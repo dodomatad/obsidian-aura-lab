@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import luxuryBoat from '@/assets/luxury-boat.png';
 import ExperienceSelector from '@/components/ExperienceSelector';
+import AtelierSection from '@/components/AtelierSection';
 
 const Index = () => {
   return (
@@ -134,6 +135,9 @@ const Index = () => {
 
       {/* Experience Selector Section */}
       <ExperienceSelector />
+
+      {/* Atelier Section */}
+      <AtelierSection />
 
       {/* Work Section */}
       <section id="work" className="px-6 md:px-12 py-32">

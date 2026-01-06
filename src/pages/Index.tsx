@@ -1,89 +1,167 @@
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import luxuryBoat from '@/assets/luxury-boat.png';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-between px-6 md:px-12 py-8">
-        {/* Navigation */}
-        <nav className="flex justify-between items-center reveal-up">
-          <div className="font-display text-xl font-medium tracking-tight">
-            STUDIO
-          </div>
-          <div className="flex gap-8">
-            <a href="#work" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              Work
-            </a>
-            <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              About
-            </a>
-            <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              Contact
-            </a>
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col justify-center py-20">
-          <div className="max-w-full">
-            <h1 className="display-giant reveal-up-delay-1">
-              <span className="block">DESIGN</span>
-              <span className="block text-muted-foreground/30">BEYOND</span>
-              <span className="block">
-                LIMITS
-                <span className="inline-block w-3 h-3 md:w-4 md:h-4 rounded-full bg-electric ml-4 glow-electric" />
-              </span>
-            </h1>
-          </div>
-        </div>
-
-        {/* Bottom Info */}
-        <div className="flex justify-between items-end reveal-up-delay-3">
-          <div className="max-w-md">
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              We craft digital experiences that push the boundaries of 
-              creativity and technology. Award-winning design studio 
-              based in the future.
-            </p>
-          </div>
-          
-          <a 
-            href="#work" 
-            className="group flex items-center gap-3 text-sm font-medium cursor-grow"
-          >
-            <span>Explore Work</span>
-            <span className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center group-hover:bg-foreground group-hover:text-background transition-all duration-300">
-              <ArrowRight className="w-4 h-4" />
-            </span>
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-6">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-display text-xl font-medium tracking-tight"
+        >
+          STUDIO
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex gap-8"
+        >
+          <a href="#work" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
+            Work
           </a>
-        </div>
+          <a href="#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
+            About
+          </a>
+          <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
+            Contact
+          </a>
+        </motion.div>
+      </nav>
 
-        {/* Decorative Line */}
-        <div className="absolute bottom-0 left-0 right-0 brutalist-line" />
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Title - Behind */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 1.2, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.3
+          }}
+          className="absolute inset-x-0 text-center font-display font-bold text-foreground select-none"
+          style={{
+            fontSize: 'clamp(4rem, 18vw, 20rem)',
+            letterSpacing: '-0.04em',
+            lineHeight: 0.85,
+            zIndex: 1,
+          }}
+        >
+          LIBERDADE
+        </motion.h1>
+
+        {/* Boat - In Front */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.3 }}
+          animate={{ 
+            opacity: 1, 
+            scale: 1,
+            y: [0, -15, 0],
+          }}
+          transition={{
+            opacity: { duration: 1, delay: 0.8 },
+            scale: { duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+            y: {
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2.3,
+            }
+          }}
+          className="absolute z-10"
+          style={{
+            width: 'clamp(300px, 70vw, 900px)',
+          }}
+        >
+          <img 
+            src={luxuryBoat} 
+            alt="Luxury Yacht"
+            className="w-full h-auto drop-shadow-2xl"
+            style={{
+              filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.8))',
+            }}
+          />
+        </motion.div>
+
+        {/* Electric Glow behind boat */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.15 }}
+          transition={{ duration: 2, delay: 1.5 }}
+          className="absolute z-5 w-[60vw] h-[30vh] rounded-full blur-3xl"
+          style={{
+            background: 'radial-gradient(ellipse, hsl(220 100% 60% / 0.4) 0%, transparent 70%)',
+          }}
+        />
+
+        {/* Subtexto - Canto Inferior Direito */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.5 }}
+          className="absolute bottom-12 right-6 md:right-12 z-20 text-right max-w-xs"
+        >
+          <p className="text-xs md:text-sm text-muted-foreground leading-relaxed tracking-wide">
+            Design de Elite.<br />
+            Performance Pura.<br />
+            Personalização Absoluta.
+          </p>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="absolute bottom-12 left-6 md:left-12 z-20"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="flex flex-col items-center gap-2"
+          >
+            <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
+            <div className="w-px h-12 bg-gradient-to-b from-foreground/50 to-transparent" />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Work Section */}
       <section id="work" className="px-6 md:px-12 py-32">
-        <div className="mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
           <span className="text-xs text-muted-foreground tracking-widest uppercase">
             Selected Work
           </span>
           <h2 className="display-large mt-4">
             PROJECTS
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Project Cards */}
           {[
             { title: 'NOIR', category: 'Brand Identity', year: '2024' },
             { title: 'VOID', category: 'Digital Experience', year: '2024' },
             { title: 'ECLIPSE', category: 'Web Design', year: '2023' },
             { title: 'SHADOW', category: 'Art Direction', year: '2023' },
           ].map((project, index) => (
-            <a 
+            <motion.a 
               key={project.title}
               href="#"
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
               className="group block cursor-grow"
             >
               <div className="aspect-[4/3] bg-card border border-border mb-6 overflow-hidden relative">
@@ -101,20 +179,26 @@ const Index = () => {
                   {project.category}
                 </span>
               </div>
-            </a>
+            </motion.a>
           ))}
         </div>
       </section>
 
       {/* Statement Section */}
       <section className="px-6 md:px-12 py-32 border-t border-border">
-        <div className="max-w-4xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl"
+        >
           <p className="display-medium text-muted-foreground">
             We believe in the power of{' '}
             <span className="text-foreground">bold ideas</span> and{' '}
             <span className="text-foreground">fearless execution</span>.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Footer */}

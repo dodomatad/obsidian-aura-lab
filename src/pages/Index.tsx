@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import luxuryBoat from '@/assets/luxury-boat.png';
+import ExperienceSelector from '@/components/ExperienceSelector';
 
 const Index = () => {
   return (
@@ -130,6 +131,9 @@ const Index = () => {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Experience Selector Section */}
+      <ExperienceSelector />
 
       {/* Work Section */}
       <section id="work" className="px-6 md:px-12 py-32">

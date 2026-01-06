@@ -48,23 +48,21 @@ const AtelierSection = () => {
           </h2>
           
           {/* CTA Button */}
-          <motion.a
+          <a
             href="https://wa.me/5511999999999"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-8 py-4 border border-foreground/30 text-foreground text-sm tracking-widest uppercase transition-all duration-500 hover:bg-foreground hover:text-background pointer-events-auto cursor-grow"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            className="inline-block px-8 py-4 border border-foreground/30 text-foreground text-sm tracking-widest uppercase transition-all duration-500 hover:bg-foreground hover:text-background pointer-events-auto cursor-grow hover:scale-105"
           >
             Personalizar no WhatsApp
-          </motion.a>
+          </a>
         </motion.div>
       </div>
 
       {/* Liquid Gallery */}
       <div className="relative z-10 flex h-screen">
         {boats.map((boat, index) => (
-          <motion.div
+          <div
             key={boat.id}
             className="relative flex-1 h-full overflow-hidden cursor-grow"
             onMouseEnter={() => setHoveredIndex(index)}
@@ -75,37 +73,20 @@ const AtelierSection = () => {
               className="absolute inset-0"
               animate={{
                 scale: hoveredIndex === index ? 1.15 : 1,
-                filter: hoveredIndex === index 
-                  ? 'blur(0px) brightness(1.1)' 
-                  : hoveredIndex !== null 
-                    ? 'blur(2px) brightness(0.5)' 
-                    : 'blur(0px) brightness(0.7)',
               }}
               transition={{ 
                 duration: 0.8, 
                 ease: [0.16, 1, 0.3, 1],
               }}
+              style={{
+                filter: hoveredIndex === index 
+                  ? 'blur(0px) brightness(1.1)' 
+                  : hoveredIndex !== null 
+                    ? 'blur(2px) brightness(0.5)' 
+                    : 'blur(0px) brightness(0.7)',
+                transition: 'filter 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
             >
-              {/* Water Ripple Effect Layer */}
-              <motion.div
-                className="absolute inset-0"
-                animate={{
-                  backgroundPosition: hoveredIndex === index 
-                    ? ['0% 0%', '100% 100%'] 
-                    : '0% 0%',
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: hoveredIndex === index ? Infinity : 0,
-                  ease: 'linear',
-                }}
-                style={{
-                  background: hoveredIndex === index
-                    ? 'radial-gradient(ellipse at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(220 100% 60% / 0.1) 0%, transparent 50%)'
-                    : 'none',
-                }}
-              />
-
               <img
                 src={boat.image}
                 alt={boat.label}
@@ -117,42 +98,15 @@ const AtelierSection = () => {
               />
 
               {/* Liquid Overlay Effect */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none"
-                animate={{
-                  opacity: hoveredIndex === index ? 1 : 0,
-                }}
-                transition={{ duration: 0.5 }}
+              <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-500"
                 style={{
+                  opacity: hoveredIndex === index ? 1 : 0,
                   background: `
-                    radial-gradient(ellipse 80% 50% at 50% 50%, transparent 30%, hsl(220 100% 60% / 0.05) 70%),
-                    linear-gradient(180deg, transparent 0%, hsl(220 100% 60% / 0.08) 100%)
+                    radial-gradient(ellipse 80% 50% at 50% 50%, transparent 30%, hsl(220 100% 60% / 0.08) 70%),
+                    linear-gradient(180deg, transparent 0%, hsl(220 100% 60% / 0.1) 100%)
                   `,
                   mixBlendMode: 'overlay',
-                }}
-              />
-
-              {/* Wave Animation Overlay */}
-              <motion.div
-                className="absolute inset-0 pointer-events-none"
-                animate={{
-                  backgroundPosition: hoveredIndex === index 
-                    ? ['0% 0%', '100% 100%'] 
-                    : '0% 0%',
-                  opacity: hoveredIndex === index ? 0.3 : 0,
-                }}
-                transition={{
-                  backgroundPosition: {
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  },
-                  opacity: { duration: 0.5 },
-                }}
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='wave'%3E%3CfeTurbulence baseFrequency='0.02' numOctaves='3' seed='1'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='10'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23wave)'/%3E%3C/svg%3E")`,
-                  backgroundSize: '200% 200%',
-                  mixBlendMode: 'soft-light',
                 }}
               />
             </motion.div>
@@ -183,7 +137,7 @@ const AtelierSection = () => {
             {index < boats.length - 1 && (
               <div className="absolute top-0 right-0 bottom-0 w-px bg-foreground/10 z-30" />
             )}
-          </motion.div>
+          </div>
         ))}
       </div>
 

@@ -139,59 +139,6 @@ const Index = () => {
       {/* Atelier Section */}
       <AtelierSection />
 
-      {/* Work Section */}
-      <section id="work" className="px-6 md:px-12 py-32">
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <span className="text-xs text-muted-foreground tracking-widest uppercase">
-            Selected Work
-          </span>
-          <h2 className="display-large mt-4">
-            PROJECTS
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {[
-            { title: 'NOIR', category: 'Brand Identity', year: '2024' },
-            { title: 'VOID', category: 'Digital Experience', year: '2024' },
-            { title: 'ECLIPSE', category: 'Web Design', year: '2023' },
-            { title: 'SHADOW', category: 'Art Direction', year: '2023' },
-          ].map((project, index) => (
-            <motion.a 
-              key={project.title}
-              href="#"
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="group block cursor-grow"
-            >
-              <div className="aspect-[4/3] bg-card border border-border mb-6 overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-6 left-6">
-                  <span className="text-xs text-muted-foreground">{project.year}</span>
-                </div>
-                <div className="absolute top-6 right-6 w-2 h-2 rounded-full bg-electric opacity-0 group-hover:opacity-100 transition-opacity duration-300 glow-electric" />
-              </div>
-              <div className="flex justify-between items-baseline">
-                <h3 className="font-display text-3xl tracking-tight group-hover:text-glow-electric transition-all duration-300">
-                  {project.title}
-                </h3>
-                <span className="text-sm text-muted-foreground">
-                  {project.category}
-                </span>
-              </div>
-            </motion.a>
-          ))}
-        </div>
-      </section>
-
       {/* Statement Section */}
       <section className="px-6 md:px-12 py-32 border-t border-border">
         <motion.div 
@@ -199,12 +146,12 @@ const Index = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl"
+          className="max-w-4xl mx-auto text-center"
         >
           <p className="display-medium text-muted-foreground">
-            We believe in the power of{' '}
-            <span className="text-foreground">bold ideas</span> and{' '}
-            <span className="text-foreground">fearless execution</span>.
+            Cada embarcação é uma{' '}
+            <span className="text-foreground">obra de arte</span> feita para{' '}
+            <span className="text-foreground">você</span>.
           </p>
         </motion.div>
       </section>
@@ -213,21 +160,18 @@ const Index = () => {
       <footer className="px-6 md:px-12 py-12 border-t border-border">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           <div className="font-display text-xl font-medium tracking-tight">
-            STUDIO
+            LIBERDADE
           </div>
           <div className="flex gap-8">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
               Instagram
             </a>
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              Twitter
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              LinkedIn
+              WhatsApp
             </a>
           </div>
           <div className="text-xs text-muted-foreground">
-            © 2024 All rights reserved
+            © 2024 Todos os direitos reservados
           </div>
         </div>
       </footer>

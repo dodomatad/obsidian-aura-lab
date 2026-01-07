@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import heroOceanVideo from '@/assets/hero-ocean-video.mp4';
 import ExperienceSelector from '@/components/ExperienceSelector';
 import AtelierSection from '@/components/AtelierSection';
 import EngineeringSection from '@/components/EngineeringSection';
@@ -78,19 +77,17 @@ const Index = () => {
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0"
+          className="absolute inset-0 overflow-hidden"
           style={{ y: heroImageY, scale: heroImageScale }}
         >
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover"
+          <iframe 
+            src="https://player.vimeo.com/video/1152065041?background=1&autoplay=1&loop=1&muted=1&quality=1080p"
+            className="absolute top-1/2 left-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2"
             style={{ filter: 'brightness(0.7)' }}
-          >
-            <source src={heroOceanVideo} type="video/mp4" />
-          </video>
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            title="Hero Background Video"
+          />
         </motion.div>
         
         {/* Dark Overlay for text readability - Fixed */}

@@ -119,14 +119,16 @@ const ExperienceSelector = () => {
             animate={{ 
               opacity: mousePosition === 'left' ? 1 : mousePosition === 'center' ? 0.7 : 0.2,
               scale: mousePosition === 'left' ? 1.1 : 1,
-              y: mousePosition === 'left' ? [-15, -5, -15] : [0, 10, 0],
+              y: mousePosition === 'left' ? [-20, 0, -20] : [-5, 15, -5],
+              rotate: mousePosition === 'left' ? [-0.5, 0.5, -0.5] : [-0.3, 0.3, -0.3],
             }}
             transition={{ 
               opacity: { duration: 0.7 },
               scale: { duration: 0.7 },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
             }}
-            className="absolute z-20 w-[80%] max-w-2xl pointer-events-none"
+            className="absolute z-20 w-[80%] max-w-2xl pointer-events-none flex flex-col items-center"
           >
             <img 
               src={boatPono} 
@@ -138,6 +140,25 @@ const ExperienceSelector = () => {
                   : 'drop-shadow(0 30px 60px rgba(10,25,47,0.7))',
               }}
             />
+            {/* Water Reflection */}
+            <motion.div
+              className="relative w-full h-20 overflow-hidden mt-2"
+              animate={{
+                opacity: mousePosition === 'left' ? 0.35 : 0.2,
+              }}
+            >
+              <img 
+                src={boatPono} 
+                alt=""
+                className="w-full h-auto absolute top-0"
+                style={{
+                  transform: 'scaleY(-1) translateY(-100%)',
+                  filter: 'blur(3px) brightness(0.6)',
+                  maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 80%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 80%)',
+                }}
+              />
+            </motion.div>
           </motion.div>
 
           {/* Subtle Label */}
@@ -258,14 +279,16 @@ const ExperienceSelector = () => {
             animate={{ 
               opacity: mousePosition === 'right' ? 1 : mousePosition === 'center' ? 0.7 : 0.2,
               scale: mousePosition === 'right' ? 1.1 : 1,
-              y: mousePosition === 'right' ? [-12, -2, -12] : [0, 8, 0],
+              y: mousePosition === 'right' ? [-18, 2, -18] : [-3, 12, -3],
+              rotate: mousePosition === 'right' ? [-0.4, 0.4, -0.4] : [-0.2, 0.2, -0.2],
             }}
             transition={{ 
               opacity: { duration: 0.7 },
               scale: { duration: 0.7 },
-              y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
             }}
-            className="absolute z-20 w-[90%] max-w-3xl pointer-events-none"
+            className="absolute z-20 w-[90%] max-w-3xl pointer-events-none flex flex-col items-center"
           >
             <img 
               src={boatSurfski} 
@@ -277,6 +300,25 @@ const ExperienceSelector = () => {
                   : 'drop-shadow(0 30px 60px rgba(10,25,47,0.7))',
               }}
             />
+            {/* Water Reflection */}
+            <motion.div
+              className="relative w-full h-16 overflow-hidden mt-2"
+              animate={{
+                opacity: mousePosition === 'right' ? 0.4 : 0.2,
+              }}
+            >
+              <img 
+                src={boatSurfski} 
+                alt=""
+                className="w-full h-auto absolute top-0"
+                style={{
+                  transform: 'scaleY(-1) translateY(-100%)',
+                  filter: 'blur(3px) brightness(0.5)',
+                  maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 80%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 80%)',
+                }}
+              />
+            </motion.div>
           </motion.div>
 
           {/* Subtle Label */}

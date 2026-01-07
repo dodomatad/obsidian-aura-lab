@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import luxuryBoat from '@/assets/luxury-boat.png';
+import heroSurfski from '@/assets/hero-surfski.png';
 import ExperienceSelector from '@/components/ExperienceSelector';
 import AtelierSection from '@/components/AtelierSection';
 
@@ -35,81 +34,60 @@ const Index = () => {
         </motion.div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Title - Behind */}
-        <motion.h1 
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 1.2, 
-            ease: [0.16, 1, 0.3, 1],
-            delay: 0.3
-          }}
-          className="absolute inset-x-0 text-center font-display font-bold text-foreground select-none"
-          style={{
-            fontSize: 'clamp(4rem, 18vw, 20rem)',
-            letterSpacing: '-0.04em',
-            lineHeight: 0.85,
-            zIndex: 1,
-          }}
-        >
-          LIBERDADE
-        </motion.h1>
-
-        {/* Boat - In Front */}
+      {/* Hero Section - Full Bleed Image */}
+      <section className="relative h-screen overflow-hidden">
+        {/* Full Background Image */}
         <motion.div
-          initial={{ opacity: 0, scale: 1.3 }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1,
-            y: [0, -15, 0],
-          }}
-          transition={{
-            opacity: { duration: 1, delay: 0.8 },
-            scale: { duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
-            y: {
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2.3,
-            }
-          }}
-          className="absolute z-10"
-          style={{
-            width: 'clamp(300px, 70vw, 900px)',
-          }}
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0"
         >
           <img 
-            src={luxuryBoat} 
-            alt="Luxury Yacht"
-            className="w-full h-auto drop-shadow-2xl"
-            style={{
-              filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.8))',
-            }}
+            src={heroSurfski} 
+            alt="Atleta remando surfski"
+            className="w-full h-full object-cover"
           />
+          {/* Dark Overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
         </motion.div>
 
-        {/* Electric Glow behind boat */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.15 }}
-          transition={{ duration: 2, delay: 1.5 }}
-          className="absolute z-5 w-[60vw] h-[30vh] rounded-full blur-3xl"
-          style={{
-            background: 'radial-gradient(ellipse, hsl(220 100% 60% / 0.4) 0%, transparent 70%)',
-          }}
-        />
+        {/* Title - Overlay */}
+        <div className="absolute inset-0 flex items-center justify-start px-6 md:px-12 z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 1.2, 
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.5
+            }}
+          >
+            <h1 
+              className="font-display font-bold text-foreground select-none"
+              style={{
+                fontSize: 'clamp(3rem, 12vw, 12rem)',
+                letterSpacing: '-0.04em',
+                lineHeight: 0.85,
+              }}
+            >
+              LIBERDADE<br />
+              <span className="text-foreground/50">NÃO SE</span><br />
+              EXPLICA
+            </h1>
+          </motion.div>
+        </div>
 
         {/* Subtexto - Canto Inferior Direito */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.5 }}
+          transition={{ duration: 1, delay: 1.2 }}
           className="absolute bottom-12 right-6 md:right-12 z-20 text-right max-w-xs"
         >
           <p className="text-xs md:text-sm text-muted-foreground leading-relaxed tracking-wide">
-            Design de Elite.<br />
+            Surfskis de Elite.<br />
             Performance Pura.<br />
             Personalização Absoluta.
           </p>
@@ -119,7 +97,7 @@ const Index = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2 }}
+          transition={{ duration: 1, delay: 1.5 }}
           className="absolute bottom-12 left-6 md:left-12 z-20"
         >
           <motion.div

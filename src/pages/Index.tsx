@@ -1,14 +1,16 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import heroOceanVideo from '@/assets/hero-ocean-video.mp4';
 import ExperienceSelector from '@/components/ExperienceSelector';
 import AtelierSection from '@/components/AtelierSection';
 import EngineeringSection from '@/components/EngineeringSection';
 import AtmosphericFog from '@/components/AtmosphericFog';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
+import LoadingScreen from '@/components/LoadingScreen';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const Index = () => {
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const { handleNavClick } = useSmoothScroll();
   const heroRef = useRef<HTMLDivElement>(null);
   
@@ -22,7 +24,13 @@ const Index = () => {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden scroll-smooth">
+    <>
+      {/* Cinematic Loading Screen */}
+      {!isLoadingComplete && (
+        <LoadingScreen onLoadingComplete={() => setIsLoadingComplete(true)} />
+      )}
+      
+      <div className="min-h-screen bg-background overflow-x-hidden scroll-smooth">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-6 backdrop-blur-sm bg-background/20">
         <motion.div 
@@ -217,6 +225,7 @@ const Index = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

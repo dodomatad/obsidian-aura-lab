@@ -45,6 +45,14 @@ const ExperienceSelector = () => {
                 : 'hsl(0 0% 3%)',
           }}
         >
+          {/* Deep Navy Spotlight behind boat */}
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 80% 60% at 50% 60%, hsl(220 60% 8% / 0.8) 0%, hsl(220 40% 4% / 0.4) 40%, transparent 70%)',
+            }}
+          />
+
           {/* HUD Specs - Top Left */}
           <motion.div
             animate={{ 
@@ -84,34 +92,40 @@ const ExperienceSelector = () => {
             </div>
           </motion.div>
 
-          {/* Title */}
+          {/* Title - Stroke style, behind boat */}
           <motion.div
             animate={{ 
-              opacity: mousePosition === 'left' ? 1 : mousePosition === 'center' ? 0.6 : 0.15,
+              opacity: mousePosition === 'left' ? 0.25 : mousePosition === 'center' ? 0.15 : 0.05,
               scale: mousePosition === 'left' ? 1.05 : 1,
             }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+            className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none"
           >
             <h2 
-              className="font-display font-bold text-foreground tracking-tighter text-center"
+              className="font-display font-bold tracking-tighter text-center select-none"
               style={{
-                fontSize: 'clamp(2rem, 8vw, 7rem)',
+                fontSize: 'clamp(2rem, 10vw, 9rem)',
                 lineHeight: 0.85,
+                color: 'transparent',
+                WebkitTextStroke: '1px hsl(0 0% 100% / 0.4)',
               }}
             >
               CONTEMPLAÇÃO
             </h2>
           </motion.div>
 
-          {/* Boat Image */}
+          {/* Boat Image with floating animation */}
           <motion.div
             animate={{ 
               opacity: mousePosition === 'left' ? 1 : mousePosition === 'center' ? 0.7 : 0.2,
               scale: mousePosition === 'left' ? 1.1 : 1,
-              y: mousePosition === 'left' ? -10 : 0,
+              y: mousePosition === 'left' ? [-15, -5, -15] : [0, 10, 0],
             }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ 
+              opacity: { duration: 0.7 },
+              scale: { duration: 0.7 },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+            }}
             className="absolute z-20 w-[80%] max-w-2xl pointer-events-none"
           >
             <img 
@@ -120,8 +134,8 @@ const ExperienceSelector = () => {
               className="w-full h-auto"
               style={{
                 filter: mousePosition === 'left' 
-                  ? 'drop-shadow(0 30px 60px rgba(0,0,0,0.8)) brightness(1.1)' 
-                  : 'drop-shadow(0 20px 40px rgba(0,0,0,0.6))',
+                  ? 'drop-shadow(0 40px 80px rgba(10,25,47,0.9)) brightness(1.1)' 
+                  : 'drop-shadow(0 30px 60px rgba(10,25,47,0.7))',
               }}
             />
           </motion.div>
@@ -158,15 +172,23 @@ const ExperienceSelector = () => {
                 : 'hsl(0 0% 3%)',
           }}
         >
+          {/* Deep Navy Spotlight behind boat */}
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 90% 70% at 50% 55%, hsl(220 80% 12% / 0.7) 0%, hsl(220 60% 6% / 0.4) 45%, transparent 75%)',
+            }}
+          />
+
           {/* Electric Glow */}
           <motion.div
             animate={{ 
-              opacity: mousePosition === 'right' ? 0.3 : 0,
+              opacity: mousePosition === 'right' ? 0.4 : 0,
             }}
             transition={{ duration: 0.7 }}
             className="absolute inset-0 z-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at center, hsl(220 100% 60% / 0.2) 0%, transparent 60%)',
+              background: 'radial-gradient(ellipse at center, hsl(220 100% 60% / 0.25) 0%, transparent 60%)',
             }}
           />
 
@@ -209,39 +231,40 @@ const ExperienceSelector = () => {
             </div>
           </motion.div>
 
-          {/* Title */}
+          {/* Title - Stroke style, behind boat */}
           <motion.div
             animate={{ 
-              opacity: mousePosition === 'right' ? 1 : mousePosition === 'center' ? 0.6 : 0.15,
+              opacity: mousePosition === 'right' ? 0.3 : mousePosition === 'center' ? 0.15 : 0.05,
               scale: mousePosition === 'right' ? 1.05 : 1,
             }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
+            className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none"
           >
             <h2 
-              className="font-display font-bold tracking-tighter text-center"
+              className="font-display font-bold tracking-tighter text-center select-none"
               style={{
-                fontSize: 'clamp(2rem, 8vw, 7rem)',
+                fontSize: 'clamp(2rem, 10vw, 9rem)',
                 lineHeight: 0.85,
-                color: mousePosition === 'right' ? 'hsl(220 100% 70%)' : 'hsl(0 0% 100%)',
-                textShadow: mousePosition === 'right' 
-                  ? '0 0 60px hsl(220 100% 60% / 0.5), 0 0 120px hsl(220 100% 60% / 0.3)' 
-                  : 'none',
-                transition: 'color 0.7s ease, text-shadow 0.7s ease',
+                color: 'transparent',
+                WebkitTextStroke: mousePosition === 'right' ? '1px hsl(220 100% 70% / 0.5)' : '1px hsl(0 0% 100% / 0.4)',
               }}
             >
               ADRENALINA
             </h2>
           </motion.div>
 
-          {/* Boat Image */}
+          {/* Boat Image with floating animation */}
           <motion.div
             animate={{ 
               opacity: mousePosition === 'right' ? 1 : mousePosition === 'center' ? 0.7 : 0.2,
               scale: mousePosition === 'right' ? 1.1 : 1,
-              y: mousePosition === 'right' ? -10 : 0,
+              y: mousePosition === 'right' ? [-12, -2, -12] : [0, 8, 0],
             }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ 
+              opacity: { duration: 0.7 },
+              scale: { duration: 0.7 },
+              y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
+            }}
             className="absolute z-20 w-[90%] max-w-3xl pointer-events-none"
           >
             <img 
@@ -250,8 +273,8 @@ const ExperienceSelector = () => {
               className="w-full h-auto"
               style={{
                 filter: mousePosition === 'right' 
-                  ? 'drop-shadow(0 30px 60px rgba(50, 100, 200, 0.4)) brightness(1.15)' 
-                  : 'drop-shadow(0 20px 40px rgba(0,0,0,0.6))',
+                  ? 'drop-shadow(0 40px 80px rgba(20, 60, 120, 0.6)) brightness(1.15)' 
+                  : 'drop-shadow(0 30px 60px rgba(10,25,47,0.7))',
               }}
             />
           </motion.div>

@@ -1,0 +1,150 @@
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
+interface LoadingScreenProps {
+  onLoadingComplete: () => void;
+}
+
+const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for cinematic effect
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const exitTimer = setTimeout(() => {
+        onLoadingComplete();
+      }, 800);
+      return () => clearTimeout(exitTimer);
+    }
+  }, [isLoading, onLoadingComplete]);
+
+  return (
+    <AnimatePresence>
+      {isLoading && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
+          style={{
+            background: 'hsl(220 50% 3%)',
+          }}
+        >
+          {/* Atmospheric background */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            style={{
+              background: `
+                radial-gradient(ellipse 80% 60% at 50% 50%, hsl(220 60% 10% / 0.8) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 30% 70%, hsl(220 50% 8% / 0.5) 0%, transparent 50%)
+              `,
+            }}
+          />
+
+          {/* Logo container */}
+          <div className="relative flex flex-col items-center">
+            {/* Reveal mask animation */}
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 0.3,
+                  ease: [0.16, 1, 0.3, 1] 
+                }}
+                className="font-display font-bold text-foreground tracking-tighter text-center"
+                style={{
+                  fontSize: 'clamp(2.5rem, 10vw, 8rem)',
+                  lineHeight: 0.9,
+                }}
+              >
+                LIBERDADE
+              </motion.h1>
+            </div>
+
+            {/* Tagline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="mt-6"
+            >
+              <span className="text-xs tracking-[0.4em] text-muted-foreground uppercase">
+                Surfskis de Elite
+              </span>
+            </motion.div>
+
+            {/* Decorative line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 h-px w-32 bg-gradient-to-r from-transparent via-foreground/30 to-transparent"
+              style={{ originX: 0.5 }}
+            />
+
+            {/* Loading indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.8 }}
+              className="mt-8 flex items-center gap-3"
+            >
+              <motion.div
+                animate={{ 
+                  scaleX: [0, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{ 
+                  scaleX: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
+                  opacity: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
+                }}
+                className="h-px w-16 bg-electric origin-left"
+              />
+            </motion.div>
+          </div>
+
+          {/* Corner decorations */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="absolute top-8 left-8"
+          >
+            <div className="w-8 h-px bg-foreground/20" />
+            <div className="w-px h-8 bg-foreground/20" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="absolute bottom-8 right-8"
+          >
+            <div className="w-8 h-px bg-foreground/20 ml-auto" />
+            <div className="w-px h-8 bg-foreground/20 ml-auto" />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default LoadingScreen;

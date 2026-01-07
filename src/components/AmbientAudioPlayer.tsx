@@ -7,8 +7,8 @@ const AmbientAudioPlayer = () => {
   const [isHovered, setIsHovered] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Ocean ambient sound URL (royalty-free)
-  const oceanSoundUrl = 'https://assets.mixkit.co/active_storage/sfx/2432/2432-preview.mp3';
+  // Kayak ambient sound - local file
+  const oceanSoundUrl = '/audio/kayak-ambient.mp3';
 
   useEffect(() => {
     if (audioRef.current) {

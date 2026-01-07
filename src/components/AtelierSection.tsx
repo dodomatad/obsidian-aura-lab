@@ -1,20 +1,34 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef } from 'react';
 import boatPink from '@/assets/boat-pink.png';
 import boatCamo from '@/assets/boat-camo.png';
 import boatCarbon from '@/assets/boat-carbon.png';
 
 const boats = [
-  { id: 'pink', image: boatPink, label: 'ROSA AUDAZ' },
-  { id: 'camo', image: boatCamo, label: 'CAMUFLAGEM' },
-  { id: 'carbon', image: boatCarbon, label: 'CARBONO' },
+  { id: 'pink', image: boatPink, label: 'ROSA AUDAZ', glow: 'hsl(350 70% 50% / 0.15)' },
+  { id: 'camo', image: boatCamo, label: 'CAMUFLAGEM', glow: 'hsl(120 30% 30% / 0.15)' },
+  { id: 'carbon', image: boatCarbon, label: 'CARBONO', glow: 'hsl(220 50% 50% / 0.15)' },
 ];
 
 const AtelierSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const parallax1 = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const parallax2 = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const parallax3 = useTransform(scrollYProgress, [0, 1], [20, -40]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  const parallaxValues = [parallax1, parallax2, parallax3];
+
   return (
-    <section className="relative min-h-screen bg-background overflow-hidden py-24 md:py-32">
+    <section 
+      ref={containerRef}
+      className="relative min-h-screen bg-background overflow-hidden py-24 md:py-32"
+    >
       {/* Background Gradient */}
       <div 
         className="absolute inset-0 z-0"
@@ -50,7 +64,7 @@ const AtelierSection = () => {
       {/* Asymmetric Masonry Layout - Floating Boats */}
       <div className="relative z-10 px-6 md:px-12">
         <div className="grid grid-cols-12 gap-4 md:gap-6 min-h-[80vh]">
-          {/* Large Left Image */}
+          {/* Large Left Image with Parallax */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,6 +73,7 @@ const AtelierSection = () => {
             className="col-span-12 md:col-span-7 relative group cursor-grow"
             onMouseEnter={() => setHoveredIndex(0)}
             onMouseLeave={() => setHoveredIndex(null)}
+            style={{ y: parallax1 }}
           >
             <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden">
               <motion.img
@@ -96,7 +111,7 @@ const AtelierSection = () => {
 
           {/* Right Column - Two Stacked Images */}
           <div className="col-span-12 md:col-span-5 flex flex-col gap-4 md:gap-6">
-            {/* Top Right Image */}
+            {/* Top Right Image with Parallax */}
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -105,6 +120,7 @@ const AtelierSection = () => {
               className="relative group cursor-grow flex-1"
               onMouseEnter={() => setHoveredIndex(1)}
               onMouseLeave={() => setHoveredIndex(null)}
+              style={{ y: parallax2 }}
             >
               <div className="relative h-full min-h-[200px] overflow-hidden">
                 <motion.img
@@ -136,7 +152,7 @@ const AtelierSection = () => {
               </motion.div>
             </motion.div>
 
-            {/* Bottom Right Image - Offset */}
+            {/* Bottom Right Image - Offset with Parallax */}
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -145,6 +161,7 @@ const AtelierSection = () => {
               className="relative group cursor-grow flex-1 md:ml-12"
               onMouseEnter={() => setHoveredIndex(2)}
               onMouseLeave={() => setHoveredIndex(null)}
+              style={{ y: parallax3 }}
             >
               <div className="relative h-full min-h-[200px] overflow-hidden">
                 <motion.img

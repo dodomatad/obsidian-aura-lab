@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import heroSurfski from '@/assets/hero-surfski.png';
+import heroOceanVideo from '@/assets/hero-ocean-video.mp4';
 import ExperienceSelector from '@/components/ExperienceSelector';
 import AtelierSection from '@/components/AtelierSection';
 import EngineeringSection from '@/components/EngineeringSection';
+import AtmosphericFog from '@/components/AtmosphericFog';
+import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const Index = () => {
@@ -61,9 +63,9 @@ const Index = () => {
         </motion.div>
       </nav>
 
-      {/* Hero Section - Full Bleed Image with Parallax */}
+      {/* Hero Section - Video Background with Parallax */}
       <section ref={heroRef} className="relative h-screen overflow-hidden">
-        {/* Full Background Image with Parallax */}
+        {/* Video Background with Parallax */}
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -71,11 +73,16 @@ const Index = () => {
           className="absolute inset-0"
           style={{ y: heroImageY, scale: heroImageScale }}
         >
-          <img 
-            src={heroSurfski} 
-            alt="Atleta remando surfski"
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
             className="w-full h-full object-cover"
-          />
+            style={{ filter: 'brightness(0.7)' }}
+          >
+            <source src={heroOceanVideo} type="video/mp4" />
+          </video>
         </motion.div>
         
         {/* Dark Overlay for text readability - Fixed */}
@@ -83,8 +90,8 @@ const Index = () => {
           className="absolute inset-0 z-[1]"
           style={{ opacity: heroOpacity }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-transparent" />
         </motion.div>
 
         {/* Title - Overlay */}
@@ -149,18 +156,26 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* Experience Selector Section */}
-      <div id="modelos">
+      {/* Experience Selector Section with Fog */}
+      <div id="modelos" className="relative">
+        <AtmosphericFog />
         <ExperienceSelector />
       </div>
 
-      {/* Engineering Section */}
-      <EngineeringSection />
+      {/* Engineering Section with Fog */}
+      <div className="relative">
+        <AtmosphericFog />
+        <EngineeringSection />
+      </div>
 
-      {/* Atelier Section */}
-      <div id="atelier">
+      {/* Atelier Section with Fog */}
+      <div id="atelier" className="relative">
+        <AtmosphericFog />
         <AtelierSection />
       </div>
+
+      {/* Ambient Audio Player */}
+      <AmbientAudioPlayer />
 
       {/* Statement Section */}
       <section className="px-6 md:px-12 py-32 border-t border-border">

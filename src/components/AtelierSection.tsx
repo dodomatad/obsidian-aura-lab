@@ -29,11 +29,16 @@ const AtelierSection = () => {
       ref={containerRef}
       className="relative min-h-screen bg-background overflow-hidden py-24 md:py-32"
     >
-      {/* Background Gradient */}
+      {/* Background with subtle navy spotlights */}
       <div 
         className="absolute inset-0 z-0"
         style={{
-          background: 'linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(220 50% 5%) 50%, hsl(0 0% 2%) 100%)',
+          background: `
+            radial-gradient(ellipse 60% 40% at 20% 30%, hsl(220 60% 10% / 0.6) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 35% at 80% 70%, hsl(220 50% 8% / 0.5) 0%, transparent 50%),
+            radial-gradient(ellipse 70% 50% at 60% 50%, hsl(220 40% 6% / 0.4) 0%, transparent 60%),
+            linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(220 50% 4%) 50%, hsl(0 0% 2%) 100%)
+          `,
         }}
       />
 
@@ -76,31 +81,64 @@ const AtelierSection = () => {
             style={{ y: parallax1 }}
           >
             <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden">
+              {/* Navy spotlight behind boat */}
+              <div 
+                className="absolute inset-0 z-0"
+                style={{
+                  background: 'radial-gradient(ellipse 70% 60% at 50% 50%, hsl(220 60% 10% / 0.7) 0%, transparent 60%)',
+                }}
+              />
               <motion.img
                 src={boats[0].image}
                 alt={boats[0].label}
-                className="w-full h-full object-contain object-center"
+                className="relative z-10 w-full h-full object-contain object-center"
                 animate={{
                   scale: hoveredIndex === 0 ? 1.08 : 1,
-                  filter: hoveredIndex === 0 ? 'brightness(1.1)' : 'brightness(0.9)',
+                  filter: hoveredIndex === 0 ? 'brightness(1.1)' : 'brightness(0.95)',
+                  y: [0, -8, 0],
                 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ 
+                  scale: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+                  filter: { duration: 0.6 },
+                  y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                }}
               />
+              {/* Water Reflection */}
+              <div 
+                className="absolute bottom-0 left-0 right-0 h-1/3 z-5 pointer-events-none overflow-hidden"
+                style={{
+                  background: 'linear-gradient(to bottom, transparent 0%, hsl(220 60% 8% / 0.3) 100%)',
+                }}
+              >
+                <motion.img
+                  src={boats[0].image}
+                  alt=""
+                  className="w-full h-auto object-contain object-center opacity-20"
+                  style={{
+                    transform: 'scaleY(-1) translateY(-60%)',
+                    filter: 'blur(3px)',
+                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 100%)',
+                  }}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
               {/* Subtle glow on hover */}
               <motion.div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none z-20"
                 animate={{
                   opacity: hoveredIndex === 0 ? 1 : 0,
                 }}
                 transition={{ duration: 0.4 }}
                 style={{
-                  background: 'radial-gradient(ellipse at center, hsl(350 70% 50% / 0.1) 0%, transparent 60%)',
+                  background: 'radial-gradient(ellipse at center, hsl(350 70% 50% / 0.15) 0%, transparent 60%)',
                 }}
               />
             </div>
             {/* Label */}
             <motion.div
-              className="absolute bottom-4 left-4 z-10"
+              className="absolute bottom-4 left-4 z-30"
               animate={{ opacity: hoveredIndex === 0 ? 1 : 0.5 }}
             >
               <span className="text-xs tracking-[0.2em] text-foreground/70 uppercase font-mono">
@@ -123,27 +161,57 @@ const AtelierSection = () => {
               style={{ y: parallax2 }}
             >
               <div className="relative h-full min-h-[200px] overflow-hidden">
+                {/* Navy spotlight */}
+                <div 
+                  className="absolute inset-0 z-0"
+                  style={{
+                    background: 'radial-gradient(ellipse 65% 55% at 50% 50%, hsl(120 40% 8% / 0.6) 0%, transparent 55%)',
+                  }}
+                />
                 <motion.img
                   src={boats[1].image}
                   alt={boats[1].label}
-                  className="w-full h-full object-contain object-center"
+                  className="relative z-10 w-full h-full object-contain object-center"
                   animate={{
                     scale: hoveredIndex === 1 ? 1.08 : 1,
-                    filter: hoveredIndex === 1 ? 'brightness(1.1)' : 'brightness(0.9)',
+                    filter: hoveredIndex === 1 ? 'brightness(1.1)' : 'brightness(0.95)',
+                    y: [0, -6, 0],
                   }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ 
+                    scale: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+                    filter: { duration: 0.6 },
+                    y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
+                  }}
                 />
+                {/* Water Reflection */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-1/4 z-5 pointer-events-none overflow-hidden"
+                >
+                  <motion.img
+                    src={boats[1].image}
+                    alt=""
+                    className="w-full h-auto object-contain object-center opacity-15"
+                    style={{
+                      transform: 'scaleY(-1) translateY(-70%)',
+                      filter: 'blur(2px)',
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%)',
+                    }}
+                    animate={{ y: [0, -3, 0] }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </div>
                 <motion.div
-                  className="absolute inset-0 pointer-events-none"
+                  className="absolute inset-0 pointer-events-none z-20"
                   animate={{ opacity: hoveredIndex === 1 ? 1 : 0 }}
                   transition={{ duration: 0.4 }}
                   style={{
-                    background: 'radial-gradient(ellipse at center, hsl(120 30% 30% / 0.15) 0%, transparent 60%)',
+                    background: 'radial-gradient(ellipse at center, hsl(120 30% 30% / 0.2) 0%, transparent 60%)',
                   }}
                 />
               </div>
               <motion.div
-                className="absolute bottom-4 left-4 z-10"
+                className="absolute bottom-4 left-4 z-30"
                 animate={{ opacity: hoveredIndex === 1 ? 1 : 0.5 }}
               >
                 <span className="text-xs tracking-[0.2em] text-foreground/70 uppercase font-mono">
@@ -164,27 +232,57 @@ const AtelierSection = () => {
               style={{ y: parallax3 }}
             >
               <div className="relative h-full min-h-[200px] overflow-hidden">
+                {/* Navy spotlight */}
+                <div 
+                  className="absolute inset-0 z-0"
+                  style={{
+                    background: 'radial-gradient(ellipse 60% 50% at 50% 50%, hsl(220 50% 10% / 0.6) 0%, transparent 55%)',
+                  }}
+                />
                 <motion.img
                   src={boats[2].image}
                   alt={boats[2].label}
-                  className="w-full h-full object-contain object-center"
+                  className="relative z-10 w-full h-full object-contain object-center"
                   animate={{
                     scale: hoveredIndex === 2 ? 1.08 : 1,
-                    filter: hoveredIndex === 2 ? 'brightness(1.1)' : 'brightness(0.9)',
+                    filter: hoveredIndex === 2 ? 'brightness(1.1)' : 'brightness(0.95)',
+                    y: [0, -7, 0],
                   }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ 
+                    scale: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+                    filter: { duration: 0.6 },
+                    y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
+                  }}
                 />
+                {/* Water Reflection */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-1/4 z-5 pointer-events-none overflow-hidden"
+                >
+                  <motion.img
+                    src={boats[2].image}
+                    alt=""
+                    className="w-full h-auto object-contain object-center opacity-15"
+                    style={{
+                      transform: 'scaleY(-1) translateY(-70%)',
+                      filter: 'blur(2px)',
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%)',
+                    }}
+                    animate={{ y: [0, -3, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </div>
                 <motion.div
-                  className="absolute inset-0 pointer-events-none"
+                  className="absolute inset-0 pointer-events-none z-20"
                   animate={{ opacity: hoveredIndex === 2 ? 1 : 0 }}
                   transition={{ duration: 0.4 }}
                   style={{
-                    background: 'radial-gradient(ellipse at center, hsl(0 0% 50% / 0.1) 0%, transparent 60%)',
+                    background: 'radial-gradient(ellipse at center, hsl(220 50% 50% / 0.15) 0%, transparent 60%)',
                   }}
                 />
               </div>
               <motion.div
-                className="absolute bottom-4 left-4 z-10"
+                className="absolute bottom-4 left-4 z-30"
                 animate={{ opacity: hoveredIndex === 2 ? 1 : 0.5 }}
               >
                 <span className="text-xs tracking-[0.2em] text-foreground/70 uppercase font-mono">

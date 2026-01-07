@@ -77,17 +77,33 @@ const Index = () => {
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 overflow-hidden"
+          className="absolute inset-0 overflow-hidden bg-[#0a192f]"
           style={{ y: heroImageY, scale: heroImageScale }}
         >
-          <iframe 
-            src="https://player.vimeo.com/video/1152065041?background=1&autoplay=1&loop=1&muted=1&quality=1080p"
-            className="absolute top-1/2 left-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full -translate-x-1/2 -translate-y-1/2"
-            style={{ filter: 'brightness(0.7)' }}
-            frameBorder="0"
-            allow="autoplay; fullscreen"
-            title="Hero Background Video"
-          />
+          {/* Fallback gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0a192f] via-[#0d1b2a] to-[#1b263b]" />
+          
+          {/* Vimeo Video Embed */}
+          <div className="absolute inset-0" style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+            <iframe 
+              src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
+              style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '50%', 
+                width: '177.78vh',
+                height: '100vh',
+                minWidth: '100%',
+                minHeight: '56.25vw',
+                transform: 'translate(-50%, -50%)',
+                filter: 'brightness(0.7)'
+              }}
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              allowFullScreen
+              title="Hero Background Video"
+            />
+          </div>
         </motion.div>
         
         {/* Dark Overlay for text readability - Fixed */}

@@ -161,7 +161,7 @@ const HUDSpec = ({
 
 const QuoteSection = ({ quote, index }: { quote: typeof quotes[0]; index: number }) => {
   return (
-    <div className="min-h-[50vh] md:h-[90vh] w-full md:snap-start md:snap-always flex items-center justify-center relative py-12 md:py-32">
+    <div className="min-h-[50vh] md:h-[90vh] w-full snap-start snap-always flex items-center justify-center relative py-12 md:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -235,7 +235,7 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
   return (
     <div
       ref={slideRef}
-      className="min-h-screen w-full md:snap-start md:snap-always relative overflow-hidden"
+      className="min-h-screen w-full snap-start snap-always relative overflow-hidden"
       style={{ touchAction: 'pan-y' }}
     >
       {/* Engineering Grid Background - Finer, more technical */}
@@ -278,7 +278,7 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden md:block absolute top-1/2 -translate-y-1/2 left-0 md:left-8 pointer-events-none z-0 overflow-hidden"
+        className="absolute top-1/2 -translate-y-1/2 left-0 md:left-8 pointer-events-none z-0 overflow-hidden"
       >
         <h2 
           className="display-hero select-none whitespace-nowrap"
@@ -306,7 +306,7 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
 
         {/* Boat Container - Offset to right, constrained on mobile */}
         <motion.div 
-          className="absolute right-0 md:right-[5%] top-[45%] md:top-1/2 -translate-y-1/2 w-[90%] md:w-[70%] h-[60vh] md:h-[65vh] flex items-center justify-center z-10"
+          className="absolute right-0 md:right-[5%] top-[45%] md:top-1/2 -translate-y-1/2 w-[90%] md:w-[70%] h-[45vh] md:h-[65vh] max-h-[50vh] md:max-h-none flex items-center justify-center z-10"
           style={{ scale: imageScale, touchAction: 'pan-y' }}
         >
           {/* Spotlight Glow */}
@@ -521,7 +521,7 @@ const ProductShowcase = () => {
       <QuoteSection quote={quotes[0]} index={0} />
       
       {/* Products */}
-      <div className="md:snap-y md:snap-mandatory">
+      <div className="snap-y snap-mandatory" style={{ scrollSnapType: 'y mandatory' }}>
         {products.map((product, index) => (
           <ProductSlide key={product.id} product={product} index={index} />
         ))}

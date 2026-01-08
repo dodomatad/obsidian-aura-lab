@@ -60,22 +60,22 @@ const quotes = [
 
 const QuoteSection = ({ quote, index }: { quote: typeof quotes[0]; index: number }) => {
   return (
-    <div className="h-[90vh] w-full snap-start snap-always flex items-center justify-center relative py-32">
+    <div className="min-h-[60vh] md:h-[90vh] w-full snap-start snap-always flex items-center justify-center relative py-16 md:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-20%" }}
         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center px-8 md:px-16 max-w-4xl"
+        className="text-center px-6 md:px-16 max-w-4xl"
       >
         <p 
           className="display-hero text-foreground/80 italic"
-          style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', lineHeight: 1.4 }}
+          style={{ fontSize: 'clamp(1.25rem, 4vw, 3rem)', lineHeight: 1.4 }}
         >
           "{quote.text}"
         </p>
-        <p className="text-muted-foreground text-sm mt-8 tracking-widest uppercase">
+        <p className="text-muted-foreground text-sm mt-6 md:mt-8 tracking-widest uppercase">
           — {quote.author}
         </p>
       </motion.div>
@@ -98,15 +98,16 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
   return (
     <div
       ref={slideRef}
-      className="min-h-screen w-full snap-start snap-always flex items-center justify-center relative overflow-hidden py-32"
+      className="min-h-screen w-full snap-start snap-always flex flex-col md:flex-row items-center justify-center relative overflow-hidden py-16 md:py-32"
+      style={{ touchAction: 'pan-y' }}
     >
-      {/* Background gradient per slide - Deep Ocean */}
+      {/* Background gradient per slide - Deep Ocean - Tighter on mobile */}
       <div 
         className="absolute inset-0"
         style={{
           background: index === 0 
-            ? 'radial-gradient(ellipse at center, #021019 0%, #010810 60%, #000000 100%)'
-            : 'radial-gradient(ellipse at center, #010c14 0%, #010810 60%, #000000 100%)',
+            ? 'radial-gradient(ellipse 80% 60% at center 40%, #021019 0%, #010810 50%, #000000 100%)'
+            : 'radial-gradient(ellipse 80% 60% at center 40%, #010c14 0%, #010810 50%, #000000 100%)',
         }}
       />
 
@@ -146,12 +147,34 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
         />
       </div>
 
-      {/* Main Content - Asymmetric Layout */}
-      <div className="relative w-full h-full flex items-center min-h-[80vh]">
-        {/* Lifestyle Image - 80% of screen with parallax */}
+      {/* Main Content - Stacked on Mobile, Side by Side on Desktop */}
+      <div className="relative w-full flex flex-col items-center justify-center min-h-[70vh] md:min-h-[80vh]">
+        
+        {/* Large Product Name - Background with parallax - Hidden on small mobile */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ y: imageY, scale: imageScale }}
+          className={`absolute hidden md:block ${index === 0 ? 'top-24 right-8 md:right-16 text-right' : 'top-24 left-8 md:left-16 text-left'} z-5 pointer-events-none`}
+          style={{ y: textY }}
+        >
+          <motion.h2 
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="display-hero select-none"
+            style={{
+              fontSize: 'clamp(4rem, 15vw, 14rem)',
+              color: 'transparent',
+              WebkitTextStroke: '1px rgba(255,255,255,0.08)',
+            }}
+          >
+            {product.name}
+          </motion.h2>
+        </motion.div>
+
+        {/* Boat Image - 60vh on mobile for immersion */}
+        <motion.div 
+          className="relative w-full h-[55vh] md:h-auto flex items-center justify-center"
+          style={{ y: imageY, scale: imageScale, touchAction: 'pan-y' }}
         >
           <motion.img
             initial={{ opacity: 0, scale: 0.8 }}
@@ -160,20 +183,85 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             src={product.image}
             alt={product.name}
-            className="w-[85%] max-w-5xl h-auto object-contain"
+            className="w-[95%] md:w-[85%] max-w-5xl h-auto object-contain"
             style={{
               filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.5))',
             }}
           />
         </motion.div>
 
-        {/* Glassmorphism Spec Card - Premium HUD style */}
+        {/* Mobile: Horizontal scrollable spec cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="md:hidden w-full px-4 mt-6"
+        >
+          <div 
+            className="w-full rounded-xl p-5"
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <div className="text-xs tracking-widest text-muted-foreground uppercase">
+                  {product.tagline}
+                </div>
+                <h3 className="display-hero text-foreground text-2xl mt-1">
+                  {product.name}
+                </h3>
+              </div>
+              <motion.button
+                className="px-4 py-2 text-xs tracking-widest uppercase text-foreground rounded-lg"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                }}
+                animate={{
+                  boxShadow: [
+                    '0 0 10px rgba(255, 255, 255, 0.05)',
+                    '0 0 20px rgba(255, 255, 255, 0.1)',
+                    '0 0 10px rgba(255, 255, 255, 0.05)',
+                  ],
+                }}
+                transition={{
+                  boxShadow: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+                }}
+              >
+                Ver
+              </motion.button>
+            </div>
+            
+            {/* Horizontal spec grid */}
+            <div className="grid grid-cols-3 gap-3 text-center">
+              <div className="p-2 rounded-lg bg-white/5">
+                <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Peso</div>
+                <div className="text-sm text-foreground font-medium mt-1">{product.specs.weight}</div>
+              </div>
+              <div className="p-2 rounded-lg bg-white/5">
+                <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Boca</div>
+                <div className="text-sm text-foreground font-medium mt-1">{product.specs.beam}</div>
+              </div>
+              <div className="p-2 rounded-lg bg-white/5">
+                <div className="text-[10px] text-muted-foreground uppercase tracking-wide">Nível</div>
+                <div className="text-sm text-foreground font-medium mt-1">{product.specs.level}</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Desktop: Glassmorphism Spec Card */}
         <motion.div
           initial={{ opacity: 0, x: index === 0 ? -50 : 50, y: 20 }}
           whileInView={{ opacity: 1, x: 0, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className={`absolute ${index === 0 ? 'bottom-16 left-8 md:left-16' : 'bottom-16 right-8 md:right-16'} z-20 group`}
+          className={`hidden md:block absolute ${index === 0 ? 'bottom-16 left-8 md:left-16' : 'bottom-16 right-8 md:right-16'} z-20 group`}
         >
           <div 
             className="px-6 py-5 min-w-[220px] rounded-xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(255,255,255,0.12)]"
@@ -243,27 +331,6 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
               Iniciar Jornada
             </motion.button>
           </div>
-        </motion.div>
-
-        {/* Large Product Name - Background with parallax */}
-        <motion.div 
-          className={`absolute ${index === 0 ? 'top-24 right-8 md:right-16 text-right' : 'top-24 left-8 md:left-16 text-left'} z-5 pointer-events-none`}
-          style={{ y: textY }}
-        >
-          <motion.h2 
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="display-hero select-none"
-            style={{
-              fontSize: 'clamp(4rem, 15vw, 14rem)',
-              color: 'transparent',
-              WebkitTextStroke: '1px rgba(255,255,255,0.08)',
-            }}
-          >
-            {product.name}
-          </motion.h2>
         </motion.div>
       </div>
     </div>

@@ -21,9 +21,35 @@ const AtelierSection = () => {
   const [selectedColor, setSelectedColor] = useState(0);
 
   return (
-    <section className="relative min-h-screen w-full py-24 md:py-32" style={{ background: 'hsl(0 0% 5%)' }}>
+    <section 
+      className="relative min-h-screen w-full py-36 md:py-48"
+      style={{ 
+        background: 'radial-gradient(ellipse at center, #021019 0%, #010810 60%, #000000 100%)' 
+      }}
+    >
+      {/* Water Caustics Effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px]"
+          animate={{
+            x: [0, 80, 0],
+            y: [0, -40, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 60%)',
+            filter: 'blur(100px)',
+          }}
+        />
+      </div>
+
       {/* Header */}
-      <div className="px-8 md:px-16 mb-16">
+      <div className="px-8 md:px-16 mb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

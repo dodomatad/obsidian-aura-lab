@@ -22,9 +22,9 @@ const AtelierSection = () => {
 
   return (
     <section 
-      className="relative min-h-screen w-full py-36 md:py-48"
+      className="relative min-h-screen w-full py-20 md:py-48"
       style={{ 
-        background: 'radial-gradient(ellipse at center, #021019 0%, #010810 60%, #000000 100%)' 
+        background: 'radial-gradient(ellipse 90% 70% at center 40%, #021019 0%, #010810 50%, #000000 100%)' 
       }}
     >
       {/* Water Caustics Effect */}
@@ -49,17 +49,17 @@ const AtelierSection = () => {
       </div>
 
       {/* Header */}
-      <div className="px-8 md:px-16 mb-20">
+      <div className="px-6 md:px-16 mb-12 md:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-xs tracking-widest text-muted-foreground uppercase block mb-4">
+          <span className="text-xs tracking-widest text-muted-foreground uppercase block mb-3 md:mb-4">
             O Ateliê
           </span>
-          <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}>
+          <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.75rem, 5vw, 4rem)' }}>
             Sua Identidade.<br />
             <span className="text-muted-foreground">Sua Cor.</span>
           </h2>
@@ -67,9 +67,12 @@ const AtelierSection = () => {
       </div>
 
       {/* Boat Display - Centered */}
-      <div className="relative flex flex-col items-center justify-center px-8 md:px-16">
-        {/* Boat Image with Smooth Transition */}
-        <div className="relative w-full max-w-4xl aspect-[16/9] flex items-center justify-center">
+      <div className="relative flex flex-col items-center justify-center px-4 md:px-16">
+        {/* Boat Image with Smooth Transition - Larger on mobile */}
+        <div 
+          className="relative w-full max-w-4xl h-[50vh] md:h-auto md:aspect-[16/9] flex items-center justify-center"
+          style={{ touchAction: 'pan-y' }}
+        >
           <AnimatePresence mode="wait">
             <motion.img
               key={colors[selectedColor].id}
@@ -79,7 +82,7 @@ const AtelierSection = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="w-[90%] h-auto object-contain"
+              className="w-full md:w-[90%] h-auto object-contain"
               style={{
                 filter: `drop-shadow(0 40px 80px ${colors[selectedColor].color}40)`,
               }}

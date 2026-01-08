@@ -1,9 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import ExperienceSelector from '@/components/ExperienceSelector';
+import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
-import EngineeringSection from '@/components/EngineeringSection';
-import AtmosphericFog from '@/components/AtmosphericFog';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -18,226 +16,132 @@ const Index = () => {
     offset: ["start start", "end start"]
   });
 
-  const heroImageY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroImageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // Hero text fades out on scroll, stays in place
+  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <>
-      {/* Cinematic Loading Screen */}
       {!isLoadingComplete && (
         <LoadingScreen onLoadingComplete={() => setIsLoadingComplete(true)} />
       )}
       
-      <div className="min-h-screen bg-background overflow-x-hidden scroll-smooth">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-6 backdrop-blur-sm bg-background/20">
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-xl font-medium tracking-tight"
-        >
-          LIBERDADE
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex gap-8"
-        >
-          <a 
-            href="#modelos" 
-            onClick={(e) => handleNavClick(e, 'modelos')}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow"
+      <div className="min-h-screen bg-background overflow-x-hidden">
+        {/* Minimal Navigation */}
+        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 md:px-16 py-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="font-sans text-sm font-medium tracking-widest text-foreground/80"
           >
-            Modelos
-          </a>
-          <a 
-            href="#engineering" 
-            onClick={(e) => handleNavClick(e, 'engineering')}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow"
-          >
-            Engenharia
-          </a>
-          <a 
-            href="#atelier" 
-            onClick={(e) => handleNavClick(e, 'atelier')}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow"
-          >
-            Ateliê
-          </a>
-        </motion.div>
-      </nav>
-
-      {/* Hero Section - Video Background with Parallax */}
-      <section ref={heroRef} className="relative h-screen overflow-hidden">
-        {/* Video Background with Parallax */}
-        <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 overflow-hidden bg-[#0a192f]"
-          style={{ y: heroImageY, scale: heroImageScale }}
-        >
-          {/* Fallback gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0a192f] via-[#0d1b2a] to-[#1b263b]" />
-          
-          {/* Vimeo Video Embed */}
-          <div className="absolute inset-0" style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
-            <iframe 
-              src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
-              style={{ 
-                position: 'absolute', 
-                top: '50%', 
-                left: '50%', 
-                width: '177.78vh',
-                height: '100vh',
-                minWidth: '100%',
-                minHeight: '56.25vw',
-                transform: 'translate(-50%, -50%)',
-                filter: 'brightness(0.7)'
-              }}
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              allowFullScreen
-              title="Hero Background Video"
-            />
-          </div>
-        </motion.div>
-        
-        {/* Dark Overlay for text readability - Fixed */}
-        <motion.div 
-          className="absolute inset-0 z-[1]"
-          style={{ opacity: heroOpacity }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-transparent" />
-        </motion.div>
-
-        {/* Title - Overlay */}
-        <motion.div 
-          className="absolute inset-0 flex items-center justify-start px-6 md:px-12 z-10"
-          style={{ opacity: heroOpacity }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              duration: 1.2, 
-              ease: [0.16, 1, 0.3, 1],
-              delay: 0.5
-            }}
-          >
-            <h1 
-              className="font-display font-bold text-foreground select-none"
-              style={{
-                fontSize: 'clamp(3rem, 12vw, 12rem)',
-                letterSpacing: '-0.04em',
-                lineHeight: 0.85,
-              }}
-            >
-              LIBERDADE<br />
-              <span className="text-foreground/50">NÃO SE</span><br />
-              EXPLICA
-            </h1>
-          </motion.div>
-        </motion.div>
-
-        {/* Subtexto - Canto Inferior Direito */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-12 right-6 md:right-12 z-20 text-right max-w-xs"
-          style={{ opacity: heroOpacity }}
-        >
-          <p className="text-xs md:text-sm text-muted-foreground leading-relaxed tracking-wide">
-            Surfskis de Elite.<br />
-            Performance Pura.<br />
-            Personalização Absoluta.
-          </p>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-12 left-6 md:left-12 z-20"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
-            <div className="w-px h-12 bg-gradient-to-b from-foreground/50 to-transparent" />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Experience Selector Section with Fog */}
-      <div id="modelos" className="relative">
-        <AtmosphericFog />
-        <ExperienceSelector />
-      </div>
-
-      {/* Engineering Section with Fog */}
-      <div className="relative">
-        <AtmosphericFog />
-        <EngineeringSection />
-      </div>
-
-      {/* Atelier Section with Fog */}
-      <div id="atelier" className="relative">
-        <AtmosphericFog />
-        <AtelierSection />
-      </div>
-
-      {/* Ambient Audio Player */}
-      <AmbientAudioPlayer />
-
-      {/* Statement Section */}
-      <section className="px-6 md:px-12 py-32 border-t border-border">
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <p 
-            className="text-muted-foreground font-display"
-            style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}
-          >
-            Cada embarcação é uma{' '}
-            <span className="text-foreground">obra de arte</span> feita para{' '}
-            <span className="text-foreground">você</span>.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Footer */}
-      <footer className="px-6 md:px-12 py-12 border-t border-border">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-          <div className="font-display text-xl font-medium tracking-tight">
             LIBERDADE
-          </div>
-          <div className="flex gap-8">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              Instagram
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="flex gap-10"
+          >
+            <a 
+              href="#modelos" 
+              onClick={(e) => handleNavClick(e, 'modelos')}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wide"
+            >
+              Modelos
             </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors cursor-grow">
-              WhatsApp
+            <a 
+              href="#atelier" 
+              onClick={(e) => handleNavClick(e, 'atelier')}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wide"
+            >
+              Ateliê
             </a>
+          </motion.div>
+        </nav>
+
+        {/* Hero Section - Video Focus with Fade Out Text */}
+        <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
+          {/* Video Background - Minimal Overlay */}
+          <div className="absolute inset-0">
+            {/* Fallback gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0a192f] via-[#0d1b2a] to-[#1b263b]" />
+            
+            {/* Vimeo Video */}
+            <div className="absolute inset-0">
+              <iframe 
+                src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
+                style={{ filter: 'brightness(0.85)' }}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
+                title="Hero Background Video"
+              />
+            </div>
+            
+            {/* Minimal Dark Overlay - Only 15% for readability */}
+            <div className="absolute inset-0 bg-background/15" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
-          <div className="text-xs text-muted-foreground">
-            © 2024 Todos os direitos reservados
-          </div>
+
+          {/* Hero Text - Stays Fixed, Fades Out on Scroll */}
+          <motion.div 
+            className="absolute inset-0 flex items-center justify-center z-10"
+            style={{ opacity: heroTextOpacity }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+              className="text-center"
+            >
+              <h1 
+                className="display-hero text-foreground select-none"
+                style={{
+                  fontSize: 'clamp(2.5rem, 8vw, 7rem)',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                LIBERDADE<br />
+                NÃO SE EXPLICA
+              </h1>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* Product Showcase - Editorial Layout with Scroll Snap */}
+        <div id="modelos">
+          <ProductShowcase />
         </div>
-      </footer>
-    </div>
+
+        {/* Atelier Section - Color Selector */}
+        <div id="atelier">
+          <AtelierSection />
+        </div>
+
+        {/* Ambient Audio Player */}
+        <AmbientAudioPlayer />
+
+        {/* Minimal Footer */}
+        <footer className="w-full px-8 md:px-16 py-16 border-t border-border/50">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <div className="text-sm font-medium tracking-widest text-foreground/60">
+              LIBERDADE
+            </div>
+            <div className="flex gap-10">
+              <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                Instagram
+              </a>
+              <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                WhatsApp
+              </a>
+            </div>
+            <div className="text-xs text-muted-foreground">
+              © 2024 Todos os direitos reservados
+            </div>
+          </div>
+        </footer>
+      </div>
     </>
   );
 };

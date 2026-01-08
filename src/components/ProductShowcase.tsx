@@ -1,16 +1,17 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
 import boatPono from '@/assets/boat-pono.png';
 import boatSurfski from '@/assets/boat-surfski.png';
+import TargetReticle from './TargetReticle';
+import MagneticButton from './MagneticButton';
 
 interface Hotspot {
   id: string;
   label: string;
   description: string;
   position: { x: string; y: string };
-  lineEnd: { x: string; y: string };
 }
 
 interface Product {
@@ -46,22 +47,19 @@ const products: Product[] = [
         id: 'bow',
         label: 'Proa Hidrodinâmica',
         description: 'Design que corta a água com mínima resistência',
-        position: { x: '15%', y: '45%' },
-        lineEnd: { x: '5%', y: '25%' },
+        position: { x: '18%', y: '48%' },
       },
       {
         id: 'cockpit',
         label: 'Cockpit Ergonômico',
         description: 'Conforto absoluto para longas travessias',
-        position: { x: '50%', y: '40%' },
-        lineEnd: { x: '50%', y: '15%' },
+        position: { x: '50%', y: '42%' },
       },
       {
         id: 'stern',
         label: 'Popa Estabilizadora',
         description: 'Máximo equilíbrio em qualquer condição',
-        position: { x: '85%', y: '45%' },
-        lineEnd: { x: '95%', y: '25%' },
+        position: { x: '82%', y: '48%' },
       },
     ],
   },
@@ -82,22 +80,19 @@ const products: Product[] = [
         id: 'bow',
         label: 'Proa de Ataque',
         description: 'Geometria agressiva para velocidade máxima',
-        position: { x: '12%', y: '48%' },
-        lineEnd: { x: '3%', y: '28%' },
+        position: { x: '15%', y: '50%' },
       },
       {
         id: 'cockpit',
         label: 'Cockpit de Performance',
         description: 'Posição otimizada para remadas potentes',
-        position: { x: '48%', y: '42%' },
-        lineEnd: { x: '48%', y: '12%' },
+        position: { x: '48%', y: '44%' },
       },
       {
         id: 'stern',
         label: 'Leme Integrado',
         description: 'Controle preciso em alta velocidade',
-        position: { x: '88%', y: '48%' },
-        lineEnd: { x: '97%', y: '28%' },
+        position: { x: '85%', y: '50%' },
       },
     ],
   },
@@ -114,171 +109,51 @@ const quotes = [
   }
 ];
 
-// Pulsing Hotspot Component
-const HotspotDot = ({ 
-  hotspot, 
-  isActive, 
-  onClick,
-  isMobile = false
-}: { 
-  hotspot: Hotspot; 
-  isActive: boolean; 
-  onClick: () => void;
-  isMobile?: boolean;
-}) => {
-  return (
-    <motion.div
-      className="absolute cursor-pointer z-30"
-      style={{ left: hotspot.position.x, top: hotspot.position.y }}
-      onClick={onClick}
-      whileHover={{ scale: 1.3 }}
-      whileTap={{ scale: 0.9 }}
-    >
-      {/* Outer pulse ring */}
-      <motion.div
-        className="absolute -inset-3 rounded-full"
-        style={{ background: 'rgba(6, 182, 212, 0.2)' }}
-        animate={{
-          scale: [1, 1.8, 1],
-          opacity: [0.6, 0, 0.6],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      
-      {/* Inner dot */}
-      <motion.div
-        className="w-3 h-3 md:w-4 md:h-4 rounded-full relative"
-        style={{
-          background: isActive 
-            ? 'linear-gradient(135deg, #06b6d4, #22d3ee)' 
-            : 'rgba(6, 182, 212, 0.8)',
-          boxShadow: isActive 
-            ? '0 0 20px rgba(6, 182, 212, 0.8), 0 0 40px rgba(6, 182, 212, 0.4)' 
-            : '0 0 10px rgba(6, 182, 212, 0.5)',
-        }}
-        animate={{
-          scale: isActive ? [1, 1.2, 1] : [1, 1.15, 1],
-          opacity: [0.8, 1, 0.8],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
-      {/* Connecting line to tooltip (desktop only) */}
-      <AnimatePresence>
-        {isActive && !isMobile && (
-          <motion.svg
-            initial={{ opacity: 0, pathLength: 0 }}
-            animate={{ opacity: 1, pathLength: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="absolute pointer-events-none"
-            style={{
-              left: '50%',
-              top: '50%',
-              width: '100px',
-              height: '80px',
-              overflow: 'visible',
-            }}
-          >
-            <motion.line
-              x1="0"
-              y1="0"
-              x2={parseInt(hotspot.lineEnd.x) < parseInt(hotspot.position.x) ? -60 : 60}
-              y2="-50"
-              stroke="rgba(6, 182, 212, 0.6)"
-              strokeWidth="1"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.svg>
-        )}
-      </AnimatePresence>
-
-      {/* Glassmorphism Tooltip */}
-      <AnimatePresence>
-        {isActive && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className={`absolute ${
-              parseInt(hotspot.position.x) > 50 ? 'right-6' : 'left-6'
-            } -top-2 md:-top-16 z-40 min-w-[180px] md:min-w-[220px]`}
-          >
-            <div
-              className="p-3 md:p-4 rounded-xl"
-              style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-              }}
-            >
-              <div 
-                className="text-xs font-medium tracking-wide text-cyan-400 mb-1"
-                style={{ fontFamily: '"JetBrains Mono", monospace' }}
-              >
-                {hotspot.label}
-              </div>
-              <div className="text-[11px] md:text-xs text-white/70 leading-relaxed">
-                {hotspot.description}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
-
-// HUD Spec Line Component
-const HUDSpecLine = ({ 
+// Asymmetric HUD Spec Component
+const HUDSpec = ({ 
   label, 
   value, 
-  position,
-  delay = 0
+  delay = 0,
+  index
 }: { 
   label: string; 
   value: string;
-  position: 'left' | 'right';
   delay?: number;
+  index: number;
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: position === 'left' ? -30 : 30 }}
+      initial={{ opacity: 0, x: -40 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={`flex items-center gap-3 ${position === 'right' ? 'flex-row-reverse text-right' : ''}`}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="relative"
     >
-      <div className="flex flex-col">
+      {/* Grid alignment line */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+      
+      <div className="pl-6">
         <span 
-          className="text-[10px] uppercase tracking-widest text-white/40"
+          className="block text-[9px] uppercase tracking-[0.25em] text-white/30 mb-1"
           style={{ fontFamily: '"JetBrains Mono", monospace' }}
         >
           {label}
         </span>
         <span 
-          className="text-lg md:text-xl font-medium text-cyan-400"
+          className="block text-2xl md:text-3xl font-light text-white tracking-tight"
           style={{ fontFamily: '"JetBrains Mono", monospace' }}
         >
           {value}
         </span>
       </div>
-      {/* Connecting line */}
-      <div 
-        className={`h-px flex-1 min-w-[40px] md:min-w-[80px] ${position === 'left' ? 'bg-gradient-to-r' : 'bg-gradient-to-l'} from-white/30 to-transparent`}
+      
+      {/* Horizontal connector line */}
+      <motion.div 
+        className="absolute top-1/2 left-full ml-4 h-px bg-gradient-to-r from-white/20 to-transparent"
+        initial={{ width: 0 }}
+        whileInView={{ width: '60px' }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: delay + 0.2 }}
       />
     </motion.div>
   );
@@ -313,9 +188,7 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
   const slideRef = useRef<HTMLDivElement>(null);
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [mobileAutoplayIndex, setMobileAutoplayIndex] = useState(-1);
   
-  // Detect mobile
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -323,24 +196,21 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Mobile auto-play sequence for hotspots
   const { scrollYProgress } = useScroll({
     target: slideRef,
     offset: ["start end", "end start"]
   });
 
+  // Mobile auto-play sequence
   useEffect(() => {
     if (!isMobile) return;
     
     const unsubscribe = scrollYProgress.on('change', (value) => {
-      // When in view (0.3 to 0.7), cycle through hotspots
-      if (value > 0.25 && value < 0.75) {
-        const hotspotIndex = Math.floor((value - 0.25) / 0.16);
+      if (value > 0.3 && value < 0.7) {
+        const hotspotIndex = Math.floor((value - 0.3) / 0.13);
         const clampedIndex = Math.min(Math.max(hotspotIndex, 0), 2);
-        setMobileAutoplayIndex(clampedIndex);
         setActiveHotspot(product.hotspots[clampedIndex]?.id || null);
       } else {
-        setMobileAutoplayIndex(-1);
         setActiveHotspot(null);
       }
     });
@@ -348,182 +218,235 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
     return () => unsubscribe();
   }, [isMobile, scrollYProgress, product.hotspots]);
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.05, 0.95]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.9]);
 
   const handleHotspotClick = (id: string) => {
-    // Haptic feedback on mobile if available
     if (isMobile && 'vibrate' in navigator) {
       navigator.vibrate(10);
     }
     setActiveHotspot(activeHotspot === id ? null : id);
   };
 
+  const getHotspotSide = (hotspot: Hotspot): 'left' | 'right' => {
+    const xPercent = parseInt(hotspot.position.x);
+    return xPercent < 50 ? 'left' : 'right';
+  };
+
   return (
     <div
       ref={slideRef}
-      className="min-h-screen w-full snap-start snap-always flex flex-col items-center justify-center relative overflow-hidden py-8 md:py-16"
+      className="min-h-screen w-full snap-start snap-always relative overflow-hidden"
       style={{ touchAction: 'pan-y' }}
     >
-      {/* Radial Vignette Background - Focus on product */}
+      {/* Engineering Grid Background */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Radial Vignette - Focus on product */}
       <div 
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 70% 50% at center 45%, transparent 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.8) 100%),
-            radial-gradient(ellipse 80% 60% at center 40%, ${index === 0 ? '#021019' : '#010c14'} 0%, #010810 50%, #000000 100%)
+            radial-gradient(ellipse 60% 50% at 60% 50%, transparent 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.95) 100%)
           `,
         }}
       />
 
-      {/* Breathing Glow - Spotlight behind boat */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-[90%] md:w-[70%] h-[50%] md:h-[60%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.15) 0%, transparent 60%)',
-          filter: 'blur(60px)',
-        }}
-      />
+      {/* Huge Overlapping Product Name (Behind boat) */}
+      <motion.div 
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-1/2 -translate-y-1/2 left-0 md:left-8 pointer-events-none z-0 overflow-hidden"
+      >
+        <h2 
+          className="display-hero select-none whitespace-nowrap"
+          style={{
+            fontSize: 'clamp(6rem, 25vw, 22rem)',
+            color: 'transparent',
+            WebkitTextStroke: '1px rgba(255,255,255,0.06)',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          {product.name}
+        </h2>
+      </motion.div>
 
-      {/* Main Content - Sticky-like centered layout */}
-      <div className="relative w-full flex flex-col items-center justify-center z-10">
+      {/* Main Layout: Asymmetric with boat offset right */}
+      <div className="relative w-full h-screen flex items-center">
         
-        {/* HUD Specs - Left Side (Desktop) */}
-        <div className="hidden md:flex absolute left-8 lg:left-16 top-1/2 -translate-y-1/2 flex-col gap-6 z-20">
-          <HUDSpecLine label="Peso" value={product.specs.weight} position="left" delay={0} />
-          <HUDSpecLine label="Boca" value={product.specs.beam} position="left" delay={0.1} />
+        {/* Left Column: Specs (Desktop) */}
+        <div className="hidden md:flex absolute left-8 lg:left-16 top-1/2 -translate-y-1/2 flex-col gap-8 z-20">
+          <HUDSpec label="Peso" value={product.specs.weight} delay={0} index={0} />
+          <HUDSpec label="Boca" value={product.specs.beam} delay={0.1} index={1} />
+          <HUDSpec label="Velocidade" value={product.specs.speed} delay={0.2} index={2} />
+          <HUDSpec label="Nível" value={product.specs.level} delay={0.3} index={3} />
         </div>
 
-        {/* HUD Specs - Right Side (Desktop) */}
-        <div className="hidden md:flex absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 flex-col gap-6 z-20">
-          <HUDSpecLine label="Velocidade" value={product.specs.speed} position="right" delay={0.15} />
-          <HUDSpecLine label="Nível" value={product.specs.level} position="right" delay={0.2} />
-        </div>
-
-        {/* Product Name - Huge Background Text */}
+        {/* Boat Container - Offset to right */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+          className="absolute right-0 md:right-[5%] top-1/2 -translate-y-1/2 w-[95%] md:w-[70%] h-[55vh] md:h-[65vh] flex items-center justify-center z-10"
+          style={{ scale: imageScale, touchAction: 'pan-y' }}
         >
-          <h2 
-            className="display-hero select-none"
-            style={{
-              fontSize: 'clamp(5rem, 20vw, 18rem)',
-              color: 'transparent',
-              WebkitTextStroke: '1px rgba(255,255,255,0.04)',
+          {/* Spotlight Glow */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{
+              opacity: [0.15, 0.25, 0.15],
             }}
-          >
-            {product.name}
-          </h2>
-        </motion.div>
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 50%)',
+              filter: 'blur(40px)',
+            }}
+          />
 
-        {/* Boat Image Container with Hotspots */}
-        <motion.div 
-          className="relative w-[95%] md:w-[75%] max-w-5xl h-[50vh] md:h-[60vh] flex items-center justify-center"
-          style={{ y: imageY, scale: imageScale, touchAction: 'pan-y' }}
-        >
           {/* Boat Image */}
           <motion.img
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             src={product.image}
             alt={product.name}
             className="w-full h-full object-contain"
             style={{
-              filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.6))',
+              filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.5))',
             }}
           />
 
-          {/* Interactive Hotspots */}
-          {product.hotspots.map((hotspot, i) => (
-            <HotspotDot
+          {/* Target Reticle Hotspots */}
+          {!isMobile && product.hotspots.map((hotspot) => (
+            <TargetReticle
               key={hotspot.id}
               hotspot={hotspot}
               isActive={activeHotspot === hotspot.id}
               onClick={() => handleHotspotClick(hotspot.id)}
-              isMobile={isMobile}
+              side={getHotspotSide(hotspot)}
             />
           ))}
 
-          {/* Mobile: Touch instruction */}
-          {isMobile && mobileAutoplayIndex === -1 && (
+          {/* Mobile: Simple pulsing dots */}
+          {isMobile && product.hotspots.map((hotspot) => (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-white/40 text-[10px] uppercase tracking-widest"
+              key={hotspot.id}
+              className="absolute z-30"
+              style={{ left: hotspot.position.x, top: hotspot.position.y }}
+              onClick={() => handleHotspotClick(hotspot.id)}
             >
-              <span>👆</span>
-              <span>Toque para explorar</span>
+              <motion.div
+                className="w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/50 flex items-center justify-center"
+                animate={{
+                  scale: activeHotspot === hotspot.id ? [1, 1.3, 1] : [1, 1.1, 1],
+                  borderColor: activeHotspot === hotspot.id ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.4)',
+                }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+              </motion.div>
             </motion.div>
-          )}
+          ))}
         </motion.div>
 
-        {/* Mobile: Title + Tagline */}
+        {/* Product Info: Bottom left aligned (Desktop) */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="hidden md:block absolute bottom-16 left-8 lg:left-16 z-20"
+        >
+          <div className="relative">
+            {/* Vertical alignment line */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-white/20" />
+            
+            <div className="pl-6">
+              <div 
+                className="text-[10px] tracking-[0.3em] text-white/40 uppercase mb-2"
+                style={{ fontFamily: '"JetBrains Mono", monospace' }}
+              >
+                {product.tagline}
+              </div>
+              <h3 
+                className="display-hero text-white text-4xl lg:text-5xl mb-6"
+                style={{ letterSpacing: '-0.02em' }}
+              >
+                {product.name}
+              </h3>
+              
+              <MagneticButton className="inline-block">
+                <motion.button
+                  className="px-8 py-4 text-[11px] tracking-[0.2em] uppercase text-white transition-all duration-300 relative overflow-hidden group"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                  }}
+                  whileHover={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
+                >
+                  <span className="relative z-10">Explorar Modelo</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/5"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              </MagneticButton>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Mobile: Title + Specs */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="md:hidden text-center mt-4 px-4"
-        >
-          <div className="text-[10px] tracking-widest text-cyan-400/80 uppercase mb-1">
-            {product.tagline}
-          </div>
-          <h3 className="display-hero text-white text-2xl">
-            {product.name}
-          </h3>
-        </motion.div>
-
-        {/* Mobile: Horizontal Swipeable HUD Specs */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="md:hidden w-full mt-4"
+          className="md:hidden absolute bottom-24 left-0 right-0 px-6"
         >
           <div 
-            className="flex gap-2 px-4 overflow-x-auto scrollbar-hide pb-2"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="text-[9px] tracking-[0.3em] text-white/40 uppercase mb-1"
+            style={{ fontFamily: '"JetBrains Mono", monospace' }}
           >
+            {product.tagline}
+          </div>
+          <h3 className="display-hero text-white text-3xl mb-4">
+            {product.name}
+          </h3>
+          
+          {/* Horizontal specs row */}
+          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
             {[
               { label: 'Peso', value: product.specs.weight },
               { label: 'Boca', value: product.specs.beam },
               { label: 'Vel.', value: product.specs.speed },
               { label: 'Nível', value: product.specs.level },
-            ].map((spec, i) => (
+            ].map((spec) => (
               <div 
                 key={spec.label}
-                className="flex-shrink-0 px-4 py-3 rounded-lg min-w-[85px] text-center"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                }}
+                className="flex-shrink-0 border-l border-white/10 pl-3"
               >
                 <div 
-                  className="text-[9px] text-white/40 uppercase tracking-wider"
+                  className="text-[8px] text-white/30 uppercase tracking-wider"
                   style={{ fontFamily: '"JetBrains Mono", monospace' }}
                 >
                   {spec.label}
                 </div>
                 <div 
-                  className="text-sm text-cyan-400 font-medium mt-0.5"
+                  className="text-sm text-white font-light"
                   style={{ fontFamily: '"JetBrains Mono", monospace' }}
                 >
                   {spec.value}
@@ -533,52 +456,34 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
           </div>
         </motion.div>
 
-        {/* Desktop: Glassmorphism Info Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-        >
-          <div 
-            className="px-8 py-5 rounded-2xl flex items-center gap-10"
-            style={{
-              background: 'rgba(255, 255, 255, 0.04)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-            }}
+        {/* Mobile active hotspot info */}
+        {isMobile && activeHotspot && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="absolute top-8 left-4 right-4 z-40"
           >
-            <div>
-              <div 
-                className="text-[10px] tracking-widest text-cyan-400/80 uppercase"
-                style={{ fontFamily: '"JetBrains Mono", monospace' }}
-              >
-                {product.tagline}
-              </div>
-              <h3 className="display-hero text-white text-2xl mt-1">
-                {product.name}
-              </h3>
-            </div>
-            
-            <div className="h-10 w-px bg-white/10" />
-            
-            <motion.button
-              className="px-6 py-3 text-xs tracking-widest uppercase text-white rounded-xl transition-all duration-300"
+            <div
+              className="p-4"
               style={{
-                background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%)',
-                border: '1px solid rgba(6, 182, 212, 0.3)',
-              }}
-              whileHover={{ 
-                boxShadow: '0 0 30px rgba(6, 182, 212, 0.3)',
-                borderColor: 'rgba(6, 182, 212, 0.5)',
+                background: 'rgba(0, 0, 0, 0.7)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
               }}
             >
-              Explorar
-            </motion.button>
-          </div>
-        </motion.div>
+              <div 
+                className="text-[10px] tracking-[0.2em] text-white/50 uppercase mb-1"
+                style={{ fontFamily: '"JetBrains Mono", monospace' }}
+              >
+                {product.hotspots.find(h => h.id === activeHotspot)?.label}
+              </div>
+              <div className="text-xs text-white/80">
+                {product.hotspots.find(h => h.id === activeHotspot)?.description}
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
@@ -590,7 +495,7 @@ const ProductShowcase = () => {
       {/* First Quote */}
       <QuoteSection quote={quotes[0]} index={0} />
       
-      {/* Products with scroll snap */}
+      {/* Products */}
       <div className="snap-y snap-mandatory" style={{ scrollSnapType: 'y mandatory' }}>
         {products.map((product, index) => (
           <ProductSlide key={product.id} product={product} index={index} />

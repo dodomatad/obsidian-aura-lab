@@ -6,11 +6,15 @@ import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
+import { useLenisScroll } from '@/hooks/useLenisScroll';
 
 const Index = () => {
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const { handleNavClick } = useSmoothScroll();
   const heroRef = useRef<HTMLDivElement>(null);
+  
+  // Enable Lenis smooth scroll
+  useLenisScroll();
   
   const { scrollYProgress } = useScroll({
     target: heroRef,

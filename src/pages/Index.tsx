@@ -62,10 +62,16 @@ const Index = () => {
 
         {/* Hero Section - Video Focus with Fade Out Text */}
         <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
-          {/* Video Background - Minimal Overlay */}
-          <div className="absolute inset-0">
+          {/* Video Background - With Fade Mask */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+            }}
+          >
             {/* Fallback gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0a192f] via-[#0d1b2a] to-[#1b263b]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#021019] via-[#010810] to-[#000000]" />
             
             {/* Vimeo Video */}
             <div className="absolute inset-0">
@@ -81,7 +87,7 @@ const Index = () => {
             </div>
             
             {/* Cinematic Overlay - Gradient for atmosphere and readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           </div>
 
           {/* Hero Text - Stays Fixed, Fades Out on Scroll */}

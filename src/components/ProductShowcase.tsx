@@ -60,13 +60,13 @@ const quotes = [
 
 const QuoteSection = ({ quote, index }: { quote: typeof quotes[0]; index: number }) => {
   return (
-    <div className="h-[60vh] w-full snap-start snap-always flex items-center justify-center relative">
+    <div className="h-[90vh] w-full snap-start snap-always flex items-center justify-center relative py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-20%" }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         className="text-center px-8 md:px-16 max-w-4xl"
       >
         <p 
@@ -75,7 +75,7 @@ const QuoteSection = ({ quote, index }: { quote: typeof quotes[0]; index: number
         >
           "{quote.text}"
         </p>
-        <p className="text-muted-foreground text-sm mt-6 tracking-widest uppercase">
+        <p className="text-muted-foreground text-sm mt-8 tracking-widest uppercase">
           — {quote.author}
         </p>
       </motion.div>
@@ -98,20 +98,56 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
   return (
     <div
       ref={slideRef}
-      className="h-screen w-full snap-start snap-always flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen w-full snap-start snap-always flex items-center justify-center relative overflow-hidden py-32"
     >
-      {/* Background gradient per slide */}
+      {/* Background gradient per slide - Deep Ocean */}
       <div 
         className="absolute inset-0"
         style={{
           background: index === 0 
-            ? 'linear-gradient(135deg, hsl(0 0% 6%) 0%, hsl(220 20% 8%) 100%)'
-            : 'linear-gradient(135deg, hsl(220 20% 8%) 0%, hsl(0 0% 6%) 100%)',
+            ? 'radial-gradient(ellipse at center, #021019 0%, #010810 60%, #000000 100%)'
+            : 'radial-gradient(ellipse at center, #010c14 0%, #010810 60%, #000000 100%)',
         }}
       />
 
+      {/* Water Caustics Effect - Animated Light Refraction */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            rotate: { duration: 60, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          style={{
+            background: 'radial-gradient(ellipse at 30% 50%, rgba(6, 182, 212, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(6, 182, 212, 0.04) 0%, transparent 40%)',
+            filter: 'blur(60px)',
+          }}
+        />
+        <motion.div
+          className="absolute top-1/3 left-1/4 w-96 h-96"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, 50, 0],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%)',
+            filter: 'blur(80px)',
+          }}
+        />
+      </div>
+
       {/* Main Content - Asymmetric Layout */}
-      <div className="relative w-full h-full flex items-center">
+      <div className="relative w-full h-full flex items-center min-h-[80vh]">
         {/* Lifestyle Image - 80% of screen with parallax */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center"

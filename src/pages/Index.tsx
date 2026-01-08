@@ -79,9 +79,8 @@ const Index = () => {
               />
             </div>
             
-            {/* Minimal Dark Overlay - Only 15% for readability */}
-            <div className="absolute inset-0 bg-background/15" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+            {/* Cinematic Overlay - Gradient for atmosphere and readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80" />
           </div>
 
           {/* Hero Text - Stays Fixed, Fades Out on Scroll */}

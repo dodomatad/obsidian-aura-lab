@@ -26,38 +26,39 @@ const Index = () => {
       )}
       
       <div className="min-h-screen bg-background overflow-x-hidden">
-        {/* Minimal Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 md:px-16 py-6">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="font-sans text-sm font-medium tracking-widest text-foreground/80"
-          >
+        {/* Glassmorphism Navigation - Futuristic HUD */}
+        <motion.nav 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-50 flex justify-between items-center px-6 md:px-10 py-4 rounded-2xl"
+          style={{
+            background: 'rgba(255, 255, 255, 0.03)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+          }}
+        >
+          <div className="font-sans text-sm font-medium tracking-widest text-foreground/90">
             LIBERDADE
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="flex gap-10"
-          >
+          </div>
+          <div className="flex gap-8 md:gap-10">
             <a 
               href="#modelos" 
               onClick={(e) => handleNavClick(e, 'modelos')}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wide"
+              className="text-xs text-foreground/60 hover:text-foreground transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
             >
               Modelos
             </a>
             <a 
               href="#atelier" 
               onClick={(e) => handleNavClick(e, 'atelier')}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wide"
+              className="text-xs text-foreground/60 hover:text-foreground transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
             >
               Ateliê
             </a>
-          </motion.div>
-        </nav>
+          </div>
+        </motion.nav>
 
         {/* Hero Section - Video Focus with Fade Out Text */}
         <section ref={heroRef} className="relative h-screen w-full overflow-hidden">

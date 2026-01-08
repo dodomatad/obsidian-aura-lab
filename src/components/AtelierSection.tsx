@@ -27,14 +27,31 @@ const AtelierSection = () => {
         background: 'radial-gradient(ellipse 90% 70% at center 40%, #021019 0%, #010810 50%, #000000 100%)' 
       }}
     >
-      {/* Water Caustics Effect */}
+      {/* Breathing Glow Effect - Spotlight behind boat */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-[70%] h-[50%] -translate-x-1/2 -translate-y-1/2"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.2) 0%, transparent 60%)',
+            filter: 'blur(80px)',
+          }}
+        />
+        
+        {/* Water Caustics */}
         <motion.div
           className="absolute top-1/4 right-1/4 w-[600px] h-[600px]"
           animate={{
             x: [0, 80, 0],
             y: [0, -40, 0],
-            opacity: [0.2, 0.5, 0.2],
           }}
           transition={{
             duration: 15,
@@ -42,7 +59,7 @@ const AtelierSection = () => {
             ease: 'easeInOut',
           }}
           style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 60%)',
             filter: 'blur(100px)',
           }}
         />

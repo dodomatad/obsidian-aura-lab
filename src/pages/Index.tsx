@@ -4,6 +4,7 @@ import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
+import AtmosphereParticles from '@/components/AtmosphereParticles';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const Index = () => {
@@ -26,6 +27,8 @@ const Index = () => {
       )}
       
       <div className="min-h-screen bg-background overflow-x-hidden">
+        {/* Global Atmosphere Particles - Deep Sea Effect */}
+        <AtmosphereParticles />
         {/* Glassmorphism Navigation - Futuristic HUD */}
         <motion.nav 
           initial={{ opacity: 0, y: -20 }}
@@ -97,16 +100,16 @@ const Index = () => {
             style={{ opacity: heroTextOpacity }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
               className="text-center"
             >
               <h1 
-                className="display-hero text-foreground select-none px-4"
+                className="display-hero text-foreground select-none px-4 tracking-widest md:tracking-tight"
                 style={{
-                  fontSize: 'clamp(2rem, 7vw, 7rem)',
-                  letterSpacing: '-0.02em',
+                  fontSize: 'clamp(1.5rem, 5vw, 7rem)',
+                  letterSpacing: undefined,
                   lineHeight: 1.1,
                 }}
               >

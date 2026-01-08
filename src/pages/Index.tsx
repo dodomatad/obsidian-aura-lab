@@ -110,10 +110,9 @@ const Index = () => {
               className="text-center"
             >
               <h1 
-                className="display-hero text-foreground select-none px-4 tracking-widest md:tracking-tight"
+                className="display-hero text-foreground select-none px-4 tracking-[0.15em] md:tracking-tight"
                 style={{
-                  fontSize: 'clamp(1.5rem, 5vw, 7rem)',
-                  letterSpacing: undefined,
+                  fontSize: 'clamp(1.2rem, 4vw, 7rem)',
                   lineHeight: 1.1,
                 }}
               >

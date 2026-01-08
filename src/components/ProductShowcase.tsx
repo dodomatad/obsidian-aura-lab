@@ -238,15 +238,27 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
       className="min-h-screen w-full snap-start snap-always relative overflow-hidden"
       style={{ touchAction: 'pan-y' }}
     >
-      {/* Engineering Grid Background */}
+      {/* Engineering Grid Background - Finer, more technical */}
       <div 
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-40"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px',
+          backgroundSize: '40px 40px',
+        }}
+      />
+      
+      {/* Secondary larger grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: '200px 200px',
         }}
       />
 
@@ -292,9 +304,9 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
           <HUDSpec label="Nível" value={product.specs.level} delay={0.3} index={3} />
         </div>
 
-        {/* Boat Container - Offset to right */}
+        {/* Boat Container - Offset to right, constrained on mobile */}
         <motion.div 
-          className="absolute right-0 md:right-[5%] top-1/2 -translate-y-1/2 w-[95%] md:w-[70%] h-[55vh] md:h-[65vh] flex items-center justify-center z-10"
+          className="absolute right-0 md:right-[5%] top-[45%] md:top-1/2 -translate-y-1/2 w-[90%] md:w-[70%] h-[45vh] md:h-[65vh] max-h-[50vh] md:max-h-none flex items-center justify-center z-10"
           style={{ scale: imageScale, touchAction: 'pan-y' }}
         >
           {/* Spotlight Glow */}
@@ -409,49 +421,62 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
           </div>
         </motion.div>
 
-        {/* Mobile: Title + Specs */}
+        {/* Mobile: Title + Swipeable Specs Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="md:hidden absolute bottom-24 left-0 right-0 px-6"
+          className="md:hidden absolute bottom-20 left-0 right-0"
         >
-          <div 
-            className="text-[9px] tracking-[0.3em] text-white/40 uppercase mb-1"
-            style={{ fontFamily: '"JetBrains Mono", monospace' }}
-          >
-            {product.tagline}
+          {/* Title section */}
+          <div className="px-5 mb-3">
+            <div 
+              className="text-[8px] tracking-[0.3em] text-white/40 uppercase mb-1"
+              style={{ fontFamily: '"JetBrains Mono", monospace' }}
+            >
+              {product.tagline}
+            </div>
+            <h3 className="display-hero text-white text-2xl" style={{ letterSpacing: '0.08em' }}>
+              {product.name}
+            </h3>
           </div>
-          <h3 className="display-hero text-white text-3xl mb-4">
-            {product.name}
-          </h3>
           
-          {/* Horizontal specs row */}
-          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
+          {/* Horizontal swipeable specs carousel - show 1.5 cards to hint scrolling */}
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide px-5 pb-3 snap-x snap-mandatory">
             {[
               { label: 'Peso', value: product.specs.weight },
               { label: 'Boca', value: product.specs.beam },
-              { label: 'Vel.', value: product.specs.speed },
+              { label: 'Velocidade', value: product.specs.speed },
               { label: 'Nível', value: product.specs.level },
-            ].map((spec) => (
-              <div 
+            ].map((spec, i) => (
+              <motion.div 
                 key={spec.label}
-                className="flex-shrink-0 border-l border-white/10 pl-3"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 * i }}
+                className="flex-shrink-0 w-[45vw] snap-start"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  padding: '12px 14px',
+                }}
               >
                 <div 
-                  className="text-[8px] text-white/30 uppercase tracking-wider"
+                  className="text-[7px] text-white/35 uppercase tracking-[0.2em] mb-1"
                   style={{ fontFamily: '"JetBrains Mono", monospace' }}
                 >
                   {spec.label}
                 </div>
                 <div 
-                  className="text-sm text-white font-light"
+                  className="text-base text-white font-light"
                   style={{ fontFamily: '"JetBrains Mono", monospace' }}
                 >
                   {spec.value}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>

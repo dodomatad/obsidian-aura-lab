@@ -46,6 +46,43 @@ const products: Product[] = [
   },
 ];
 
+// Inspirational quotes between sections
+const quotes = [
+  {
+    text: "A água não resiste. A água flui.",
+    author: "Lao Tzu"
+  },
+  {
+    text: "O mar, uma vez que lança seu feitiço, mantém-nos em sua rede de maravilhas para sempre.",
+    author: "Jacques Cousteau"
+  }
+];
+
+const QuoteSection = ({ quote, index }: { quote: typeof quotes[0]; index: number }) => {
+  return (
+    <div className="h-[60vh] w-full snap-start snap-always flex items-center justify-center relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-20%" }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center px-8 md:px-16 max-w-4xl"
+      >
+        <p 
+          className="display-hero text-foreground/80 italic"
+          style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)', lineHeight: 1.4 }}
+        >
+          "{quote.text}"
+        </p>
+        <p className="text-muted-foreground text-sm mt-6 tracking-widest uppercase">
+          — {quote.author}
+        </p>
+      </motion.div>
+    </div>
+  );
+};
+
 const ProductSlide = ({ product, index }: { product: Product; index: number }) => {
   const slideRef = useRef<HTMLDivElement>(null);
   
@@ -54,13 +91,14 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
     offset: ["start end", "end start"]
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.95]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1.05, 0.9]);
+  const textY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
     <div
       ref={slideRef}
-      className="h-screen w-full snap-start snap-always flex items-center justify-center relative"
+      className="h-screen w-full snap-start snap-always flex items-center justify-center relative overflow-hidden"
     >
       {/* Background gradient per slide */}
       <div 
@@ -74,12 +112,16 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
 
       {/* Main Content - Asymmetric Layout */}
       <div className="relative w-full h-full flex items-center">
-        {/* Lifestyle Image - 80% of screen */}
+        {/* Lifestyle Image - 80% of screen with parallax */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center"
           style={{ y: imageY, scale: imageScale }}
         >
-          <img
+          <motion.img
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             src={product.image}
             alt={product.name}
             className="w-[85%] max-w-5xl h-auto object-contain"
@@ -89,15 +131,23 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
           />
         </motion.div>
 
-        {/* Glassmorphism Spec Card - Corner positioning */}
+        {/* Glassmorphism Spec Card - Premium HUD style */}
         <motion.div
-          initial={{ opacity: 0, x: index === 0 ? -50 : 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: index === 0 ? -50 : 50, y: 20 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className={`absolute ${index === 0 ? 'bottom-16 left-8 md:left-16' : 'bottom-16 right-8 md:right-16'} z-20`}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className={`absolute ${index === 0 ? 'bottom-16 left-8 md:left-16' : 'bottom-16 right-8 md:right-16'} z-20 group`}
         >
-          <div className="glass-card px-6 py-5 min-w-[200px]">
+          <div 
+            className="px-6 py-5 min-w-[220px] rounded-xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(255,255,255,0.12)]"
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            }}
+          >
             <div className="text-xs tracking-widest text-muted-foreground mb-3 uppercase">
               {product.tagline}
             </div>
@@ -121,20 +171,54 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
                 <span className="text-muted-foreground">Peso</span>
                 <span className="text-foreground">{product.specs.weight}</span>
               </div>
-              <div className="divider-line my-3" />
+              <div className="h-px w-full bg-white/10 my-3" />
               <div className="flex justify-between gap-8">
                 <span className="text-muted-foreground">Nível</span>
                 <span className="text-foreground">{product.specs.level}</span>
               </div>
             </div>
+            
+            {/* CTA Button */}
+            <motion.button
+              className="mt-5 w-full py-3 text-xs tracking-widest uppercase text-foreground rounded-lg transition-all duration-500"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+              whileHover={{ 
+                background: 'rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 0 30px rgba(255, 255, 255, 0.15)',
+              }}
+              animate={{
+                boxShadow: [
+                  '0 0 10px rgba(255, 255, 255, 0.05)',
+                  '0 0 20px rgba(255, 255, 255, 0.1)',
+                  '0 0 10px rgba(255, 255, 255, 0.05)',
+                ],
+              }}
+              transition={{
+                boxShadow: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }
+              }}
+            >
+              Iniciar Jornada
+            </motion.button>
           </div>
         </motion.div>
 
-        {/* Large Product Name - Background */}
-        <div 
+        {/* Large Product Name - Background with parallax */}
+        <motion.div 
           className={`absolute ${index === 0 ? 'top-24 right-8 md:right-16 text-right' : 'top-24 left-8 md:left-16 text-left'} z-5 pointer-events-none`}
+          style={{ y: textY }}
         >
-          <h2 
+          <motion.h2 
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="display-hero select-none"
             style={{
               fontSize: 'clamp(4rem, 15vw, 14rem)',
@@ -143,8 +227,8 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
             }}
           >
             {product.name}
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
       </div>
     </div>
   );
@@ -152,10 +236,19 @@ const ProductSlide = ({ product, index }: { product: Product; index: number }) =
 
 const ProductShowcase = () => {
   return (
-    <section className="w-full snap-y snap-mandatory overflow-y-auto h-[200vh]" style={{ scrollSnapType: 'y mandatory' }}>
-      {products.map((product, index) => (
-        <ProductSlide key={product.id} product={product} index={index} />
-      ))}
+    <section className="w-full">
+      {/* First Quote */}
+      <QuoteSection quote={quotes[0]} index={0} />
+      
+      {/* Products with scroll snap */}
+      <div className="snap-y snap-mandatory" style={{ scrollSnapType: 'y mandatory' }}>
+        {products.map((product, index) => (
+          <ProductSlide key={product.id} product={product} index={index} />
+        ))}
+      </div>
+      
+      {/* Second Quote */}
+      <QuoteSection quote={quotes[1]} index={1} />
     </section>
   );
 };

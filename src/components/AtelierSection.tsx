@@ -120,7 +120,7 @@ const AtelierSection = () => {
         </motion.div>
       </div>
 
-      {/* CTA */}
+      {/* CTA - Glassmorphism style */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -131,14 +131,38 @@ const AtelierSection = () => {
         <p className="text-muted-foreground text-sm mb-8 max-w-md mx-auto">
           Customização sob consulta. Cada embarcação é única.
         </p>
-        <a
+        <motion.a
           href="https://wa.me/5511999999999"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-10 py-4 border border-foreground/20 text-foreground text-xs tracking-widest uppercase transition-all duration-500 hover:bg-foreground hover:text-background"
+          className="inline-block px-10 py-4 text-foreground text-xs tracking-widest uppercase rounded-xl transition-all duration-500"
+          style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
+          whileHover={{ 
+            background: 'rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 0 40px rgba(255, 255, 255, 0.15)',
+          }}
+          animate={{
+            boxShadow: [
+              '0 0 15px rgba(255, 255, 255, 0.05)',
+              '0 0 25px rgba(255, 255, 255, 0.1)',
+              '0 0 15px rgba(255, 255, 255, 0.05)',
+            ],
+          }}
+          transition={{
+            boxShadow: {
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }
+          }}
         >
-          Falar com Especialista
-        </a>
+          Descobrir Possibilidades
+        </motion.a>
       </motion.div>
     </section>
   );

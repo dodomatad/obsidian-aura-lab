@@ -1,30 +1,44 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useTransition } from '@/context/TransitionContext';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
 }
 
 const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const { hasSeenIntro, setHasSeenIntro } = useTransition();
+  const [isLoading, setIsLoading] = useState(!hasSeenIntro);
 
   useEffect(() => {
+    // If already seen intro, skip immediately
+    if (hasSeenIntro) {
+      onLoadingComplete();
+      return;
+    }
+
     // Simulate loading time for cinematic effect
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2800);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [hasSeenIntro, onLoadingComplete]);
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && !hasSeenIntro) {
       const exitTimer = setTimeout(() => {
+        setHasSeenIntro(true);
         onLoadingComplete();
       }, 800);
       return () => clearTimeout(exitTimer);
     }
-  }, [isLoading, onLoadingComplete]);
+  }, [isLoading, hasSeenIntro, setHasSeenIntro, onLoadingComplete]);
+
+  // If already seen intro, don't render anything
+  if (hasSeenIntro) {
+    return null;
+  }
 
   return (
     <AnimatePresence>

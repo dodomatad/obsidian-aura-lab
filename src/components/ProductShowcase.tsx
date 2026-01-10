@@ -179,9 +179,12 @@ const ProductSlide = ({
 const ProductShowcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { startTransition } = useTransition();
+  const { startTransition, saveScrollPosition } = useTransition();
 
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
+    // Save scroll position before transitioning
+    saveScrollPosition();
+    
     const rect = imageElement.getBoundingClientRect();
     startTransition({
       productId: product.id,

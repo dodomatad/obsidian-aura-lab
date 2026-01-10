@@ -17,8 +17,8 @@ const DiveTransition = () => {
     
     // On desktop, image takes left 50% and is centered
     const isDesktop = viewportWidth >= 1024;
-    const targetWidth = isDesktop ? viewportWidth * 0.35 : viewportWidth * 0.8;
-    const targetHeight = targetWidth * 0.3; // Approximate boat aspect ratio
+    const targetWidth = isDesktop ? viewportWidth * 0.4 : viewportWidth * 0.85;
+    const targetHeight = targetWidth * 0.28; // Approximate boat aspect ratio
     
     const targetX = isDesktop 
       ? (viewportWidth * 0.25) - (targetWidth / 2) // Center of left half
@@ -41,7 +41,7 @@ const DiveTransition = () => {
       // Wait for expand animation, then navigate
       const timer = setTimeout(() => {
         setPhase('navigating');
-      }, 600);
+      }, 800); // Longer animation for more visible zoom
       return () => clearTimeout(timer);
     }
     
@@ -113,6 +113,7 @@ const DiveTransition = () => {
               top: 0,
               width: sourceRect.width,
               height: sourceRect.height,
+              transformOrigin: 'center center',
             }}
             initial={{
               x: sourceRect.left,
@@ -123,12 +124,12 @@ const DiveTransition = () => {
             animate={{
               x: isExpanded ? sourceRect.left + translateX : sourceRect.left,
               y: isExpanded ? sourceRect.top + translateY : sourceRect.top,
-              scale: isExpanded ? scale : 1,
+              scale: isExpanded ? scale * 1.15 : 1, // Slight overshoot for more dramatic zoom
               opacity: isFadingOut ? 0 : 1,
             }}
             transition={{
-              duration: 0.6,
-              ease: [0.32, 0.72, 0, 1], // Custom easing for smooth motion
+              duration: 0.8, // Slower for more visible zoom effect
+              ease: [0.16, 1, 0.3, 1], // Smoother cubic-bezier for physical motion feel
             }}
           >
             {/* Glow effect */}

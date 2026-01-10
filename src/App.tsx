@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TransitionProvider } from "./context/TransitionContext";
 import DiveTransition from "./components/DiveTransition";
+import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
@@ -18,6 +19,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <TransitionProvider>
+          <ScrollToTop />
           <DiveTransition />
           <Routes>
             <Route path="/" element={<Index />} />

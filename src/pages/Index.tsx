@@ -8,8 +8,7 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
-import MobileMenu from '@/components/MobileMenu';
-import StickyWhatsApp from '@/components/StickyWhatsApp';
+import MobileDock from '@/components/MobileDock';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -61,7 +60,7 @@ const Index = () => {
       <div className="min-h-screen bg-background overflow-x-hidden">
         {/* Global Atmosphere Particles - Deep Sea Effect */}
         <AtmosphereParticles />
-        {/* Glassmorphism Navigation - Futuristic HUD */}
+        {/* Glassmorphism Navigation - Desktop Only now, Mobile uses Dock */}
         <motion.nav 
           initial={skipAnimations ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,10 +95,10 @@ const Index = () => {
               Ateliê
             </a>
           </div>
-          
-          {/* Mobile Menu */}
-          <MobileMenu />
         </motion.nav>
+
+        {/* Mobile Dock - Bottom Navigation */}
+        <MobileDock />
 
         {/* Hero Section - Compact on mobile to show content below */}
         <section ref={heroRef} id="hero" className="relative h-[85vh] md:h-screen w-full overflow-hidden">
@@ -204,7 +203,7 @@ const Index = () => {
         <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
-        <footer className="w-full px-6 md:px-16 py-16 md:py-20 pb-28 md:pb-20 border-t border-border/50">
+        <footer className="w-full px-6 md:px-16 py-16 md:py-20 pb-32 md:pb-20 border-t border-border/50">
           <div className="max-w-7xl mx-auto">
             
             {/* Authority Badges - Social Proof */}
@@ -315,9 +314,6 @@ const Index = () => {
             </div>
           </div>
         </footer>
-
-        {/* Sticky WhatsApp Button - Mobile Only */}
-        <StickyWhatsApp />
       </div>
     </>
   );

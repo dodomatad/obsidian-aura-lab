@@ -8,8 +8,10 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
+import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useTransition } from '@/context/TransitionContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
@@ -17,6 +19,7 @@ const Index = () => {
   const { handleNavClick } = useSmoothScroll();
   const heroRef = useRef<HTMLDivElement>(null);
   const hasRestoredScroll = useRef(false);
+  const isMobile = useIsMobile();
   
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -71,9 +74,11 @@ const Index = () => {
           }}
         >
           <div className="font-sans text-sm font-medium tracking-widest text-foreground/90">
-            LIBERDADE
+            OPIUM<span className="text-orange">.</span>
           </div>
-          <div className="flex gap-8 md:gap-10">
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-8 md:gap-10">
             <a 
               href="#modelos" 
               onClick={(e) => handleNavClick(e, 'modelos')}
@@ -89,10 +94,13 @@ const Index = () => {
               Ateliê
             </a>
           </div>
+          
+          {/* Mobile Menu */}
+          <MobileMenu />
         </motion.nav>
 
         {/* Hero Section - Video Focus with Fade Out Text */}
-        <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
+        <section ref={heroRef} id="hero" className="relative h-screen w-full overflow-hidden">
           {/* Video Background - With Fade Mask */}
           <div 
             className="absolute inset-0"
@@ -101,21 +109,36 @@ const Index = () => {
               WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
             }}
           >
-            {/* Fallback gradient */}
+            {/* Fallback gradient - also serves as static background on mobile */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#021019] via-[#010810] to-[#000000]" />
             
-            {/* Vimeo Video */}
-            <div className="absolute inset-0">
-              <iframe 
-                src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
-                style={{ filter: 'brightness(0.85)' }}
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowFullScreen
-                title="Hero Background Video"
+            {/* Vimeo Video - Hidden on mobile for performance */}
+            {!isMobile && (
+              <div className="absolute inset-0">
+                <iframe 
+                  src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
+                  style={{ filter: 'brightness(0.85)' }}
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                  allowFullScreen
+                  title="Hero Background Video"
+                />
+              </div>
+            )}
+            
+            {/* Mobile: Static ocean gradient overlay for better performance */}
+            {isMobile && (
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: `
+                    radial-gradient(ellipse 100% 60% at 50% 30%, rgba(2, 30, 50, 0.8) 0%, transparent 70%),
+                    linear-gradient(180deg, rgba(1, 15, 30, 0.9) 0%, rgba(0, 5, 15, 1) 100%)
+                  `,
+                }}
               />
-            </div>
+            )}
             
             {/* Cinematic Overlay - Gradient for atmosphere and readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
@@ -123,7 +146,7 @@ const Index = () => {
 
           {/* Hero Text - Stays Fixed, Fades Out on Scroll */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center z-10"
+            className="absolute inset-0 flex items-center justify-center z-10 px-6"
             style={{ opacity: heroTextOpacity }}
           >
             <motion.div
@@ -133,9 +156,9 @@ const Index = () => {
               className="text-center"
             >
               <h1 
-                className="display-hero text-foreground select-none px-4"
+                className="display-hero text-foreground select-none"
                 style={{
-                  fontSize: 'clamp(2rem, 8vw, 9rem)',
+                  fontSize: 'clamp(2.5rem, 12vw, 9rem)',
                   letterSpacing: '-0.02em',
                   lineHeight: 0.95,
                 }}
@@ -148,7 +171,7 @@ const Index = () => {
                 initial={skipAnimations ? { opacity: 1 } : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={skipAnimations ? { duration: 0 } : { duration: 1.2, delay: 1.5 }}
-                className="mt-6 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
+                className="mt-4 md:mt-6 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
               >
                 Surfskis de Elite
               </motion.p>

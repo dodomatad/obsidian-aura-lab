@@ -71,6 +71,7 @@ html {
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
@@ -81,6 +82,8 @@ html {
     background-image: radial-gradient(ellipse at 50% 0%, rgba(20, 25, 35, 0.3) 0%, transparent 50%);
     background-attachment: fixed;
     min-height: 100vh;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   /* Subtle noise texture overlay */

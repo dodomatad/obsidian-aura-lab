@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MessageCircle, Ruler, Move, Scale, Weight, Layers, TrendingUp } from 'lucide-react';
 import CustomCursor from '@/components/CustomCursor';
 import MagneticButton from '@/components/MagneticButton';
+import VideoBackground from '@/components/VideoBackground';
 import { useTransition } from '@/context/TransitionContext';
 
 // Import all boat images
@@ -113,6 +114,11 @@ const ProductDetail = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [showBoatImage, setShowBoatImage] = useState(false);
+  const [contentRevealed, setContentRevealed] = useState(false);
+
+  const handleVideoRevealComplete = useCallback(() => {
+    setContentRevealed(true);
+  }, []);
 
   const product = id ? productsData[id] : null;
 
@@ -156,63 +162,37 @@ const ProductDetail = () => {
       <CustomCursor />
       
       <motion.div 
-        className="min-h-screen bg-background"
+        className="min-h-screen"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded && !isExiting ? 1 : 0 }}
         transition={{ duration: isExiting ? 0.2 : 0.6 }}
       >
+        {/* Immersive Video Background */}
+        <VideoBackground 
+          className="z-0" 
+          onRevealComplete={handleVideoRevealComplete}
+        />
+
         {/* Giant outline text background */}
-        <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+        <motion.div 
+          className="fixed inset-0 pointer-events-none z-[1] flex items-center justify-center overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: contentRevealed ? 1 : 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <span 
             className="display-hero whitespace-nowrap select-none"
             style={{
               fontSize: 'clamp(20rem, 40vw, 50rem)',
               color: 'transparent',
-              WebkitTextStroke: '2px rgba(255,255,255,0.03)',
+              WebkitTextStroke: '2px rgba(255,255,255,0.05)',
               letterSpacing: '-0.02em',
               transform: 'rotate(-5deg)',
             }}
           >
             {product.name}
           </span>
-        </div>
-
-        {/* Background texture - Carbon fiber pattern */}
-        <div 
-          className="fixed inset-0 pointer-events-none z-0"
-          style={{
-            opacity: 0.03,
-            backgroundImage: `
-              repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 2px,
-                rgba(255,255,255,0.1) 2px,
-                rgba(255,255,255,0.1) 4px
-              ),
-              repeating-linear-gradient(
-                -45deg,
-                transparent,
-                transparent 2px,
-                rgba(255,255,255,0.05) 2px,
-                rgba(255,255,255,0.05) 4px
-              )
-            `,
-            backgroundSize: '8px 8px',
-          }}
-        />
-
-        {/* Water texture overlay */}
-        <div 
-          className="fixed inset-0 pointer-events-none z-0"
-          style={{
-            opacity: 0.08,
-            background: `
-              radial-gradient(ellipse 100% 100% at 80% 20%, rgba(100, 150, 200, 0.15) 0%, transparent 50%),
-              radial-gradient(ellipse 80% 80% at 20% 80%, rgba(50, 100, 150, 0.1) 0%, transparent 50%)
-            `,
-          }}
-        />
+        </motion.div>
 
         {/* Magnetic Back button - Fixed top left */}
         <MagneticButton
@@ -307,8 +287,13 @@ const ProductDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              {/* Header */}
-              <div className="mb-16">
+              {/* Header - Delayed entrance after video reveal */}
+              <motion.div 
+                className="mb-16"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 40 }}
+                transition={{ duration: 0.8, delay: 0, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 <span className="text-sm tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium block mb-4">
                   {product.tagline}
                 </span>
@@ -325,13 +310,24 @@ const ProductDetail = () => {
                 <p className="text-xl lg:text-2xl text-foreground/60 leading-relaxed font-sans font-light">
                   {product.description}
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Divider with gradient */}
-              <div className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent mb-12" />
+              {/* Divider with gradient - Delayed */}
+              <motion.div 
+                className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent mb-12"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, scaleX: contentRevealed ? 1 : 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                style={{ transformOrigin: 'left' }}
+              />
 
-              {/* Specifications - Grid of Cards */}
-              <div className="mb-16">
+              {/* Specifications - Grid of Cards - Delayed */}
+              <motion.div 
+                className="mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
+                transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-8">
                   Especificações Técnicas
                 </h2>
@@ -345,9 +341,9 @@ const ProductDetail = () => {
                       <motion.div
                         key={key}
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 + index * 0.08 }}
-                        className="group relative p-5 border border-foreground/10 hover:border-foreground/25 transition-all duration-300 hover:bg-foreground/[0.02]"
+                        animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
+                        transition={{ delay: 0.2 + index * 0.06 }}
+                        className="group relative p-5 border border-foreground/10 hover:border-foreground/25 transition-all duration-300 hover:bg-foreground/[0.02] backdrop-blur-sm"
                       >
                         {/* Icon */}
                         <IconComponent className="w-4 h-4 text-foreground/30 mb-3 group-hover:text-foreground/50 transition-colors" />
@@ -365,10 +361,15 @@ const ProductDetail = () => {
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Features */}
-              <div className="mb-16">
+              {/* Features - Delayed */}
+              <motion.div 
+                className="mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
+                transition={{ duration: 0.7, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-8">
                   Características
                 </h2>
@@ -377,8 +378,8 @@ const ProductDetail = () => {
                     <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 + index * 0.05 }}
+                      animate={{ opacity: contentRevealed ? 1 : 0, x: contentRevealed ? 0 : -20 }}
+                      transition={{ delay: 0.3 + index * 0.04 }}
                       className="flex items-start gap-5 text-foreground/70 font-sans group"
                     >
                       <span className="flex-shrink-0 mt-2 w-3 h-px bg-foreground/40 group-hover:w-6 group-hover:bg-foreground/60 transition-all duration-300" />
@@ -388,10 +389,15 @@ const ProductDetail = () => {
                     </motion.li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
 
-              {/* Color Selector */}
-              <div className="mb-16">
+              {/* Color Selector - Delayed */}
+              <motion.div 
+                className="mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
+                transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-6">
                   Cores Disponíveis
                 </h2>
@@ -414,23 +420,29 @@ const ProductDetail = () => {
                       />
                       {/* Tooltip */}
                       <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                        <span className="text-[10px] text-foreground/60 tracking-wide bg-background/80 px-2 py-1 rounded">
+                        <span className="text-[10px] text-foreground/60 tracking-wide bg-background/80 backdrop-blur-sm px-2 py-1 rounded">
                           {color.name}
                         </span>
                       </div>
                     </motion.button>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Divider */}
-              <div className="w-full h-px bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent mb-12" />
+              {/* Divider - Delayed */}
+              <motion.div 
+                className="w-full h-px bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent mb-12"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, scaleX: contentRevealed ? 1 : 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                style={{ transformOrigin: 'left' }}
+              />
 
-              {/* CTA Button */}
+              {/* CTA Button - Delayed */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
+                transition={{ delay: 0.45, duration: 0.6 }}
               >
                 <a
                   href={`https://wa.me/5500000000000?text=Olá! Gostaria de saber mais sobre o modelo ${product.name}`}

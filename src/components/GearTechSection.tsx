@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Anchor, Shield, Zap } from 'lucide-react';
+import { Anchor, Shield, Link2, Ship } from 'lucide-react';
 
 interface GearItem {
   id: string;
@@ -12,38 +12,51 @@ const gearItems: GearItem[] = [
   {
     id: 'remos',
     name: 'Remos de Carbono',
-    description: 'Leveza extrema, máxima eficiência',
+    description: 'Leveza absoluta para sua remada',
     icon: <Anchor className="w-8 h-8" />,
   },
   {
     id: 'bolsas',
-    name: 'Bolsas Estanques',
-    description: 'Proteção total para seus equipamentos',
+    name: 'Bolsa Estanque',
+    description: 'Proteção total contra a água',
     icon: <Shield className="w-8 h-8" />,
   },
   {
-    id: 'acessorios',
-    name: 'Acessórios de Performance',
-    description: 'Upgrade completo para sua jornada',
-    icon: <Zap className="w-8 h-8" />,
+    id: 'fitas',
+    name: 'Fitas de Amarração',
+    description: 'Segurança no transporte',
+    icon: <Link2 className="w-8 h-8" />,
   },
+  {
+    id: 'canoa',
+    name: 'Canoa Havaiana',
+    description: 'Tradição polinésia com tecnologia Opium',
+    icon: <Ship className="w-8 h-8" />,
+  },
+  // Duplicados para o infinite scroll
   {
     id: 'remos-2',
     name: 'Remos de Carbono',
-    description: 'Leveza extrema, máxima eficiência',
+    description: 'Leveza absoluta para sua remada',
     icon: <Anchor className="w-8 h-8" />,
   },
   {
     id: 'bolsas-2',
-    name: 'Bolsas Estanques',
-    description: 'Proteção total para seus equipamentos',
+    name: 'Bolsa Estanque',
+    description: 'Proteção total contra a água',
     icon: <Shield className="w-8 h-8" />,
   },
   {
-    id: 'acessorios-2',
-    name: 'Acessórios de Performance',
-    description: 'Upgrade completo para sua jornada',
-    icon: <Zap className="w-8 h-8" />,
+    id: 'fitas-2',
+    name: 'Fitas de Amarração',
+    description: 'Segurança no transporte',
+    icon: <Link2 className="w-8 h-8" />,
+  },
+  {
+    id: 'canoa-2',
+    name: 'Canoa Havaiana',
+    description: 'Tradição polinésia com tecnologia Opium',
+    icon: <Ship className="w-8 h-8" />,
   },
 ];
 
@@ -70,7 +83,7 @@ const GearTechSection = () => {
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
             <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/50 font-sans font-medium">
-              Equipamentos
+              Acessórios
             </span>
           </div>
           <h2 
@@ -80,10 +93,10 @@ const GearTechSection = () => {
               letterSpacing: '-0.02em',
             }}
           >
-            GEAR & TECH<span className="text-orange">.</span>
+            Opium Gear<span className="text-orange">.</span>
           </h2>
           <p className="mt-4 text-lg text-foreground/50 font-sans font-light max-w-xl">
-            Acessórios premium para maximizar sua performance no mar.
+            Equipamentos premium para completar sua experiência no mar.
           </p>
         </motion.div>
       </div>

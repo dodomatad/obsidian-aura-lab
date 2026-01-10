@@ -14,34 +14,34 @@ interface Product {
 
 const products: Product[] = [
   {
-    id: 'infinite',
-    name: 'INFINITE',
-    tagline: 'Velocidade Extrema / Elite',
-    image: boatSurfski,
-  },
-  {
     id: 'pono',
     name: 'PONO',
-    tagline: 'Estabilidade e Performance',
+    tagline: 'Estabilidade e Controle',
     image: boatPono,
   },
   {
-    id: 'moana',
-    name: 'MOANA',
-    tagline: 'Travessias e Mar Aberto',
-    image: boatPono, // Placeholder - mesma imagem por enquanto
+    id: 'infinite',
+    name: 'INFINITE',
+    tagline: 'Velocidade Pura',
+    image: boatSurfski,
   },
   {
     id: 'azimut',
     name: 'AZIMUT',
-    tagline: 'Versatilidade Total',
-    image: boatSurfski, // Placeholder - mesma imagem por enquanto
+    tagline: 'A Evolução da Espécie',
+    image: boatSurfski,
+  },
+  {
+    id: 'moana',
+    name: 'MOANA',
+    tagline: 'Conquiste o Oceano',
+    image: boatPono,
   },
   {
     id: 'dw',
     name: 'DW',
-    tagline: 'Downwind Specialist',
-    image: boatSurfski, // Placeholder - mesma imagem por enquanto
+    tagline: 'Mestre das Ondas',
+    image: boatSurfski,
   },
 ];
 

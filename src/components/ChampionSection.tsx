@@ -108,7 +108,7 @@ const ChampionSection = () => {
         </motion.div>
 
         {/* Right: Text Content + Authority Badges */}
-        <div className="relative flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-24 py-16 lg:py-24">
+        <div className="relative flex flex-col justify-center px-6 md:px-12 lg:px-16 xl:px-24 py-12 md:py-16 lg:py-24">
           
           {/* Subtle background texture */}
           <div 
@@ -132,19 +132,19 @@ const ChampionSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex items-center gap-4 mb-8"
+              className="flex items-center gap-4 mb-6 md:mb-8"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
-              <span className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
+              <div className="w-12 md:w-16 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
+              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
                 A Origem
               </span>
             </motion.div>
 
             {/* Title */}
             <h2 
-              className="display-hero text-foreground mb-4"
+              className="display-hero text-foreground mb-3 md:mb-4"
               style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+                fontSize: 'clamp(2rem, 6vw, 4.5rem)',
                 letterSpacing: '-0.03em',
                 lineHeight: 0.95,
               }}
@@ -153,16 +153,16 @@ const ChampionSection = () => {
             </h2>
             
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-foreground/50 font-sans font-light mb-10 tracking-wide">
+            <p className="text-base md:text-xl text-foreground/50 font-sans font-light mb-8 md:mb-10 tracking-wide">
               Introdutor da Canoagem Oceânica no Brasil
             </p>
 
             {/* Manifesto text */}
-            <div className="space-y-6 mb-12">
-              <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
+            <div className="space-y-4 md:space-y-6 mb-10 md:mb-12">
+              <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                 Há mais de <span className="text-foreground font-medium">30 anos</span>, a Opium nasceu de uma garagem em Santos para dominar o mar.
               </p>
-              <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
+              <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                 Fábio Paiva, <span className="text-foreground font-medium">14 anos invicto</span> e condutor da Tocha Olímpica (2016) e Pan-Americana (2007), transformou a experiência náutica no país.
               </p>
             </div>
@@ -173,11 +173,11 @@ const ChampionSection = () => {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent origin-left mb-12"
+              className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent origin-left mb-10 md:mb-12"
             />
 
             {/* Authority Badges Grid */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
               {authorityBadges.map((badge, index) => (
                 <motion.div
                   key={badge.title}
@@ -187,18 +187,18 @@ const ChampionSection = () => {
                   transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                   className="group cursor-default"
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 md:gap-4">
                     {/* Icon */}
-                    <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center border border-foreground/20 group-hover:border-orange transition-colors duration-300">
-                      <badge.icon className="w-5 h-5 text-foreground/50 group-hover:text-orange transition-colors duration-300" />
+                    <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center border border-foreground/20 group-hover:border-orange transition-colors duration-300">
+                      <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground/50 group-hover:text-orange transition-colors duration-300" />
                     </div>
                     
                     {/* Text */}
                     <div>
-                      <h4 className="text-sm font-sans font-medium text-foreground tracking-wide mb-1">
+                      <h4 className="text-xs md:text-sm font-sans font-medium text-foreground tracking-wide mb-0.5 md:mb-1">
                         {badge.title}
                       </h4>
-                      <p className="text-xs text-foreground/40 font-sans font-light leading-relaxed">
+                      <p className="text-[10px] md:text-xs text-foreground/40 font-sans font-light leading-relaxed">
                         {badge.description}
                       </p>
                     </div>

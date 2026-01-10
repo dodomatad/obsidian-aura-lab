@@ -95,6 +95,15 @@ const productsData: Record<string, ProductData> = {
   },
 };
 
+const specLabels: Record<string, string> = {
+  length: 'Comprimento',
+  beam: 'Boca',
+  weight: 'Peso',
+  capacity: 'Capacidade',
+  material: 'Material',
+  level: 'Nível',
+};
+
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -138,6 +147,43 @@ const ProductDetail = () => {
         animate={{ opacity: isLoaded && !isExiting ? 1 : 0 }}
         transition={{ duration: isExiting ? 0.2 : 0.6 }}
       >
+        {/* Background texture - Carbon fiber pattern */}
+        <div 
+          className="fixed inset-0 pointer-events-none z-0"
+          style={{
+            opacity: 0.03,
+            backgroundImage: `
+              repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(255,255,255,0.1) 2px,
+                rgba(255,255,255,0.1) 4px
+              ),
+              repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 2px,
+                rgba(255,255,255,0.05) 2px,
+                rgba(255,255,255,0.05) 4px
+              )
+            `,
+            backgroundSize: '8px 8px',
+          }}
+        />
+
+        {/* Water texture overlay */}
+        <div 
+          className="fixed inset-0 pointer-events-none z-0"
+          style={{
+            opacity: 0.08,
+            background: `
+              radial-gradient(ellipse 100% 100% at 80% 20%, rgba(100, 150, 200, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse 80% 80% at 20% 80%, rgba(50, 100, 150, 0.1) 0%, transparent 50%)
+            `,
+          }}
+        />
+
         {/* Magnetic Back button - Fixed top left */}
         <MagneticButton
           onClick={handleBack}
@@ -173,7 +219,7 @@ const ProductDetail = () => {
         </MagneticButton>
 
         {/* Main layout */}
-        <div className="flex flex-col lg:flex-row min-h-screen">
+        <div className="relative z-10 flex flex-col lg:flex-row min-h-screen">
           
           {/* Left: Sticky boat image */}
           <div className="lg:w-1/2 lg:sticky lg:top-0 lg:h-screen flex items-center justify-center p-8 lg:p-16">
@@ -187,7 +233,7 @@ const ProductDetail = () => {
               <div 
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255,255,255,0.08) 0%, transparent 60%)',
+                  background: 'radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255,255,255,0.12) 0%, transparent 60%)',
                   filter: 'blur(40px)',
                 }}
               />
@@ -213,7 +259,7 @@ const ProductDetail = () => {
                   style={{
                     fontSize: 'clamp(8rem, 20vw, 20rem)',
                     color: 'transparent',
-                    WebkitTextStroke: '1px rgba(255,255,255,0.03)',
+                    WebkitTextStroke: '1px rgba(255,255,255,0.04)',
                     letterSpacing: '-0.02em',
                   }}
                 >
@@ -233,49 +279,47 @@ const ProductDetail = () => {
             >
               {/* Header */}
               <div className="mb-12">
-                <span className="text-[10px] tracking-[0.3em] uppercase text-foreground/40 font-sans block mb-4">
+                <span className="text-xs tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium block mb-4">
                   {product.tagline}
                 </span>
                 <h1 
                   className="display-hero text-foreground mb-6"
                   style={{
-                    fontSize: 'clamp(3rem, 8vw, 6rem)',
-                    letterSpacing: '-0.02em',
-                    lineHeight: 1,
+                    fontSize: 'clamp(3.5rem, 10vw, 7rem)',
+                    letterSpacing: '-0.03em',
+                    lineHeight: 0.95,
                   }}
                 >
                   {product.name}
                 </h1>
-                <p className="text-lg text-foreground/60 leading-relaxed font-sans font-light">
+                <p className="text-xl text-foreground/60 leading-relaxed font-sans font-light">
                   {product.description}
                 </p>
               </div>
 
-              {/* Divider */}
-              <div className="w-16 h-px bg-foreground/20 mb-12" />
+              {/* Divider with gradient */}
+              <div className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent mb-12" />
 
-              {/* Specifications */}
+              {/* Specifications - Table Style */}
               <div className="mb-16">
-                <h2 className="text-xs tracking-[0.25em] uppercase text-foreground/40 font-sans mb-8">
-                  Especificações
+                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-8">
+                  Especificações Técnicas
                 </h2>
-                <div className="grid grid-cols-2 gap-6">
+                
+                {/* Specs table */}
+                <div className="border border-foreground/10 divide-y divide-foreground/10">
                   {Object.entries(product.specs).map(([key, value], index) => (
                     <motion.div
                       key={key}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 + index * 0.05 }}
-                      className="border-l border-foreground/10 pl-4"
+                      className="flex items-center justify-between px-6 py-5 hover:bg-foreground/[0.02] transition-colors group"
                     >
-                      <span className="text-[9px] tracking-[0.2em] uppercase text-foreground/30 block mb-1 font-sans">
-                        {key === 'length' ? 'Comprimento' : 
-                         key === 'beam' ? 'Boca' :
-                         key === 'weight' ? 'Peso' :
-                         key === 'capacity' ? 'Capacidade' :
-                         key === 'material' ? 'Material' : 'Nível'}
+                      <span className="text-sm tracking-[0.15em] uppercase text-foreground/40 font-sans group-hover:text-foreground/60 transition-colors">
+                        {specLabels[key] || key}
                       </span>
-                      <span className="text-foreground/80 font-sans">
+                      <span className="text-lg text-foreground font-sans font-medium">
                         {value}
                       </span>
                     </motion.div>
@@ -285,50 +329,52 @@ const ProductDetail = () => {
 
               {/* Features */}
               <div className="mb-16">
-                <h2 className="text-xs tracking-[0.25em] uppercase text-foreground/40 font-sans mb-8">
+                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-8">
                   Características
                 </h2>
-                <ul className="space-y-4">
+                <ul className="space-y-5">
                   {product.features.map((feature, index) => (
                     <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.6 + index * 0.05 }}
-                      className="flex items-start gap-4 text-foreground/60 font-sans"
+                      className="flex items-start gap-5 text-foreground/70 font-sans group"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-foreground/30 mt-2 flex-shrink-0" />
-                      {feature}
+                      <span className="flex-shrink-0 mt-2 w-3 h-px bg-foreground/40 group-hover:w-6 group-hover:bg-foreground/60 transition-all duration-300" />
+                      <span className="text-base leading-relaxed group-hover:text-foreground/90 transition-colors">
+                        {feature}
+                      </span>
                     </motion.li>
                   ))}
                 </ul>
               </div>
 
               {/* Color Selector */}
-              <div className="mb-20">
-                <h2 className="text-xs tracking-[0.25em] uppercase text-foreground/40 font-sans mb-6">
+              <div className="mb-16">
+                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-6">
                   Cores Disponíveis
                 </h2>
-                <div className="flex gap-4">
+                <div className="flex gap-5">
                   {product.colors.map((color) => (
                     <motion.button
                       key={color.id}
                       onClick={() => setSelectedColor(color.id)}
-                      className={`relative group`}
+                      className="relative group"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <div 
-                        className={`w-10 h-10 rounded-full border-2 transition-all duration-300 ${
+                        className={`w-12 h-12 rounded-full border-2 transition-all duration-300 ${
                           selectedColor === color.id 
-                            ? 'border-foreground' 
+                            ? 'border-foreground ring-2 ring-foreground/20 ring-offset-2 ring-offset-background' 
                             : 'border-foreground/20 hover:border-foreground/50'
                         }`}
                         style={{ backgroundColor: color.color }}
                       />
                       {/* Tooltip */}
-                      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        <span className="text-[9px] text-foreground/50 tracking-wide">
+                      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        <span className="text-[10px] text-foreground/60 tracking-wide bg-background/80 px-2 py-1 rounded">
                           {color.name}
                         </span>
                       </div>
@@ -337,6 +383,9 @@ const ProductDetail = () => {
                 </div>
               </div>
 
+              {/* Divider */}
+              <div className="w-full h-px bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent mb-12" />
+
               {/* CTA Button */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -344,15 +393,15 @@ const ProductDetail = () => {
                 transition={{ delay: 0.8 }}
               >
                 <a
-                  href="https://wa.me/5500000000000?text=Olá! Gostaria de saber mais sobre o modelo"
+                  href={`https://wa.me/5500000000000?text=Olá! Gostaria de saber mais sobre o modelo ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-10 py-5 bg-foreground text-background font-sans text-sm tracking-[0.15em] uppercase hover:bg-foreground/90 transition-colors group"
+                  className="inline-flex items-center gap-4 px-12 py-6 bg-foreground text-background font-sans text-sm tracking-[0.2em] uppercase hover:bg-foreground/90 transition-all duration-300 group"
                 >
                   <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   Consultar Especialista
                 </a>
-                <p className="text-[10px] text-foreground/30 mt-4 tracking-wide">
+                <p className="text-xs text-foreground/40 mt-5 tracking-wide">
                   Resposta em até 24 horas úteis
                 </p>
               </motion.div>

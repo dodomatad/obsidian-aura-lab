@@ -186,8 +186,9 @@ const ProductShowcase = () => {
               }}
             />
 
-            {/* Boat image */}
+            {/* Boat image with layoutId for shared element transition */}
             <motion.img
+              layoutId={`boat-image-${currentProduct.id}`}
               ref={(el) => { imageRefs.current[currentIndex] = el; }}
               src={currentProduct.image}
               alt={currentProduct.name}
@@ -201,6 +202,7 @@ const ProductShowcase = () => {
                 opacity: { duration: 0.1 },
                 y: { type: 'spring', stiffness: 200, damping: 20 },
                 scale: { type: 'spring', stiffness: 200, damping: 20 },
+                layout: { duration: 0.6, ease: [0.32, 0.72, 0, 1] },
               }}
               style={{
                 filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.6))',

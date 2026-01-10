@@ -12,7 +12,7 @@ const VideoBackground = ({ className = '', onRevealComplete }: VideoBackgroundPr
   useEffect(() => {
     // Start overlay transition after 1.5 seconds
     const timer = setTimeout(() => {
-      setOverlayOpacity(0.55); // Lower opacity to show more video movement
+      setOverlayOpacity(0.6); // 60% darkness - enough contrast but video still visible
       onRevealComplete?.();
     }, 1500);
     

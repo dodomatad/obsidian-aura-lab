@@ -33,16 +33,16 @@ html {
     --muted: 0 0% 6%;
     --muted-foreground: 0 0% 45%;
 
-    /* Accent: Premium Burnt Orange (#E65100) */
-    --accent: 25 100% 45%;
+    /* Accent: Premium Burnt Orange (#F97316) */
+    --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
     
     /* Metallic Silver accent */
     --silver: 220 5% 70%;
     
     /* Premium Orange for CTAs and highlights */
-    --orange: 25 100% 45%;
-    --orange-glow: 25 100% 55%;
+    --orange: 25 95% 53%;
+    --orange-glow: 25 100% 60%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;

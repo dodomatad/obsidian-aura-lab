@@ -140,7 +140,7 @@ const Index = () => {
                   lineHeight: 0.95,
                 }}
               >
-                LIBERDADE
+                LIBERDADE<span className="text-orange">.</span>
               </h1>
               
               {/* Subtext - fade in delayed */}

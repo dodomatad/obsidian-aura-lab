@@ -81,7 +81,7 @@ const ChampionSection = () => {
             className="absolute bottom-12 left-8 z-30"
           >
             <span 
-              className="display-hero text-orange/10"
+              className="display-hero text-foreground/5"
               style={{ 
                 fontSize: 'clamp(6rem, 16vw, 12rem)',
                 lineHeight: 0.8,
@@ -119,8 +119,8 @@ const ChampionSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex items-center gap-4 mb-8"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-orange to-transparent" />
-              <span className="text-[11px] tracking-[0.35em] uppercase text-orange font-sans font-medium">
+              <div className="w-16 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
+              <span className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
                 A Origem
               </span>
             </motion.div>
@@ -135,7 +135,7 @@ const ChampionSection = () => {
               }}
             >
               O Legado<br />
-              <span className="text-orange">Fábio Paiva</span>
+              Fábio Paiva<span className="text-orange">.</span>
             </h2>
             
             {/* Subtitle */}
@@ -146,7 +146,7 @@ const ChampionSection = () => {
             {/* Manifesto text */}
             <div className="space-y-8 mb-16">
               <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
-                Há mais de <span className="text-orange font-medium">30 anos</span> fabricando a história do mar. Fábio Paiva trouxe a canoagem oceânica para o país e transformou o esporte.
+                Há mais de <span className="text-foreground font-medium">30 anos</span> fabricando a história do mar. Fábio Paiva trouxe a canoagem oceânica para o país e transformou o esporte.
               </p>
               <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                 Nossos barcos carregam o DNA de quem vive, respira e vence no mar.
@@ -155,7 +155,7 @@ const ChampionSection = () => {
                 className="text-2xl md:text-3xl text-foreground font-display italic"
                 style={{ letterSpacing: '0.01em', lineHeight: 1.3 }}
               >
-                "Não vendemos apenas barcos, entregamos a evolução da espécie."
+                "Não vendemos apenas barcos, entregamos a evolução da espécie<span className="text-orange not-italic">.</span>"
               </p>
             </div>
 

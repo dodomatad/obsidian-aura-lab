@@ -77,8 +77,8 @@ const AtelierSection = () => {
             O Ateliê
           </span>
           <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.75rem, 5vw, 4rem)' }}>
-            Sua Identidade.<br />
-            <span className="text-muted-foreground">Sua Cor.</span>
+            Sua Identidade<span className="text-orange">.</span><br />
+            <span className="text-muted-foreground">Sua Cor<span className="text-orange">.</span></span>
           </h2>
         </motion.div>
       </div>
@@ -181,13 +181,11 @@ const AtelierSection = () => {
           href="https://wa.me/5500000000000?text=Olá! Gostaria de personalizar minha embarcação."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-10 py-4 text-white text-xs tracking-widest uppercase transition-all duration-500"
+          className="inline-flex items-center gap-3 px-10 py-4 text-foreground text-xs tracking-widest uppercase transition-all duration-500 border border-foreground/20 hover:border-orange hover:text-orange"
           style={{
-            background: 'linear-gradient(135deg, hsl(25 100% 45%) 0%, hsl(25 100% 35%) 100%)',
-            boxShadow: '0 4px 24px rgba(230, 81, 0, 0.3)',
+            background: 'transparent',
           }}
           whileHover={{ 
-            boxShadow: '0 8px 40px rgba(230, 81, 0, 0.5)',
             scale: 1.02,
           }}
         >

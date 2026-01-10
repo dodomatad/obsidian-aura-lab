@@ -68,8 +68,8 @@ const GearTechSection = () => {
           className="max-w-4xl"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-px bg-gradient-to-r from-orange to-transparent" />
-            <span className="text-[10px] tracking-[0.4em] uppercase text-orange font-sans font-medium">
+            <div className="w-12 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
+            <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/50 font-sans font-medium">
               Equipamentos
             </span>
           </div>
@@ -80,7 +80,7 @@ const GearTechSection = () => {
               letterSpacing: '-0.02em',
             }}
           >
-            GEAR & TECH
+            GEAR & TECH<span className="text-orange">.</span>
           </h2>
           <p className="mt-4 text-lg text-foreground/50 font-sans font-light max-w-xl">
             Acessórios premium para maximizar sua performance no mar.
@@ -127,7 +127,7 @@ const GearTechSection = () => {
                 }}
               >
                 {/* Icon */}
-                <div className="text-orange/70 group-hover:text-orange transition-colors duration-300 mb-6">
+                <div className="text-foreground/40 group-hover:text-orange transition-colors duration-300 mb-6">
                   {item.icon}
                 </div>
 
@@ -167,15 +167,14 @@ const GearTechSection = () => {
           href="https://wa.me/5500000000000?text=Olá! Gostaria de saber mais sobre os acessórios."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-8 py-4 font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 group"
+          className="inline-flex items-center gap-3 px-8 py-4 font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 group border border-foreground/20 text-foreground hover:border-orange hover:text-orange"
           style={{
-            background: 'linear-gradient(135deg, hsl(25 100% 45%) 0%, hsl(25 100% 35%) 100%)',
-            color: 'white',
-            boxShadow: '0 4px 24px rgba(230, 81, 0, 0.3)',
+            background: 'transparent',
           }}
         >
           <span>Consultar Acessórios</span>
           <motion.span
+            className="group-hover:text-orange transition-colors"
             animate={{ x: [0, 4, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           >

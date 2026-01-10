@@ -178,36 +178,26 @@ const AtelierSection = () => {
           Customização sob consulta. Cada embarcação é única.
         </p>
         <motion.a
-          href="https://wa.me/5511999999999"
+          href="https://wa.me/5500000000000?text=Olá! Gostaria de personalizar minha embarcação."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-10 py-4 text-foreground text-xs tracking-widest uppercase rounded-xl transition-all duration-500"
+          className="inline-flex items-center gap-3 px-10 py-4 text-white text-xs tracking-widest uppercase transition-all duration-500"
           style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: 'linear-gradient(135deg, hsl(25 100% 45%) 0%, hsl(25 100% 35%) 100%)',
+            boxShadow: '0 4px 24px rgba(230, 81, 0, 0.3)',
           }}
           whileHover={{ 
-            background: 'rgba(255, 255, 255, 0.12)',
-            boxShadow: '0 0 40px rgba(255, 255, 255, 0.15)',
-          }}
-          animate={{
-            boxShadow: [
-              '0 0 15px rgba(255, 255, 255, 0.05)',
-              '0 0 25px rgba(255, 255, 255, 0.1)',
-              '0 0 15px rgba(255, 255, 255, 0.05)',
-            ],
-          }}
-          transition={{
-            boxShadow: {
-              duration: 3,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }
+            boxShadow: '0 8px 40px rgba(230, 81, 0, 0.5)',
+            scale: 1.02,
           }}
         >
-          Descobrir Possibilidades
+          <span>Consultar Especialista</span>
+          <motion.span
+            animate={{ x: [0, 4, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
+            →
+          </motion.span>
         </motion.a>
       </motion.div>
     </section>

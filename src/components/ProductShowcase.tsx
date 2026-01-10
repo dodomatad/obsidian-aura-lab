@@ -14,16 +14,34 @@ interface Product {
 
 const products: Product[] = [
   {
+    id: 'infinite',
+    name: 'INFINITE',
+    tagline: 'Velocidade Extrema / Elite',
+    image: boatSurfski,
+  },
+  {
     id: 'pono',
     name: 'PONO',
-    tagline: 'Contemplação Pura',
+    tagline: 'Estabilidade e Performance',
     image: boatPono,
   },
   {
-    id: 'infinite',
-    name: 'INFINITE',
-    tagline: 'Adrenalina Absoluta',
-    image: boatSurfski,
+    id: 'moana',
+    name: 'MOANA',
+    tagline: 'Travessias e Mar Aberto',
+    image: boatPono, // Placeholder - mesma imagem por enquanto
+  },
+  {
+    id: 'azimut',
+    name: 'AZIMUT',
+    tagline: 'Versatilidade Total',
+    image: boatSurfski, // Placeholder - mesma imagem por enquanto
+  },
+  {
+    id: 'dw',
+    name: 'DW',
+    tagline: 'Downwind Specialist',
+    image: boatSurfski, // Placeholder - mesma imagem por enquanto
   },
 ];
 
@@ -304,9 +322,9 @@ const ProductShowcase = () => {
             whileTap={{ scale: 0.9 }}
           >
             <motion.div
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                 index === currentIndex 
-                  ? 'bg-foreground' 
+                  ? 'bg-orange' 
                   : 'bg-foreground/20 group-hover:bg-foreground/40'
               }`}
               animate={{
@@ -316,7 +334,7 @@ const ProductShowcase = () => {
             {/* Active indicator ring */}
             {index === currentIndex && (
               <motion.div
-                className="absolute inset-0 rounded-full border border-foreground/30"
+                className="absolute inset-0 rounded-full border border-orange/50"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1.5, opacity: 1 }}
                 transition={{ duration: 0.3 }}

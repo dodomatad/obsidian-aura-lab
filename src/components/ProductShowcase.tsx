@@ -1,6 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { useTransition } from '@/context/TransitionContext';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import boatPono from '@/assets/boat-pono.png';
 import boatSurfski from '@/assets/boat-surfski.png';
 
@@ -26,174 +27,16 @@ const products: Product[] = [
   },
 ];
 
-const ProductSlide = ({ 
-  product, 
-  index,
-  progress,
-  onProductClick,
-  isTransitioning,
-  transitionProductId,
-}: { 
-  product: Product; 
-  index: number;
-  progress: number;
-  onProductClick: (product: Product, imageRef: HTMLImageElement) => void;
-  isTransitioning: boolean;
-  transitionProductId: string | null;
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const imageRef = useRef<HTMLImageElement>(null);
-
-  // Calculate parallax offset for the background text
-  const textParallax = (progress - index) * 100;
-  
-  // Hide this specific image if it's the one being transitioned
-  const isThisProductTransitioning = isTransitioning && transitionProductId === product.id;
-
-  return (
-    <div 
-      className="relative w-screen h-screen flex-shrink-0 flex items-center justify-center overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Dramatic top lighting effect */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 70%)
-          `,
-        }}
-      />
-
-      {/* Giant background name with parallax */}
-      <motion.div 
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
-        style={{
-          x: textParallax,
-        }}
-      >
-        <h2 
-          className="display-hero whitespace-nowrap"
-          style={{
-            fontSize: 'clamp(15rem, 35vw, 40rem)',
-            color: 'transparent',
-            WebkitTextStroke: '1px rgba(255,255,255,0.04)',
-            letterSpacing: '-0.03em',
-            lineHeight: 1,
-          }}
-        >
-          {product.name}
-        </h2>
-      </motion.div>
-
-      {/* Boat container with hover effects */}
-      <motion.div
-        className="relative z-10 w-[70%] max-w-4xl cursor-pointer"
-        animate={{
-          y: isHovered ? -10 : 0,
-          scale: isHovered ? 1.05 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 200,
-          damping: 20,
-        }}
-        onClick={() => {
-          if (imageRef.current) {
-            onProductClick(product, imageRef.current);
-          }
-        }}
-      >
-        {/* Spotlight glow */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            opacity: isHovered ? 0.4 : 0.2,
-          }}
-          transition={{ duration: 0.4 }}
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 60%)',
-            filter: 'blur(60px)',
-            transform: 'translateY(-20%)',
-          }}
-        />
-
-        {/* Boat image - hidden during transition to avoid duplication */}
-        <motion.img
-          ref={imageRef}
-          src={product.image}
-          alt={product.name}
-          className="w-full h-auto object-contain relative z-10"
-          animate={{
-            opacity: isThisProductTransitioning ? 0 : 1,
-          }}
-          transition={{ duration: 0.1 }}
-          style={{
-            filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.6))',
-          }}
-        />
-
-        {/* Hover label */}
-        <motion.div
-          className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-8 pointer-events-none"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ 
-            opacity: isHovered ? 1 : 0,
-            y: isHovered ? 0 : 10,
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/60 font-sans">
-            Explorar
-          </span>
-        </motion.div>
-      </motion.div>
-
-      {/* Model name at bottom */}
-      <motion.div
-        className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 text-center z-20"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <span className="text-[9px] tracking-[0.3em] uppercase text-foreground/40 font-sans block mb-2">
-          {product.tagline}
-        </span>
-        <h3 
-          className="display-hero text-foreground"
-          style={{
-            fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-            letterSpacing: '0.1em',
-          }}
-        >
-          {product.name}
-        </h3>
-      </motion.div>
-
-      {/* Slide indicator dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-        {products.map((_, i) => (
-          <div
-            key={i}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              i === index ? 'bg-foreground/80 scale-100' : 'bg-foreground/20 scale-75'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const ProductShowcase = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const { startTransition, saveScrollPosition, isTransitioning, transitionData } = useTransition();
 
+  const currentProduct = products[currentIndex];
+
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
-    // Save scroll position before transitioning
     saveScrollPosition();
     
     const rect = imageElement.getBoundingClientRect();
@@ -205,176 +48,289 @@ const ProductShowcase = () => {
     });
   };
 
+  const goToSlide = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % products.length);
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+  };
+
+  // Keyboard navigation
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
-  // Transform vertical scroll to horizontal movement
-  const x = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    ["0%", `-${(products.length - 1) * 100}%`]
-  );
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.9,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0,
+      scale: 0.9,
+    }),
+  };
 
-  // Track which slide we're on for parallax
-  const slideProgress = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, products.length - 1]
-  );
+  const textVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 200 : -200,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -200 : 200,
+      opacity: 0,
+    }),
+  };
 
-  const [currentProgress, setCurrentProgress] = useState(0);
-
-  useEffect(() => {
-    const unsubscribe = slideProgress.on('change', setCurrentProgress);
-    return () => unsubscribe();
-  }, [slideProgress]);
-
-  // Mobile: Vertical scroll cards with click navigation
-  if (isMobile) {
-    return (
-      <section className="relative py-20">
-        <div className="space-y-8 px-4">
-          {products.map((product, index) => {
-            const mobileImageRef = useRef<HTMLImageElement>(null);
-            const isThisMobileProductTransitioning = isTransitioning && transitionData?.productId === product.id;
-            
-            return (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative aspect-[4/3] flex items-center justify-center overflow-hidden cursor-pointer"
-                style={{
-                  background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%)',
-                }}
-                onClick={() => {
-                  if (mobileImageRef.current) {
-                    handleProductClick(product, mobileImageRef.current);
-                  }
-                }}
-              >
-                {/* Background name */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <span 
-                    className="display-hero text-transparent"
-                    style={{
-                      fontSize: '8rem',
-                      WebkitTextStroke: '1px rgba(255,255,255,0.03)',
-                      letterSpacing: '-0.02em',
-                    }}
-                  >
-                    {product.name}
-                  </span>
-                </div>
-
-                {/* Boat - hidden during transition */}
-                <motion.img
-                  ref={mobileImageRef}
-                  src={product.image}
-                  alt={product.name}
-                  className="relative z-10 w-[85%] h-auto object-contain"
-                  animate={{
-                    opacity: isThisMobileProductTransitioning ? 0 : 1,
-                  }}
-                  transition={{ duration: 0.1 }}
-                  style={{
-                    filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.5))',
-                  }}
-                />
-
-                {/* Name overlay */}
-                <div className="absolute bottom-4 left-0 right-0 text-center z-20">
-                  <span className="text-[8px] tracking-[0.25em] uppercase text-foreground/40 block mb-1">
-                    {product.tagline}
-                  </span>
-                  <span className="display-hero text-foreground text-xl tracking-[0.08em]">
-                    {product.name}
-                  </span>
-                </div>
-                
-                {/* Tap hint */}
-                <div className="absolute top-4 right-4 z-20">
-                  <span className="text-[8px] tracking-[0.15em] uppercase text-foreground/30">
-                    Toque para explorar
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-    );
-  }
-
-  // Desktop: Horizontal scroll with pinning
   return (
-    <section 
-      ref={containerRef} 
-      className="relative"
-      style={{ 
-        height: `${products.length * 100}vh`,
-      }}
-    >
-      {/* Sticky container for horizontal scroll */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Horizontal track */}
-        <motion.div 
-          className="flex h-full"
-          style={{ x }}
-        >
-          {products.map((product, index) => (
-            <ProductSlide 
-              key={product.id} 
-              product={product} 
-              index={index}
-              progress={currentProgress}
-              onProductClick={handleProductClick}
-              isTransitioning={isTransitioning}
-              transitionProductId={transitionData?.productId || null}
-            />
-          ))}
-        </motion.div>
+    <section className="relative h-screen w-full overflow-hidden">
+      {/* Dramatic lighting effect */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 60%),
+            radial-gradient(ellipse 60% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 70%)
+          `,
+        }}
+      />
 
-        {/* Navigation hint */}
-        <motion.div
-          className="absolute top-1/2 right-8 -translate-y-1/2 z-30"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-        >
-          <motion.div
-            className="flex flex-col items-center gap-2"
-            animate={{ x: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <span className="text-[9px] tracking-[0.2em] uppercase text-foreground/30 rotate-90 origin-center whitespace-nowrap">
-              Scroll
-            </span>
-          </motion.div>
-        </motion.div>
-
-        {/* Progress bar */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-32 h-px bg-foreground/10 z-30">
-          <motion.div
-            className="h-full bg-foreground/60"
-            style={{ 
-              scaleX: useTransform(scrollYProgress, [0, 1], [0, 1]),
-              transformOrigin: 'left',
+      {/* Giant background name */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.h2 
+            key={currentProduct.id}
+            custom={direction}
+            variants={textVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+            className="display-hero whitespace-nowrap"
+            style={{
+              fontSize: 'clamp(12rem, 30vw, 35rem)',
+              color: 'transparent',
+              WebkitTextStroke: '1px rgba(255,255,255,0.04)',
+              letterSpacing: '-0.03em',
+              lineHeight: 1,
             }}
-          />
-        </div>
+          >
+            {currentProduct.name}
+          </motion.h2>
+        </AnimatePresence>
       </div>
+
+      {/* Boat carousel */}
+      <div 
+        className="relative z-10 h-full flex items-center justify-center"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={currentProduct.id}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ 
+              duration: 0.6, 
+              ease: [0.32, 0.72, 0, 1],
+            }}
+            className="absolute w-[65%] max-w-4xl cursor-pointer"
+            onClick={() => {
+              const currentImageRef = imageRefs.current[currentIndex];
+              if (currentImageRef) {
+                handleProductClick(currentProduct, currentImageRef);
+              }
+            }}
+          >
+            {/* Spotlight glow */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              animate={{
+                opacity: isHovered ? 0.4 : 0.2,
+              }}
+              transition={{ duration: 0.4 }}
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 60%)',
+                filter: 'blur(60px)',
+                transform: 'translateY(-20%)',
+              }}
+            />
+
+            {/* Boat image */}
+            <motion.img
+              ref={(el) => { imageRefs.current[currentIndex] = el; }}
+              src={currentProduct.image}
+              alt={currentProduct.name}
+              className="w-full h-auto object-contain relative z-10"
+              animate={{
+                opacity: isThisProductTransitioning ? 0 : 1,
+                y: isHovered ? -10 : 0,
+                scale: isHovered ? 1.03 : 1,
+              }}
+              transition={{ 
+                opacity: { duration: 0.1 },
+                y: { type: 'spring', stiffness: 200, damping: 20 },
+                scale: { type: 'spring', stiffness: 200, damping: 20 },
+              }}
+              style={{
+                filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.6))',
+              }}
+            />
+
+            {/* Hover label */}
+            <motion.div
+              className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-8 pointer-events-none"
+              animate={{ 
+                opacity: isHovered ? 1 : 0,
+                y: isHovered ? 0 : 10,
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/60 font-sans">
+                Clique para explorar
+              </span>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation Arrows */}
+      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 z-30 pointer-events-none">
+        <motion.button
+          onClick={prevSlide}
+          className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center group"
+          style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
+          whileHover={{ 
+            scale: 1.1,
+            background: 'rgba(255, 255, 255, 0.1)',
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronLeft className="w-6 h-6 text-foreground/60 group-hover:text-foreground transition-colors" />
+        </motion.button>
+
+        <motion.button
+          onClick={nextSlide}
+          className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center group"
+          style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
+          whileHover={{ 
+            scale: 1.1,
+            background: 'rgba(255, 255, 255, 0.1)',
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronRight className="w-6 h-6 text-foreground/60 group-hover:text-foreground transition-colors" />
+        </motion.button>
+      </div>
+
+      {/* Model name at bottom */}
+      <div className="absolute bottom-20 md:bottom-28 left-1/2 -translate-x-1/2 text-center z-20">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentProduct.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <span className="text-[10px] tracking-[0.35em] uppercase text-foreground/40 font-sans block mb-3">
+              {currentProduct.tagline}
+            </span>
+            <h3 
+              className="display-hero text-foreground"
+              style={{
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                letterSpacing: '0.1em',
+              }}
+            >
+              {currentProduct.name}
+            </h3>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+        {products.map((product, index) => (
+          <motion.button
+            key={product.id}
+            onClick={() => goToSlide(index)}
+            className="relative group p-2"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <motion.div
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex 
+                  ? 'bg-foreground' 
+                  : 'bg-foreground/20 group-hover:bg-foreground/40'
+              }`}
+              animate={{
+                scale: index === currentIndex ? 1 : 0.75,
+              }}
+            />
+            {/* Active indicator ring */}
+            {index === currentIndex && (
+              <motion.div
+                className="absolute inset-0 rounded-full border border-foreground/30"
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1.5, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Keyboard hint */}
+      <motion.div
+        className="absolute bottom-8 right-8 z-20 hidden md:flex items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ delay: 2 }}
+      >
+        <span className="text-[9px] tracking-[0.15em] uppercase text-foreground/40">
+          ← →
+        </span>
+      </motion.div>
     </section>
   );
 };

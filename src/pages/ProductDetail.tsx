@@ -307,7 +307,7 @@ const ProductDetail = () => {
                 >
                   {product.name}
                 </h1>
-                <p className="text-xl lg:text-2xl text-foreground/60 leading-relaxed font-sans font-light">
+                <p className="text-xl lg:text-2xl text-foreground/60 font-sans font-light" style={{ lineHeight: 1.8 }}>
                   {product.description}
                 </p>
               </motion.div>

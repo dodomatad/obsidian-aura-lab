@@ -9,9 +9,11 @@ import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
 import MobileMenu from '@/components/MobileMenu';
+import StickyWhatsApp from '@/components/StickyWhatsApp';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ChevronDown } from 'lucide-react';
 
 const Index = () => {
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
@@ -99,8 +101,8 @@ const Index = () => {
           <MobileMenu />
         </motion.nav>
 
-        {/* Hero Section - Video Focus with Fade Out Text */}
-        <section ref={heroRef} id="hero" className="relative h-screen w-full overflow-hidden">
+        {/* Hero Section - Compact on mobile to show content below */}
+        <section ref={heroRef} id="hero" className="relative h-[85vh] md:h-screen w-full overflow-hidden">
           {/* Video Background - With Fade Mask */}
           <div 
             className="absolute inset-0"
@@ -112,41 +114,26 @@ const Index = () => {
             {/* Fallback gradient - also serves as static background on mobile */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#021019] via-[#010810] to-[#000000]" />
             
-            {/* Vimeo Video - Hidden on mobile for performance */}
-            {!isMobile && (
-              <div className="absolute inset-0">
-                <iframe 
-                  src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
-                  style={{ filter: 'brightness(0.85)' }}
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                  allowFullScreen
-                  title="Hero Background Video"
-                />
-              </div>
-            )}
-            
-            {/* Mobile: Static ocean gradient overlay for better performance */}
-            {isMobile && (
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: `
-                    radial-gradient(ellipse 100% 60% at 50% 30%, rgba(2, 30, 50, 0.8) 0%, transparent 70%),
-                    linear-gradient(180deg, rgba(1, 15, 30, 0.9) 0%, rgba(0, 5, 15, 1) 100%)
-                  `,
-                }}
+            {/* Vimeo Video - Works on all devices now */}
+            <div className="absolute inset-0">
+              <iframe 
+                src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
+                style={{ filter: isMobile ? 'brightness(0.7)' : 'brightness(0.85)' }}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
+                title="Hero Background Video"
               />
-            )}
+            </div>
             
             {/* Cinematic Overlay - Gradient for atmosphere and readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           </div>
 
-          {/* Hero Text - Stays Fixed, Fades Out on Scroll */}
+          {/* Hero Text - Positioned higher on mobile to leave room for scroll indicator */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center z-10 px-6"
+            className="absolute inset-0 flex items-center justify-center z-10 px-6 pb-24 md:pb-0"
             style={{ opacity: heroTextOpacity }}
           >
             <motion.div
@@ -177,6 +164,24 @@ const Index = () => {
               </motion.p>
             </motion.div>
           </motion.div>
+
+          {/* Scroll Indicator - Shows on mobile to hint more content */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+          >
+            <span className="text-[9px] tracking-[0.3em] uppercase text-foreground/40 font-sans">
+              Explorar
+            </span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="w-5 h-5 text-foreground/40" />
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Champion Journey Section - Storytelling */}
@@ -199,35 +204,60 @@ const Index = () => {
         <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
-        <footer className="w-full px-8 md:px-16 py-20 border-t border-border/50">
+        <footer className="w-full px-6 md:px-16 py-16 md:py-20 pb-28 md:pb-20 border-t border-border/50">
           <div className="max-w-7xl mx-auto">
+            
+            {/* Authority Badges - Social Proof */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 md:mb-16 pb-8 md:pb-12 border-b border-border/30">
+              <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
+                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
+                  🇧🇷 DNA Brasileiro
+                </span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
+                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
+                  Desde 1985
+                </span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
+                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
+                  14× Campeão
+                </span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-orange/10 border border-orange/30 rounded-sm">
+                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-orange font-medium">
+                  Hightec Line
+                </span>
+              </div>
+            </div>
+
             {/* Main Footer Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
               {/* Brand */}
               <div>
                 <h3 className="text-lg font-medium tracking-widest text-foreground mb-4">
                   OPIUM<span className="text-orange">.</span>
                 </h3>
-                <p className="text-sm text-foreground/50 font-light leading-relaxed">
+                <p className="text-sm text-foreground/60 font-light leading-relaxed">
                   Há mais de 30 anos fabricando a história do mar. Surfskis de elite com DNA brasileiro.
                 </p>
               </div>
 
               {/* Contact */}
               <div>
-                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
+                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/50 mb-4">
                   Contato
                 </h4>
                 <div className="space-y-3">
                   <a 
                     href="tel:+5513997446684" 
-                    className="block text-sm text-foreground/70 hover:text-orange transition-colors"
+                    className="block text-sm text-foreground/80 hover:text-orange transition-colors"
                   >
                     (13) 99744-6684
                   </a>
                   <a 
                     href="mailto:atendimento@caiaquesopium.com.br" 
-                    className="block text-sm text-foreground/70 hover:text-orange transition-colors"
+                    className="block text-sm text-foreground/80 hover:text-orange transition-colors break-all"
                   >
                     atendimento@caiaquesopium.com.br
                   </a>
@@ -236,21 +266,21 @@ const Index = () => {
 
               {/* Address */}
               <div>
-                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
+                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/50 mb-4">
                   Endereço
                 </h4>
-                <p className="text-sm text-foreground/70 font-light leading-relaxed">
+                <p className="text-sm text-foreground/80 font-light leading-relaxed">
                   Rua Afonso Celso de Paula Lima, 16<br />
                   Ponta da Praia, Santos | SP
                 </p>
-                <p className="text-xs text-foreground/40 mt-3">
+                <p className="text-xs text-foreground/50 mt-3">
                   Garagem: Seg a Sex 08:00 - 14:00
                 </p>
               </div>
 
               {/* Social */}
               <div>
-                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/40 mb-4">
+                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/50 mb-4">
                   Redes Sociais
                 </h4>
                 <div className="flex gap-6">
@@ -258,7 +288,7 @@ const Index = () => {
                     href="https://instagram.com/opiumsurfski" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/70 hover:text-orange transition-colors"
+                    className="text-sm text-foreground/80 hover:text-orange transition-colors"
                   >
                     Instagram
                   </a>
@@ -266,7 +296,7 @@ const Index = () => {
                     href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os produtos Opium."
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/70 hover:text-orange transition-colors"
+                    className="text-sm text-foreground/80 hover:text-orange transition-colors"
                   >
                     WhatsApp
                   </a>
@@ -276,15 +306,18 @@ const Index = () => {
 
             {/* Bottom Bar */}
             <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-xs text-foreground/30">
+              <p className="text-xs text-foreground/40">
                 © 2024 Opium Hightec Line. Todos os direitos reservados.
               </p>
-              <p className="text-xs text-foreground/20">
+              <p className="text-xs text-foreground/30">
                 Surfskis de Elite desde 1985
               </p>
             </div>
           </div>
         </footer>
+
+        {/* Sticky WhatsApp Button - Mobile Only */}
+        <StickyWhatsApp />
       </div>
     </>
   );

@@ -1,14 +1,29 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Flag, Trophy, Cpu, Palette } from 'lucide-react';
 import championImage from '@/assets/champion-silhouette.jpg';
 
-const achievements = [
-  { year: '1994', title: 'Pioneirismo Nacional', location: 'Início da Canoagem Oceânica no Brasil' },
-  { year: '2005', title: 'Tecnologia Hightec Line', location: 'Lançamento da Linha Premium' },
-  { year: '2010', title: 'Expansão Internacional', location: 'Exportação para América Latina' },
-  { year: '2015', title: 'Inovação em Carbono', location: 'Novos Processos de Fabricação' },
-  { year: '2020', title: 'Referência no Mercado', location: 'Líder em Surfskis de Elite' },
-  { year: '2024', title: '+30 Anos de História', location: 'Legado Consolidado' },
+const authorityBadges = [
+  { 
+    icon: Flag, 
+    title: 'Pioneiro desde 1985',
+    description: 'Primeira fábrica de surfskis do Brasil'
+  },
+  { 
+    icon: Trophy, 
+    title: '14 Anos Invicto',
+    description: 'Domínio absoluto nas competições'
+  },
+  { 
+    icon: Cpu, 
+    title: 'Tecnologia Hightec Line',
+    description: 'Inovação em fibra de carbono'
+  },
+  { 
+    icon: Palette, 
+    title: 'Design Brasileiro',
+    description: 'Engenharia 100% nacional'
+  },
 ];
 
 const ChampionSection = () => {
@@ -41,7 +56,7 @@ const ChampionSection = () => {
           >
             <img
               src={championImage}
-              alt="Atleta de elite contemplando o mar"
+              alt="Fábio Paiva - Pioneiro da Canoagem Oceânica"
               className="w-full h-[120%] object-cover"
               style={{
                 filter: 'grayscale(100%) contrast(1.2) brightness(0.85)',
@@ -87,12 +102,12 @@ const ChampionSection = () => {
                 lineHeight: 0.8,
               }}
             >
-              30+
+              14×
             </span>
           </motion.div>
         </motion.div>
 
-        {/* Right: Text Content + Timeline */}
+        {/* Right: Text Content + Authority Badges */}
         <div className="relative flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-24 py-16 lg:py-24">
           
           {/* Subtle background texture */}
@@ -134,28 +149,21 @@ const ChampionSection = () => {
                 lineHeight: 0.95,
               }}
             >
-              O Legado<br />
-              Fábio Paiva<span className="text-orange">.</span>
+              O Pioneiro<span className="text-orange">.</span>
             </h2>
             
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-foreground/50 font-sans font-light mb-10 tracking-wide">
-              O Introdutor da Canoagem Oceânica no Brasil
+              Introdutor da Canoagem Oceânica no Brasil
             </p>
 
             {/* Manifesto text */}
-            <div className="space-y-8 mb-16">
+            <div className="space-y-6 mb-12">
               <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
-                Há mais de <span className="text-foreground font-medium">30 anos</span> fabricando a história do mar. Fábio Paiva trouxe a canoagem oceânica para o país e transformou o esporte.
+                Há mais de <span className="text-foreground font-medium">30 anos</span>, a Opium nasceu de uma garagem em Santos para dominar o mar.
               </p>
               <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
-                Nossos barcos carregam o DNA de quem vive, respira e vence no mar.
-              </p>
-              <p 
-                className="text-2xl md:text-3xl text-foreground font-display italic"
-                style={{ letterSpacing: '0.01em', lineHeight: 1.3 }}
-              >
-                "Não vendemos apenas barcos, entregamos a evolução da espécie<span className="text-orange not-italic">.</span>"
+                Fábio Paiva, <span className="text-foreground font-medium">14 anos invicto</span> e condutor da Tocha Olímpica (2016) e Pan-Americana (2007), transformou a experiência náutica no país.
               </p>
             </div>
 
@@ -165,49 +173,38 @@ const ChampionSection = () => {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent origin-left mb-16"
+              className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent origin-left mb-12"
             />
 
-            {/* Vertical Timeline */}
-            <div className="relative">
-              <h3 className="text-xs tracking-[0.3em] uppercase text-foreground/40 font-sans mb-8">
-                Conquistas
-              </h3>
-              
-              {/* Timeline container with vertical line */}
-              <div className="relative pl-8 border-l border-foreground/20">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={achievement.year}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="relative pb-8 last:pb-0 group"
-                  >
-                    {/* Timeline dot */}
-                    <div className="absolute -left-[33px] top-1 w-2 h-2 rounded-full bg-foreground/40 group-hover:bg-foreground group-hover:scale-150 transition-all duration-300" />
-                    
-                    {/* Year - Large and prominent */}
-                    <span 
-                      className="block text-4xl md:text-5xl font-display text-foreground/90 group-hover:text-foreground transition-colors"
-                      style={{ letterSpacing: '-0.02em', lineHeight: 1 }}
-                    >
-                      {achievement.year}
-                    </span>
-                    
-                    {/* Title & Location */}
-                    <div className="mt-2 flex flex-wrap items-baseline gap-x-3">
-                      <span className="text-sm tracking-[0.1em] uppercase text-foreground/60 font-sans font-medium">
-                        {achievement.title}
-                      </span>
-                      <span className="text-xs text-foreground/30 font-sans">
-                        — {achievement.location}
-                      </span>
+            {/* Authority Badges Grid */}
+            <div className="grid grid-cols-2 gap-6">
+              {authorityBadges.map((badge, index) => (
+                <motion.div
+                  key={badge.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  className="group cursor-default"
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Icon */}
+                    <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center border border-foreground/20 group-hover:border-orange transition-colors duration-300">
+                      <badge.icon className="w-5 h-5 text-foreground/50 group-hover:text-orange transition-colors duration-300" />
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                    
+                    {/* Text */}
+                    <div>
+                      <h4 className="text-sm font-sans font-medium text-foreground tracking-wide mb-1">
+                        {badge.title}
+                      </h4>
+                      <p className="text-xs text-foreground/40 font-sans font-light leading-relaxed">
+                        {badge.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>

@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import { useTransition } from '@/context/TransitionContext';
 import boatPono from '@/assets/boat-pono.png';
 import boatSurfski from '@/assets/boat-surfski.png';
 
@@ -28,13 +29,16 @@ const products: Product[] = [
 const ProductSlide = ({ 
   product, 
   index,
-  progress 
+  progress,
+  onProductClick,
 }: { 
   product: Product; 
   index: number;
   progress: number;
+  onProductClick: (product: Product, imageRef: HTMLImageElement) => void;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // Calculate parallax offset for the background text
   const textParallax = (progress - index) * 100;
@@ -79,7 +83,7 @@ const ProductSlide = ({
 
       {/* Boat container with hover effects */}
       <motion.div
-        className="relative z-10 w-[70%] max-w-4xl"
+        className="relative z-10 w-[70%] max-w-4xl cursor-pointer"
         animate={{
           y: isHovered ? -10 : 0,
           scale: isHovered ? 1.05 : 1,
@@ -89,8 +93,10 @@ const ProductSlide = ({
           stiffness: 200,
           damping: 20,
         }}
-        style={{
-          cursor: isHovered ? 'none' : 'default',
+        onClick={() => {
+          if (imageRef.current) {
+            onProductClick(product, imageRef.current);
+          }
         }}
       >
         {/* Spotlight glow */}
@@ -109,6 +115,7 @@ const ProductSlide = ({
 
         {/* Boat image */}
         <motion.img
+          ref={imageRef}
           src={product.image}
           alt={product.name}
           className="w-full h-auto object-contain relative z-10"
@@ -172,6 +179,17 @@ const ProductSlide = ({
 const ProductShowcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const { startTransition } = useTransition();
+
+  const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
+    const rect = imageElement.getBoundingClientRect();
+    startTransition({
+      productId: product.id,
+      productName: product.name,
+      imageUrl: product.image,
+      imageRect: rect,
+    });
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -206,58 +224,75 @@ const ProductShowcase = () => {
     return () => unsubscribe();
   }, [slideProgress]);
 
-  // Mobile: Vertical scroll cards
+  // Mobile: Vertical scroll cards with click navigation
   if (isMobile) {
     return (
       <section className="relative py-20">
         <div className="space-y-8 px-4">
-          {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="relative aspect-[4/3] flex items-center justify-center overflow-hidden"
-              style={{
-                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%)',
-              }}
-            >
-              {/* Background name */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span 
-                  className="display-hero text-transparent"
-                  style={{
-                    fontSize: '8rem',
-                    WebkitTextStroke: '1px rgba(255,255,255,0.03)',
-                    letterSpacing: '-0.02em',
-                  }}
-                >
-                  {product.name}
-                </span>
-              </div>
-
-              {/* Boat */}
-              <img
-                src={product.image}
-                alt={product.name}
-                className="relative z-10 w-[85%] h-auto object-contain"
+          {products.map((product, index) => {
+            const mobileImageRef = useRef<HTMLImageElement>(null);
+            
+            return (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="relative aspect-[4/3] flex items-center justify-center overflow-hidden cursor-pointer"
                 style={{
-                  filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.5))',
+                  background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%)',
                 }}
-              />
+                onClick={() => {
+                  if (mobileImageRef.current) {
+                    handleProductClick(product, mobileImageRef.current);
+                  }
+                }}
+              >
+                {/* Background name */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <span 
+                    className="display-hero text-transparent"
+                    style={{
+                      fontSize: '8rem',
+                      WebkitTextStroke: '1px rgba(255,255,255,0.03)',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {product.name}
+                  </span>
+                </div>
 
-              {/* Name overlay */}
-              <div className="absolute bottom-4 left-0 right-0 text-center z-20">
-                <span className="text-[8px] tracking-[0.25em] uppercase text-foreground/40 block mb-1">
-                  {product.tagline}
-                </span>
-                <span className="display-hero text-foreground text-xl tracking-[0.08em]">
-                  {product.name}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                {/* Boat */}
+                <img
+                  ref={mobileImageRef}
+                  src={product.image}
+                  alt={product.name}
+                  className="relative z-10 w-[85%] h-auto object-contain"
+                  style={{
+                    filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.5))',
+                  }}
+                />
+
+                {/* Name overlay */}
+                <div className="absolute bottom-4 left-0 right-0 text-center z-20">
+                  <span className="text-[8px] tracking-[0.25em] uppercase text-foreground/40 block mb-1">
+                    {product.tagline}
+                  </span>
+                  <span className="display-hero text-foreground text-xl tracking-[0.08em]">
+                    {product.name}
+                  </span>
+                </div>
+                
+                {/* Tap hint */}
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="text-[8px] tracking-[0.15em] uppercase text-foreground/30">
+                    Toque para explorar
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
     );
@@ -285,6 +320,7 @@ const ProductShowcase = () => {
               product={product} 
               index={index}
               progress={currentProgress}
+              onProductClick={handleProductClick}
             />
           ))}
         </motion.div>

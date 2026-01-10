@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface TransitionData {
   productId: string;
@@ -12,6 +12,9 @@ interface TransitionContextType {
   transitionData: TransitionData | null;
   startTransition: (data: TransitionData) => void;
   endTransition: () => void;
+  // Track if we just finished transitioning (for detail page to know)
+  justTransitioned: boolean;
+  setJustTransitioned: (value: boolean) => void;
   // Intro state management
   hasSeenIntro: boolean;
   setHasSeenIntro: (value: boolean) => void;
@@ -30,6 +33,7 @@ const TransitionContext = createContext<TransitionContextType | null>(null);
 export const TransitionProvider = ({ children }: { children: ReactNode }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionData, setTransitionData] = useState<TransitionData | null>(null);
+  const [justTransitioned, setJustTransitioned] = useState(false);
   const [hasSeenIntro, setHasSeenIntroState] = useState(() => {
     return sessionStorage.getItem(INTRO_SEEN_KEY) === 'true';
   });
@@ -38,11 +42,17 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
   const startTransition = (data: TransitionData) => {
     setTransitionData(data);
     setIsTransitioning(true);
+    setJustTransitioned(false);
   };
 
   const endTransition = () => {
     setIsTransitioning(false);
-    setTransitionData(null);
+    setJustTransitioned(true);
+    // Keep transitionData for a moment so detail page can use it
+    setTimeout(() => {
+      setTransitionData(null);
+      setJustTransitioned(false);
+    }, 100);
   };
 
   const setHasSeenIntro = (value: boolean) => {
@@ -76,6 +86,8 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
       transitionData, 
       startTransition, 
       endTransition,
+      justTransitioned,
+      setJustTransitioned,
       hasSeenIntro,
       setHasSeenIntro,
       savedScrollPosition,

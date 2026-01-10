@@ -143,13 +143,24 @@ const ProductShowcase = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Dramatic lighting effect */}
+      {/* Dramatic lighting effect with enhanced depth */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
             radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 60%),
             radial-gradient(ellipse 60% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 70%)
+          `,
+        }}
+      />
+
+      {/* Enhanced ambient glow behind products */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 70% 50% at 50% 55%, rgba(249, 115, 22, 0.03) 0%, transparent 50%),
+            radial-gradient(ellipse 80% 60% at 50% 50%, rgba(30, 50, 80, 0.15) 0%, transparent 60%)
           `,
         }}
       />
@@ -209,17 +220,29 @@ const ProductShowcase = () => {
               }
             }}
           >
-            {/* Spotlight glow */}
+            {/* Enhanced spotlight glow with depth */}
             <motion.div
               className="absolute inset-0 pointer-events-none"
               animate={{
-                opacity: isHovered ? 0.4 : 0.2,
+                opacity: isHovered ? 0.5 : 0.3,
               }}
               transition={{ duration: 0.4 }}
               style={{
-                background: 'radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, transparent 60%)',
-                filter: 'blur(60px)',
-                transform: 'translateY(-20%)',
+                background: `
+                  radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse 60% 40% at 50% 60%, rgba(249, 115, 22, 0.08) 0%, transparent 40%)
+                `,
+                filter: 'blur(40px)',
+              }}
+            />
+
+            {/* Floor reflection / shadow for grounding */}
+            <div 
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[30%] pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 70%)',
+                filter: 'blur(20px)',
+                transform: 'translateY(60%) scaleY(0.3)',
               }}
             />
 
@@ -242,21 +265,35 @@ const ProductShowcase = () => {
                 layout: { duration: 0.6, ease: [0.32, 0.72, 0, 1] },
               }}
               style={{
-                filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.6))',
+                filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.5)) drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
               }}
             />
 
-            {/* Mobile swipe hint */}
+            {/* Mobile swipe hint - More prominent */}
             {isMobile && (
               <motion.div
-                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-6 pointer-events-none"
+                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-4 pointer-events-none flex items-center gap-2"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                transition={{ delay: 1 }}
+                animate={{ opacity: 0.8 }}
+                transition={{ delay: 0.5 }}
               >
-                <span className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 font-sans">
-                  ← Arraste →
+                <motion.span
+                  animate={{ x: [-4, 4, -4] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-foreground/60"
+                >
+                  ←
+                </motion.span>
+                <span className="text-xs tracking-[0.2em] uppercase text-foreground/60 font-sans font-medium">
+                  Deslize
                 </span>
+                <motion.span
+                  animate={{ x: [4, -4, 4] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-foreground/60"
+                >
+                  →
+                </motion.span>
               </motion.div>
             )}
 

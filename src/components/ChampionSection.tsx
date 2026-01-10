@@ -107,8 +107,8 @@ const ChampionSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right: Text Content + Authority Badges */}
-        <div className="relative flex flex-col justify-center px-6 md:px-12 lg:px-16 xl:px-24 py-12 md:py-16 lg:py-24">
+        {/* Right: Text Content + Authority Badges - Better mobile padding */}
+        <div className="relative flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-24 py-12 md:py-16 lg:py-24">
           
           {/* Subtle background texture */}
           <div 
@@ -188,17 +188,17 @@ const ChampionSection = () => {
                   className="group cursor-default"
                 >
                   <div className="flex items-start gap-3 md:gap-4">
-                    {/* Icon */}
-                    <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center border border-foreground/20 group-hover:border-orange transition-colors duration-300">
-                      <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground/50 group-hover:text-orange transition-colors duration-300" />
+                    {/* Icon - Enhanced contrast */}
+                    <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center border border-foreground/30 group-hover:border-orange bg-foreground/5 transition-colors duration-300">
+                      <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground/70 group-hover:text-orange transition-colors duration-300" />
                     </div>
                     
-                    {/* Text */}
+                    {/* Text - Better contrast for outdoor reading */}
                     <div>
-                      <h4 className="text-xs md:text-sm font-sans font-medium text-foreground tracking-wide mb-0.5 md:mb-1">
+                      <h4 className="text-xs md:text-sm font-sans font-medium text-foreground/90 tracking-wide mb-0.5 md:mb-1">
                         {badge.title}
                       </h4>
-                      <p className="text-[10px] md:text-xs text-foreground/40 font-sans font-light leading-relaxed">
+                      <p className="text-[11px] md:text-xs text-foreground/60 font-sans font-light leading-relaxed">
                         {badge.description}
                       </p>
                     </div>

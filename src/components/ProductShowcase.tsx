@@ -225,39 +225,43 @@ const ProductShowcase = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 z-30 pointer-events-none">
+      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-8 md:px-20 z-30 pointer-events-none">
         <motion.button
           onClick={prevSlide}
-          className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center group"
+          className="pointer-events-auto w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center group"
           style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: 'rgba(255, 255, 255, 0.06)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
           }}
           whileHover={{ 
             scale: 1.1,
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(255, 255, 255, 0.12)',
           }}
           whileTap={{ scale: 0.95 }}
         >
-          <ChevronLeft className="w-6 h-6 text-foreground/60 group-hover:text-foreground transition-colors" />
+          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-foreground/60 group-hover:text-foreground transition-colors" />
         </motion.button>
 
         <motion.button
           onClick={nextSlide}
-          className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center group"
+          className="pointer-events-auto w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center group"
           style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            background: 'rgba(255, 255, 255, 0.06)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
           }}
           whileHover={{ 
             scale: 1.1,
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(255, 255, 255, 0.12)',
           }}
           whileTap={{ scale: 0.95 }}
         >
-          <ChevronRight className="w-6 h-6 text-foreground/60 group-hover:text-foreground transition-colors" />
+          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-foreground/60 group-hover:text-foreground transition-colors" />
         </motion.button>
       </div>
 

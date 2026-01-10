@@ -162,7 +162,7 @@ const ProductDetail = () => {
       <CustomCursor />
       
       <motion.div 
-        className="min-h-screen"
+        className="min-h-screen bg-transparent"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded && !isExiting ? 1 : 0 }}
         transition={{ duration: isExiting ? 0.2 : 0.6 }}
@@ -248,8 +248,9 @@ const ProductDetail = () => {
                 }}
               />
 
-              {/* Boat image with color transition - hidden during transition to avoid duplication */}
+              {/* Boat image with layoutId for shared element transition */}
               <motion.img
+                layoutId={`boat-image-${product.id}`}
                 key={selectedColor}
                 src={currentImage}
                 alt={product.name}
@@ -307,7 +308,10 @@ const ProductDetail = () => {
                 >
                   {product.name}
                 </h1>
-                <p className="text-xl lg:text-2xl text-foreground/60 font-sans font-light" style={{ lineHeight: 1.8 }}>
+                <p 
+                  className="text-lg lg:text-xl font-sans font-light leading-loose"
+                  style={{ color: '#E0E0E0' }}
+                >
                   {product.description}
                 </p>
               </motion.div>

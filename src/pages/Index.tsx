@@ -5,6 +5,7 @@ import AtelierSection from '@/components/AtelierSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
+import CustomCursor from '@/components/CustomCursor';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const Index = () => {
@@ -22,6 +23,9 @@ const Index = () => {
 
   return (
     <>
+      {/* Custom Cursor - Desktop Only */}
+      <CustomCursor />
+      
       {!isLoadingComplete && (
         <LoadingScreen onLoadingComplete={() => setIsLoadingComplete(true)} />
       )}
@@ -102,19 +106,29 @@ const Index = () => {
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
               className="text-center"
             >
               <h1 
-                className="display-hero text-foreground select-none px-4 tracking-[0.15em] md:tracking-tight"
+                className="display-hero text-foreground select-none px-4"
                 style={{
-                  fontSize: 'clamp(1.2rem, 4vw, 7rem)',
-                  lineHeight: 1.1,
+                  fontSize: 'clamp(2rem, 8vw, 9rem)',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 0.95,
                 }}
               >
-                LIBERDADE<br />
-                NÃO SE EXPLICA
+                LIBERDADE
               </h1>
+              
+              {/* Subtext - fade in delayed */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, delay: 1.5 }}
+                className="mt-6 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
+              >
+                Surfskis de Elite
+              </motion.p>
             </motion.div>
           </motion.div>
         </section>

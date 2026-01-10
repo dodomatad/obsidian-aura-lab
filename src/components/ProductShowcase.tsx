@@ -143,24 +143,24 @@ const ProductShowcase = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Dramatic lighting effect with enhanced depth */}
+      {/* Dramatic lighting effect with enhanced depth - charcoal to black gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 70%)
+            radial-gradient(ellipse 100% 80% at 50% 40%, rgba(34, 34, 34, 0.6) 0%, rgba(0, 0, 0, 0.95) 70%),
+            radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 60%)
           `,
         }}
       />
 
-      {/* Enhanced ambient glow behind products */}
+      {/* Enhanced ambient glow behind products - spotlight effect */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 70% 50% at 50% 55%, rgba(249, 115, 22, 0.03) 0%, transparent 50%),
-            radial-gradient(ellipse 80% 60% at 50% 50%, rgba(30, 50, 80, 0.15) 0%, transparent 60%)
+            radial-gradient(ellipse 60% 40% at 50% 50%, rgba(60, 70, 90, 0.25) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 35% at 50% 55%, rgba(249, 115, 22, 0.05) 0%, transparent 50%)
           `,
         }}
       />
@@ -220,33 +220,37 @@ const ProductShowcase = () => {
               }
             }}
           >
-            {/* Enhanced spotlight glow with depth */}
+            {/* CRITICAL: Enhanced spotlight glow - simulating studio lighting */}
             <motion.div
-              className="absolute inset-0 pointer-events-none"
+              className="absolute inset-0 pointer-events-none -z-10"
               animate={{
-                opacity: isHovered ? 0.5 : 0.3,
+                opacity: isHovered ? 0.7 : 0.5,
               }}
               transition={{ duration: 0.4 }}
               style={{
                 background: `
-                  radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
-                  radial-gradient(ellipse 60% 40% at 50% 60%, rgba(249, 115, 22, 0.08) 0%, transparent 40%)
+                  radial-gradient(ellipse 90% 70% at 50% 35%, rgba(50, 55, 65, 0.8) 0%, transparent 55%),
+                  radial-gradient(ellipse 70% 50% at 50% 45%, rgba(255, 255, 255, 0.08) 0%, transparent 45%),
+                  radial-gradient(ellipse 50% 30% at 50% 55%, rgba(249, 115, 22, 0.06) 0%, transparent 35%)
                 `,
-                filter: 'blur(40px)',
+                filter: 'blur(30px)',
               }}
             />
 
-            {/* Floor reflection / shadow for grounding */}
+            {/* CRITICAL: Floor reflection / drop shadow - makes boat "land" */}
             <div 
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[30%] pointer-events-none"
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-[40%] pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 70%)',
-                filter: 'blur(20px)',
-                transform: 'translateY(60%) scaleY(0.3)',
+                background: `
+                  radial-gradient(ellipse 100% 80% at 50% -10%, rgba(0,0,0,0.6) 0%, transparent 65%),
+                  radial-gradient(ellipse 80% 50% at 50% 10%, rgba(0,0,0,0.4) 0%, transparent 60%)
+                `,
+                filter: 'blur(25px)',
+                transform: 'translateY(75%) scaleY(0.35)',
               }}
             />
 
-            {/* Boat image with layoutId for shared element transition */}
+            {/* Boat image with enhanced shadows for depth */}
             <motion.img
               layoutId={`boat-image-${currentProduct.id}`}
               ref={(el) => { imageRefs.current[currentIndex] = el; }}
@@ -265,7 +269,11 @@ const ProductShowcase = () => {
                 layout: { duration: 0.6, ease: [0.32, 0.72, 0, 1] },
               }}
               style={{
-                filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.5)) drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
+                filter: `
+                  drop-shadow(0 50px 100px rgba(0,0,0,0.7)) 
+                  drop-shadow(0 25px 50px rgba(0,0,0,0.5))
+                  drop-shadow(0 10px 20px rgba(0,0,0,0.3))
+                `,
               }}
             />
 

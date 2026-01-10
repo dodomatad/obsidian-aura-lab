@@ -6,6 +6,7 @@ import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
+import ChampionSection from '@/components/ChampionSection';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const Index = () => {
@@ -132,6 +133,9 @@ const Index = () => {
             </motion.div>
           </motion.div>
         </section>
+
+        {/* Champion Journey Section - Storytelling */}
+        <ChampionSection />
 
         {/* Product Showcase - Editorial Layout with Scroll Snap */}
         <div id="modelos">

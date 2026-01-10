@@ -57,7 +57,7 @@ const Index = () => {
         <LoadingScreen onLoadingComplete={() => setIsLoadingComplete(true)} />
       )}
       
-      <div className="min-h-screen bg-background overflow-x-hidden">
+      <div className="min-h-screen bg-background overflow-x-hidden max-w-[100vw]">
         {/* Global Atmosphere Particles - Deep Sea Effect */}
         <AtmosphereParticles />
         {/* Glassmorphism Navigation - Desktop Only now, Mobile uses Dock */}
@@ -113,8 +113,16 @@ const Index = () => {
             {/* Fallback gradient - also serves as static background on mobile */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#021019] via-[#010810] to-[#000000]" />
             
-            {/* Vimeo Video - Works on all devices now */}
+            {/* Vimeo Video - Works on all devices with proper fallback */}
             <div className="absolute inset-0">
+              {/* Static fallback image - loads instantly */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage: 'url("https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80")',
+                }}
+              />
+              {/* Video overlay */}
               <iframe 
                 src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"

@@ -107,8 +107,8 @@ const ChampionSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right: Text Content + Authority Badges - Better mobile padding */}
-        <div className="relative flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-24 py-12 md:py-16 lg:py-24">
+        {/* Right: Text Content + Authority Badges - Better mobile padding (24px = 1.5rem) */}
+        <div className="relative flex flex-col justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-12 md:py-16 lg:py-24">
           
           {/* Subtle background texture */}
           <div 

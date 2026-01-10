@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MessageCircle } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Ruler, Move, Scale, Weight, Layers, TrendingUp } from 'lucide-react';
 import CustomCursor from '@/components/CustomCursor';
 import MagneticButton from '@/components/MagneticButton';
 import { useTransition } from '@/context/TransitionContext';
@@ -96,13 +96,13 @@ const productsData: Record<string, ProductData> = {
   },
 };
 
-const specLabels: Record<string, string> = {
-  length: 'Comprimento',
-  beam: 'Boca',
-  weight: 'Peso',
-  capacity: 'Capacidade',
-  material: 'Material',
-  level: 'Nível',
+const specLabels: Record<string, { label: string; icon: typeof Ruler }> = {
+  length: { label: 'Comprimento', icon: Ruler },
+  beam: { label: 'Boca', icon: Move },
+  weight: { label: 'Peso', icon: Weight },
+  capacity: { label: 'Capacidade', icon: Scale },
+  material: { label: 'Material', icon: Layers },
+  level: { label: 'Nível', icon: TrendingUp },
 };
 
 const ProductDetail = () => {
@@ -161,6 +161,22 @@ const ProductDetail = () => {
         animate={{ opacity: isLoaded && !isExiting ? 1 : 0 }}
         transition={{ duration: isExiting ? 0.2 : 0.6 }}
       >
+        {/* Giant outline text background */}
+        <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
+          <span 
+            className="display-hero whitespace-nowrap select-none"
+            style={{
+              fontSize: 'clamp(20rem, 40vw, 50rem)',
+              color: 'transparent',
+              WebkitTextStroke: '2px rgba(255,255,255,0.03)',
+              letterSpacing: '-0.02em',
+              transform: 'rotate(-5deg)',
+            }}
+          >
+            {product.name}
+          </span>
+        </div>
+
         {/* Background texture - Carbon fiber pattern */}
         <div 
           className="fixed inset-0 pointer-events-none z-0"
@@ -283,30 +299,30 @@ const ProductDetail = () => {
             </motion.div>
           </div>
 
-          {/* Right: Scrollable content */}
-          <div className="lg:w-1/2 px-8 lg:px-16 py-24 lg:py-32">
+          {/* Right: Scrollable content - vertically centered */}
+          <div className="lg:w-1/2 px-8 lg:px-16 py-24 lg:py-32 flex items-center">
             <motion.div
-              className="max-w-xl"
+              className="max-w-xl w-full"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               {/* Header */}
-              <div className="mb-12">
-                <span className="text-xs tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium block mb-4">
+              <div className="mb-16">
+                <span className="text-sm tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium block mb-4">
                   {product.tagline}
                 </span>
                 <h1 
-                  className="display-hero text-foreground mb-6"
+                  className="display-hero text-foreground mb-8"
                   style={{
-                    fontSize: 'clamp(3.5rem, 10vw, 7rem)',
+                    fontSize: 'clamp(4rem, 12vw, 8rem)',
                     letterSpacing: '-0.03em',
-                    lineHeight: 0.95,
+                    lineHeight: 0.9,
                   }}
                 >
                   {product.name}
                 </h1>
-                <p className="text-xl text-foreground/60 leading-relaxed font-sans font-light">
+                <p className="text-xl lg:text-2xl text-foreground/60 leading-relaxed font-sans font-light">
                   {product.description}
                 </p>
               </div>
@@ -314,30 +330,40 @@ const ProductDetail = () => {
               {/* Divider with gradient */}
               <div className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent mb-12" />
 
-              {/* Specifications - Table Style */}
+              {/* Specifications - Grid of Cards */}
               <div className="mb-16">
                 <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-8">
                   Especificações Técnicas
                 </h2>
                 
-                {/* Specs table */}
-                <div className="border border-foreground/10 divide-y divide-foreground/10">
-                  {Object.entries(product.specs).map(([key, value], index) => (
-                    <motion.div
-                      key={key}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 + index * 0.05 }}
-                      className="flex items-center justify-between px-6 py-5 hover:bg-foreground/[0.02] transition-colors group"
-                    >
-                      <span className="text-sm tracking-[0.15em] uppercase text-foreground/40 font-sans group-hover:text-foreground/60 transition-colors">
-                        {specLabels[key] || key}
-                      </span>
-                      <span className="text-lg text-foreground font-sans font-medium">
-                        {value}
-                      </span>
-                    </motion.div>
-                  ))}
+                {/* Specs Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                  {Object.entries(product.specs).map(([key, value], index) => {
+                    const spec = specLabels[key];
+                    const IconComponent = spec?.icon || Ruler;
+                    return (
+                      <motion.div
+                        key={key}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + index * 0.08 }}
+                        className="group relative p-5 border border-foreground/10 hover:border-foreground/25 transition-all duration-300 hover:bg-foreground/[0.02]"
+                      >
+                        {/* Icon */}
+                        <IconComponent className="w-4 h-4 text-foreground/30 mb-3 group-hover:text-foreground/50 transition-colors" />
+                        
+                        {/* Value - Large */}
+                        <div className="text-xl lg:text-2xl font-sans font-semibold text-foreground mb-1 tracking-tight">
+                          {value}
+                        </div>
+                        
+                        {/* Label - Small */}
+                        <div className="text-[10px] tracking-[0.2em] uppercase text-foreground/40 group-hover:text-foreground/60 transition-colors">
+                          {spec?.label || key}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
 

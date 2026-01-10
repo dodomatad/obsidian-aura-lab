@@ -31,17 +31,24 @@ const ProductSlide = ({
   index,
   progress,
   onProductClick,
+  isTransitioning,
+  transitionProductId,
 }: { 
   product: Product; 
   index: number;
   progress: number;
   onProductClick: (product: Product, imageRef: HTMLImageElement) => void;
+  isTransitioning: boolean;
+  transitionProductId: string | null;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
 
   // Calculate parallax offset for the background text
   const textParallax = (progress - index) * 100;
+  
+  // Hide this specific image if it's the one being transitioned
+  const isThisProductTransitioning = isTransitioning && transitionProductId === product.id;
 
   return (
     <div 
@@ -113,12 +120,16 @@ const ProductSlide = ({
           }}
         />
 
-        {/* Boat image */}
+        {/* Boat image - hidden during transition to avoid duplication */}
         <motion.img
           ref={imageRef}
           src={product.image}
           alt={product.name}
           className="w-full h-auto object-contain relative z-10"
+          animate={{
+            opacity: isThisProductTransitioning ? 0 : 1,
+          }}
+          transition={{ duration: 0.1 }}
           style={{
             filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.6))',
           }}
@@ -179,7 +190,7 @@ const ProductSlide = ({
 const ProductShowcase = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { startTransition, saveScrollPosition } = useTransition();
+  const { startTransition, saveScrollPosition, isTransitioning, transitionData } = useTransition();
 
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
     // Save scroll position before transitioning
@@ -234,6 +245,7 @@ const ProductShowcase = () => {
         <div className="space-y-8 px-4">
           {products.map((product, index) => {
             const mobileImageRef = useRef<HTMLImageElement>(null);
+            const isThisMobileProductTransitioning = isTransitioning && transitionData?.productId === product.id;
             
             return (
               <motion.div
@@ -266,12 +278,16 @@ const ProductShowcase = () => {
                   </span>
                 </div>
 
-                {/* Boat */}
-                <img
+                {/* Boat - hidden during transition */}
+                <motion.img
                   ref={mobileImageRef}
                   src={product.image}
                   alt={product.name}
                   className="relative z-10 w-[85%] h-auto object-contain"
+                  animate={{
+                    opacity: isThisMobileProductTransitioning ? 0 : 1,
+                  }}
+                  transition={{ duration: 0.1 }}
                   style={{
                     filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.5))',
                   }}
@@ -324,6 +340,8 @@ const ProductShowcase = () => {
               index={index}
               progress={currentProgress}
               onProductClick={handleProductClick}
+              isTransitioning={isTransitioning}
+              transitionProductId={transitionData?.productId || null}
             />
           ))}
         </motion.div>

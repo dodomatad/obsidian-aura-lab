@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MessageCircle } from 'lucide-react';
 import CustomCursor from '@/components/CustomCursor';
 import MagneticButton from '@/components/MagneticButton';
+import { useTransition } from '@/context/TransitionContext';
 
 // Import all boat images
 import boatPono from '@/assets/boat-pono.png';
@@ -107,9 +108,11 @@ const specLabels: Record<string, string> = {
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { isTransitioning, justTransitioned } = useTransition();
   const [selectedColor, setSelectedColor] = useState<string>('default');
   const [isLoaded, setIsLoaded] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const [showBoatImage, setShowBoatImage] = useState(false);
 
   const product = id ? productsData[id] : null;
 
@@ -118,6 +121,17 @@ const ProductDetail = () => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
+
+  // Show the boat image after the transition animation completes
+  useEffect(() => {
+    if (justTransitioned || !isTransitioning) {
+      // Small delay to ensure smooth handoff from transition overlay
+      const timer = setTimeout(() => {
+        setShowBoatImage(true);
+      }, isTransitioning ? 0 : 400);
+      return () => clearTimeout(timer);
+    }
+  }, [justTransitioned, isTransitioning]);
 
   const handleBack = () => {
     setIsExiting(true);
@@ -238,15 +252,15 @@ const ProductDetail = () => {
                 }}
               />
 
-              {/* Boat image with color transition */}
+              {/* Boat image with color transition - hidden during transition to avoid duplication */}
               <motion.img
                 key={selectedColor}
                 src={currentImage}
                 alt={product.name}
                 className="w-full h-auto object-contain relative z-10"
-                initial={{ opacity: 0.5 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showBoatImage ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
                 style={{
                   filter: 'drop-shadow(0 60px 100px rgba(0,0,0,0.5))',
                 }}

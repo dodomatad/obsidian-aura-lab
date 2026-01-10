@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
@@ -8,11 +8,14 @@ import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
+import { useTransition } from '@/context/TransitionContext';
 
 const Index = () => {
-  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
+  const [isLoadingComplete, setIsLoadingComplete] = useState(hasSeenIntro);
   const { handleNavClick } = useSmoothScroll();
   const heroRef = useRef<HTMLDivElement>(null);
+  const hasRestoredScroll = useRef(false);
   
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -21,6 +24,24 @@ const Index = () => {
 
   // Hero text fades out on scroll, stays in place
   const heroTextOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  // Restore scroll position after coming back from product detail
+  useEffect(() => {
+    if (isLoadingComplete && !hasRestoredScroll.current) {
+      const savedPosition = getSavedScrollPosition();
+      if (savedPosition > 0) {
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          window.scrollTo(0, savedPosition);
+          clearScrollPosition();
+        });
+      }
+      hasRestoredScroll.current = true;
+    }
+  }, [isLoadingComplete, getSavedScrollPosition, clearScrollPosition]);
+
+  // Determine if we should skip animations (returning from product page)
+  const skipAnimations = hasSeenIntro;
 
   return (
     <>
@@ -36,9 +57,9 @@ const Index = () => {
         <AtmosphereParticles />
         {/* Glassmorphism Navigation - Futuristic HUD */}
         <motion.nav 
-          initial={{ opacity: 0, y: -20 }}
+          initial={skipAnimations ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={skipAnimations ? { duration: 0 } : { duration: 1, delay: 0.5 }}
           className="fixed top-0 left-0 right-0 md:top-4 md:left-8 md:right-8 z-50 flex justify-between items-center px-4 md:px-10 py-3 md:py-4 md:rounded-2xl"
           style={{
             background: 'rgba(255, 255, 255, 0.03)',
@@ -105,9 +126,9 @@ const Index = () => {
             style={{ opacity: heroTextOpacity }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={skipAnimations ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+              transition={skipAnimations ? { duration: 0 } : { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
               className="text-center"
             >
               <h1 
@@ -123,9 +144,9 @@ const Index = () => {
               
               {/* Subtext - fade in delayed */}
               <motion.p
-                initial={{ opacity: 0 }}
+                initial={skipAnimations ? { opacity: 1 } : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1.2, delay: 1.5 }}
+                transition={skipAnimations ? { duration: 0 } : { duration: 1.2, delay: 1.5 }}
                 className="mt-6 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
               >
                 Surfskis de Elite

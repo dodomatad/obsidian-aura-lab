@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MessageCircle } from 'lucide-react';
 import CustomCursor from '@/components/CustomCursor';
+import MagneticButton from '@/components/MagneticButton';
 
 // Import all boat images
 import boatPono from '@/assets/boat-pono.png';
@@ -99,6 +100,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState<string>('default');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   const product = id ? productsData[id] : null;
 
@@ -107,6 +109,14 @@ const ProductDetail = () => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleBack = () => {
+    setIsExiting(true);
+    // Quick exit transition
+    setTimeout(() => {
+      navigate('/');
+    }, 200);
+  };
 
   if (!product) {
     return (
@@ -125,20 +135,42 @@ const ProductDetail = () => {
       <motion.div 
         className="min-h-screen bg-background"
         initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.6 }}
+        animate={{ opacity: isLoaded && !isExiting ? 1 : 0 }}
+        transition={{ duration: isExiting ? 0.2 : 0.6 }}
       >
-        {/* Back button */}
-        <motion.button
-          onClick={() => navigate('/')}
-          className="fixed top-6 left-6 z-50 flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors group"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
+        {/* Magnetic Back button - Fixed top left */}
+        <MagneticButton
+          onClick={handleBack}
+          className="fixed top-6 left-6 z-50 cursor-pointer"
         >
-          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-xs tracking-[0.2em] uppercase">Voltar</span>
-        </motion.button>
+          <motion.div
+            className="flex items-center gap-3 px-5 py-3 rounded-full group"
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            whileHover={{ 
+              background: 'rgba(255, 255, 255, 0.1)',
+              scale: 1.02,
+            }}
+          >
+            <motion.div
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground/10"
+              whileHover={{ x: -3 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            >
+              <ArrowLeft className="w-4 h-4 text-foreground/80" />
+            </motion.div>
+            <span className="text-xs tracking-[0.2em] uppercase text-foreground/70 group-hover:text-foreground transition-colors">
+              Voltar
+            </span>
+          </motion.div>
+        </MagneticButton>
 
         {/* Main layout */}
         <div className="flex flex-col lg:flex-row min-h-screen">

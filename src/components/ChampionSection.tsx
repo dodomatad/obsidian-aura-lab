@@ -3,13 +3,12 @@ import { useRef } from 'react';
 import championImage from '@/assets/champion-silhouette.jpg';
 
 const achievements = [
-  { year: '2018', title: 'Campeão Nacional', location: 'Florianópolis' },
-  { year: '2019', title: 'Campeão Sul-Americano', location: 'Rio de Janeiro' },
-  { year: '2020', title: 'Bicampeão Nacional', location: 'Santos' },
-  { year: '2021', title: 'Campeão Mundial', location: 'Portugal' },
-  { year: '2022', title: 'Tricampeão Nacional', location: 'Recife' },
-  { year: '2023', title: 'Bicampeão Mundial', location: 'Austrália' },
-  { year: '2024', title: 'Tetracampeão Nacional', location: 'Vitória' },
+  { year: '1994', title: 'Pioneirismo Nacional', location: 'Início da Canoagem Oceânica no Brasil' },
+  { year: '2005', title: 'Tecnologia Hightec Line', location: 'Lançamento da Linha Premium' },
+  { year: '2010', title: 'Expansão Internacional', location: 'Exportação para América Latina' },
+  { year: '2015', title: 'Inovação em Carbono', location: 'Novos Processos de Fabricação' },
+  { year: '2020', title: 'Referência no Mercado', location: 'Líder em Surfskis de Elite' },
+  { year: '2024', title: '+30 Anos de História', location: 'Legado Consolidado' },
 ];
 
 const ChampionSection = () => {
@@ -82,13 +81,13 @@ const ChampionSection = () => {
             className="absolute bottom-12 left-8 z-30"
           >
             <span 
-              className="display-hero text-white/10"
+              className="display-hero text-orange/10"
               style={{ 
-                fontSize: 'clamp(8rem, 20vw, 16rem)',
+                fontSize: 'clamp(6rem, 16vw, 12rem)',
                 lineHeight: 0.8,
               }}
             >
-              7×
+              30+
             </span>
           </motion.div>
         </motion.div>
@@ -120,35 +119,43 @@ const ChampionSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex items-center gap-4 mb-8"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
-              <span className="text-[11px] tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
+              <div className="w-16 h-px bg-gradient-to-r from-orange to-transparent" />
+              <span className="text-[11px] tracking-[0.35em] uppercase text-orange font-sans font-medium">
                 A Origem
               </span>
             </motion.div>
 
             {/* Title */}
             <h2 
-              className="display-hero text-foreground mb-10"
+              className="display-hero text-foreground mb-4"
               style={{
-                fontSize: 'clamp(3rem, 6vw, 5.5rem)',
+                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
                 letterSpacing: '-0.03em',
                 lineHeight: 0.95,
               }}
             >
-              Mente de<br />
-              <span className="text-foreground/60">Campeão</span>
+              O Legado<br />
+              <span className="text-orange">Fábio Paiva</span>
             </h2>
+            
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl text-foreground/50 font-sans font-light mb-10 tracking-wide">
+              O Introdutor da Canoagem Oceânica no Brasil
+            </p>
 
             {/* Manifesto text */}
             <div className="space-y-8 mb-16">
-              <p className="text-xl md:text-2xl text-foreground/70 leading-relaxed font-sans font-light">
-                A Opium nasceu da exigência. Criada por quem venceu o mar <span className="text-foreground font-medium">7 vezes</span>.
+              <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
+                Há mais de <span className="text-orange font-medium">30 anos</span> fabricando a história do mar. Fábio Paiva trouxe a canoagem oceânica para o país e transformou o esporte.
+              </p>
+              <p className="text-lg md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
+                Nossos barcos carregam o DNA de quem vive, respira e vence no mar.
               </p>
               <p 
-                className="text-3xl md:text-4xl text-foreground font-display italic"
-                style={{ letterSpacing: '0.01em', lineHeight: 1.2 }}
+                className="text-2xl md:text-3xl text-foreground font-display italic"
+                style={{ letterSpacing: '0.01em', lineHeight: 1.3 }}
               >
-                "Disciplina é a nossa liberdade."
+                "Não vendemos apenas barcos, entregamos a evolução da espécie."
               </p>
             </div>
 

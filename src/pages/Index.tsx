@@ -8,7 +8,7 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
-import MobileDock from '@/components/MobileDock';
+
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useLenisScroll } from '@/hooks/useLenisScroll';
@@ -115,8 +115,6 @@ const Index = () => {
           <MobileMenu />
         </motion.nav>
 
-        {/* Mobile Dock - Bottom Navigation */}
-        <MobileDock />
 
         {/* Hero Section - Compact on mobile to show content below */}
         <section ref={heroRef} id="hero" className="relative h-[85vh] md:h-screen w-full overflow-hidden">
@@ -246,7 +244,7 @@ const Index = () => {
         <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
-        <footer className="w-full px-6 md:px-16 py-16 md:py-20 pb-32 md:pb-20 border-t border-border/50">
+        <footer className="w-full px-6 md:px-16 py-16 md:py-20 border-t border-border/50">
           <div className="max-w-7xl mx-auto">
             
             {/* Authority Badges - Social Proof */}

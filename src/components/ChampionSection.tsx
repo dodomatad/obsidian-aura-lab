@@ -157,13 +157,17 @@ const ChampionSection = () => {
               Introdutor da Canoagem Oceânica no Brasil
             </p>
 
-            {/* Manifesto text */}
+            {/* Manifesto text - Provisional, will be edited */}
             <div className="space-y-4 md:space-y-6 mb-10 md:mb-12">
               <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                 Há mais de <span className="text-foreground font-medium">30 anos</span>, a Opium nasceu de uma garagem em Santos para dominar o mar.
               </p>
               <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                 Fábio Paiva, <span className="text-foreground font-medium">14 anos invicto</span> e condutor da Tocha Olímpica (2016) e Pan-Americana (2007), transformou a experiência náutica no país.
+              </p>
+              <p className="text-base md:text-lg text-foreground/60 leading-relaxed font-sans font-light italic">
+                {/* Placeholder for additional bio text */}
+                "O mar é o único lugar onde a liberdade é completa. Cada embarcação que construímos carrega essa filosofia."
               </p>
             </div>
 
@@ -177,7 +181,7 @@ const ChampionSection = () => {
             />
 
             {/* Authority Badges Grid */}
-            <div className="grid grid-cols-2 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-16">
               {authorityBadges.map((badge, index) => (
                 <motion.div
                   key={badge.title}
@@ -206,6 +210,63 @@ const ChampionSection = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Galeria de Conquistas - Placeholder Grid for Medals */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              {/* Section label */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-px bg-gradient-to-r from-orange to-transparent" />
+                <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
+                  Conquistas
+                </span>
+              </div>
+
+              <h3 
+                className="text-lg md:text-xl font-medium text-foreground mb-6"
+                style={{ letterSpacing: '0.02em' }}
+              >
+                Galeria de Conquistas<span className="text-orange">.</span>
+              </h3>
+
+              {/* Medal Grid Placeholders */}
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+                {[...Array(8)].map((_, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.7 + index * 0.05 }}
+                    className="aspect-square relative group cursor-pointer"
+                  >
+                    {/* Placeholder box */}
+                    <div 
+                      className="absolute inset-0 border border-dashed border-foreground/20 group-hover:border-orange/40 bg-foreground/[0.02] group-hover:bg-foreground/[0.05] transition-all duration-300 flex items-center justify-center"
+                    >
+                      {/* Trophy icon placeholder */}
+                      <Trophy className="w-6 h-6 md:w-8 md:h-8 text-foreground/15 group-hover:text-orange/30 transition-colors duration-300" />
+                    </div>
+                    
+                    {/* Hover tooltip placeholder */}
+                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                      <span className="text-[8px] md:text-[9px] tracking-wider uppercase text-foreground/40">
+                        Medalha {index + 1}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Coming soon note */}
+              <p className="text-[10px] md:text-xs text-foreground/30 mt-6 text-center italic">
+                Galeria em construção — fotos e descrições em breve
+              </p>
+            </motion.div>
           </motion.div>
         </div>
       </div>

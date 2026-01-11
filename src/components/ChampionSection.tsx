@@ -233,8 +233,8 @@ const ChampionSection = () => {
                 Galeria de Conquistas<span className="text-orange">.</span>
               </h3>
 
-              {/* Medal Grid Placeholders */}
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+              {/* Medal Grid - Enhanced visibility */}
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
                 {[...Array(8)].map((_, index) => (
                   <motion.div
                     key={index}
@@ -244,17 +244,20 @@ const ChampionSection = () => {
                     transition={{ duration: 0.4, delay: 0.7 + index * 0.05 }}
                     className="aspect-square relative group cursor-pointer"
                   >
-                    {/* Placeholder box */}
+                    {/* Enhanced placeholder box with better visibility */}
                     <div 
-                      className="absolute inset-0 border border-dashed border-foreground/20 group-hover:border-orange/40 bg-foreground/[0.02] group-hover:bg-foreground/[0.05] transition-all duration-300 flex items-center justify-center"
+                      className="absolute inset-0 border border-foreground/30 group-hover:border-orange/60 bg-foreground/[0.06] group-hover:bg-foreground/[0.12] transition-all duration-300 flex items-center justify-center"
+                      style={{
+                        background: 'linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+                      }}
                     >
-                      {/* Trophy icon placeholder */}
-                      <Trophy className="w-6 h-6 md:w-8 md:h-8 text-foreground/15 group-hover:text-orange/30 transition-colors duration-300" />
+                      {/* Trophy icon - Enhanced contrast */}
+                      <Trophy className="w-7 h-7 md:w-9 md:h-9 text-orange/40 group-hover:text-orange/70 transition-colors duration-300" />
                     </div>
                     
-                    {/* Hover tooltip placeholder */}
+                    {/* Hover tooltip */}
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                      <span className="text-[8px] md:text-[9px] tracking-wider uppercase text-foreground/40">
+                      <span className="text-[9px] md:text-[10px] tracking-wider uppercase text-foreground/50">
                         Medalha {index + 1}
                       </span>
                     </div>
@@ -262,9 +265,9 @@ const ChampionSection = () => {
                 ))}
               </div>
 
-              {/* Coming soon note */}
-              <p className="text-[10px] md:text-xs text-foreground/30 mt-6 text-center italic">
-                Galeria em construção — fotos e descrições em breve
+              {/* Coming soon note - Enhanced */}
+              <p className="text-xs md:text-sm text-foreground/50 mt-8 text-center font-sans">
+                ✨ Galeria em construção — fotos e descrições em breve
               </p>
             </motion.div>
           </motion.div>

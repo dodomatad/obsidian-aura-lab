@@ -104,11 +104,12 @@ const Hero3DCarousel = () => {
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
   // Optimized variants - reduced transform complexity
+  // Smooth slide animation with proper easing - fixes "snap" effect
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '80%' : '-80%',
+      x: direction > 0 ? '100%' : '-100%',
       opacity: 0,
-      scale: 0.85,
+      scale: 0.9,
     }),
     center: {
       x: 0,
@@ -116,10 +117,16 @@ const Hero3DCarousel = () => {
       scale: 1,
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? '-80%' : '80%',
+      x: direction > 0 ? '-100%' : '100%',
       opacity: 0,
-      scale: 0.85,
+      scale: 0.9,
     }),
+  };
+
+  // Smooth bezier curve for luxury feel
+  const smoothTransition = {
+    duration: 0.6,
+    ease: [0.25, 1, 0.5, 1] as const, // Custom bezier for smooth slide
   };
 
   const textVariants = {
@@ -220,7 +227,7 @@ const Hero3DCarousel = () => {
         dragElastic={0.1}
         onDragEnd={handleDragEnd}
       >
-        <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence mode="popLayout" custom={direction}>
           <motion.div
             key={currentProduct.id}
             custom={direction}
@@ -228,7 +235,7 @@ const Hero3DCarousel = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+            transition={smoothTransition}
             className="absolute w-[85%] md:w-[55%] max-w-3xl cursor-pointer"
             onClick={() => {
               const currentImageRef = imageRefs.current[currentIndex];
@@ -431,7 +438,7 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7 }}
-      className="relative py-14 md:py-20 overflow-hidden"
+      className="relative py-20 md:py-32 overflow-hidden"
     >
       {/* Subtle background */}
       <div 
@@ -507,7 +514,7 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="flex-shrink-0 w-[70vw] sm:w-[45vw] md:w-[30vw] lg:w-[24vw] max-w-[350px] group cursor-pointer"
+      className="flex-shrink-0 w-[80vw] sm:w-[60vw] md:w-[35vw] lg:w-[28vw] max-w-[400px] group cursor-pointer"
       style={{ scrollSnapAlign: 'start' }}
       whileHover={isMobile ? undefined : { y: -8 }}
       onClick={() => {

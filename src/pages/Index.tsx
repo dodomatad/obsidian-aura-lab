@@ -9,10 +9,12 @@ import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
 import MobileDock from '@/components/MobileDock';
+import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ChevronDown } from 'lucide-react';
+import opiumLogo from '@/assets/opium-logo.png';
 
 const Index = () => {
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
@@ -95,6 +97,9 @@ const Index = () => {
               Ateliê
             </a>
           </div>
+
+          {/* Mobile Hamburger Menu */}
+          <MobileMenu />
         </motion.nav>
 
         {/* Mobile Dock - Bottom Navigation */}
@@ -138,34 +143,33 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           </div>
 
-          {/* Hero Text - Positioned higher on mobile to leave room for scroll indicator */}
+          {/* Hero Logo - Centered Opium Logo */}
           <motion.div 
             className="absolute inset-0 flex items-center justify-center z-10 px-6 pb-24 md:pb-0"
             style={{ opacity: heroTextOpacity }}
           >
             <motion.div
-              initial={skipAnimations ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={skipAnimations ? { duration: 0 } : { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+              initial={skipAnimations ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={skipAnimations ? { duration: 0 } : { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
               className="text-center"
             >
-              <h1 
-                className="display-hero text-foreground select-none"
+              {/* Logo Image - PNG transparent ready */}
+              <img 
+                src={opiumLogo}
+                alt="Opium Surfskis"
+                className="w-[200px] md:w-[320px] lg:w-[400px] h-auto mx-auto drop-shadow-2xl"
                 style={{
-                  fontSize: 'clamp(2.5rem, 12vw, 9rem)',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 0.95,
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
                 }}
-              >
-                LIBERDADE<span className="text-orange">.</span>
-              </h1>
+              />
               
               {/* Subtext - fade in delayed */}
               <motion.p
                 initial={skipAnimations ? { opacity: 1 } : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={skipAnimations ? { duration: 0 } : { duration: 1.2, delay: 1.5 }}
-                className="mt-4 md:mt-6 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
+                className="mt-6 md:mt-8 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
               >
                 Surfskis de Elite
               </motion.p>
@@ -191,9 +195,6 @@ const Index = () => {
           </motion.div>
         </section>
 
-        {/* Champion Journey Section - Storytelling */}
-        <ChampionSection />
-
         {/* Product Showcase - Editorial Layout with Scroll Snap */}
         <div id="modelos">
           <ProductShowcase />
@@ -206,6 +207,11 @@ const Index = () => {
 
         {/* Gear & Tech Section - Accessories */}
         <GearTechSection />
+
+        {/* Champion Journey Section - Storytelling (moved below accessories) */}
+        <div id="champion">
+          <ChampionSection />
+        </div>
 
         {/* Ambient Audio Player */}
         <AmbientAudioPlayer />

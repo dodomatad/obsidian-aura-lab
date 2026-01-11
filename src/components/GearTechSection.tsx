@@ -107,17 +107,21 @@ const GearTechSection = () => {
         {/* Gradient fade right */}
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Scrolling container */}
+        {/* Scrolling container with snap */}
         <motion.div
-          className="flex gap-4 md:gap-6 py-4 px-6"
+          className="flex gap-5 md:gap-6 py-4 px-6 overflow-x-auto md:overflow-visible"
+          style={{
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+          }}
           animate={{
-            x: [0, -1200],
+            x: [0, -1400],
           }}
           transition={{
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: isMobile ? 40 : 30,
+              duration: isMobile ? 50 : 35,
               ease: "linear",
             },
           }}
@@ -129,7 +133,8 @@ const GearTechSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="flex-shrink-0 w-[80vw] md:w-80 group"
+              className="flex-shrink-0 w-[85vw] md:w-80 group"
+              style={{ scrollSnapAlign: 'center' }}
               whileHover={isMobile ? undefined : { y: -8 }}
             >
               <div 

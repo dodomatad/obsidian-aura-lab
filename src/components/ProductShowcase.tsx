@@ -514,8 +514,8 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="flex-shrink-0 w-[80vw] sm:w-[60vw] md:w-[35vw] lg:w-[28vw] max-w-[400px] group cursor-pointer"
-      style={{ scrollSnapAlign: 'start' }}
+      className="flex-shrink-0 w-[85vw] sm:w-[65vw] md:w-[38vw] lg:w-[30vw] max-w-[420px] group cursor-pointer"
+      style={{ scrollSnapAlign: 'center' }}
       whileHover={isMobile ? undefined : { y: -8 }}
       onClick={() => {
         if (imageRef.current) onProductClick(product, imageRef.current);

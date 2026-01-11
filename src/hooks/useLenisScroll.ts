@@ -6,25 +6,31 @@ export const useLenisScroll = () => {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      // Performance-optimized settings
+      lerp: 0.1, // More responsive (0.1 = 10% per frame)
+      duration: 1.0, // Slightly faster
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      wheelMultiplier: 0.8, // Reduced for smoother feel
+      touchMultiplier: 1.5, // Optimized for mobile
     });
 
     lenisRef.current = lenis;
 
+    // Use a more performant RAF loop
+    let animationId: number;
+    
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      animationId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    animationId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(animationId);
       lenis.destroy();
     };
   }, []);

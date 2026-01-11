@@ -130,26 +130,27 @@ const Index = () => {
             {/* Fallback gradient - also serves as static background on mobile */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#021019] via-[#010810] to-[#000000]" />
             
-            {/* Vimeo Video - Works on all devices with proper fallback */}
-            <div className="absolute inset-0">
-              {/* Static fallback image - loads instantly */}
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: 'url("https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80")',
-                }}
-              />
-              {/* Video overlay */}
+            {/* Static fallback image - always visible, loads instantly */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: 'url("https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80")',
+                filter: 'brightness(0.7)',
+              }}
+            />
+            
+            {/* Video - ONLY on desktop (>768px) to save mobile battery/performance */}
+            {!isMobile && (
               <iframe 
                 src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
-                style={{ filter: isMobile ? 'brightness(0.7)' : 'brightness(0.85)' }}
+                style={{ filter: 'brightness(0.85)' }}
                 frameBorder="0"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                allowFullScreen
+                loading="lazy"
                 title="Hero Background Video"
               />
-            </div>
+            )}
             
             {/* Cinematic Overlay - Gradient for atmosphere and readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />

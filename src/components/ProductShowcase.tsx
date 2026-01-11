@@ -1,5 +1,5 @@
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -28,6 +28,21 @@ const canoaProducts: Product[] = [
   { id: 'oc1-touring', name: 'OC1 TOURING', tagline: 'Aventura no Mar', image: boatSurfski },
   { id: 'oc6', name: 'OC6', tagline: 'Espírito de Equipe', image: boatPono },
 ];
+
+// ============================================
+// LOADING SKELETON - While carousel loads
+// ============================================
+const CarouselSkeleton = () => (
+  <div className="relative min-h-screen w-full flex items-center justify-center">
+    <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+    <motion.div
+      className="w-[60%] max-w-2xl h-48 rounded-lg"
+      style={{ background: 'rgba(255,255,255,0.03)' }}
+      animate={{ opacity: [0.3, 0.6, 0.3] }}
+      transition={{ duration: 1.5, repeat: Infinity }}
+    />
+  </div>
+);
 
 // ============================================
 // HERO 3D CAROUSEL - For Surfski de Elite
@@ -79,7 +94,7 @@ const Hero3DCarousel = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobile, nextSlide, prevSlide]);
 
-  // Swipe handlers
+  // Swipe handlers - optimized for mobile
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const swipeThreshold = 50;
     if (info.offset.x > swipeThreshold) prevSlide();
@@ -88,90 +103,82 @@ const Hero3DCarousel = () => {
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
+  // Optimized variants - reduced transform complexity
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
+      x: direction > 0 ? '80%' : '-80%',
       opacity: 0,
-      scale: 0.8,
-      rotateY: direction > 0 ? 25 : -25,
+      scale: 0.85,
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
-      rotateY: 0,
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? '-100%' : '100%',
+      x: direction > 0 ? '-80%' : '80%',
       opacity: 0,
-      scale: 0.8,
-      rotateY: direction > 0 ? -25 : 25,
+      scale: 0.85,
     }),
   };
 
   const textVariants = {
-    enter: (direction: number) => ({ x: direction > 0 ? 300 : -300, opacity: 0 }),
+    enter: (direction: number) => ({ x: direction > 0 ? 200 : -200, opacity: 0 }),
     center: { x: 0, opacity: 1 },
-    exit: (direction: number) => ({ x: direction > 0 ? -300 : 300, opacity: 0 }),
+    exit: (direction: number) => ({ x: direction > 0 ? -200 : 200, opacity: 0 }),
   };
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Noise texture overlay */}
+      {/* Noise texture overlay - optimized */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* Dramatic charcoal-to-black gradient */}
+      {/* Dramatic gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 120% 100% at 50% 30%, rgba(25, 30, 40, 0.7) 0%, rgba(0, 0, 0, 0.98) 60%),
-            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 50%)
+            radial-gradient(ellipse 100% 80% at 50% 35%, rgba(30, 35, 50, 0.6) 0%, rgba(0, 0, 0, 0.97) 65%),
+            radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 45%)
           `,
         }}
       />
 
-      {/* Animated spotlight behind boat */}
+      {/* Animated spotlight - reduced animation complexity */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"
-        animate={{
-          opacity: [0.4, 0.6, 0.4],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        animate={{ opacity: [0.35, 0.5, 0.35] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           background: `
-            radial-gradient(ellipse 70% 50% at 50% 45%, rgba(60, 80, 120, 0.35) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 35% at 50% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 45%)
+            radial-gradient(ellipse 65% 45% at 50% 45%, rgba(50, 70, 110, 0.3) 0%, transparent 50%),
+            radial-gradient(ellipse 45% 30% at 50% 50%, rgba(249, 115, 22, 0.06) 0%, transparent 40%)
           `,
         }}
       />
 
       {/* Section Header */}
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative z-20 px-6 md:px-16 pt-12 md:pt-20"
+        transition={{ duration: 0.7 }}
+        className="relative z-20 px-6 md:px-16 pt-10 md:pt-16"
       >
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 md:w-12 h-px bg-gradient-to-r from-orange to-transparent" />
-          <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-orange/80 font-sans font-medium">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-8 md:w-10 h-px bg-gradient-to-r from-orange to-transparent" />
+          <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
             Performance
           </span>
         </div>
         <h2 
           className="display-hero text-foreground"
-          style={{ fontSize: 'clamp(1.75rem, 5vw, 3.5rem)', letterSpacing: '-0.02em' }}
+          style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
         >
           Surfski de Elite<span className="text-orange">.</span>
         </h2>
@@ -187,12 +194,12 @@ const Hero3DCarousel = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+            transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
             className="display-hero whitespace-nowrap"
             style={{
-              fontSize: isMobile ? 'clamp(5rem, 20vw, 9rem)' : 'clamp(14rem, 30vw, 36rem)',
+              fontSize: isMobile ? 'clamp(4.5rem, 18vw, 8rem)' : 'clamp(12rem, 26vw, 30rem)',
               color: 'transparent',
-              WebkitTextStroke: '1px rgba(255,255,255,0.025)',
+              WebkitTextStroke: '1px rgba(255,255,255,0.02)',
               letterSpacing: '-0.04em',
               lineHeight: 1,
             }}
@@ -204,13 +211,13 @@ const Hero3DCarousel = () => {
 
       {/* 3D Boat Carousel */}
       <motion.div 
-        className="relative z-10 h-[55vh] md:h-[60vh] flex items-center justify-center mt-4"
-        style={{ touchAction: 'pan-y', perspective: 1200 }}
+        className="relative z-10 h-[52vh] md:h-[58vh] flex items-center justify-center mt-2"
+        style={{ touchAction: 'pan-y' }}
         onMouseEnter={() => !isMobile && setIsHovered(true)}
         onMouseLeave={() => !isMobile && setIsHovered(false)}
         drag={isMobile ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.12}
+        dragElastic={0.1}
         onDragEnd={handleDragEnd}
       >
         <AnimatePresence mode="wait" custom={direction}>
@@ -221,66 +228,59 @@ const Hero3DCarousel = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.65, ease: [0.32, 0.72, 0, 1] }}
-            className="absolute w-[88%] md:w-[58%] max-w-3xl cursor-pointer"
-            style={{ transformStyle: 'preserve-3d' }}
+            transition={{ duration: 0.55, ease: [0.32, 0.72, 0, 1] }}
+            className="absolute w-[85%] md:w-[55%] max-w-3xl cursor-pointer"
             onClick={() => {
               const currentImageRef = imageRefs.current[currentIndex];
               if (currentImageRef) handleProductClick(currentProduct, currentImageRef);
             }}
           >
-            {/* Specular light glow */}
+            {/* Specular light glow - simplified */}
             <motion.div
               className="absolute inset-0 pointer-events-none -z-10"
-              animate={{ opacity: isHovered ? 0.9 : 0.6 }}
-              transition={{ duration: 0.4 }}
+              animate={{ opacity: isHovered ? 0.8 : 0.5 }}
+              transition={{ duration: 0.3 }}
               style={{
                 background: `
-                  radial-gradient(ellipse 100% 80% at 50% 30%, rgba(70, 90, 130, 0.9) 0%, transparent 50%),
-                  radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
-                  radial-gradient(ellipse 60% 40% at 50% 55%, rgba(249, 115, 22, 0.1) 0%, transparent 35%)
+                  radial-gradient(ellipse 90% 70% at 50% 35%, rgba(60, 80, 120, 0.7) 0%, transparent 45%),
+                  radial-gradient(ellipse 70% 50% at 50% 45%, rgba(255, 255, 255, 0.08) 0%, transparent 35%)
                 `,
-                filter: 'blur(50px)',
+                filter: 'blur(45px)',
               }}
             />
 
-            {/* Floor shadow / reflection */}
+            {/* Floor shadow */}
             <div 
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100%] h-[50%] pointer-events-none"
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%] h-[45%] pointer-events-none"
               style={{
-                background: `
-                  radial-gradient(ellipse 100% 90% at 50% -20%, rgba(0,0,0,0.8) 0%, transparent 60%),
-                  radial-gradient(ellipse 70% 50% at 50% 10%, rgba(0,0,0,0.5) 0%, transparent 55%)
-                `,
-                filter: 'blur(35px)',
-                transform: 'translateY(85%) scaleY(0.45)',
+                background: 'radial-gradient(ellipse 100% 80% at 50% -15%, rgba(0,0,0,0.7) 0%, transparent 55%)',
+                filter: 'blur(30px)',
+                transform: 'translateY(80%) scaleY(0.4)',
               }}
             />
 
-            {/* Boat image with 3D transform */}
+            {/* Boat image - lazy loaded */}
             <motion.img
               layoutId={`boat-image-${currentProduct.id}`}
               ref={(el) => { imageRefs.current[currentIndex] = el; }}
               src={currentProduct.image}
               alt={currentProduct.name}
+              loading="lazy"
               className="w-full h-auto object-contain relative z-10 pointer-events-none"
               animate={{
                 opacity: isThisProductTransitioning ? 0 : 1,
-                y: isHovered && !isMobile ? -20 : 0,
-                scale: isHovered && !isMobile ? 1.06 : 1,
-                rotateX: isHovered && !isMobile ? 2 : 0,
+                y: isHovered && !isMobile ? -15 : 0,
+                scale: isHovered && !isMobile ? 1.04 : 1,
               }}
               transition={{ 
                 opacity: { duration: 0.1 },
-                y: { type: 'spring', stiffness: 150, damping: 18 },
-                scale: { type: 'spring', stiffness: 150, damping: 18 },
-                rotateX: { type: 'spring', stiffness: 150, damping: 18 },
+                y: { type: 'spring', stiffness: 120, damping: 15 },
+                scale: { type: 'spring', stiffness: 120, damping: 15 },
               }}
               style={{
                 filter: `
-                  drop-shadow(0 70px 140px rgba(0,0,0,0.85)) 
-                  drop-shadow(0 35px 70px rgba(0,0,0,0.65))
-                  drop-shadow(0 15px 30px rgba(0,0,0,0.45))
+                  drop-shadow(0 50px 100px rgba(0,0,0,0.75)) 
+                  drop-shadow(0 25px 50px rgba(0,0,0,0.55))
                 `,
               }}
             />
@@ -288,25 +288,25 @@ const Hero3DCarousel = () => {
             {/* Mobile swipe hint */}
             {isMobile && (
               <motion.div
-                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-8 pointer-events-none flex items-center gap-3"
+                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-6 pointer-events-none flex items-center gap-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: 0.6 }}
               >
-                <motion.span animate={{ x: [-6, 6, -6] }} transition={{ duration: 1.3, repeat: Infinity }} className="text-foreground/50 text-xl">←</motion.span>
-                <span className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium">Deslize</span>
-                <motion.span animate={{ x: [6, -6, 6] }} transition={{ duration: 1.3, repeat: Infinity }} className="text-foreground/50 text-xl">→</motion.span>
+                <motion.span animate={{ x: [-4, 4, -4] }} transition={{ duration: 1.2, repeat: Infinity }} className="text-foreground/45 text-lg">←</motion.span>
+                <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/45 font-sans">Deslize</span>
+                <motion.span animate={{ x: [4, -4, 4] }} transition={{ duration: 1.2, repeat: Infinity }} className="text-foreground/45 text-lg">→</motion.span>
               </motion.div>
             )}
 
             {/* Desktop hover hint */}
             {!isMobile && (
               <motion.div
-                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-12 pointer-events-none"
-                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
-                transition={{ duration: 0.3 }}
+                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-10 pointer-events-none"
+                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 8 }}
+                transition={{ duration: 0.25 }}
               >
-                <span className="text-[10px] tracking-[0.4em] uppercase text-foreground/50 font-sans">Clique para explorar</span>
+                <span className="text-[10px] tracking-[0.35em] uppercase text-foreground/45 font-sans">Clique para explorar</span>
               </motion.div>
             )}
           </motion.div>
@@ -318,49 +318,47 @@ const Hero3DCarousel = () => {
         <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-6 md:px-12 z-30 pointer-events-none">
           <motion.button
             onClick={prevSlide}
-            className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center group"
+            className="pointer-events-auto w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center group"
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+              background: 'rgba(255, 255, 255, 0.025)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
             }}
-            whileHover={{ scale: 1.1, background: 'rgba(255, 255, 255, 0.08)' }}
+            whileHover={{ scale: 1.08, background: 'rgba(255, 255, 255, 0.06)' }}
             whileTap={{ scale: 0.95 }}
           >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground/40 group-hover:text-foreground transition-colors" />
+            <ChevronLeft className="w-5 h-5 text-foreground/35 group-hover:text-foreground/70 transition-colors" />
           </motion.button>
           <motion.button
             onClick={nextSlide}
-            className="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center group"
+            className="pointer-events-auto w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center group"
             style={{
-              background: 'rgba(255, 255, 255, 0.03)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+              background: 'rgba(255, 255, 255, 0.025)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
             }}
-            whileHover={{ scale: 1.1, background: 'rgba(255, 255, 255, 0.08)' }}
+            whileHover={{ scale: 1.08, background: 'rgba(255, 255, 255, 0.06)' }}
             whileTap={{ scale: 0.95 }}
           >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground/40 group-hover:text-foreground transition-colors" />
+            <ChevronRight className="w-5 h-5 text-foreground/35 group-hover:text-foreground/70 transition-colors" />
           </motion.button>
         </div>
       )}
 
       {/* Model name + tagline */}
-      <div className="absolute bottom-28 md:bottom-24 left-1/2 -translate-x-1/2 text-center z-20 px-6">
+      <div className="absolute bottom-24 md:bottom-20 left-1/2 -translate-x-1/2 text-center z-20 px-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -25 }}
-            transition={{ duration: 0.4 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.35 }}
           >
-            <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-foreground/40 font-sans block mb-2">
+            <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1.5">
               {currentProduct.tagline}
             </span>
-            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.75rem, 5vw, 3.5rem)', letterSpacing: '0.12em' }}>
+            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
               {currentProduct.name}
             </h3>
           </motion.div>
@@ -368,27 +366,27 @@ const Hero3DCarousel = () => {
       </div>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-10 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+      <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5 z-30">
         {surfskiProducts.map((product, index) => (
           <motion.button
             key={product.id}
             onClick={() => goToSlide(index)}
-            className="relative group p-3 md:p-2"
-            whileHover={{ scale: 1.2 }}
+            className="relative group p-2.5 md:p-2"
+            whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.9 }}
           >
             <motion.div
-              className={`w-2.5 h-2.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-orange' : 'bg-foreground/20 group-hover:bg-foreground/40'
+              className={`w-2 h-2 rounded-full transition-all duration-250 ${
+                index === currentIndex ? 'bg-orange' : 'bg-foreground/15 group-hover:bg-foreground/35'
               }`}
-              animate={{ scale: index === currentIndex ? 1.3 : 0.85 }}
+              animate={{ scale: index === currentIndex ? 1.2 : 0.8 }}
             />
             {index === currentIndex && (
               <motion.div
-                className="absolute inset-0 m-auto w-6 h-6 md:w-5 md:h-5 rounded-full border border-orange/40"
+                className="absolute inset-0 m-auto w-5 h-5 rounded-full border border-orange/35"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.25 }}
               />
             )}
           </motion.button>
@@ -399,7 +397,7 @@ const Hero3DCarousel = () => {
 };
 
 // ============================================
-// HORIZONTAL SLIDER - For Canoas
+// HORIZONTAL SLIDER - For Canoas (Lazy loaded)
 // ============================================
 interface SliderRowProps {
   title: string;
@@ -424,69 +422,61 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
   };
 
   const scrollRight = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
   };
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8 }}
-      className="relative py-16 md:py-24 overflow-hidden"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7 }}
+      className="relative py-14 md:py-20 overflow-hidden"
     >
       {/* Subtle background */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 80% 40% at 50% 0%, rgba(30, 35, 45, 0.4) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 30% at 50% 100%, rgba(249, 115, 22, 0.03) 0%, transparent 40%)
+            radial-gradient(ellipse 70% 35% at 50% 0%, rgba(25, 30, 40, 0.35) 0%, transparent 45%),
+            radial-gradient(ellipse 50% 25% at 50% 100%, rgba(249, 115, 22, 0.025) 0%, transparent 35%)
           `,
         }}
       />
 
-      {/* Noise overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
       {/* Header */}
-      <div className="relative z-10 px-6 md:px-16 mb-8 flex items-end justify-between">
+      <div className="relative z-10 px-6 md:px-16 mb-6 flex items-end justify-between">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-6 md:w-10 h-px bg-gradient-to-r from-orange to-transparent" />
-            <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-orange/80 font-sans font-medium">
+          <div className="flex items-center gap-2.5 mb-1.5">
+            <div className="w-6 md:w-8 h-px bg-gradient-to-r from-orange to-transparent" />
+            <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/75 font-sans font-medium">
               {subtitle}
             </span>
           </div>
-          <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.01em' }}>
+          <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.2rem)', letterSpacing: '-0.01em' }}>
             {title}<span className="text-orange">.</span>
           </h2>
         </motion.div>
 
-        <button onClick={scrollRight} className="hidden md:flex items-center gap-2 text-foreground/40 hover:text-foreground transition-colors group">
+        <button onClick={scrollRight} className="hidden md:flex items-center gap-1.5 text-foreground/35 hover:text-foreground/70 transition-colors group">
           <span className="text-xs tracking-wider uppercase">Ver Mais</span>
-          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
         </button>
       </div>
 
       {/* Horizontal Scroll */}
       <div className="relative">
-        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-6 md:w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
 
         <div
           ref={scrollRef}
-          className="flex gap-5 md:gap-6 overflow-x-auto scrollbar-hide px-6 md:px-16 pb-4"
+          className="flex gap-4 md:gap-5 overflow-x-auto scrollbar-hide px-6 md:px-16 pb-3"
           style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
         >
           {products.map((product, index) => (
@@ -513,47 +503,48 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="flex-shrink-0 w-[72vw] sm:w-[48vw] md:w-[32vw] lg:w-[26vw] max-w-[380px] group cursor-pointer"
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className="flex-shrink-0 w-[70vw] sm:w-[45vw] md:w-[30vw] lg:w-[24vw] max-w-[350px] group cursor-pointer"
       style={{ scrollSnapAlign: 'start' }}
-      whileHover={isMobile ? undefined : { y: -10 }}
+      whileHover={isMobile ? undefined : { y: -8 }}
       onClick={() => {
         if (imageRef.current) onProductClick(product, imageRef.current);
       }}
     >
       <div 
-        className="relative p-5 md:p-6 rounded-lg overflow-hidden h-full"
+        className="relative p-4 md:p-5 rounded-lg overflow-hidden h-full"
         style={{
-          background: 'rgba(255, 255, 255, 0.02)',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          background: 'rgba(255, 255, 255, 0.018)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.04)',
         }}
       >
         {/* Hover spotlight */}
         <div 
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-400"
           style={{
             background: `
-              radial-gradient(ellipse 90% 70% at 50% 25%, rgba(60, 80, 120, 0.5) 0%, transparent 45%),
-              radial-gradient(ellipse 70% 50% at 50% 50%, rgba(249, 115, 22, 0.06) 0%, transparent 35%)
+              radial-gradient(ellipse 85% 65% at 50% 25%, rgba(50, 70, 100, 0.4) 0%, transparent 40%),
+              radial-gradient(ellipse 65% 45% at 50% 50%, rgba(249, 115, 22, 0.05) 0%, transparent 30%)
             `,
           }}
         />
 
-        {/* Product Image */}
-        <div className="relative aspect-[16/10] mb-4 overflow-hidden">
+        {/* Product Image - lazy loaded */}
+        <div className="relative aspect-[16/10] mb-3 overflow-hidden">
           <img
             ref={imageRef}
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            className="w-full h-full object-contain transition-transform duration-400 group-hover:scale-104"
             style={{
               filter: `
-                drop-shadow(0 35px 70px rgba(0,0,0,0.6)) 
-                drop-shadow(0 18px 35px rgba(0,0,0,0.45))
+                drop-shadow(0 30px 60px rgba(0,0,0,0.55)) 
+                drop-shadow(0 15px 30px rgba(0,0,0,0.4))
               `,
             }}
           />
@@ -561,10 +552,10 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
 
         {/* Info */}
         <div className="relative z-10">
-          <span className="text-[9px] tracking-[0.3em] uppercase text-foreground/40 font-sans block mb-1">
+          <span className="text-[8px] md:text-[9px] tracking-[0.25em] uppercase text-foreground/35 font-sans block mb-0.5">
             {product.tagline}
           </span>
-          <h3 className="text-lg md:text-xl font-medium tracking-wider text-foreground">
+          <h3 className="text-base md:text-lg font-medium tracking-wider text-foreground">
             {product.name}
           </h3>
         </div>
@@ -574,7 +565,7 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
           className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange via-orange-glow to-transparent"
           initial={{ scaleX: 0 }}
           whileHover={{ scaleX: 1 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.35 }}
           style={{ originX: 0 }}
         />
       </div>
@@ -583,11 +574,11 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
 };
 
 // ============================================
-// MAIN COMPONENT
+// MAIN COMPONENT - With Suspense for lazy loading
 // ============================================
 const ProductShowcase = () => {
   return (
-    <>
+    <Suspense fallback={<CarouselSkeleton />}>
       {/* Hero 3D Carousel - Surfski de Elite */}
       <Hero3DCarousel />
 
@@ -597,7 +588,7 @@ const ProductShowcase = () => {
         subtitle="Tradição"
         products={canoaProducts}
       />
-    </>
+    </Suspense>
   );
 };
 

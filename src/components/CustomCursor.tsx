@@ -3,145 +3,123 @@ import { useEffect, useRef, useCallback } from 'react';
 const CustomCursor = () => {
   const mainCursorRef = useRef<HTMLDivElement>(null);
   const ringCursorRef = useRef<HTMLDivElement>(null);
-  const isVisibleRef = useRef(false);
-  const isHoveringRef = useRef(false);
-  const positionRef = useRef({ x: -100, y: -100 });
-  const targetRef = useRef({ x: -100, y: -100 });
+
+  // Instant main cursor position (no lag)
+  const lastMouseRef = useRef({ x: -100, y: -100 });
+
+  // Smoothed ring position (slight trailing, cheap)
+  const ringPosRef = useRef({ x: -100, y: -100 });
   const rafRef = useRef<number>();
 
-  // Direct DOM animation loop - no React state updates
-  const animate = useCallback(() => {
-    const lerp = 0.2; // Fast lerp for snappy response
-    
-    positionRef.current.x += (targetRef.current.x - positionRef.current.x) * lerp;
-    positionRef.current.y += (targetRef.current.y - positionRef.current.y) * lerp;
-
-    if (mainCursorRef.current) {
-      mainCursorRef.current.style.transform = 
-        `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0) translate(-50%, -50%)`;
-    }
-    
-    if (ringCursorRef.current) {
-      ringCursorRef.current.style.transform = 
-        `translate3d(${positionRef.current.x}px, ${positionRef.current.y}px, 0) translate(-50%, -50%)`;
-    }
-
-    rafRef.current = requestAnimationFrame(animate);
+  const setMainTransform = useCallback((x: number, y: number) => {
+    if (!mainCursorRef.current) return;
+    mainCursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
   }, []);
 
+  const setRingTransform = useCallback((x: number, y: number) => {
+    if (!ringCursorRef.current) return;
+    ringCursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+  }, []);
+
+  const animateRing = useCallback(() => {
+    const lerp = 0.35; // higher = less lag
+
+    ringPosRef.current.x += (lastMouseRef.current.x - ringPosRef.current.x) * lerp;
+    ringPosRef.current.y += (lastMouseRef.current.y - ringPosRef.current.y) * lerp;
+
+    setRingTransform(ringPosRef.current.x, ringPosRef.current.y);
+    rafRef.current = requestAnimationFrame(animateRing);
+  }, [setRingTransform]);
+
   useEffect(() => {
-    // Check if device has fine pointer (mouse)
     const hasMouse = window.matchMedia('(pointer: fine)').matches;
     if (!hasMouse) return;
-    
-    isVisibleRef.current = true;
-    if (mainCursorRef.current) {
-      mainCursorRef.current.style.opacity = '1';
-    }
 
-    // Direct mouse position update - no state
+    // Show
+    if (mainCursorRef.current) mainCursorRef.current.style.opacity = '1';
+    if (ringCursorRef.current) ringCursorRef.current.style.opacity = '1';
+
     const handleMouseMove = (e: MouseEvent) => {
-      targetRef.current.x = e.clientX;
-      targetRef.current.y = e.clientY;
+      const x = e.clientX;
+      const y = e.clientY;
+      lastMouseRef.current = { x, y };
+      // Main cursor is 1:1 with hand
+      setMainTransform(x, y);
     };
 
-    const handleMouseEnter = () => {
-      isVisibleRef.current = true;
-      if (mainCursorRef.current) {
-        mainCursorRef.current.style.opacity = '1';
-      }
-      if (ringCursorRef.current) {
-        ringCursorRef.current.style.opacity = '1';
-      }
+    // Hover detection should NOT run on every mousemove.
+    const isInteractiveEl = (el: HTMLElement | null) => {
+      if (!el) return false;
+      return (
+        el.tagName === 'A' ||
+        el.tagName === 'BUTTON' ||
+        !!el.closest('a') ||
+        !!el.closest('button') ||
+        !!el.closest('[role="button"]') ||
+        !!el.closest('[data-magnetic]') ||
+        el.classList.contains('cursor-pointer')
+      );
     };
 
-    const handleMouseLeave = () => {
-      isVisibleRef.current = false;
-      if (mainCursorRef.current) {
-        mainCursorRef.current.style.opacity = '0';
-      }
-      if (ringCursorRef.current) {
-        ringCursorRef.current.style.opacity = '0';
-      }
-    };
+    let hovering = false;
+    const applyHover = (next: boolean) => {
+      if (hovering === next) return;
+      hovering = next;
 
-    // Track hover on interactive elements - direct DOM update
-    const updateHoverState = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        target.closest('[role="button"]') ||
-        target.closest('[data-magnetic]') ||
-        target.classList.contains('cursor-pointer');
-      
-      const wasHovering = isHoveringRef.current;
-      isHoveringRef.current = !!isInteractive;
+      const innerDot = mainCursorRef.current?.firstChild as HTMLElement | null;
+      const ring = ringCursorRef.current?.firstChild as HTMLElement | null;
 
-      // Only update DOM when state changes
-      if (wasHovering !== isHoveringRef.current) {
-        if (mainCursorRef.current) {
-          const innerDot = mainCursorRef.current.firstChild as HTMLElement;
-          if (innerDot) {
-            innerDot.style.width = isHoveringRef.current ? '60px' : '12px';
-            innerDot.style.height = isHoveringRef.current ? '60px' : '12px';
-          }
-        }
-        if (ringCursorRef.current) {
-          const ring = ringCursorRef.current.firstChild as HTMLElement;
-          if (ring) {
-            ring.style.opacity = isHoveringRef.current ? '0.3' : '0';
-            ring.style.transform = isHoveringRef.current ? 'scale(1)' : 'scale(0.5)';
-          }
-        }
+      if (innerDot) {
+        innerDot.style.width = next ? '60px' : '12px';
+        innerDot.style.height = next ? '60px' : '12px';
+      }
+      if (ring) {
+        ring.style.opacity = next ? '0.3' : '0';
+        ring.style.transform = next ? 'scale(1)' : 'scale(0.5)';
       }
     };
 
-    // Start animation loop
-    rafRef.current = requestAnimationFrame(animate);
+    const handlePointerOver = (e: PointerEvent) => {
+      applyHover(isInteractiveEl(e.target as HTMLElement));
+    };
+
+    const handlePointerOut = (e: PointerEvent) => {
+      // When leaving an interactive element, check relatedTarget to avoid flicker
+      const nextTarget = (e.relatedTarget as HTMLElement) ?? null;
+      applyHover(isInteractiveEl(nextTarget));
+    };
+
+    rafRef.current = requestAnimationFrame(animateRing);
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('mousemove', updateHoverState, { passive: true });
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('pointerover', handlePointerOver, true);
+    document.addEventListener('pointerout', handlePointerOut, true);
 
-    // Hide default cursor
     document.body.style.cursor = 'none';
-    
     const style = document.createElement('style');
     style.textContent = `*, *::before, *::after { cursor: none !important; }`;
     document.head.appendChild(style);
 
     return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousemove', updateHoverState);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('pointerover', handlePointerOver, true);
+      document.removeEventListener('pointerout', handlePointerOut, true);
       document.body.style.cursor = '';
       style.remove();
     };
-  }, [animate]);
+  }, [animateRing, setMainTransform]);
 
-  // Check for mouse on mount
   if (typeof window !== 'undefined' && !window.matchMedia('(pointer: fine)').matches) {
     return null;
   }
 
   return (
     <>
-      {/* Main cursor - GPU accelerated */}
       <div
         ref={mainCursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
-        style={{
-          opacity: 0,
-          willChange: 'transform',
-        }}
+        style={{ opacity: 0, willChange: 'transform' }}
       >
         <div
           className="rounded-full"
@@ -150,28 +128,24 @@ const CustomCursor = () => {
             height: '12px',
             mixBlendMode: 'difference',
             backgroundColor: '#ffffff',
-            transition: 'width 0.15s ease-out, height 0.15s ease-out',
+            transition: 'width 0.12s ease-out, height 0.12s ease-out',
             willChange: 'width, height',
           }}
         />
       </div>
 
-      {/* Outer ring - GPU accelerated */}
       <div
         ref={ringCursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[9998]"
-        style={{
-          opacity: 0,
-          willChange: 'transform',
-        }}
+        style={{ opacity: 0, willChange: 'transform' }}
       >
-        <div 
+        <div
           className="w-20 h-20 rounded-full border border-white/30"
-          style={{ 
+          style={{
             mixBlendMode: 'difference',
             opacity: 0,
             transform: 'scale(0.5)',
-            transition: 'opacity 0.15s ease-out, transform 0.15s ease-out',
+            transition: 'opacity 0.12s ease-out, transform 0.12s ease-out',
             willChange: 'opacity, transform',
           }}
         />

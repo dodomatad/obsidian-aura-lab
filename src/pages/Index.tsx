@@ -82,8 +82,9 @@ const Index = () => {
           className="fixed top-0 left-0 right-0 md:top-4 md:left-8 md:right-8 z-50 flex justify-between items-center px-4 md:px-10 py-3 md:py-4 md:rounded-2xl"
           style={{
             background: 'rgba(255, 255, 255, 0.03)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
+            // Backdrop blur is expensive on mobile; keep it only on >= md.
+            backdropFilter: isMobile ? 'none' : 'blur(20px)',
+            WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
             border: 'none',
             borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
           }}

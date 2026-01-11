@@ -43,7 +43,7 @@ const GearTechSection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section className="relative py-28 md:py-40 overflow-hidden">
       {/* Background subtle gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
@@ -129,7 +129,7 @@ const GearTechSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="flex-shrink-0 w-64 md:w-80 group"
+              className="flex-shrink-0 w-[80vw] md:w-80 group"
               whileHover={isMobile ? undefined : { y: -8 }}
             >
               <div 

@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
-import GearTechSection from '@/components/GearTechSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
@@ -204,9 +203,6 @@ const Index = () => {
         <div id="atelier">
           <AtelierSection />
         </div>
-
-        {/* Gear & Tech Section - Accessories */}
-        <GearTechSection />
 
         {/* Champion Journey Section - Storytelling (moved below accessories) */}
         <div id="champion">

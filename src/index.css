@@ -95,6 +95,8 @@ html {
     min-height: 100vh;
     overflow-x: hidden;
     max-width: 100%;
+    /* GPU acceleration for smooth scroll */
+    will-change: scroll-position;
   }
 
   /* Subtle noise texture overlay */

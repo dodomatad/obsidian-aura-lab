@@ -209,10 +209,10 @@ const Hero3DCarousel = () => {
         </AnimatePresence>
       </div>
 
-      {/* 3D Boat Carousel */}
+      {/* 3D Boat Carousel - GPU accelerated */}
       <motion.div 
         className="relative z-10 h-[52vh] md:h-[58vh] flex items-center justify-center mt-2"
-        style={{ touchAction: 'pan-y' }}
+        style={{ touchAction: 'pan-y', willChange: 'transform' }}
         onMouseEnter={() => !isMobile && setIsHovered(true)}
         onMouseLeave={() => !isMobile && setIsHovered(false)}
         drag={isMobile ? "x" : false}
@@ -320,11 +320,11 @@ const Hero3DCarousel = () => {
             onClick={prevSlide}
             className="pointer-events-auto w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center group"
             style={{
-              background: 'rgba(255, 255, 255, 0.025)',
-              backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              willChange: 'transform',
             }}
-            whileHover={{ scale: 1.08, background: 'rgba(255, 255, 255, 0.06)' }}
+            whileHover={{ scale: 1.08, background: 'rgba(255, 255, 255, 0.08)' }}
             whileTap={{ scale: 0.95 }}
           >
             <ChevronLeft className="w-5 h-5 text-foreground/35 group-hover:text-foreground/70 transition-colors" />
@@ -333,11 +333,11 @@ const Hero3DCarousel = () => {
             onClick={nextSlide}
             className="pointer-events-auto w-11 h-11 md:w-13 md:h-13 rounded-full flex items-center justify-center group"
             style={{
-              background: 'rgba(255, 255, 255, 0.025)',
-              backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              willChange: 'transform',
             }}
-            whileHover={{ scale: 1.08, background: 'rgba(255, 255, 255, 0.06)' }}
+            whileHover={{ scale: 1.08, background: 'rgba(255, 255, 255, 0.08)' }}
             whileTap={{ scale: 0.95 }}
           >
             <ChevronRight className="w-5 h-5 text-foreground/35 group-hover:text-foreground/70 transition-colors" />

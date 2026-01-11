@@ -233,7 +233,7 @@ const ChampionSection = () => {
                 Galeria de Conquistas<span className="text-orange">.</span>
               </h3>
 
-              {/* Medal Grid - Enhanced visibility */}
+              {/* Medal Grid - Enhanced visibility with glow on scroll */}
               <div className="grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
                 {[...Array(8)].map((_, index) => (
                   <motion.div
@@ -243,21 +243,44 @@ const ChampionSection = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.7 + index * 0.05 }}
                     className="aspect-square relative group cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
                   >
-                    {/* Enhanced placeholder box with better visibility */}
-                    <div 
-                      className="absolute inset-0 border border-foreground/30 group-hover:border-orange/60 bg-foreground/[0.06] group-hover:bg-foreground/[0.12] transition-all duration-300 flex items-center justify-center"
+                    {/* Glow effect on hover */}
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
                       style={{
-                        background: 'linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+                        background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.3) 0%, transparent 70%)',
+                        filter: 'blur(15px)',
+                        transform: 'scale(1.3)',
+                      }}
+                    />
+                    
+                    {/* Enhanced placeholder box */}
+                    <div 
+                      className="absolute inset-0 border border-white/30 group-hover:border-orange/70 transition-all duration-300 flex items-center justify-center overflow-hidden"
+                      style={{
+                        background: 'linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)',
                       }}
                     >
-                      {/* Trophy icon - Enhanced contrast */}
-                      <Trophy className="w-7 h-7 md:w-9 md:h-9 text-orange/40 group-hover:text-orange/70 transition-colors duration-300" />
+                      {/* Inner glow pulse when scrolling into view */}
+                      <motion.div
+                        className="absolute inset-0 pointer-events-none"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: [0, 0.5, 0] }}
+                        viewport={{ once: false, margin: "-15%" }}
+                        transition={{ duration: 1.8, ease: "easeInOut" }}
+                        style={{
+                          background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.35) 0%, transparent 55%)',
+                        }}
+                      />
+                      
+                      {/* Trophy icon - High contrast white/40 */}
+                      <Trophy className="w-8 h-8 md:w-10 md:h-10 text-white/40 group-hover:text-orange transition-colors duration-300 relative z-10" />
                     </div>
                     
                     {/* Hover tooltip */}
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                      <span className="text-[9px] md:text-[10px] tracking-wider uppercase text-foreground/50">
+                      <span className="text-[10px] md:text-[11px] tracking-wider uppercase text-foreground/60">
                         Medalha {index + 1}
                       </span>
                     </div>

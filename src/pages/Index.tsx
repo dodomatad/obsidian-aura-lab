@@ -209,21 +209,36 @@ const Index = () => {
           </motion.div>
         </section>
 
+        {/* ============================================ */}
+        {/* LUXURY SPACING: Large gaps between sections */}
+        {/* ============================================ */}
+        
         {/* Product Showcase - Editorial Layout with Scroll Snap */}
-        <div id="modelos">
+        <div id="modelos" className="pt-16 md:pt-24">
           <ProductShowcase />
         </div>
 
+        {/* Spacer for breathing room */}
+        <div className="h-20 md:h-32" />
+
         {/* Atelier Section - Color Selector */}
-        <div id="atelier">
+        <div id="atelier" className="pt-12 md:pt-20">
           <AtelierSection />
         </div>
 
+        {/* Spacer for breathing room */}
+        <div className="h-24 md:h-40" />
+
         {/* Gear & Tech Section - Accessories with infinite scroll */}
-        <GearTechSection />
+        <div className="pt-12 md:pt-20">
+          <GearTechSection />
+        </div>
+
+        {/* Spacer for breathing room */}
+        <div className="h-24 md:h-40" />
 
         {/* Champion Journey Section - Storytelling (moved below accessories) */}
-        <div id="champion">
+        <div id="champion" className="pt-12 md:pt-20">
           <ChampionSection />
         </div>
 

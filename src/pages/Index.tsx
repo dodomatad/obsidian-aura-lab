@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
+import GearTechSection from '@/components/GearTechSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
@@ -10,6 +11,7 @@ import ChampionSection from '@/components/ChampionSection';
 import MobileDock from '@/components/MobileDock';
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
+import { useLenisScroll } from '@/hooks/useLenisScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ChevronDown } from 'lucide-react';
@@ -22,6 +24,9 @@ const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const hasRestoredScroll = useRef(false);
   const isMobile = useIsMobile();
+  
+  // Activate Lenis smooth scroll
+  useLenisScroll();
   
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -58,7 +63,15 @@ const Index = () => {
         <LoadingScreen onLoadingComplete={() => setIsLoadingComplete(true)} />
       )}
       
-      <div className="min-h-screen bg-background overflow-x-hidden max-w-[100vw]">
+      <div className="min-h-screen bg-background overflow-x-hidden max-w-[100vw] relative">
+        {/* Global noise texture overlay for dark luxury feel */}
+        <div 
+          className="fixed inset-0 pointer-events-none z-0 opacity-[0.025]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+        
         {/* Global Atmosphere Particles - Deep Sea Effect */}
         <AtmosphereParticles />
         {/* Glassmorphism Navigation - Desktop Only now, Mobile uses Dock */}
@@ -203,6 +216,9 @@ const Index = () => {
         <div id="atelier">
           <AtelierSection />
         </div>
+
+        {/* Gear & Tech Section - Accessories with infinite scroll */}
+        <GearTechSection />
 
         {/* Champion Journey Section - Storytelling (moved below accessories) */}
         <div id="champion">

@@ -3,7 +3,7 @@
 @tailwind base;
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 @tailwind components;
 @tailwind utilities;
@@ -81,7 +81,7 @@ html {
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     overflow-x: hidden;
   }
 

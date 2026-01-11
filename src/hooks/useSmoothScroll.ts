@@ -4,8 +4,9 @@ export const useSmoothScroll = () => {
   const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
+      // Avoid native smooth scroll to prevent "double easing" with Lenis
       element.scrollIntoView({
-        behavior: 'smooth',
+        behavior: 'auto',
         block: 'start',
       });
     }

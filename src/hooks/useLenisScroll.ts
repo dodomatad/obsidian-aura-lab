@@ -6,15 +6,15 @@ export const useLenisScroll = () => {
 
   useEffect(() => {
     const lenis = new Lenis({
-      // Calibrated for immediate input response (reduce "gelatina")
-      lerp: 0.18,
-      duration: 0.8,
+      // Calibrated for immediate stop + minimal perceived lag
+      lerp: 0.22,
+      duration: 0.7,
       easing: (t) => 1 - Math.pow(1 - t, 3),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.8,
+      wheelMultiplier: 1.05,
+      touchMultiplier: 2.0,
       syncTouch: true,
     });
 

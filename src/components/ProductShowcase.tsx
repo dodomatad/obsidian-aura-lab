@@ -52,7 +52,7 @@ const Hero3DCarousel = () => {
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const { startTransition, saveScrollPosition, isTransitioning, transitionData } = useTransition();
+  const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
   const currentProduct = surfskiProducts[currentIndex];
@@ -60,11 +60,15 @@ const Hero3DCarousel = () => {
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
     saveScrollPosition();
     const rect = imageElement.getBoundingClientRect();
-    startTransition({
-      productId: product.id,
-      productName: product.name,
-      imageUrl: product.image,
-      imageRect: rect,
+    
+    // Show dramatic OpiumLoader, then trigger navigation transition
+    showLoader(() => {
+      startTransition({
+        productId: product.id,
+        productName: product.name,
+        imageUrl: product.image,
+        imageRect: rect,
+      });
     });
   };
 
@@ -414,17 +418,21 @@ interface SliderRowProps {
 
 const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { startTransition, saveScrollPosition } = useTransition();
+  const { startTransition, saveScrollPosition, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
     saveScrollPosition();
     const rect = imageElement.getBoundingClientRect();
-    startTransition({
-      productId: product.id,
-      productName: product.name,
-      imageUrl: product.image,
-      imageRect: rect,
+    
+    // Show dramatic OpiumLoader, then trigger navigation transition
+    showLoader(() => {
+      startTransition({
+        productId: product.id,
+        productName: product.name,
+        imageUrl: product.image,
+        imageRect: rect,
+      });
     });
   };
 

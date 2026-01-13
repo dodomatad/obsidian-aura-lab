@@ -28,7 +28,7 @@ interface TransitionContextType {
 
 const INTRO_SEEN_KEY = 'liberdade_intro_seen';
 const SCROLL_POSITION_KEY = 'liberdade_scroll_position';
-const LOADER_DURATION = 1500; // 1.5 seconds dramatic delay
+const LOADER_DURATION = 2500; // 2.5 seconds dramatic delay
 
 const TransitionContext = createContext<TransitionContextType | null>(null);
 

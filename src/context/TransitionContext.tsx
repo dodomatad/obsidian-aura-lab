@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
 interface TransitionData {
   productId: string;
@@ -12,21 +12,23 @@ interface TransitionContextType {
   transitionData: TransitionData | null;
   startTransition: (data: TransitionData) => void;
   endTransition: () => void;
-  // Track if we just finished transitioning (for detail page to know)
   justTransitioned: boolean;
   setJustTransitioned: (value: boolean) => void;
-  // Intro state management
   hasSeenIntro: boolean;
   setHasSeenIntro: (value: boolean) => void;
-  // Scroll position management
   savedScrollPosition: number;
   saveScrollPosition: () => void;
   getSavedScrollPosition: () => number;
   clearScrollPosition: () => void;
+  // New: OpiumLoader state
+  isLoaderVisible: boolean;
+  showLoader: (callback?: () => void) => void;
+  hideLoader: () => void;
 }
 
 const INTRO_SEEN_KEY = 'liberdade_intro_seen';
 const SCROLL_POSITION_KEY = 'liberdade_scroll_position';
+const LOADER_DURATION = 1500; // 1.5 seconds dramatic delay
 
 const TransitionContext = createContext<TransitionContextType | null>(null);
 
@@ -38,6 +40,7 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
     return sessionStorage.getItem(INTRO_SEEN_KEY) === 'true';
   });
   const [savedScrollPosition, setSavedScrollPosition] = useState(0);
+  const [isLoaderVisible, setIsLoaderVisible] = useState(false);
 
   const startTransition = (data: TransitionData) => {
     setTransitionData(data);
@@ -48,7 +51,6 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
   const endTransition = () => {
     setIsTransitioning(false);
     setJustTransitioned(true);
-    // Keep transitionData for a moment so detail page can use it
     setTimeout(() => {
       setTransitionData(null);
       setJustTransitioned(false);
@@ -80,6 +82,22 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
     sessionStorage.removeItem(SCROLL_POSITION_KEY);
   };
 
+  // Show loader with dramatic 1.5s delay, then execute callback
+  const showLoader = useCallback((callback?: () => void) => {
+    setIsLoaderVisible(true);
+    setTimeout(() => {
+      if (callback) callback();
+      // Small delay before hiding for smoother transition
+      setTimeout(() => {
+        setIsLoaderVisible(false);
+      }, 200);
+    }, LOADER_DURATION);
+  }, []);
+
+  const hideLoader = useCallback(() => {
+    setIsLoaderVisible(false);
+  }, []);
+
   return (
     <TransitionContext.Provider value={{ 
       isTransitioning, 
@@ -94,6 +112,9 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
       saveScrollPosition,
       getSavedScrollPosition,
       clearScrollPosition,
+      isLoaderVisible,
+      showLoader,
+      hideLoader,
     }}>
       {children}
     </TransitionContext.Provider>

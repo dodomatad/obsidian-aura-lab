@@ -9,13 +9,6 @@ interface OpiumLoaderProps {
 const OpiumLoader = ({ isVisible }: OpiumLoaderProps) => {
   const [imageError, setImageError] = useState(false);
 
-  // Ring configurations: size, color, opacity, rotation speed, direction
-  const rings = [
-    { size: 180, color: '#E65100', opacity: 0.3, duration: 8, reverse: false, strokeWidth: 1 },
-    { size: 140, color: '#FFFFFF', opacity: 0.1, duration: 6, reverse: true, strokeWidth: 2 },
-    { size: 100, color: '#E65100', opacity: 0.8, duration: 4, reverse: false, strokeWidth: 1 },
-  ];
-
   return (
     <AnimatePresence>
       {isVisible && (
@@ -32,48 +25,26 @@ const OpiumLoader = ({ isVisible }: OpiumLoaderProps) => {
 
           {/* Subtle radial gradient for depth */}
           <div 
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-40"
             style={{
-              background: 'radial-gradient(circle at center, rgba(230, 81, 0, 0.15) 0%, transparent 60%)',
+              background: 'radial-gradient(circle at center, rgba(230, 81, 0, 0.12) 0%, transparent 50%)',
             }}
           />
 
-          {/* Container for rings and central image */}
+          {/* Container for central image */}
           <div className="relative flex items-center justify-center">
-            {/* Orbital Rings */}
-            {rings.map((ring, index) => (
-              <motion.div
-                key={index}
-                className="absolute rounded-full"
-                style={{
-                  width: ring.size,
-                  height: ring.size,
-                  border: `${ring.strokeWidth}px solid ${ring.color}`,
-                  opacity: ring.opacity,
-                }}
-                animate={{
-                  rotate: ring.reverse ? -360 : 360,
-                }}
-                transition={{
-                  duration: ring.duration,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              />
-            ))}
-
             {/* Pulsing glow behind rower */}
             <motion.div
-              className="absolute w-20 h-20 rounded-full"
+              className="absolute w-32 h-32 rounded-full"
               style={{
-                background: 'radial-gradient(circle, rgba(230, 81, 0, 0.4) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(230, 81, 0, 0.25) 0%, transparent 70%)',
               }}
               animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.4, 0.2, 0.4],
+                scale: [1, 1.6, 1],
+                opacity: [0.3, 0.15, 0.3],
               }}
               transition={{
-                duration: 2,
+                duration: 2.5,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
@@ -84,15 +55,15 @@ const OpiumLoader = ({ isVisible }: OpiumLoaderProps) => {
               <motion.img
                 src="/rower-silhouette.png"
                 alt="Opium Loading..."
-                className="w-24 h-24 object-contain z-10"
-                style={{ filter: 'invert(1) brightness(0.9)' }}
+                className="w-28 h-28 object-contain z-10"
+                style={{ filter: 'invert(1) brightness(0.85)' }}
                 onError={() => setImageError(true)}
                 animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.7, 1, 0.7],
+                  scale: [1, 1.08, 1],
+                  opacity: [0.75, 1, 0.75],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 2.5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
@@ -101,16 +72,16 @@ const OpiumLoader = ({ isVisible }: OpiumLoaderProps) => {
               <motion.div
                 className="z-10"
                 animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.7, 1, 0.7],
+                  scale: [1, 1.08, 1],
+                  opacity: [0.75, 1, 0.75],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 2.5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
               >
-                <Waves className="w-16 h-16 text-white/80" />
+                <Waves className="w-20 h-20 text-white/80" />
               </motion.div>
             )}
           </div>

@@ -34,13 +34,17 @@ const OpiumLoader = ({ isVisible }: OpiumLoaderProps) => {
                 }}
                 onError={() => setImageError(true)}
                 animate={{
-                  scale: [1, 1.08, 1],
-                  opacity: [0.8, 1, 0.8],
+                  // Simula movimento de remada: inclina para trás (puxando remos) e volta
+                  rotateZ: [0, -3, 0, 3, 0],
+                  y: [0, -4, 0, -4, 0],
+                  scaleX: [1, 1.02, 1, 1.02, 1],
+                  opacity: [0.85, 1, 0.85, 1, 0.85],
                 }}
                 transition={{
-                  duration: 1.5,
+                  duration: 1.8,
                   repeat: Infinity,
                   ease: 'easeInOut',
+                  times: [0, 0.25, 0.5, 0.75, 1],
                 }}
               />
             ) : (

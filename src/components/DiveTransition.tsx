@@ -94,7 +94,7 @@ const DiveTransition = () => {
     <AnimatePresence>
       {isTransitioning && (
         <>
-          {/* Background fade - covers the home page */}
+          {/* Background fade - covers the home page during navigation */}
           <motion.div
             className="fixed inset-0 z-[98] bg-background"
             initial={{ opacity: 0 }}
@@ -104,78 +104,6 @@ const DiveTransition = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           />
-
-          {/* The boat image that animates from source to target */}
-          <motion.div
-            className="fixed z-[100] pointer-events-none"
-            style={{
-              left: 0,
-              top: 0,
-              width: sourceRect.width,
-              height: sourceRect.height,
-              transformOrigin: 'center center',
-            }}
-            initial={{
-              x: sourceRect.left,
-              y: sourceRect.top,
-              scale: 1,
-              opacity: 1,
-            }}
-            animate={{
-              x: isExpanded ? sourceRect.left + translateX : sourceRect.left,
-              y: isExpanded ? sourceRect.top + translateY : sourceRect.top,
-              scale: isExpanded ? scale * 1.15 : 1, // Slight overshoot for more dramatic zoom
-              opacity: isFadingOut ? 0 : 1,
-            }}
-            transition={{
-              duration: 0.8, // Slower for more visible zoom effect
-              ease: [0.16, 1, 0.3, 1], // Smoother cubic-bezier for physical motion feel
-            }}
-          >
-            {/* Glow effect */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isExpanded ? 0.3 : 0 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, transparent 70%)',
-                filter: 'blur(40px)',
-                transform: 'scale(1.5)',
-              }}
-            />
-            
-            <motion.img
-              src={transitionData.imageUrl}
-              alt={transitionData.productName}
-              className="w-full h-full object-contain"
-              style={{
-                filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.4))',
-              }}
-            />
-          </motion.div>
-
-          {/* Subtle ripple from click origin */}
-          <motion.div
-            className="fixed z-[97] pointer-events-none"
-            style={{
-              left: sourceRect.left + sourceRect.width / 2,
-              top: sourceRect.top + sourceRect.height / 2,
-            }}
-            initial={{ scale: 0, opacity: 0.5 }}
-            animate={{ 
-              scale: isExpanded ? 15 : 0, 
-              opacity: 0,
-            }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <div 
-              className="w-32 h-32 -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{
-                background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
-              }}
-            />
-          </motion.div>
         </>
       )}
     </AnimatePresence>

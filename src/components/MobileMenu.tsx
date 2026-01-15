@@ -13,7 +13,7 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
-  const { handleNavClick } = useSmoothScroll();
+  
 
   const menuItems = [
     { icon: Home, label: 'Início', href: '#hero', id: 'hero' },

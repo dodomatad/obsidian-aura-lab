@@ -178,7 +178,7 @@ const AtelierSection = () => {
           Customização sob consulta. Cada embarcação é única.
         </p>
         <motion.a
-          href="https://wa.me/5500000000000?text=Olá! Gostaria de personalizar minha embarcação."
+          href="https://wa.me/5513997446684?text=Olá! Gostaria de personalizar minha embarcação."
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 px-10 py-4 text-foreground text-xs tracking-widest uppercase transition-all duration-500 border border-foreground/20 hover:border-orange hover:text-orange"

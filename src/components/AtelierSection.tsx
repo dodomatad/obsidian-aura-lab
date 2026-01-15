@@ -21,12 +21,7 @@ const AtelierSection = () => {
   const [selectedColor, setSelectedColor] = useState(0);
 
   return (
-    <section 
-      className="relative min-h-screen w-full py-20 md:py-48"
-      style={{ 
-        background: 'radial-gradient(ellipse 90% 70% at center 40%, #021019 0%, #010810 50%, #000000 100%)' 
-      }}
-    >
+    <section className="relative min-h-screen w-full py-20 md:py-48">
       {/* Breathing Glow Effect - Spotlight behind boat */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

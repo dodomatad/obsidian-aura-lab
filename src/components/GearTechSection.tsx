@@ -52,13 +52,12 @@ const GearTechSection = () => {
         }}
       />
       
-      {/* Background subtle gradient */}
+      {/* Background subtle gradient - more subtle, no boxy effect */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(230, 81, 0, 0.04) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 40% at 50% 100%, rgba(34, 34, 34, 0.5) 0%, transparent 60%)
+            radial-gradient(ellipse 100% 40% at 50% 0%, rgba(249, 115, 22, 0.02) 0%, transparent 70%)
           `,
         }}
       />

@@ -8,7 +8,6 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
-import SectionDivider from '@/components/SectionDivider';
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -88,12 +87,12 @@ const Index = () => {
             backdropFilter: isMobile ? 'none' : 'blur(20px)',
             WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
             border: 'none',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
           }}
         >
           <div className="font-sans text-sm font-medium tracking-widest text-foreground/90">
             OPIUM<span className="text-orange">.</span>
           </div>
+
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-8 md:gap-10">
@@ -206,36 +205,31 @@ const Index = () => {
           <ProductShowcase />
         </div>
 
-        <SectionDivider />
-
         {/* Atelier Section - Color Selector */}
         <div id="atelier" className="pt-12 md:pt-20">
           <AtelierSection />
         </div>
-
-        <SectionDivider variant="glow" />
 
         {/* Gear & Tech Section - Accessories with infinite scroll */}
         <div className="pt-12 md:pt-20">
           <GearTechSection />
         </div>
 
-        <SectionDivider />
-
         {/* Champion Journey Section - Storytelling (moved below accessories) */}
         <div id="champion" className="pt-12 md:pt-20">
           <ChampionSection />
         </div>
 
+
         {/* Ambient Audio Player */}
         <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
-        <footer className="w-full px-6 md:px-16 py-16 md:py-20 border-t border-border/50">
+        <footer className="w-full px-6 md:px-16 py-16 md:py-20">
           <div className="max-w-7xl mx-auto">
             
             {/* Authority Badges - Social Proof */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 md:mb-16 pb-8 md:pb-12 border-b border-border/30">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 md:mb-16 pb-8 md:pb-12">
               <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
                 <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
                   🇧🇷 DNA Brasileiro
@@ -332,7 +326,7 @@ const Index = () => {
             </div>
 
             {/* Bottom Bar */}
-            <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-foreground/40">
                 © 2025 Opium Hightec Line. Todos os direitos reservados.
               </p>

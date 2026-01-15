@@ -171,15 +171,6 @@ const ChampionSection = () => {
               </p>
             </div>
 
-            {/* Decorative divider */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent origin-left mb-10 md:mb-12"
-            />
-
             {/* Authority Badges Grid */}
             <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-16">
               {authorityBadges.map((badge, index) => (

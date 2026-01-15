@@ -54,6 +54,10 @@ html {
     /* Premium Orange for CTAs and highlights */
     --orange: 25 95% 53%;
     --orange-glow: 25 100% 60%;
+    
+    /* Electric Cyan accent */
+    --electric: 188 100% 50%;
+    --electric-glow: 188 100% 60%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;

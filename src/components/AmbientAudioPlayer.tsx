@@ -43,7 +43,7 @@ const AmbientAudioPlayer = () => {
       
       <motion.button
         onClick={toggleSound}
-        className="relative flex items-center gap-3 px-4 py-3 backdrop-blur-md border border-foreground/10 transition-all duration-300 cursor-grow group"
+        className="relative flex items-center gap-3 px-4 py-3 backdrop-blur-md border border-foreground/10 transition-all duration-300 group"
         style={{
           background: 'hsl(220 50% 5% / 0.8)',
         }}

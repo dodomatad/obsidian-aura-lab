@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 export const useLenisScroll = () => {
   const lenisRef = useRef<Lenis | null>(null);

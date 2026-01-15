@@ -9,7 +9,6 @@ import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
 import SectionDivider from '@/components/SectionDivider';
-import ContinuousGradientLine from '@/components/ContinuousGradientLine';
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -74,8 +73,6 @@ const Index = () => {
           }}
         />
         
-        {/* Continuous gradient line connecting all sections */}
-        <ContinuousGradientLine />
         
         {/* Global Atmosphere Particles - Deep Sea Effect */}
         <AtmosphereParticles />

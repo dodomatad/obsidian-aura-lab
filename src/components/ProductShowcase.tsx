@@ -448,13 +448,12 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
       transition={{ duration: 0.7 }}
       className="relative py-20 md:py-32 overflow-hidden"
     >
-      {/* Subtle background */}
+      {/* Subtle background - no boxy effect */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 70% 35% at 50% 0%, rgba(25, 30, 40, 0.35) 0%, transparent 45%),
-            radial-gradient(ellipse 50% 25% at 50% 100%, rgba(249, 115, 22, 0.025) 0%, transparent 35%)
+            radial-gradient(ellipse 100% 50% at 50% 30%, rgba(6, 182, 212, 0.015) 0%, transparent 60%)
           `,
         }}
       />

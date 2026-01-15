@@ -22,6 +22,14 @@ const AtelierSection = () => {
 
   return (
     <section className="relative min-h-screen w-full py-20 md:py-48">
+      {/* Fade-in gradient from previous section */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-32 md:h-48 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, transparent 0%, rgba(6, 182, 212, 0.02) 100%)',
+        }}
+      />
+      
       {/* Breathing Glow Effect - Spotlight behind boat */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

@@ -89,7 +89,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
                   lineHeight: 0.9,
                 }}
               >
-                LIBERDADE
+                OPIUM
               </motion.h1>
             </div>
 

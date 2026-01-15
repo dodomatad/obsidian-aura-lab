@@ -8,6 +8,7 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
+import SectionDivider from '@/components/SectionDivider';
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -204,24 +205,21 @@ const Index = () => {
           <ProductShowcase />
         </div>
 
-        {/* Spacer for breathing room */}
-        <div className="h-20 md:h-32" />
+        <SectionDivider />
 
         {/* Atelier Section - Color Selector */}
         <div id="atelier" className="pt-12 md:pt-20">
           <AtelierSection />
         </div>
 
-        {/* Spacer for breathing room */}
-        <div className="h-24 md:h-40" />
+        <SectionDivider variant="glow" />
 
         {/* Gear & Tech Section - Accessories with infinite scroll */}
         <div className="pt-12 md:pt-20">
           <GearTechSection />
         </div>
 
-        {/* Spacer for breathing room */}
-        <div className="h-24 md:h-40" />
+        <SectionDivider />
 
         {/* Champion Journey Section - Storytelling (moved below accessories) */}
         <div id="champion" className="pt-12 md:pt-20">

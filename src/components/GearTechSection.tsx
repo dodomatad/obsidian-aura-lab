@@ -44,6 +44,14 @@ const GearTechSection = () => {
 
   return (
     <section className="relative py-28 md:py-40 overflow-hidden">
+      {/* Smooth entry gradient */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-24 md:h-40 pointer-events-none -z-10"
+        style={{
+          background: 'linear-gradient(180deg, transparent 0%, rgba(249, 115, 22, 0.015) 100%)',
+        }}
+      />
+      
       {/* Background subtle gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"

@@ -335,7 +335,7 @@ const Index = () => {
             {/* Bottom Bar */}
             <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-xs text-foreground/40">
-                © 2024 Opium Hightec Line. Todos os direitos reservados.
+                © 2025 Opium Hightec Line. Todos os direitos reservados.
               </p>
               <p className="text-xs text-foreground/30">
                 Surfskis de Elite desde 1985

@@ -499,6 +499,14 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
           ))}
         </div>
       </div>
+
+      {/* Exit gradient to next section */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-24 md:h-32 pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, transparent 0%, rgba(6, 182, 212, 0.02) 100%)',
+        }}
+      />
     </motion.section>
   );
 };

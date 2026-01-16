@@ -10,6 +10,7 @@ import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
 
 import MobileMenu from '@/components/MobileMenu';
+import MobileDock from '@/components/MobileDock';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useLenisScroll } from '@/hooks/useLenisScroll';
 import { useTransition } from '@/context/TransitionContext';
@@ -356,6 +357,9 @@ const Index = () => {
           </div>
         </footer>
       </div>
+      
+      {/* Mobile Dock Navigation */}
+      <MobileDock />
     </>
   );
 };

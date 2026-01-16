@@ -40,7 +40,7 @@ const MobileDock = () => {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 1.5, duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-      className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-50 md:hidden safe-area-bottom"
     >
       {/* Dock Container */}
       <div 

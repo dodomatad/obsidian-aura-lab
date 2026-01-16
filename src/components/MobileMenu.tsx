@@ -15,9 +15,11 @@ const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => (
   <div className="w-10 h-10 flex flex-col justify-center items-center gap-2 relative p-0">
     {/* Paddle 1 - Upper */}
     <div 
-      className={`w-8 h-1.5 flex items-center justify-between relative transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
-        isOpen ? 'translate-y-[7px] rotate-45' : 'translate-x-0'
-      } group-hover:${!isOpen ? '-translate-x-0.5' : ''}`}
+      className="w-8 h-1.5 flex items-center justify-between relative"
+      style={{
+        transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        transform: isOpen ? 'translateY(7px) rotate(45deg)' : 'translateY(0) rotate(0deg)',
+      }}
     >
       <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
       <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
@@ -26,9 +28,11 @@ const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => (
     
     {/* Paddle 2 - Lower */}
     <div 
-      className={`w-8 h-1.5 flex items-center justify-between relative transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
-        isOpen ? '-translate-y-[7px] -rotate-45' : 'translate-x-0'
-      } group-hover:${!isOpen ? 'translate-x-0.5' : ''}`}
+      className="w-8 h-1.5 flex items-center justify-between relative"
+      style={{
+        transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        transform: isOpen ? 'translateY(-7px) rotate(-45deg)' : 'translateY(0) rotate(0deg)',
+      }}
     >
       <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
       <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />

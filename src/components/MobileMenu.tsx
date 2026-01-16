@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/sheet';
 import opiumLogo from '@/assets/opium-logo-official.png';
 
-// Paddle Menu Button Component
+// Paddle Menu Button Component - Animated Crossed Paddles
 const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => (
   <div className="w-10 h-10 flex flex-col justify-center items-center gap-2 relative p-0">
     {/* Paddle 1 - Upper */}
@@ -83,15 +83,15 @@ const MobileMenu = () => {
       
       <SheetContent 
         side="right" 
-        className="w-[280px] sm:w-[320px] border-l border-foreground/10 p-0"
+        className="w-[280px] sm:w-[320px] border-l border-foreground/10 p-0 [&>button]:hidden"
         style={{
           background: 'rgba(10, 10, 12, 0.95)',
           backdropFilter: 'blur(30px)',
           WebkitBackdropFilter: 'blur(30px)',
         }}
       >
-        {/* Header */}
-        <SheetHeader className="p-6 pb-4 border-b border-foreground/10">
+        {/* Header with Paddle Close Button */}
+        <SheetHeader className="p-6 pb-4 border-b border-foreground/10 flex flex-row items-center justify-between">
           <SheetTitle className="text-left">
             <img 
               src={opiumLogo} 
@@ -99,6 +99,15 @@ const MobileMenu = () => {
               className="h-6 w-auto"
             />
           </SheetTitle>
+          
+          {/* Custom Paddle Close Button */}
+          <button
+            onClick={() => setOpen(false)}
+            className="p-2 rounded-lg transition-all duration-300 hover:bg-foreground/10 active:bg-foreground/20 text-foreground/80"
+            aria-label="Fechar menu"
+          >
+            <PaddleMenuButton isOpen={true} />
+          </button>
         </SheetHeader>
 
         {/* Navigation Links */}

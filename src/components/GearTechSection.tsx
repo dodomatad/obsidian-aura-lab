@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { Anchor, Shield, Link2, Package } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -41,9 +42,11 @@ const duplicatedItems = [...gearItems, ...gearItems];
 
 const GearTechSection = () => {
   const isMobile = useIsMobile();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { margin: "-100px" });
 
   return (
-    <section className="relative py-28 md:py-40 overflow-hidden">
+    <section ref={sectionRef} className="relative py-28 md:py-40 overflow-hidden">
       
       {/* Background subtle gradient - more subtle, no boxy effect */}
       <div 
@@ -113,9 +116,7 @@ const GearTechSection = () => {
             scrollSnapType: isMobile ? 'x mandatory' : 'none',
             WebkitOverflowScrolling: 'touch',
           }}
-          animate={isMobile ? undefined : {
-            x: [0, -1400],
-          }}
+          animate={isMobile ? undefined : (isInView ? { x: [0, -1400] } : { x: 0 })}
           transition={isMobile ? undefined : {
             x: {
               repeat: Infinity,

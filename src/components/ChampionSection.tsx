@@ -15,16 +15,6 @@ const authorityBadges = [
     title: '14 Anos Invicto',
     description: 'Domínio absoluto nas competições'
   },
-  { 
-    icon: Cpu, 
-    title: 'Tecnologia Hightec Line',
-    description: 'Inovação em fibra de carbono'
-  },
-  { 
-    icon: Palette, 
-    title: 'Design Brasileiro',
-    description: 'Engenharia 100% nacional'
-  },
 ];
 
 const ChampionSection = () => {
@@ -203,7 +193,7 @@ const ChampionSection = () => {
               {/* Section label */}
               <div className="mb-6">
                 <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
-                  Conquistas
+                  Nossos Diferenciais
                 </span>
               </div>
 

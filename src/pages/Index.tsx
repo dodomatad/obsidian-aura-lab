@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import GearTechSection from '@/components/GearTechSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
@@ -7,24 +8,34 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
-import CinematicHero from '@/components/CinematicHero';
-import HorizontalGallery from '@/components/HorizontalGallery';
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useLenisScroll } from '@/hooks/useLenisScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ChevronDown } from 'lucide-react';
+import opiumLogo from '@/assets/opium-logo.png';
 
 const Index = () => {
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
   const [isLoadingComplete, setIsLoadingComplete] = useState(hasSeenIntro);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const { handleNavClick } = useSmoothScroll();
+  const heroRef = useRef<HTMLDivElement>(null);
   const hasRestoredScroll = useRef(false);
   const isMobile = useIsMobile();
   
   // Activate Lenis smooth scroll
   useLenisScroll();
+  
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Hero text fades out on scroll, stays in place
+  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   // Restore scroll position after coming back from product detail
   useEffect(() => {
@@ -107,12 +118,110 @@ const Index = () => {
         </motion.nav>
 
 
-        {/* Cinematic Hero with Video Background + Logo Zoom */}
-        <CinematicHero />
+        {/* Hero Section - Compact on mobile to show content below */}
+        <section ref={heroRef} id="hero" className="relative h-[85vh] md:h-screen w-full overflow-hidden">
+          {/* Video Background - With Fade Mask */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+            }}
+          >
+            {/* Fallback gradient - sempre visível como base */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#050d18] to-[#000000]"
+              style={{
+                backgroundImage: `
+                  radial-gradient(ellipse 80% 50% at 50% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(249, 115, 22, 0.05) 0%, transparent 40%)
+                `,
+              }}
+            />
+            
+            {/* Subtle texture overlay */}
+            <div 
+              className="absolute inset-0 opacity-30"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+              }}
+            />
+            
+            {/* Video Background - carrega sobre o fallback */}
+            <iframe 
+              src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw] transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={{ filter: 'brightness(0.85)' }}
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              title="Hero Background Video"
+              loading="lazy"
+              onLoad={() => setVideoLoaded(true)}
+            />
+            
+            {/* Cinematic Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+          </div>
 
-        {/* Horizontal Gallery - Boats Showcase */}
-        <div id="modelos">
-          <HorizontalGallery />
+          {/* Hero Logo - Centered Opium Logo */}
+          <motion.div 
+            className="absolute inset-0 flex items-center justify-center z-10 px-6 pb-24 md:pb-0"
+            style={{ opacity: heroTextOpacity }}
+          >
+            <motion.div
+              initial={skipAnimations ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={skipAnimations ? { duration: 0 } : { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+              className="text-center"
+            >
+              {/* Logo Image - PNG transparent ready */}
+              <img 
+                src={opiumLogo}
+                alt="Opium Surfskis"
+                className="w-[200px] md:w-[320px] lg:w-[400px] h-auto mx-auto drop-shadow-2xl"
+                style={{
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
+                }}
+              />
+              
+              {/* Subtext - fade in delayed */}
+              <motion.p
+                initial={skipAnimations ? { opacity: 1 } : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={skipAnimations ? { duration: 0 } : { duration: 1.2, delay: 1.5 }}
+                className="mt-6 md:mt-8 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
+              >
+                Surfskis de Elite
+              </motion.p>
+            </motion.div>
+          </motion.div>
+
+          {/* Scroll Indicator - Shows on mobile to hint more content */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+          >
+            <span className="text-[9px] tracking-[0.3em] uppercase text-foreground/40 font-sans">
+              Explorar
+            </span>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="w-5 h-5 text-foreground/40" />
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* ============================================ */}
+        {/* LUXURY SPACING: Large gaps between sections */}
+        {/* ============================================ */}
+        
+        {/* Product Showcase - Editorial Layout with Scroll Snap */}
+        <div id="modelos" className="pt-16 md:pt-24">
+          <ProductShowcase />
         </div>
 
         {/* Atelier Section - Color Selector */}

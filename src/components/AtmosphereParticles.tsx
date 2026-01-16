@@ -15,23 +15,26 @@ const AtmosphereParticles = () => {
   const isMobile = useIsMobile();
   const prefersReducedMotion = useReducedMotion();
   
-  // Skip particles entirely on mobile for performance - they cause scroll lag
-  if (isMobile || prefersReducedMotion) {
-    return null;
-  }
-  
-  // Generate random particles - fewer on mobile for performance
+  // Generate random particles - only for desktop
   const particles = useMemo<Particle[]>(() => {
-    const count = isMobile ? 10 : 30; // Reduced from 15/40
+    // Return empty array if we won't render anyway
+    if (isMobile || prefersReducedMotion) return [];
+    
+    const count = 30;
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       size: Math.random() * 3 + 1,
-      duration: Math.random() * 25 + 20, // Slower = less CPU
+      duration: Math.random() * 25 + 20,
       delay: Math.random() * 10,
-      opacity: Math.random() * 0.06 + 0.02, // Slightly more subtle
+      opacity: Math.random() * 0.06 + 0.02,
     }));
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
+
+  // Skip rendering on mobile for performance
+  if (isMobile || prefersReducedMotion) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">

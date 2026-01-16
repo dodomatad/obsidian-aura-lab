@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import GearTechSection from '@/components/GearTechSection';
 import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
@@ -8,7 +7,8 @@ import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
-import ScrollZoomLogo from '@/components/ScrollZoomLogo';
+import CinematicHero from '@/components/CinematicHero';
+import HorizontalGallery from '@/components/HorizontalGallery';
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -107,16 +107,12 @@ const Index = () => {
         </motion.nav>
 
 
-        {/* Hero Section with Scroll Zoom */}
-        <ScrollZoomLogo />
+        {/* Cinematic Hero with Video Background + Logo Zoom */}
+        <CinematicHero />
 
-        {/* ============================================ */}
-        {/* LUXURY SPACING: Large gaps between sections */}
-        {/* ============================================ */}
-        
-        {/* Product Showcase - Editorial Layout with Scroll Snap */}
-        <div id="modelos" className="pt-16 md:pt-24">
-          <ProductShowcase />
+        {/* Horizontal Gallery - Boats Showcase */}
+        <div id="modelos">
+          <HorizontalGallery />
         </div>
 
         {/* Atelier Section - Color Selector */}

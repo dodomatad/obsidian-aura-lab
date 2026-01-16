@@ -177,13 +177,11 @@ const AtelierSection = () => {
           href="https://wa.me/5513997446684?text=Olá! Gostaria de personalizar minha embarcação."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-10 py-4 text-foreground text-xs tracking-widest uppercase transition-all duration-500 border border-foreground/20 hover:border-orange hover:text-orange"
-          style={{
-            background: 'transparent',
-          }}
+          className="inline-flex items-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-widest uppercase font-bold transition-all duration-300 hover:shadow-lg hover:shadow-white/20"
           whileHover={{ 
-            scale: 1.02,
+            scale: 1.03,
           }}
+          whileTap={{ scale: 0.98 }}
         >
           <span>Consultar Especialista</span>
           <motion.span

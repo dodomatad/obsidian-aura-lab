@@ -183,7 +183,7 @@ const ChampionSection = () => {
               ))}
             </div>
 
-            {/* Galeria de Conquistas - Placeholder Grid for Medals */}
+            {/* Nossos Diferenciais */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -201,67 +201,26 @@ const ChampionSection = () => {
                 className="text-lg md:text-xl font-medium text-foreground mb-6"
                 style={{ letterSpacing: '0.02em' }}
               >
-                Galeria de Conquistas<span className="text-orange">.</span>
+                Por que escolher a Opium<span className="text-orange">?</span>
               </h3>
 
-              {/* Medal Grid - Enhanced visibility with glow on scroll */}
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
-                {[...Array(8)].map((_, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.7 + index * 0.05 }}
-                    className="aspect-square relative group cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {/* Glow effect on hover */}
-                    <motion.div
-                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
-                      style={{
-                        background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.3) 0%, transparent 70%)',
-                        filter: 'blur(15px)',
-                        transform: 'scale(1.3)',
-                      }}
-                    />
-                    
-                    {/* Enhanced placeholder box */}
-                    <div 
-                      className="absolute inset-0 border border-white/30 group-hover:border-orange/70 transition-all duration-300 flex items-center justify-center overflow-hidden"
-                      style={{
-                        background: 'linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)',
-                      }}
-                    >
-                      {/* Inner glow pulse when scrolling into view */}
-                      <motion.div
-                        className="absolute inset-0 pointer-events-none"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: [0, 0.5, 0] }}
-                        viewport={{ once: false, margin: "-15%" }}
-                        transition={{ duration: 1.8, ease: "easeInOut" }}
-                        style={{
-                          background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.35) 0%, transparent 55%)',
-                        }}
-                      />
-                      
-                      {/* Trophy icon - High contrast white/40 */}
-                      <Trophy className="w-8 h-8 md:w-10 md:h-10 text-white/40 group-hover:text-orange transition-colors duration-300 relative z-10" />
-                    </div>
-                    
-                    {/* Hover tooltip */}
-                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                      <span className="text-[10px] md:text-[11px] tracking-wider uppercase text-foreground/60">
-                        Medalha {index + 1}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              <p className="text-sm md:text-base text-foreground/70 leading-relaxed mb-6">
+                Com mais de 35 anos de experiência na fabricação de embarcações de alta performance, 
+                a Opium se consolidou como referência absoluta no mercado brasileiro. Nossa dedicação 
+                à excelência técnica e compromisso com a inovação nos permitiram conquistar 14 títulos 
+                consecutivos nas principais competições nacionais.
+              </p>
 
-              {/* Coming soon note - Enhanced */}
-              <p className="text-xs md:text-sm text-foreground/50 mt-8 text-center font-sans">
-                ✨ Galeria em construção — fotos e descrições em breve
+              <p className="text-sm md:text-base text-foreground/70 leading-relaxed mb-6">
+                Cada surfski que sai de nossa fábrica é resultado de décadas de conhecimento acumulado, 
+                pesquisa de materiais de ponta e feedback direto dos atletas campeões que confiam em 
+                nossos produtos para alcançar a vitória.
+              </p>
+
+              <p className="text-sm md:text-base text-foreground/70 leading-relaxed">
+                Somos pioneiros na utilização de fibra de carbono de alta gramatura no Brasil, 
+                oferecendo embarcações que combinam leveza extrema, rigidez estrutural e durabilidade 
+                incomparável. Quando você escolhe Opium, você escolhe a tradição de quem domina o mar.
               </p>
             </motion.div>
           </motion.div>

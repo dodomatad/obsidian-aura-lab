@@ -381,7 +381,7 @@ const Hero3DCarousel = () => {
           <motion.button
             key={product.id}
             onClick={() => goToSlide(index)}
-            className="relative group p-2.5 md:p-2"
+            className="relative group p-4 md:p-2"
             whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.9 }}
           >

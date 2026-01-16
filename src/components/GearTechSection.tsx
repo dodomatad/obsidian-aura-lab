@@ -3,7 +3,6 @@ import { useRef, useCallback, useEffect, useState } from 'react';
 import { Anchor, Shield, Link2, Package, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
-import BlurText from '@/components/ui/BlurText';
 
 interface GearItem {
   id: string;
@@ -111,14 +110,15 @@ const GearTechSection = () => {
               Equipamentos
             </span>
           </div>
-          <BlurText
-            text="Opium Gear."
-            animateBy="letters"
-            delay={50}
+          <h2 
             className="display-hero text-foreground"
-            direction="top"
-            style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.02em' }}
-          />
+            style={{
+              fontSize: 'clamp(2rem, 5vw, 4rem)',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Opium Gear<span className="text-orange">.</span>
+          </h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

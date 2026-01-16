@@ -161,8 +161,7 @@ const ChampionSection = () => {
                 Fábio Paiva, <span className="text-foreground font-medium">14 anos invicto</span> e condutor da Tocha Olímpica (2016) e Pan-Americana (2007), transformou a experiência náutica no país.
               </p>
               <p className="text-base md:text-lg text-foreground/60 leading-relaxed font-sans font-light italic">
-                {/* Placeholder for additional bio text */}
-                "O mar é o único lugar onde a liberdade é completa. Cada embarcação que construímos carrega essa filosofia."
+                "Cada embarcação que construímos carrega a filosofia de dominar o mar com excelência."
               </p>
             </div>
 

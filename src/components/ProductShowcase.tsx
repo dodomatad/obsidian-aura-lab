@@ -3,6 +3,7 @@ import { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import BlurText from '@/components/ui/BlurText';
 import boatPono from '@/assets/boat-pono.png';
 import boatSurfski from '@/assets/boat-surfski.png';
 
@@ -482,9 +483,13 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
               {subtitle}
             </span>
           </div>
-          <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.2rem)', letterSpacing: '-0.01em' }}>
-            {title}<span className="text-orange">.</span>
-          </h2>
+          <BlurText
+            text={`${title}.`}
+            animateBy="words"
+            delay={120}
+            direction="top"
+            className="display-hero text-foreground"
+          />
         </motion.div>
 
         <button onClick={scrollRight} className="hidden md:flex items-center gap-1.5 text-foreground/35 hover:text-foreground/70 transition-colors group">

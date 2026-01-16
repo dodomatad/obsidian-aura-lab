@@ -10,6 +10,7 @@ import {
   SheetClose,
 } from '@/components/ui/sheet';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
+import opiumLogo from '@/assets/opium-logo-official.png';
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
@@ -62,8 +63,12 @@ const MobileMenu = () => {
       >
         {/* Header */}
         <SheetHeader className="p-6 pb-4 border-b border-foreground/10">
-          <SheetTitle className="text-lg font-medium tracking-widest text-foreground text-left">
-            OPIUM<span className="text-orange">.</span>
+          <SheetTitle className="text-left">
+            <img 
+              src={opiumLogo} 
+              alt="OPIUM" 
+              className="h-6 w-auto"
+            />
           </SheetTitle>
         </SheetHeader>
 

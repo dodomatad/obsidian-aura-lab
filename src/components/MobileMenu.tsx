@@ -1,16 +1,41 @@
 import { useState } from 'react';
-import { Menu, Home, Ship, Cpu, Users, MessageCircle, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Home, Ship, Cpu, Users, MessageCircle } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  SheetClose,
 } from '@/components/ui/sheet';
-import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import opiumLogo from '@/assets/opium-logo-official.png';
+
+// Paddle Menu Button Component
+const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => (
+  <div className="w-10 h-10 flex flex-col justify-center items-center gap-2 relative p-0">
+    {/* Paddle 1 - Upper */}
+    <div 
+      className={`w-8 h-1.5 flex items-center justify-between relative transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
+        isOpen ? 'translate-y-[7px] rotate-45' : 'translate-x-0'
+      } group-hover:${!isOpen ? '-translate-x-0.5' : ''}`}
+    >
+      <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
+      <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
+      <span className="w-2 h-full bg-current rounded-tr-full rounded-br-full z-[2]" />
+    </div>
+    
+    {/* Paddle 2 - Lower */}
+    <div 
+      className={`w-8 h-1.5 flex items-center justify-between relative transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] ${
+        isOpen ? '-translate-y-[7px] -rotate-45' : 'translate-x-0'
+      } group-hover:${!isOpen ? 'translate-x-0.5' : ''}`}
+    >
+      <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
+      <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
+      <span className="w-2 h-full bg-current rounded-tr-full rounded-br-full z-[2]" />
+    </div>
+  </div>
+);
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
@@ -39,8 +64,8 @@ const MobileMenu = () => {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
-          className="md:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-foreground/10 active:bg-foreground/20"
-          aria-label="Abrir menu"
+          className="md:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-foreground/10 active:bg-foreground/20 text-foreground/80 group"
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           onClick={() => {
             // Haptic feedback for mobile
             if ('vibrate' in navigator) {
@@ -48,7 +73,7 @@ const MobileMenu = () => {
             }
           }}
         >
-          <Menu className="w-5 h-5 text-foreground/80" />
+          <PaddleMenuButton isOpen={open} />
         </button>
       </SheetTrigger>
       

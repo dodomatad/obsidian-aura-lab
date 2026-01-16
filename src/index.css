@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@100;200;300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
+/* Safe area inset support for iPhone notch/home indicator */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
 @tailwind base;
 
 html {

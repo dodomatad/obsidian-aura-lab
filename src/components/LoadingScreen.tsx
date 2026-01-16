@@ -17,10 +17,10 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       return;
     }
 
-    // Simulate loading time for cinematic effect
+    // Simulate loading time for cinematic effect - optimized for mobile
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2800);
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, [hasSeenIntro, onLoadingComplete]);
@@ -30,7 +30,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       const exitTimer = setTimeout(() => {
         setHasSeenIntro(true);
         onLoadingComplete();
-      }, 800);
+      }, 600);
       return () => clearTimeout(exitTimer);
     }
   }, [isLoading, hasSeenIntro, setHasSeenIntro, onLoadingComplete]);

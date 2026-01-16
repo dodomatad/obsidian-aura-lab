@@ -191,13 +191,12 @@ const Hero3DCarousel = () => {
             Performance
           </span>
         </div>
-        <BlurText
-          text="Surfski de Elite."
-          animateBy="words"
-          delay={150}
-          direction="top"
+        <h2 
           className="display-hero text-foreground"
-        />
+          style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
+        >
+          Surfski de Elite<span className="text-orange">.</span>
+        </h2>
       </motion.div>
 
       {/* Giant background name */}
@@ -381,13 +380,9 @@ const Hero3DCarousel = () => {
             <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1.5">
               {currentProduct.tagline}
             </span>
-            <BlurText
-              text={currentProduct.name}
-              animateBy="letters"
-              delay={40}
-              direction="bottom"
-              className="display-hero text-foreground"
-            />
+            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
+              {currentProduct.name}
+            </h3>
           </motion.div>
         </AnimatePresence>
       </div>

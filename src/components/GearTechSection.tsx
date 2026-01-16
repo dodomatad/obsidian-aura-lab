@@ -44,13 +44,6 @@ const GearTechSection = () => {
 
   return (
     <section className="relative py-28 md:py-40 overflow-hidden">
-      {/* Smooth entry gradient */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-24 md:h-40 pointer-events-none -z-10"
-        style={{
-          background: 'linear-gradient(180deg, transparent 0%, rgba(249, 115, 22, 0.015) 100%)',
-        }}
-      />
       
       {/* Background subtle gradient - more subtle, no boxy effect */}
       <div 
@@ -79,8 +72,7 @@ const GearTechSection = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl"
         >
-          <div className="flex items-center gap-4 mb-4 md:mb-6">
-            <div className="w-8 md:w-12 h-px bg-gradient-to-r from-orange to-transparent" />
+          <div className="mb-4 md:mb-6">
             <span className="text-[10px] tracking-[0.4em] uppercase text-orange/80 font-sans font-medium">
               Equipamentos
             </span>
@@ -178,14 +170,6 @@ const GearTechSection = () => {
                   {item.description}
                 </p>
 
-                {/* Accent line */}
-                <motion.div 
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange via-orange-glow to-transparent"
-                  initial={{ scaleX: isMobile ? 1 : 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ originX: 0 }}
-                />
               </div>
             </motion.div>
           ))}

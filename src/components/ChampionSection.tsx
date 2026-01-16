@@ -83,10 +83,6 @@ const ChampionSection = () => {
             }}
           />
           
-          {/* Corner accent lines */}
-          <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-white/20 z-30" />
-          <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-white/20 z-30" />
-          
           {/* Large number overlay */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -132,9 +128,8 @@ const ChampionSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex items-center gap-4 mb-6 md:mb-8"
+              className="mb-6 md:mb-8"
             >
-              <div className="w-12 md:w-16 h-px bg-gradient-to-r from-foreground/50 to-transparent" />
               <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
                 A Origem
               </span>
@@ -210,8 +205,7 @@ const ChampionSection = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               {/* Section label */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-px bg-gradient-to-r from-orange to-transparent" />
+              <div className="mb-6">
                 <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
                   Conquistas
                 </span>

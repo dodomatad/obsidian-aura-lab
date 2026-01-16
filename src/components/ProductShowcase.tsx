@@ -181,8 +181,7 @@ const Hero3DCarousel = () => {
         transition={{ duration: 0.7 }}
         className="relative z-20 px-6 md:px-16 pt-10 md:pt-16"
       >
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-8 md:w-10 h-px bg-gradient-to-r from-orange to-transparent" />
+        <div className="mb-2">
           <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
             Performance
           </span>
@@ -498,14 +497,6 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
           ))}
         </div>
       </div>
-
-      {/* Exit gradient to next section */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-24 md:h-32 pointer-events-none"
-        style={{
-          background: 'linear-gradient(180deg, transparent 0%, rgba(6, 182, 212, 0.02) 100%)',
-        }}
-      />
     </motion.section>
   );
 };
@@ -582,14 +573,6 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
           </h3>
         </div>
 
-        {/* Accent line */}
-        <motion.div 
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange via-orange-glow to-transparent"
-          initial={{ scaleX: 0 }}
-          whileHover={{ scaleX: 1 }}
-          transition={{ duration: 0.35 }}
-          style={{ originX: 0 }}
-        />
       </div>
     </motion.div>
   );

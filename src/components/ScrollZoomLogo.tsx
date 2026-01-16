@@ -32,20 +32,6 @@ const ScrollZoomLogo = () => {
           {/* Fundo - gradiente que sempre aparece */}
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
 
-          {/* Vídeo de fundo */}
-          <div className="absolute inset-0">
-            <iframe
-              src="https://player.vimeo.com/video/1087480498?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=1080p"
-              className="absolute inset-0 w-full h-full"
-              style={{ 
-                transform: 'scale(1.2)',
-                pointerEvents: 'none'
-              }}
-              allow="autoplay; fullscreen"
-              loading="lazy"
-            />
-          </div>
-          
           {/* Overlay escuro */}
           <div className="absolute inset-0 bg-black/40 z-[5]" />
 

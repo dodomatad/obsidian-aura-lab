@@ -73,13 +73,9 @@ const AtelierSection = () => {
           <span className="text-xs tracking-widest text-muted-foreground uppercase block mb-3 md:mb-4">
             O Ateliê
           </span>
-          <BlurText
-            text="Sua Identidade. Sua Cor."
-            animateBy="words"
-            delay={150}
-            direction="top"
-            className="display-hero text-foreground block"
-          />
+          <h2 className="display-hero text-foreground">
+            Sua Identidade. Sua Cor.
+          </h2>
         </motion.div>
       </div>
 
@@ -87,8 +83,7 @@ const AtelierSection = () => {
       <div className="relative flex flex-col items-center justify-center px-4 md:px-16">
         {/* Boat Image with Smooth Transition - Larger on mobile */}
         <div 
-          className="relative w-full max-w-4xl h-[50vh] md:h-auto md:aspect-[16/9] flex items-center justify-center"
-          style={{ touchAction: 'pan-y' }}
+          className="relative w-full max-w-4xl aspect-[16/9] flex items-center justify-center"
         >
           <AnimatePresence mode="wait">
             <motion.img

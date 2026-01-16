@@ -127,10 +127,26 @@ const Index = () => {
               WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
             }}
           >
-            {/* Fallback gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#021019] via-[#010810] to-[#000000]" />
+            {/* Fallback gradient - sempre visível como base */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#050d18] to-[#000000]"
+              style={{
+                backgroundImage: `
+                  radial-gradient(ellipse 80% 50% at 50% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(249, 115, 22, 0.05) 0%, transparent 40%)
+                `,
+              }}
+            />
             
-            {/* Video Background - Always visible on all devices */}
+            {/* Subtle texture overlay */}
+            <div 
+              className="absolute inset-0 opacity-30"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+              }}
+            />
+            
+            {/* Video Background - carrega sobre o fallback */}
             <iframe 
               src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
@@ -138,9 +154,10 @@ const Index = () => {
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               title="Hero Background Video"
+              loading="lazy"
             />
             
-            {/* Cinematic Overlay - Gradient for atmosphere and readability */}
+            {/* Cinematic Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           </div>
 

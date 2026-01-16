@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BlurTextProps {
   text?: string;
@@ -26,6 +27,7 @@ const BlurText = ({
   onAnimationComplete,
   stepDuration = 0.35
 }: BlurTextProps) => {
+  const isMobile = useIsMobile();
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
@@ -45,6 +47,21 @@ const BlurText = ({
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
 
+  // On mobile, render static text without per-letter animations for performance
+  if (isMobile) {
+    return (
+      <motion.p 
+        ref={ref} 
+        className={className}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
+        {text}
+      </motion.p>
+    );
+  }
+
   const fromY = direction === 'top' ? -50 : 50;
   const midY = direction === 'top' ? 5 : -5;
   const totalDuration = stepDuration * 2;
@@ -54,7 +71,7 @@ const BlurText = ({
     <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
       {elements.map((segment: string, index: number) => (
         <motion.span
-          className="inline-block will-change-[transform,filter,opacity]"
+          className="inline-block"
           key={index}
           initial={{ filter: 'blur(10px)', opacity: 0, y: fromY }}
           animate={

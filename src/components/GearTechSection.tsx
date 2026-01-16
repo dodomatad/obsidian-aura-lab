@@ -110,17 +110,17 @@ const GearTechSection = () => {
         <motion.div
           className="flex gap-5 md:gap-6 py-4 px-6 overflow-x-auto md:overflow-visible"
           style={{
-            scrollSnapType: 'x mandatory',
+            scrollSnapType: isMobile ? 'x mandatory' : 'none',
             WebkitOverflowScrolling: 'touch',
           }}
-          animate={{
+          animate={isMobile ? undefined : {
             x: [0, -1400],
           }}
-          transition={{
+          transition={isMobile ? undefined : {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: isMobile ? 50 : 35,
+              duration: 35,
               ease: "linear",
             },
           }}

@@ -117,6 +117,7 @@ const GearTechSection = () => {
             delay={50}
             className="display-hero text-foreground"
             direction="top"
+            style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.02em' }}
           />
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

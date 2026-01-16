@@ -142,6 +142,7 @@ const ChampionSection = () => {
               delay={80}
               className="display-hero text-foreground mb-3 md:mb-4"
               direction="top"
+              style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', letterSpacing: '-0.03em', lineHeight: 0.95 }}
             />
             
             {/* Subtitle */}

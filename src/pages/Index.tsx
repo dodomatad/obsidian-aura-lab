@@ -292,13 +292,13 @@ const Index = () => {
                 <div className="space-y-3">
                   <a 
                     href="tel:+5513997446684" 
-                    className="block text-sm text-foreground/80 hover:text-orange transition-colors"
+                    className="block text-sm text-foreground/80 hover:text-orange transition-colors py-2 -my-2"
                   >
                     (13) 99744-6684
                   </a>
                   <a 
                     href="mailto:atendimento@caiaquesopium.com.br" 
-                    className="block text-sm text-foreground/80 hover:text-orange transition-colors break-all"
+                    className="block text-sm text-foreground/80 hover:text-orange transition-colors break-all py-2 -my-2"
                   >
                     atendimento@caiaquesopium.com.br
                   </a>
@@ -329,7 +329,7 @@ const Index = () => {
                     href="https://instagram.com/opiumsurfski" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/80 hover:text-orange transition-colors"
+                    className="text-sm text-foreground/80 hover:text-orange transition-colors py-2 -my-2"
                   >
                     Instagram
                   </a>
@@ -337,7 +337,7 @@ const Index = () => {
                     href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os produtos Opium."
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/80 hover:text-orange transition-colors"
+                    className="text-sm text-foreground/80 hover:text-orange transition-colors py-2 -my-2"
                   >
                     WhatsApp
                   </a>

@@ -11,7 +11,7 @@ const ScrollZoomLogo = () => {
   });
 
   // Transformações baseadas no scroll
-  const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.4]);
+  const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.2]);
   const logoY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const contentOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);

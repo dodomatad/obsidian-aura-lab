@@ -119,7 +119,7 @@ const AtelierSection = () => {
             >
               {/* Color Dot */}
               <div
-                className={`w-8 h-8 rounded-full transition-all duration-300 ${
+                className={`w-11 h-11 md:w-8 md:h-8 rounded-full transition-all duration-300 ${
                   selectedColor === index 
                     ? 'scale-100 ring-2 ring-foreground ring-offset-2 ring-offset-background' 
                     : 'scale-90 opacity-60 hover:opacity-100 hover:scale-100'

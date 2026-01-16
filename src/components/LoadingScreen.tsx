@@ -105,14 +105,6 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               </span>
             </motion.div>
 
-            {/* Decorative line */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 h-px w-32 bg-gradient-to-r from-transparent via-foreground/30 to-transparent"
-              style={{ originX: 0.5 }}
-            />
 
             {/* Loading indicator */}
             <motion.div
@@ -135,26 +127,6 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
             </motion.div>
           </div>
 
-          {/* Corner decorations */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="absolute top-8 left-8"
-          >
-            <div className="w-8 h-px bg-foreground/20" />
-            <div className="w-px h-8 bg-foreground/20" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="absolute bottom-8 right-8"
-          >
-            <div className="w-8 h-px bg-foreground/20 ml-auto" />
-            <div className="w-px h-8 bg-foreground/20 ml-auto" />
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

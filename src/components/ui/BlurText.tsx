@@ -11,6 +11,7 @@ interface BlurTextProps {
   rootMargin?: string;
   onAnimationComplete?: () => void;
   stepDuration?: number;
+  style?: React.CSSProperties;
 }
 
 const BlurText = ({
@@ -22,7 +23,8 @@ const BlurText = ({
   threshold = 0.1,
   rootMargin = '0px',
   onAnimationComplete,
-  stepDuration = 0.35
+  stepDuration = 0.35,
+  style = {}
 }: BlurTextProps) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -50,7 +52,7 @@ const BlurText = ({
   const times = [0, 0.5, 1];
 
   return (
-    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'inherit' }}>
+    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'inherit', ...style }}>
       {elements.map((segment: string, index: number) => (
         <motion.span
           className="inline-block will-change-[transform,filter,opacity]"

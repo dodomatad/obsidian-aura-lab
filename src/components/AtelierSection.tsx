@@ -79,6 +79,7 @@ const AtelierSection = () => {
             delay={150}
             className="display-hero text-foreground"
             direction="bottom"
+            style={{ fontSize: 'clamp(1.75rem, 5vw, 4rem)' }}
           />
         </motion.div>
       </div>

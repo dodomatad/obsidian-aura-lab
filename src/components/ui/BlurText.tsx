@@ -47,7 +47,7 @@ const BlurText = ({
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
 
-  // On mobile, render static text without per-letter animations for performance
+  // On mobile, render simpler animation for performance
   if (isMobile) {
     return (
       <motion.p 

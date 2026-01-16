@@ -162,7 +162,7 @@ const AtelierSection = () => {
         </motion.div>
       </div>
 
-      {/* CTA - Glassmorphism style */}
+      {/* CTA - Destaque com lista */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -170,23 +170,38 @@ const AtelierSection = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="px-8 md:px-16 mt-20 text-center"
       >
-        <p className="text-muted-foreground text-sm mb-8 max-w-md mx-auto">
-          Customização sob consulta. Cada embarcação é única.
-        </p>
+        {/* Lista de benefícios */}
+        <ul className="text-muted-foreground text-sm md:text-base mb-10 max-w-lg mx-auto space-y-3 text-left">
+          <li className="flex items-start gap-3">
+            <span className="text-orange mt-1">•</span>
+            <span>Realizando o desejo do barco dos sonhos</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-orange mt-1">•</span>
+            <span>Aqui você pode escolher a coloração do seu barco</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-orange mt-1">•</span>
+            <span>Escolha o modelo que você deseja</span>
+          </li>
+        </ul>
+
+        {/* Botão maior e mais destacado */}
         <motion.a
           href="https://wa.me/5513997446684?text=Olá! Gostaria de personalizar minha embarcação."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-widest uppercase font-bold transition-all duration-300 hover:shadow-lg hover:shadow-white/20"
+          className="inline-flex items-center gap-4 px-12 py-5 bg-white text-black text-sm md:text-base tracking-widest uppercase font-bold transition-all duration-300 hover:shadow-xl hover:shadow-white/30"
           whileHover={{ 
-            scale: 1.03,
+            scale: 1.05,
           }}
           whileTap={{ scale: 0.98 }}
         >
           <span>Consultar Especialista</span>
           <motion.span
-            animate={{ x: [0, 4, 0] }}
+            animate={{ x: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
+            className="text-lg"
           >
             →
           </motion.span>

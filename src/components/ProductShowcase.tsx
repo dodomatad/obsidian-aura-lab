@@ -51,6 +51,7 @@ const Hero3DCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
@@ -75,16 +76,19 @@ const Hero3DCarousel = () => {
   const goToSlide = (index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
+    setImageLoaded(false);
   };
 
   const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % surfskiProducts.length);
+    setImageLoaded(false);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + surfskiProducts.length) % surfskiProducts.length);
+    setImageLoaded(false);
   }, []);
 
   // Keyboard navigation
@@ -269,6 +273,13 @@ const Hero3DCarousel = () => {
               }}
             />
 
+            {/* Skeleton loading placeholder */}
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="w-full h-48 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-lg" />
+              </div>
+            )}
+
             {/* Boat image - lazy loaded */}
             <motion.img
               layoutId={`boat-image-${currentProduct.id}`}
@@ -276,14 +287,13 @@ const Hero3DCarousel = () => {
               src={currentProduct.image}
               alt={currentProduct.name}
               loading="lazy"
-              className="w-full h-auto object-contain relative z-10 pointer-events-none"
+              onLoad={() => setImageLoaded(true)}
+              className={`w-full h-auto object-contain relative z-10 pointer-events-none transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               animate={{
-                opacity: isThisProductTransitioning ? 0 : 1,
                 y: isHovered && !isMobile ? -15 : 0,
                 scale: isHovered && !isMobile ? 1.04 : 1,
               }}
               transition={{ 
-                opacity: { duration: 0.1 },
                 y: { type: 'spring', stiffness: 120, damping: 15 },
                 scale: { type: 'spring', stiffness: 120, damping: 15 },
               }}
@@ -292,6 +302,7 @@ const Hero3DCarousel = () => {
                   drop-shadow(0 50px 100px rgba(0,0,0,0.75)) 
                   drop-shadow(0 25px 50px rgba(0,0,0,0.55))
                 `,
+                opacity: isThisProductTransitioning ? 0 : undefined,
               }}
             />
 

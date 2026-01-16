@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import BlurText from '@/components/ui/BlurText';
 import boatPink from '@/assets/boat-pink.png';
 import boatCamo from '@/assets/boat-camo.png';
 import boatCarbon from '@/assets/boat-carbon.png';
@@ -72,10 +73,13 @@ const AtelierSection = () => {
           <span className="text-xs tracking-widest text-muted-foreground uppercase block mb-3 md:mb-4">
             O Ateliê
           </span>
-          <h2 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.75rem, 5vw, 4rem)' }}>
-            Sua Identidade<span className="text-orange">.</span><br />
-            <span className="text-muted-foreground">Sua Cor<span className="text-orange">.</span></span>
-          </h2>
+          <BlurText
+            text="Sua Identidade. Sua Cor."
+            animateBy="words"
+            delay={150}
+            className="display-hero text-foreground"
+            direction="bottom"
+          />
         </motion.div>
       </div>
 

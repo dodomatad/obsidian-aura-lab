@@ -245,7 +245,7 @@ const Index = () => {
         <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
-        <footer className="w-full px-6 md:px-16 py-16 md:py-20">
+        <footer className="w-full px-6 md:px-16 py-16 md:py-20 pb-24 md:pb-20">
           <div className="max-w-7xl mx-auto">
             
             {/* Authority Badges - Social Proof */}

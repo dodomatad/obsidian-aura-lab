@@ -1,7 +1,6 @@
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef, useCallback, useEffect, useState } from 'react';
 import { Anchor, Shield, Link2, Package, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
 import BlurText from '@/components/ui/BlurText';
 
@@ -40,7 +39,6 @@ const gearItems: GearItem[] = [
 ];
 
 const GearTechSection = () => {
-  const isMobile = useIsMobile();
   const sectionRef = useRef(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
@@ -131,11 +129,11 @@ const GearTechSection = () => {
       </div>
 
       {/* Carousel Container */}
-      <div className="relative px-6 md:px-16">
-        {/* Navigation Arrows - Desktop only */}
+      <div className="relative px-6 md:px-16 max-w-4xl mx-auto">
+        {/* Navigation Arrows */}
         <button
           onClick={scrollPrev}
-          className="hidden md:flex absolute -left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full border border-foreground/20 bg-background/80 backdrop-blur-sm text-foreground/60 hover:text-orange hover:border-orange transition-all duration-300"
+          className="absolute -left-2 md:left-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-foreground/20 bg-background/80 backdrop-blur-sm text-foreground/60 hover:text-orange hover:border-orange transition-all duration-300"
           aria-label="Anterior"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -143,28 +141,20 @@ const GearTechSection = () => {
         
         <button
           onClick={scrollNext}
-          className="hidden md:flex absolute -right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full border border-foreground/20 bg-background/80 backdrop-blur-sm text-foreground/60 hover:text-orange hover:border-orange transition-all duration-300"
+          className="absolute -right-2 md:right-0 top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-foreground/20 bg-background/80 backdrop-blur-sm text-foreground/60 hover:text-orange hover:border-orange transition-all duration-300"
           aria-label="Próximo"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        {/* Gradient fade left */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        
-        {/* Gradient fade right */}
-        <div className="absolute right-0 top-0 bottom-0 w-8 md:w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-
-        {/* Embla Carousel */}
-        <div className="overflow-hidden" ref={emblaRef}>
+        {/* Embla Carousel - Single card view */}
+        <div className="overflow-hidden mx-8 md:mx-16" ref={emblaRef}>
           <div className="flex">
             {gearItems.map((item, index) => (
               <div
                 key={item.id}
-                className="flex-shrink-0 min-w-0 pl-4 md:pl-6"
-                style={{
-                  flexBasis: isMobile ? '85%' : '25%',
-                }}
+                className="flex-shrink-0 min-w-0 px-2"
+                style={{ flexBasis: '100%' }}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -172,10 +162,9 @@ const GearTechSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group h-full"
-                  whileHover={isMobile ? undefined : { y: -8 }}
                 >
                   <div 
-                    className="relative p-6 md:p-8 h-full min-h-[180px] md:min-h-[220px]"
+                    className="relative p-8 md:p-12 h-full min-h-[240px] md:min-h-[280px] flex flex-col items-center justify-center text-center"
                     style={{
                       background: 'rgba(255, 255, 255, 0.02)',
                       border: '1px solid rgba(255, 255, 255, 0.06)',
@@ -190,21 +179,21 @@ const GearTechSection = () => {
                       }}
                     />
 
-                    {/* Icon */}
-                    <div className={`mb-4 md:mb-6 transition-colors duration-300 ${
-                      isMobile ? 'text-orange' : 'text-foreground/40 group-hover:text-orange'
-                    }`}>
-                      {item.icon}
+                    {/* Icon - Larger */}
+                    <div className="mb-6 text-orange">
+                      <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
+                        {item.icon}
+                      </div>
                     </div>
 
-                    {/* Content */}
+                    {/* Content - Centered */}
                     <h3 
-                      className="text-lg md:text-xl font-sans font-medium text-foreground mb-2 md:mb-3 tracking-wide"
+                      className="text-2xl md:text-3xl font-sans font-medium text-foreground mb-3 md:mb-4 tracking-wide"
                       style={{ letterSpacing: '0.03em' }}
                     >
                       {item.name}
                     </h3>
-                    <p className="text-sm text-foreground/50 font-sans font-light">
+                    <p className="text-base md:text-lg text-foreground/50 font-sans font-light max-w-md">
                       {item.description}
                     </p>
                   </div>
@@ -214,20 +203,20 @@ const GearTechSection = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Dots */}
-        <div className="flex md:hidden justify-center gap-2 mt-6">
+        {/* Navigation Dots */}
+        <div className="flex justify-center gap-3 mt-8">
           {gearItems.map((item, index) => (
             <button
               key={item.id}
               onClick={() => emblaApi?.scrollTo(index)}
-              className="w-8 h-8 flex items-center justify-center"
+              className="w-10 h-10 flex items-center justify-center"
               aria-label={`Ir para ${item.name}`}
             >
               <span 
-                className={`block w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`block w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                   emblaApi?.selectedScrollSnap() === index 
-                    ? 'bg-orange w-4' 
-                    : 'bg-foreground/30'
+                    ? 'bg-orange scale-125' 
+                    : 'bg-foreground/30 hover:bg-foreground/50'
                 }`}
               />
             </button>

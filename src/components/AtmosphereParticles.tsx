@@ -1,5 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { useMemo, useEffect, useState } from 'react';
+import { motion, useReducedMotion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useMemo, useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Particle {
@@ -14,20 +14,49 @@ interface Particle {
 const AtmosphereParticles = () => {
   const isMobile = useIsMobile();
   const prefersReducedMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Mouse position for parallax spotlights
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+  
+  // Smooth spring physics for organic movement
+  const smoothX = useSpring(mouseX, { stiffness: 15, damping: 30, mass: 1 });
+  const smoothY = useSpring(mouseY, { stiffness: 15, damping: 30, mass: 1 });
+  
+  // Transform mouse position to spotlight offset (subtle movement)
+  const spotlight1X = useTransform(smoothX, [0, 1], ['-10%', '10%']);
+  const spotlight1Y = useTransform(smoothY, [0, 1], ['-8%', '8%']);
+  const spotlight2X = useTransform(smoothX, [0, 1], ['8%', '-8%']);
+  const spotlight2Y = useTransform(smoothY, [0, 1], ['6%', '-6%']);
+  
+  // Track mouse movement
+  useEffect(() => {
+    if (isMobile || prefersReducedMotion) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isMobile, prefersReducedMotion, mouseX, mouseY]);
   
   // Generate random particles - only for desktop
   const particles = useMemo<Particle[]>(() => {
-    // Return empty array if we won't render anyway
     if (isMobile || prefersReducedMotion) return [];
     
-    const count = 30;
+    const count = 25;
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       size: Math.random() * 3 + 1,
       duration: Math.random() * 25 + 20,
       delay: Math.random() * 10,
-      opacity: Math.random() * 0.06 + 0.02,
+      opacity: Math.random() * 0.05 + 0.02,
     }));
   }, [isMobile, prefersReducedMotion]);
 
@@ -37,63 +66,44 @@ const AtmosphereParticles = () => {
   }
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
-      {/* Animated Spotlight 1 - Top left, slow drift */}
+    <div ref={containerRef} className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      {/* Mouse-following Spotlight 1 - Deep Blue Cyan (follows mouse slowly) */}
       <motion.div
-        className="absolute w-[80vw] h-[60vh] -top-20 -left-40"
-        animate={{
-          x: [0, 100, 50, 0],
-          y: [0, 50, 30, 0],
-          opacity: [0.15, 0.25, 0.2, 0.15],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+        className="absolute w-[70vw] h-[60vh] top-0 left-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.12) 0%, rgba(30, 60, 90, 0.08) 30%, transparent 60%)',
-          filter: 'blur(80px)',
-        }}
-      />
-      
-      {/* Animated Spotlight 2 - Center right, orange tint */}
-      <motion.div
-        className="absolute w-[70vw] h-[50vh] top-1/3 -right-20"
-        animate={{
-          x: [0, -80, -40, 0],
-          y: [0, 60, 20, 0],
-          opacity: [0.1, 0.18, 0.12, 0.1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 5,
-        }}
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(249, 115, 22, 0.08) 0%, rgba(60, 40, 30, 0.05) 40%, transparent 60%)',
+          x: spotlight1X,
+          y: spotlight1Y,
+          background: 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.15) 0%, rgba(20, 50, 80, 0.08) 35%, transparent 60%)',
           filter: 'blur(100px)',
         }}
       />
       
-      {/* Animated Spotlight 3 - Bottom center, subtle cyan */}
+      {/* Mouse-following Spotlight 2 - Opium Orange (inverse movement) */}
       <motion.div
-        className="absolute w-[90vw] h-[40vh] -bottom-20 left-1/2 -translate-x-1/2"
+        className="absolute w-[60vw] h-[50vh] bottom-0 right-0"
+        style={{
+          x: spotlight2X,
+          y: spotlight2Y,
+          background: 'radial-gradient(ellipse at center, rgba(249, 115, 22, 0.1) 0%, rgba(80, 40, 20, 0.06) 40%, transparent 55%)',
+          filter: 'blur(120px)',
+        }}
+      />
+      
+      {/* Ambient Spotlight 3 - Subtle breathing cyan at bottom */}
+      <motion.div
+        className="absolute w-[90vw] h-[35vh] -bottom-10 left-1/2 -translate-x-1/2"
         animate={{
-          y: [0, -40, -20, 0],
-          opacity: [0.08, 0.15, 0.1, 0.08],
-          scale: [1, 1.1, 1.05, 1],
+          opacity: [0.06, 0.12, 0.06],
+          scale: [1, 1.08, 1],
         }}
         transition={{
-          duration: 18,
+          duration: 12,
           repeat: Infinity,
           ease: 'easeInOut',
-          delay: 8,
         }}
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.06) 0%, transparent 50%)',
-          filter: 'blur(120px)',
+          background: 'radial-gradient(ellipse at center, rgba(6, 182, 212, 0.08) 0%, transparent 50%)',
+          filter: 'blur(100px)',
         }}
       />
       

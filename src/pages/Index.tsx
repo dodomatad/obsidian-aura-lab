@@ -14,7 +14,7 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useLenisScroll } from '@/hooks/useLenisScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { ChevronDown } from 'lucide-react';
+
 import opiumLogo from '@/assets/opium-logo.png';
 
 const Index = () => {
@@ -183,36 +183,9 @@ const Index = () => {
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
                 }}
               />
-              
-              {/* Subtext - fade in delayed */}
-              <motion.p
-                initial={skipAnimations ? { opacity: 1 } : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={skipAnimations ? { duration: 0 } : { duration: 1.2, delay: 1.5 }}
-                className="mt-6 md:mt-8 text-sm md:text-base tracking-[0.3em] uppercase text-foreground/50 font-sans"
-              >
-                Surfskis de Elite
-              </motion.p>
             </motion.div>
           </motion.div>
 
-          {/* Scroll Indicator - Shows on mobile to hint more content */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 0.8 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-          >
-            <span className="text-[9px] tracking-[0.3em] uppercase text-foreground/40 font-sans">
-              Explorar
-            </span>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <ChevronDown className="w-5 h-5 text-foreground/40" />
-            </motion.div>
-          </motion.div>
         </section>
 
         {/* ============================================ */}

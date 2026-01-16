@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useMemo } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Particle {
   id: number;
@@ -11,9 +12,12 @@ interface Particle {
 }
 
 const AtmosphereParticles = () => {
-  // Generate random particles
+  const isMobile = useIsMobile();
+  
+  // Generate random particles - fewer on mobile for performance
   const particles = useMemo<Particle[]>(() => {
-    return Array.from({ length: 40 }, (_, i) => ({
+    const count = isMobile ? 15 : 40;
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       size: Math.random() * 3 + 1,
@@ -21,7 +25,7 @@ const AtmosphereParticles = () => {
       delay: Math.random() * 10,
       opacity: Math.random() * 0.08 + 0.02,
     }));
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">

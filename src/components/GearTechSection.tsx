@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useRef, useCallback, useEffect, useState } from 'react';
 import { Anchor, Shield, Link2, Package, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import BlurText from '@/components/ui/BlurText';
 
 interface GearItem {
@@ -43,12 +44,18 @@ const GearTechSection = () => {
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: 'start',
-    slidesToScroll: 1,
-    containScroll: false,
-  });
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3500, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: 'center',
+      slidesToScroll: 1,
+    },
+    [autoplayPlugin.current]
+  );
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();

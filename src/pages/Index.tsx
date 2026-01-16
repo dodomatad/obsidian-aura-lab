@@ -10,7 +10,6 @@ import CustomCursor from '@/components/CustomCursor';
 import ChampionSection from '@/components/ChampionSection';
 
 import MobileMenu from '@/components/MobileMenu';
-import MobileDock from '@/components/MobileDock';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useLenisScroll } from '@/hooks/useLenisScroll';
 import { useTransition } from '@/context/TransitionContext';
@@ -245,7 +244,7 @@ const Index = () => {
         <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
-        <footer className="w-full px-6 md:px-16 py-16 md:py-20 pb-24 md:pb-20">
+        <footer className="w-full px-6 md:px-16 py-16 md:py-20">
           <div className="max-w-7xl mx-auto">
             
             {/* Authority Badges - Social Proof */}
@@ -358,8 +357,6 @@ const Index = () => {
         </footer>
       </div>
       
-      {/* Mobile Dock Navigation */}
-      <MobileDock />
     </>
   );
 };

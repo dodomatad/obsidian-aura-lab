@@ -14,20 +14,9 @@ interface Particle {
 const AtmosphereParticles = () => {
   const isMobile = useIsMobile();
   const prefersReducedMotion = useReducedMotion();
-  const [isVisible, setIsVisible] = useState(true);
   
-  // Pause particles when tab is not visible (saves battery)
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      setIsVisible(document.visibilityState === 'visible');
-    };
-    
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, []);
-
-  // Skip particles entirely if user prefers reduced motion
-  if (prefersReducedMotion) {
+  // Skip particles entirely on mobile for performance - they cause scroll lag
+  if (isMobile || prefersReducedMotion) {
     return null;
   }
   
@@ -43,11 +32,6 @@ const AtmosphereParticles = () => {
       opacity: Math.random() * 0.06 + 0.02, // Slightly more subtle
     }));
   }, [isMobile]);
-
-  // Don't animate when tab is hidden
-  if (!isVisible) {
-    return null;
-  }
 
   return (
     <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">

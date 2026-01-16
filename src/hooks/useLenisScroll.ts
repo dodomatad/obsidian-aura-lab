@@ -5,17 +5,22 @@ export const useLenisScroll = () => {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Check if mobile
+    const isMobile = window.innerWidth < 768;
+    
+    // On mobile, use native scroll for best performance
+    if (isMobile) {
+      return;
+    }
+    
     const lenis = new Lenis({
-      // Mobile-optimized: controlled, weighted scroll with elegant deceleration
-      lerp: 0.1,
-      duration: 1.5,
-      easing: (t) => 1 - Math.pow(1 - t, 4),
+      lerp: 0.15,
+      duration: 0.8,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 0.8,
-      syncTouch: true,
     });
 
     lenisRef.current = lenis;

@@ -11,35 +11,64 @@ import {
 import opiumLogo from '@/assets/opium-logo-official.png';
 
 // Paddle Menu Button Component - Animated Crossed Paddles
-const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => (
-  <div className="w-10 h-10 flex flex-col justify-center items-center gap-2 relative p-0">
-    {/* Paddle 1 - Upper */}
-    <div 
-      className="w-8 h-1.5 flex items-center justify-between relative"
-      style={{
-        transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-        transform: isOpen ? 'translateY(7px) rotate(45deg)' : 'translateY(0) rotate(0deg)',
-      }}
-    >
-      <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
-      <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
-      <span className="w-2 h-full bg-current rounded-tr-full rounded-br-full z-[2]" />
+const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => {
+  const transition = {
+    duration: 0.45,
+    ease: [0.68, -0.55, 0.265, 1.55] as const,
+  };
+
+  return (
+    <div className="w-10 h-10 flex flex-col justify-center items-center gap-2 relative p-0">
+      {/* Paddle 1 - Upper */}
+      <motion.div
+        className="w-8 h-1.5 flex items-center justify-between relative"
+        style={{ transformOrigin: '50% 50%' }}
+        initial={false}
+        animate={
+          isOpen
+            ? {
+                y: 7,
+                rotate: [45, 40, 45],
+              }
+            : { y: 0, rotate: 0 }
+        }
+        transition={
+          isOpen
+            ? { ...transition, repeat: Infinity, repeatType: 'mirror', duration: 1.6, ease: 'easeInOut' }
+            : transition
+        }
+      >
+        <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
+        <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
+        <span className="w-2 h-full bg-current rounded-tr-full rounded-br-full z-[2]" />
+      </motion.div>
+
+      {/* Paddle 2 - Lower */}
+      <motion.div
+        className="w-8 h-1.5 flex items-center justify-between relative"
+        style={{ transformOrigin: '50% 50%' }}
+        initial={false}
+        animate={
+          isOpen
+            ? {
+                y: -7,
+                rotate: [-45, -40, -45],
+              }
+            : { y: 0, rotate: 0 }
+        }
+        transition={
+          isOpen
+            ? { ...transition, repeat: Infinity, repeatType: 'mirror', duration: 1.6, ease: 'easeInOut' }
+            : transition
+        }
+      >
+        <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
+        <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
+        <span className="w-2 h-full bg-current rounded-tr-full rounded-br-full z-[2]" />
+      </motion.div>
     </div>
-    
-    {/* Paddle 2 - Lower */}
-    <div 
-      className="w-8 h-1.5 flex items-center justify-between relative"
-      style={{
-        transition: 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-        transform: isOpen ? 'translateY(-7px) rotate(-45deg)' : 'translateY(0) rotate(0deg)',
-      }}
-    >
-      <span className="absolute left-0 right-0 h-0.5 bg-current top-1/2 -translate-y-1/2 z-[1]" />
-      <span className="w-2 h-full bg-current rounded-tl-full rounded-bl-full z-[2]" />
-      <span className="w-2 h-full bg-current rounded-tr-full rounded-br-full z-[2]" />
-    </div>
-  </div>
-);
+  );
+};
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);

@@ -40,6 +40,12 @@ const MobileMenu = () => {
         <button
           className="md:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-foreground/10 active:bg-foreground/20"
           aria-label="Abrir menu"
+          onClick={() => {
+            // Haptic feedback for mobile
+            if ('vibrate' in navigator) {
+              navigator.vibrate(10);
+            }
+          }}
         >
           <Menu className="w-5 h-5 text-foreground/80" />
         </button>

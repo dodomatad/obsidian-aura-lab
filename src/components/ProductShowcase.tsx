@@ -386,25 +386,25 @@ const Hero3DCarousel = () => {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5 z-30">
+      {/* Navigation Dots - Larger on mobile for better visibility */}
+      <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-3 md:gap-2.5 z-30">
         {surfskiProducts.map((product, index) => (
           <motion.button
             key={product.id}
             onClick={() => goToSlide(index)}
-            className="relative group p-4 md:p-2"
+            className="relative group p-3 md:p-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 flex items-center justify-center"
             whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.9 }}
           >
             <motion.div
-              className={`w-2 h-2 rounded-full transition-all duration-250 ${
-                index === currentIndex ? 'bg-orange' : 'bg-foreground/15 group-hover:bg-foreground/35'
+              className={`w-3 h-3 md:w-2 md:h-2 rounded-full transition-all duration-250 ${
+                index === currentIndex ? 'bg-orange' : 'bg-foreground/20 group-hover:bg-foreground/40'
               }`}
-              animate={{ scale: index === currentIndex ? 1.2 : 0.8 }}
+              animate={{ scale: index === currentIndex ? 1.3 : 1 }}
             />
             {index === currentIndex && (
               <motion.div
-                className="absolute inset-0 m-auto w-5 h-5 rounded-full border border-orange/35"
+                className="absolute inset-0 m-auto w-7 h-7 md:w-5 md:h-5 rounded-full border border-orange/40"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.25 }}

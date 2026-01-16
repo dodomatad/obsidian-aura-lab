@@ -196,6 +196,12 @@ const AtelierSection = () => {
             scale: 1.05,
           }}
           whileTap={{ scale: 0.98 }}
+          onClick={() => {
+            // Haptic feedback for mobile
+            if ('vibrate' in navigator) {
+              navigator.vibrate(15);
+            }
+          }}
         >
           <span>Consultar Especialista</span>
           <motion.span

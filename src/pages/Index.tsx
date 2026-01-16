@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import GearTechSection from '@/components/GearTechSection';
@@ -7,7 +7,9 @@ import GearTechSection from '@/components/GearTechSection';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
-import ChampionSection from '@/components/ChampionSection';
+
+// Lazy load heavy sections below the fold
+const ChampionSection = lazy(() => import('@/components/ChampionSection'));
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -207,9 +209,15 @@ const Index = () => {
           <GearTechSection />
         </div>
 
-        {/* Champion Journey Section - Storytelling (moved below accessories) */}
+        {/* Champion Journey Section - Lazy loaded for performance */}
         <div id="champion" className="pt-12 md:pt-20">
-          <ChampionSection />
+          <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="w-12 h-12 border-2 border-orange/30 border-t-orange rounded-full animate-spin" />
+            </div>
+          }>
+            <ChampionSection />
+          </Suspense>
         </div>
 
 

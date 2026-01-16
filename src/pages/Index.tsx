@@ -17,7 +17,7 @@ import { useLenisScroll } from '@/hooks/useLenisScroll';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-import opiumLogo from '@/assets/opium-logo.png';
+import opiumLogo from '@/assets/opium-logo-official.png';
 
 const Index = () => {
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();

@@ -78,7 +78,7 @@ const AtelierSection = () => {
             animateBy="words"
             delay={150}
             direction="top"
-            className="display-hero text-foreground"
+            className="display-hero text-foreground block"
           />
         </motion.div>
       </div>

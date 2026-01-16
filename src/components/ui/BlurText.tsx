@@ -68,7 +68,7 @@ const BlurText = ({
   const times = [0, 0.5, 1];
 
   return (
-    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <p ref={ref} className={`${className}`} style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'baseline' }}>
       {elements.map((segment: string, index: number) => (
         <motion.span
           className="inline-block"

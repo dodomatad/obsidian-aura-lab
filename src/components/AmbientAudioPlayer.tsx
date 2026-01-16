@@ -35,7 +35,7 @@ const AmbientAudioPlayer = () => {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 2 }}
-      className="fixed bottom-8 right-8 z-50"
+      className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

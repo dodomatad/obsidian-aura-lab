@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Anchor, Shield, Link2, Package } from 'lucide-react';
+import { useRef, useCallback, useEffect, useState } from 'react';
+import { Anchor, Shield, Link2, Package, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import useEmblaCarousel from 'embla-carousel-react';
 
 interface GearItem {
   id: string;
@@ -37,18 +38,47 @@ const gearItems: GearItem[] = [
   },
 ];
 
-// Duplicate for infinite scroll effect
-const duplicatedItems = [...gearItems, ...gearItems];
-
 const GearTechSection = () => {
   const isMobile = useIsMobile();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { margin: "-100px" });
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    slidesToScroll: 1,
+    containScroll: false,
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
     <section ref={sectionRef} className="relative py-28 md:py-40 overflow-hidden">
       
-      {/* Background subtle gradient - more subtle, no boxy effect */}
+      {/* Background subtle gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -101,80 +131,109 @@ const GearTechSection = () => {
         </motion.div>
       </div>
 
-      {/* Infinite Slider */}
-      <div className="relative">
+      {/* Carousel Container */}
+      <div className="relative px-6 md:px-16">
+        {/* Navigation Arrows - Desktop only */}
+        <button
+          onClick={scrollPrev}
+          className="hidden md:flex absolute -left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full border border-foreground/20 bg-background/80 backdrop-blur-sm text-foreground/60 hover:text-orange hover:border-orange transition-all duration-300"
+          aria-label="Anterior"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        
+        <button
+          onClick={scrollNext}
+          className="hidden md:flex absolute -right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center rounded-full border border-foreground/20 bg-background/80 backdrop-blur-sm text-foreground/60 hover:text-orange hover:border-orange transition-all duration-300"
+          aria-label="Próximo"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+
         {/* Gradient fade left */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         
         {/* Gradient fade right */}
-        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 md:w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        {/* Scrolling container with snap */}
-        <motion.div
-          className="flex gap-5 md:gap-6 py-4 px-6 overflow-x-auto md:overflow-visible"
-          style={{
-            scrollSnapType: isMobile ? 'x mandatory' : 'none',
-            WebkitOverflowScrolling: 'touch',
-          }}
-          animate={isMobile ? undefined : (isInView ? { x: [0, -1400] } : { x: 0 })}
-          transition={isMobile ? undefined : {
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 35,
-              ease: "linear",
-            },
-          }}
-        >
-          {duplicatedItems.map((item, index) => (
-            <motion.div
-              key={`${item.id}-${index}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="flex-shrink-0 w-[85vw] md:w-80 group"
-              style={{ scrollSnapAlign: 'center' }}
-              whileHover={isMobile ? undefined : { y: -8 }}
-            >
-              <div 
-                className="relative p-6 md:p-8 h-full"
+        {/* Embla Carousel */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {gearItems.map((item, index) => (
+              <div
+                key={item.id}
+                className="flex-shrink-0 min-w-0 pl-4 md:pl-6"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  border: '1px solid rgba(255, 255, 255, 0.06)',
-                  backdropFilter: 'blur(10px)',
+                  flexBasis: isMobile ? '85%' : '25%',
                 }}
               >
-                {/* Hover glow */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(249, 115, 22, 0.08) 0%, transparent 50%)',
-                  }}
-                />
-
-                {/* Icon */}
-                <div className={`mb-4 md:mb-6 transition-colors duration-300 ${
-                  isMobile ? 'text-orange' : 'text-foreground/40 group-hover:text-orange'
-                }`}>
-                  {item.icon}
-                </div>
-
-                {/* Content */}
-                <h3 
-                  className="text-lg md:text-xl font-sans font-medium text-foreground mb-2 md:mb-3 tracking-wide"
-                  style={{ letterSpacing: '0.03em' }}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group h-full"
+                  whileHover={isMobile ? undefined : { y: -8 }}
                 >
-                  {item.name}
-                </h3>
-                <p className="text-sm text-foreground/50 font-sans font-light">
-                  {item.description}
-                </p>
+                  <div 
+                    className="relative p-6 md:p-8 h-full min-h-[180px] md:min-h-[220px]"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                      backdropFilter: 'blur(10px)',
+                    }}
+                  >
+                    {/* Hover glow */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(249, 115, 22, 0.08) 0%, transparent 50%)',
+                      }}
+                    />
 
+                    {/* Icon */}
+                    <div className={`mb-4 md:mb-6 transition-colors duration-300 ${
+                      isMobile ? 'text-orange' : 'text-foreground/40 group-hover:text-orange'
+                    }`}>
+                      {item.icon}
+                    </div>
+
+                    {/* Content */}
+                    <h3 
+                      className="text-lg md:text-xl font-sans font-medium text-foreground mb-2 md:mb-3 tracking-wide"
+                      style={{ letterSpacing: '0.03em' }}
+                    >
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-foreground/50 font-sans font-light">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Navigation Dots */}
+        <div className="flex md:hidden justify-center gap-2 mt-6">
+          {gearItems.map((item, index) => (
+            <button
+              key={item.id}
+              onClick={() => emblaApi?.scrollTo(index)}
+              className="w-8 h-8 flex items-center justify-center"
+              aria-label={`Ir para ${item.name}`}
+            >
+              <span 
+                className={`block w-2 h-2 rounded-full transition-all duration-300 ${
+                  emblaApi?.selectedScrollSnap() === index 
+                    ? 'bg-orange w-4' 
+                    : 'bg-foreground/30'
+                }`}
+              />
+            </button>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* CTA */}

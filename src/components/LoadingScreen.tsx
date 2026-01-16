@@ -93,17 +93,6 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               </motion.h1>
             </div>
 
-            {/* Tagline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="mt-6"
-            >
-              <span className="text-xs tracking-[0.4em] text-muted-foreground uppercase">
-                Surfskis de Elite
-              </span>
-            </motion.div>
 
 
             {/* Loading indicator */}

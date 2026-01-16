@@ -92,9 +92,11 @@ const Index = () => {
             border: 'none',
           }}
         >
-          <div className="font-sans text-sm font-medium tracking-widest text-foreground/90">
-            OPIUM<span className="text-orange">.</span>
-          </div>
+          <img 
+            src={opiumLogo} 
+            alt="OPIUM" 
+            className="h-6 md:h-7 w-auto"
+          />
 
           
           {/* Desktop Navigation */}
@@ -254,9 +256,11 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
               {/* Brand */}
               <div>
-                <h3 className="text-lg font-medium tracking-widest text-foreground mb-4">
-                  OPIUM<span className="text-orange">.</span>
-                </h3>
+                <img 
+                  src={opiumLogo} 
+                  alt="OPIUM" 
+                  className="h-8 w-auto mb-4"
+                />
                 <p className="text-sm text-foreground/60 font-light leading-relaxed">
                   Há mais de 30 anos fabricando a história do mar. Surfskis de elite com DNA brasileiro.
                 </p>

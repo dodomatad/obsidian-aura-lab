@@ -64,11 +64,6 @@ const ScrollZoomLogo = () => {
                 className="w-[180px] md:w-[280px] lg:w-[350px] h-auto"
               />
             </div>
-            
-            {/* Subtítulo */}
-            <p className="mt-6 md:mt-8 text-sm md:text-base tracking-[0.3em] uppercase text-white/70 font-sans">
-              Surfskis de Elite
-            </p>
           </motion.div>
         </motion.div>
 

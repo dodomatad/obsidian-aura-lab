@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import GearTechSection from '@/components/GearTechSection';
-import AmbientAudioPlayer from '@/components/AmbientAudioPlayer';
+
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
@@ -240,8 +240,6 @@ const Index = () => {
         </div>
 
 
-        {/* Ambient Audio Player */}
-        <AmbientAudioPlayer />
 
         {/* Footer with Real Data */}
         <footer className="w-full px-6 md:px-16 py-16 md:py-20">

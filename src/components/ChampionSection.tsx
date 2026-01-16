@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Flag, Trophy, Cpu, Palette } from 'lucide-react';
 import championImage from '@/assets/champion-silhouette.jpg';
+import BlurText from '@/components/ui/BlurText';
 
 const authorityBadges = [
   { 
@@ -135,16 +136,13 @@ const ChampionSection = () => {
               </span>
             </motion.div>
             {/* Title */}
-            <h2 
+            <BlurText
+              text="O Pioneiro."
+              animateBy="letters"
+              delay={80}
+              direction="top"
               className="display-hero text-foreground mb-3 md:mb-4"
-              style={{
-                fontSize: 'clamp(2rem, 6vw, 4.5rem)',
-                letterSpacing: '-0.03em',
-                lineHeight: 0.95,
-              }}
-            >
-              O Pioneiro<span className="text-orange">.</span>
-            </h2>
+            />
             
             {/* Subtitle */}
             <p className="text-base md:text-xl text-foreground/50 font-sans font-light mb-8 md:mb-10 tracking-wide">

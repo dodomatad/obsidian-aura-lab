@@ -90,10 +90,14 @@ const AtelierSection = () => {
               key={colors[selectedColor].id}
               src={colors[selectedColor].image}
               alt={colors[selectedColor].name}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ 
+                duration: 0.6, 
+                ease: [0.25, 0.46, 0.45, 0.94],
+                opacity: { duration: 0.5 }
+              }}
               className="w-full md:w-[90%] h-auto object-contain"
               style={{
                 filter: `drop-shadow(0 40px 80px ${colors[selectedColor].color}40)`,

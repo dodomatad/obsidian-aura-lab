@@ -204,20 +204,20 @@ const ChampionSection = () => {
                 Por que escolher a Opium<span className="text-orange">?</span>
               </h3>
 
-              <p className="text-sm md:text-base text-foreground/70 leading-relaxed mb-6">
+              <p className="text-sm md:text-base text-foreground/70 leading-loose mb-8">
                 Com mais de 35 anos de experiência na fabricação de embarcações de alta performance, 
                 a Opium se consolidou como referência absoluta no mercado brasileiro. Nossa dedicação 
                 à excelência técnica e compromisso com a inovação nos permitiram conquistar 14 títulos 
                 consecutivos nas principais competições nacionais.
               </p>
 
-              <p className="text-sm md:text-base text-foreground/70 leading-relaxed mb-6">
+              <p className="text-sm md:text-base text-foreground/70 leading-loose mb-8">
                 Cada surfski que sai de nossa fábrica é resultado de décadas de conhecimento acumulado, 
                 pesquisa de materiais de ponta e feedback direto dos atletas campeões que confiam em 
                 nossos produtos para alcançar a vitória.
               </p>
 
-              <p className="text-sm md:text-base text-foreground/70 leading-relaxed">
+              <p className="text-sm md:text-base text-foreground/70 leading-loose">
                 Somos pioneiros na utilização de fibra de carbono de alta gramatura no Brasil, 
                 oferecendo embarcações que combinam leveza extrema, rigidez estrutural e durabilidade 
                 incomparável. Quando você escolhe Opium, você escolhe a tradição de quem domina o mar.

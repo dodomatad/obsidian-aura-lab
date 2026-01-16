@@ -112,13 +112,12 @@ const Hero3DCarousel = () => {
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
-  // Optimized variants - reduced transform complexity
-  // Smooth slide animation with proper easing - fixes "snap" effect
+  // Smooth slide animation - boat pushes old boat out
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
+      x: direction > 0 ? '80%' : '-80%',
       opacity: 0,
-      scale: 0.9,
+      scale: 0.85,
     }),
     center: {
       x: 0,
@@ -126,22 +125,40 @@ const Hero3DCarousel = () => {
       scale: 1,
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? '-100%' : '100%',
+      x: direction > 0 ? '-80%' : '80%',
       opacity: 0,
-      scale: 0.9,
+      scale: 0.85,
     }),
   };
 
-  // Smooth bezier curve for luxury feel
+  // Luxury smooth transition - longer duration for push effect
   const smoothTransition = {
-    duration: 0.6,
-    ease: [0.25, 1, 0.5, 1] as const, // Custom bezier for smooth slide
+    duration: 0.85,
+    ease: [0.32, 0.72, 0, 1] as const, // Smooth out-expo curve
   };
 
+  // Title synced with image - same timing
   const textVariants = {
-    enter: (direction: number) => ({ x: direction > 0 ? 200 : -200, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction: number) => ({ x: direction > 0 ? -200 : 200, opacity: 0 }),
+    enter: (direction: number) => ({ 
+      x: direction > 0 ? 150 : -150, 
+      opacity: 0,
+      scale: 0.95,
+    }),
+    center: { 
+      x: 0, 
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: number) => ({ 
+      x: direction > 0 ? -150 : 150, 
+      opacity: 0,
+      scale: 0.95,
+    }),
+  };
+
+  const textTransition = {
+    duration: 0.85,
+    ease: [0.32, 0.72, 0, 1] as const,
   };
 
   return (
@@ -199,9 +216,9 @@ const Hero3DCarousel = () => {
         </h2>
       </motion.div>
 
-      {/* Giant background name */}
+      {/* Giant background name - synced with boat animation */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence mode="popLayout" custom={direction}>
           <motion.h2 
             key={currentProduct.id}
             custom={direction}
@@ -209,12 +226,12 @@ const Hero3DCarousel = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+            transition={textTransition}
             className="display-hero whitespace-nowrap"
             style={{
               fontSize: isMobile ? 'clamp(4.5rem, 18vw, 8rem)' : 'clamp(12rem, 26vw, 30rem)',
               color: 'transparent',
-              WebkitTextStroke: '1px rgba(255,255,255,0.02)',
+              WebkitTextStroke: '1px rgba(255,255,255,0.04)',
               letterSpacing: '-0.04em',
               lineHeight: 1,
             }}
@@ -264,13 +281,25 @@ const Hero3DCarousel = () => {
               }}
             />
 
-            {/* Floor shadow */}
+            {/* Floor shadow - enhanced grounding effect */}
             <div 
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%] h-[45%] pointer-events-none"
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] h-[60%] pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse 100% 80% at 50% -15%, rgba(0,0,0,0.7) 0%, transparent 55%)',
-                filter: 'blur(30px)',
-                transform: 'translateY(80%) scaleY(0.4)',
+                background: `
+                  radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.85) 0%, transparent 50%),
+                  radial-gradient(ellipse 80% 60% at 50% 10%, rgba(30, 40, 60, 0.3) 0%, transparent 60%)
+                `,
+                filter: 'blur(35px)',
+                transform: 'translateY(65%) scaleY(0.5)',
+              }}
+            />
+            
+            {/* Reflection line */}
+            <div 
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[2px] pointer-events-none"
+              style={{
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.05) 70%, transparent 100%)',
+                transform: 'translateY(20px)',
               }}
             />
 

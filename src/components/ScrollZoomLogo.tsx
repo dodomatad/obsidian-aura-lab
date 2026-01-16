@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import opiumLogo from '@/assets/opium-logo.png';
+import opiumLogo from '@/assets/opium-logo-official.png';
 
 const ScrollZoomLogo = () => {
   const containerRef = useRef(null);

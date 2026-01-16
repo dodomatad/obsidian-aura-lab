@@ -20,6 +20,7 @@ import opiumLogo from '@/assets/opium-logo.png';
 const Index = () => {
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
   const [isLoadingComplete, setIsLoadingComplete] = useState(hasSeenIntro);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const { handleNavClick } = useSmoothScroll();
   const heroRef = useRef<HTMLDivElement>(null);
   const hasRestoredScroll = useRef(false);
@@ -149,12 +150,13 @@ const Index = () => {
             {/* Video Background - carrega sobre o fallback */}
             <iframe 
               src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw]"
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw] transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
               style={{ filter: 'brightness(0.85)' }}
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               title="Hero Background Video"
               loading="lazy"
+              onLoad={() => setVideoLoaded(true)}
             />
             
             {/* Cinematic Overlay */}

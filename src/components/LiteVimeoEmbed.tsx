@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTransition } from '@/context/TransitionContext';
 
 interface LiteVimeoEmbedProps {
   videoId: string;
@@ -7,18 +8,23 @@ interface LiteVimeoEmbedProps {
   className?: string;
   autoplayOnLoad?: boolean; // For background videos that should autoplay immediately
   showPlayButton?: boolean;
+  preloadDuringLoading?: boolean; // Pre-load iframe during LoadingScreen
   onLoad?: () => void;
 }
 
 /**
- * LiteVimeoEmbed - Lazy loading Vimeo component
+ * LiteVimeoEmbed - Lazy loading Vimeo component with preload support
  * 
- * Loads only a thumbnail initially, then loads the full iframe player when:
- * - autoplayOnLoad is true (for background videos)
- * - User clicks/hovers on the thumbnail
+ * Features:
+ * - Loads thumbnail as placeholder initially
+ * - For background videos (autoplayOnLoad=true): preloads iframe during LoadingScreen
+ * - For interactive videos: loads iframe on click/hover
+ * - Seamless transition from thumbnail to video without visible delay
  * 
- * This dramatically improves initial page load performance by deferring
- * the heavy Vimeo iframe until it's actually needed.
+ * When preloadDuringLoading is true (default for autoplayOnLoad):
+ * - Iframe starts loading immediately when component mounts
+ * - Video plays muted/looped in background once loaded
+ * - Thumbnail serves as placeholder until video is ready
  */
 const LiteVimeoEmbed = ({
   videoId,
@@ -26,9 +32,16 @@ const LiteVimeoEmbed = ({
   className = '',
   autoplayOnLoad = false,
   showPlayButton = true,
+  preloadDuringLoading = autoplayOnLoad, // Default: preload if autoplay
   onLoad,
 }: LiteVimeoEmbedProps) => {
-  const [isActivated, setIsActivated] = useState(autoplayOnLoad);
+  const { hasSeenIntro } = useTransition();
+  
+  // For background videos: start loading immediately (during LoadingScreen)
+  // For returning visitors (hasSeenIntro): also start immediately
+  const shouldPreload = preloadDuringLoading || hasSeenIntro;
+  
+  const [isActivated, setIsActivated] = useState(shouldPreload);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
 
@@ -36,7 +49,15 @@ const LiteVimeoEmbed = ({
   const thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`;
   
   // Full player URL with background mode for seamless autoplay
-  const playerUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1`;
+  // Added quality=auto for faster initial load, dnt=1 for privacy
+  const playerUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1&quality=auto&dnt=1`;
+
+  // Effect to activate preloading for background videos
+  useEffect(() => {
+    if (shouldPreload && !isActivated) {
+      setIsActivated(true);
+    }
+  }, [shouldPreload, isActivated]);
 
   const handleActivate = useCallback(() => {
     if (!isActivated) {
@@ -106,11 +127,11 @@ const LiteVimeoEmbed = ({
         <div className="absolute inset-0 bg-background animate-pulse" />
       )}
 
-      {/* Vimeo iframe - only rendered when activated */}
+      {/* Vimeo iframe - rendered immediately for preload, hidden until loaded */}
       {isActivated && (
         <iframe
           src={playerUrl}
-          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${
             iframeLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ 
@@ -129,6 +150,8 @@ const LiteVimeoEmbed = ({
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           title={title}
           onLoad={handleIframeLoad}
+          // Loading eager for preload scenario, lazy otherwise
+          loading={shouldPreload ? 'eager' : 'lazy'}
         />
       )}
     </div>

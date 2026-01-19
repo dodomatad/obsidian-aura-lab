@@ -7,6 +7,7 @@ import GearTechSection from '@/components/GearTechSection';
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
 import CustomCursor from '@/components/CustomCursor';
+import LiteVimeoEmbed from '@/components/LiteVimeoEmbed';
 
 // Lazy load heavy sections below the fold
 const ChampionSection = lazy(() => import('@/components/ChampionSection'));
@@ -151,15 +152,13 @@ const Index = () => {
               }}
             />
             
-            {/* Video Background - carrega sobre o fallback */}
-            <iframe 
-              src="https://player.vimeo.com/video/1152065041?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&playsinline=1"
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] h-screen min-w-full min-h-[56.25vw] transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ filter: 'brightness(0.85)' }}
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            {/* Video Background - Lite Vimeo Embed para performance */}
+            <LiteVimeoEmbed
+              videoId="1152065041"
               title="Hero Background Video"
-              loading="lazy"
+              className="absolute inset-0"
+              autoplayOnLoad={true}
+              showPlayButton={false}
               onLoad={() => setVideoLoaded(true)}
             />
             

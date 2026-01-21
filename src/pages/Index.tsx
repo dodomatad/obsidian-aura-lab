@@ -227,29 +227,6 @@ const Index = () => {
         <footer className="w-full px-6 md:px-16 py-16 md:py-20">
           <div className="max-w-7xl mx-auto">
             
-            {/* Authority Badges - Social Proof */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 md:mb-16 pb-8 md:pb-12">
-              <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
-                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
-                  🇧🇷 DNA Brasileiro
-                </span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
-                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
-                  Desde 1985
-                </span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-foreground/5 border border-foreground/10 rounded-sm">
-                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-foreground/60 font-medium">
-                  14× Campeão
-                </span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-orange/10 border border-orange/30 rounded-sm">
-                <span className="text-[10px] md:text-xs tracking-[0.15em] uppercase text-orange font-medium">
-                  Hightec Line
-                </span>
-              </div>
-            </div>
 
             {/* Main Footer Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">

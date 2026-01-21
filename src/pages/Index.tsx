@@ -105,14 +105,14 @@ const Index = () => {
             <a 
               href="#modelos" 
               onClick={(e) => handleNavClick(e, 'modelos')}
-              className="text-xs text-foreground/60 hover:text-foreground transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               Modelos
             </a>
             <a 
               href="#atelier" 
               onClick={(e) => handleNavClick(e, 'atelier')}
-              className="text-xs text-foreground/60 hover:text-foreground transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               Ateliê
             </a>

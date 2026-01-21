@@ -40,7 +40,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-lg md:text-4xl mb-4 text-foreground max-w-4xl font-display"
+          transition={{ duration: 0.5 }}
+          className="text-lg md:text-4xl mb-4 text-foreground max-w-4xl font-display font-bold"
         >
           A Jornada de Fábio Paiva
         </motion.h2>
@@ -48,7 +49,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="text-foreground/60 text-sm md:text-base max-w-sm"
         >
           De atleta visionário a formador de gerações: uma história marcada pela excelência e pioneirismo no mar.
@@ -59,10 +60,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         {data.map((item, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex justify-start pt-12 md:pt-20 md:gap-10"
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
@@ -100,6 +101,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             </motion.div>
           </motion.div>
         ))}
+        
+        {/* Linha vertical animada */}
         <div
           style={{
             height: height + "px",

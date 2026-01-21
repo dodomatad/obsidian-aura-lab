@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Flag, Trophy, Anchor, Ship, Users, Award, ArrowRight } from 'lucide-react';
-import championImage from '@/assets/champion-silhouette.jpg';
+import championImage from '@/assets/fabio-champion.jpg';
 import BlurText from '@/components/ui/BlurText';
 import { useTransition } from '@/context/TransitionContext';
 

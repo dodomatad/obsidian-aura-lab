@@ -203,12 +203,24 @@ const ChampionSection = () => {
               />
               
               {/* Subtitle */}
-              <p className="text-base md:text-xl text-foreground/50 font-sans font-light mb-8 md:mb-10 tracking-wide">
+              <motion.p 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="text-base md:text-xl text-foreground/50 font-sans font-light mb-8 md:mb-10 tracking-wide"
+              >
                 Nascida para Dominar o Mar
-              </p>
+              </motion.p>
 
               {/* Brand Story - Foco na EMPRESA */}
-              <div className="space-y-4 md:space-y-6 mb-10 md:mb-12">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="space-y-4 md:space-y-6 mb-10 md:mb-12"
+              >
                 <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                   Há mais de <span className="text-foreground font-medium">35 anos</span>, a Opium nasceu de uma garagem em Santos. O que começou como um sonho se transformou na maior referência em surfskis do Brasil.
                 </p>
@@ -218,7 +230,7 @@ const ChampionSection = () => {
                 <p className="text-base md:text-lg text-foreground/60 leading-relaxed font-sans font-light italic">
                   "Da garagem ao mar, a filosofia permanece: excelência absoluta em cada detalhe."
                 </p>
-              </div>
+              </motion.div>
 
               {/* Authority Badges Grid */}
               <div className="grid grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-12">

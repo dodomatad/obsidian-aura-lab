@@ -1,7 +1,7 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { Button } from "@/components/ui/button";
-import { Trophy, Medal, Waves, Users, Heart, ArrowRight } from "lucide-react";
+import { Trophy, Medal, Waves, Users, Heart, ExternalLink } from "lucide-react";
 
 export function FabioStory() {
   const data = [
@@ -34,16 +34,20 @@ export function FabioStory() {
             </div>
           </div>
 
-          {/* Action Button */}
+          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
               className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
               asChild
             >
-              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://instagram.com/opiumsurfski" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 Ver Detalhes de 1984
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </Button>
           </div>
@@ -72,16 +76,20 @@ export function FabioStory() {
             />
           </div>
 
-          {/* Action Button */}
+          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
               className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
               asChild
             >
-              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://instagram.com/opiumsurfski" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 Ler sobre os Recordes
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </Button>
           </div>
@@ -114,16 +122,20 @@ export function FabioStory() {
             />
           </div>
 
-          {/* Action Button */}
+          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
               className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
               asChild
             >
-              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://instagram.com/opiumsurfski" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 A Chegada da Canoa Havaiana
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </Button>
           </div>
@@ -151,16 +163,20 @@ export function FabioStory() {
             </div>
           </div>
 
-          {/* Action Button */}
+          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
               className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
               asChild
             >
-              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://instagram.com/opiumsurfski" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 Conheça a Canoa Brasil
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </Button>
           </div>
@@ -196,7 +212,7 @@ export function FabioStory() {
             />
           </div>
 
-          {/* Action Button - Highlighted for social impact */}
+          {/* Action Button - Highlighted for social impact - Opens in new tab */}
           <div className="mt-6">
             <Button 
               className="group bg-orange hover:bg-orange/90 text-background font-semibold transition-all"
@@ -208,7 +224,7 @@ export function FabioStory() {
                 rel="noopener noreferrer"
               >
                 Apoie os Projetos Sociais
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </Button>
           </div>

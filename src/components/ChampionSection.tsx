@@ -70,30 +70,42 @@ const ChampionSection = () => {
               </h2>
             </motion.div>
 
-            {/* Content - Texto claro com palavras-chave em laranja bold */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6 md:space-y-8 max-w-3xl mx-auto"
-            >
-              <p className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200">
+            {/* Content - Parágrafos com animação escalonada */}
+            <div className="space-y-6 md:space-y-8 max-w-3xl mx-auto">
+              <motion.p 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+                className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
+              >
                 Com mais de <span className="text-orange font-bold">35 anos de experiência</span> na fabricação de embarcações de alta performance, 
                 a Opium se consolidou como <span className="text-orange font-bold">referência absoluta</span> no mercado brasileiro.
-              </p>
+              </motion.p>
 
-              <p className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200">
+              <motion.p 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
+                className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
+              >
                 Nossa dedicação à excelência técnica e compromisso com a inovação nos permitiram 
                 conquistar <span className="text-orange font-bold">14 títulos consecutivos</span> nas principais competições nacionais.
-              </p>
+              </motion.p>
 
-              <p className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200">
+              <motion.p 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
+                className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
+              >
                 Somos <span className="text-orange font-bold">pioneiros na fibra de carbono</span> de alta gramatura no Brasil, 
                 oferecendo embarcações que combinam leveza extrema, rigidez estrutural e 
                 durabilidade incomparável.
-              </p>
-            </motion.div>
+              </motion.p>
+            </div>
           </div>
         </div>
 

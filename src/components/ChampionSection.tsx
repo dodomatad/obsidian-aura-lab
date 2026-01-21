@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Flag, Trophy, Anchor, Ship, Users, Award, ArrowRight } from 'lucide-react';
 import championImage from '@/assets/champion-silhouette.jpg';
 import BlurText from '@/components/ui/BlurText';
+import { useTransition } from '@/context/TransitionContext';
 
 // Authority logos/badges - Títulos exatos da cliente
 const authorityLogos = [
@@ -28,7 +29,7 @@ const authorityBadges = [
 
 const ChampionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  
+  const { saveScrollPosition } = useTransition();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
@@ -269,6 +270,7 @@ const ChampionSection = () => {
               >
                 <Link
                   to="/historia"
+                  onClick={saveScrollPosition}
                   className="group inline-flex items-center gap-3 px-6 py-3 border border-orange/50 hover:border-orange hover:bg-orange/10 transition-all duration-300"
                 >
                   <span className="text-sm md:text-base font-sans font-medium text-foreground/90 group-hover:text-orange transition-colors">

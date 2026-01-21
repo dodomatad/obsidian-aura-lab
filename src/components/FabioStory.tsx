@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Timeline } from "@/components/ui/timeline";
-import { Trophy, Medal, Waves, Users, Heart, Anchor, Award } from "lucide-react";
+import { Trophy, Medal, Waves, Users, Heart, Anchor, Award, Baby, Hammer, MapPin, Briefcase, Star } from "lucide-react";
+import fabioPortrait from "@/assets/fabio-paiva-portrait.jpg";
 
 function RevealText({
   children,
@@ -28,45 +29,52 @@ function RevealText({
 export function FabioStory() {
   const data = [
     {
-      title: "1962 - O Início de Tudo",
+      title: "O Visionário do Mar",
       content: (
-        <div>
-          <RevealText
-            delay={0}
-            className="text-foreground/80 text-lg md:text-2xl font-normal mb-6 leading-relaxed"
-          >
-            Filho de dois atletas santistas, os nadadores{" "}
-            <span className="font-bold text-orange">
-              Gilson Nunes Marques Pereira (o Kalu)
-            </span>{" "}
-            e <span className="font-bold text-orange">Dona Regina Stella</span>,
-            Fábio nasceu em 10 de novembro de 1962.
-          </RevealText>
-          <RevealText
-            delay={0.05}
-            className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
-          >
-            O espírito esportivo dos pais proporcionou uma infância livre. Ele e a
-            irmã Cláudia divertiam-se participando de travessias marítimas feitas,
-            literalmente, nas costas dos pais.
-          </RevealText>
-          <div className="bg-orange/10 border border-orange/30 rounded-lg p-5 mb-6">
-            <Anchor className="w-7 h-7 text-orange mb-2" />
-            <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
-            <RevealText
-              delay={0.1}
-              className="text-foreground/70 text-sm md:text-base mt-2"
-            >
-              Aficionado pelo mar, aos 10 anos ganhou do pai o primeiro barco a remo
-              na Ilha das Palmas, onde criou sua intimidade com as águas.
-            </RevealText>
-          </div>
-          <div className="rounded-lg overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-8 items-stretch">
+          {/* ÁREA DA FOTO DE RETRATO DO FÁBIO */}
+          <div className="md:w-2/5 relative group">
             <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop"
-              alt="Santos, cidade natal"
-              className="w-full h-48 md:h-64 object-cover rounded-lg"
+              src={fabioPortrait}
+              alt="Fábio Paiva - Lenda Viva da Canoagem"
+              className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-2xl"
             />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+              <div className="flex items-center gap-2">
+                <Star className="w-5 h-5 text-orange" />
+                <span className="text-white font-semibold text-sm">Lenda Viva da Canoagem</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ÁREA DO TEXTO INTRODUTÓRIO */}
+          <div className="md:w-3/5 flex flex-col justify-center">
+            <div className="mb-6">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Fábio Paiva
+              </h3>
+              <RevealText
+                delay={0}
+                className="text-foreground/80 text-lg md:text-xl font-normal leading-relaxed"
+              >
+                Filho de dois atletas santistas, os nadadores{" "}
+                <span className="font-bold text-orange">Gilson Nunes Marques Pereira (o Kalu)</span> e{" "}
+                <span className="font-bold text-orange">Dona Regina Stella</span>, nascido em 10 de novembro de 1962.
+              </RevealText>
+            </div>
+
+            <div className="bg-orange/10 border border-orange/30 rounded-lg p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <Anchor className="w-6 h-6 text-orange" />
+                <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
+              </div>
+              <RevealText
+                delay={0.05}
+                className="text-foreground/70 text-sm md:text-base"
+              >
+                O espírito esportivo dos pais proporcionou uma infância livre. Divertia-se participando de travessias marítimas feitas, literalmente, nas costas dos pais. Aos 10 anos, ganhou o primeiro barco a remo na Ilha das Palmas, onde criou sua intimidade com as águas.
+              </RevealText>
+            </div>
           </div>
         </div>
       ),
@@ -86,27 +94,22 @@ export function FabioStory() {
             </span>{" "}
             mesmo com equipamentos defasados em relação aos profissionais.
           </RevealText>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-lg overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070&auto=format&fit=crop"
-                alt="Remo no mar"
-                className="w-full h-48 md:h-64 object-cover rounded-lg"
-              />
+          <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 mb-6">
+            <RevealText
+              delay={0.05}
+              className="text-foreground/70 text-sm md:text-base"
+            >
+              Tornou-se o primeiro campeão brasileiro da Volta à Ilha de Vitória e conquistou a primeira medalha internacional da canoagem brasileira (Campeão Sul-americano no Uruguai).
+            </RevealText>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <div className="flex items-center gap-3 text-foreground/70">
+              <Trophy className="w-6 h-6 text-orange flex-shrink-0" />
+              <span className="text-base md:text-lg">1º Campeão Brasileiro</span>
             </div>
-            <div className="flex flex-col gap-4 justify-center">
-              <div className="flex items-center gap-3 text-foreground/70">
-                <Trophy className="w-6 h-6 text-orange flex-shrink-0" />
-                <span className="text-base md:text-lg">1º Campeão Volta à Ilha Vitória (ES)</span>
-              </div>
-              <div className="flex items-center gap-3 text-foreground/70">
-                <Medal className="w-6 h-6 text-orange flex-shrink-0" />
-                <span className="text-base md:text-lg">Campeão Sul-americano (Uruguai)</span>
-              </div>
-              <div className="flex items-center gap-3 text-foreground/70">
-                <Award className="w-6 h-6 text-orange flex-shrink-0" />
-                <span className="text-base md:text-lg">1ª Medalha Internacional da Canoagem BR</span>
-              </div>
+            <div className="flex items-center gap-3 text-foreground/70">
+              <Medal className="w-6 h-6 text-orange flex-shrink-0" />
+              <span className="text-base md:text-lg">Campeão Sul-americano</span>
             </div>
           </div>
         </div>
@@ -128,6 +131,7 @@ export function FabioStory() {
             </span>
             .
           </RevealText>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
               <Trophy className="w-7 h-7 text-orange mb-2" />
@@ -146,22 +150,9 @@ export function FabioStory() {
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base mt-2"
               >
-                Com a equipe Canoar (tricampeã brasileira), desafiou o Rio Orange no
-                deserto do Kalahari.
+                Com a equipe Canoar (tricampeã brasileira), desafiou o Rio Orange no deserto do Kalahari e foi Prata nos Jogos Mundiais da Natureza.
               </RevealText>
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <img
-              src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=2070&auto=format&fit=crop"
-              alt="Mar aberto"
-              className="rounded-lg object-cover h-40 md:h-56 w-full shadow-lg"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1504681869696-d977211a5f4c?q=80&w=2023&auto=format&fit=crop"
-              alt="Competição"
-              className="rounded-lg object-cover h-40 md:h-56 w-full shadow-lg"
-            />
           </div>
         </div>
       ),
@@ -181,24 +172,23 @@ export function FabioStory() {
             </span>{" "}
             para se dedicar integralmente à canoagem.
           </RevealText>
+
           <div className="bg-orange/10 border border-orange/30 rounded-lg p-5 mb-6">
-            <Anchor className="w-7 h-7 text-orange mb-2" />
-            <span className="text-orange font-bold text-base md:text-lg">De Engenheiro a Fabricante</span>
+            <div className="flex items-center gap-2 mb-2">
+              <Hammer className="w-6 h-6 text-orange" />
+              <span className="text-orange font-bold text-base md:text-lg">De Engenheiro a Fabricante</span>
+            </div>
             <RevealText
               delay={0.05}
-              className="text-foreground/70 text-sm md:text-base mt-2"
+              className="text-foreground/70 text-sm md:text-base"
             >
-              Começou fabricando canoas de forma quase artesanal em Santos, dando
-              início à <span className="font-bold">Opium</span>, empresa pioneira
-              que hoje gera centenas de empregos.
+              Começou fabricando canoas de forma quase artesanal em Santos, dando início à Opium, empresa pioneira que hoje gera centenas de empregos.
             </RevealText>
           </div>
-          <div className="rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2032&auto=format&fit=crop"
-              alt="Fabricação artesanal"
-              className="w-full h-48 md:h-64 object-cover rounded-lg"
-            />
+
+          <div className="flex items-center gap-3 text-foreground/70">
+            <Briefcase className="w-6 h-6 text-orange flex-shrink-0" />
+            <span className="text-base md:text-lg">Pioneiro na fabricação de canoas no Brasil</span>
           </div>
         </div>
       ),
@@ -218,23 +208,23 @@ export function FabioStory() {
             . Criou a primeira base da modalidade e organizou os primeiros
             campeonatos.
           </RevealText>
+
           <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 mb-6">
-            <Waves className="w-7 h-7 text-orange mb-2" />
-            <h4 className="text-orange font-bold text-base md:text-lg">Volta à Ilha de Santo Amaro</h4>
+            <div className="flex items-center gap-2 mb-2">
+              <MapPin className="w-6 h-6 text-orange" />
+              <h4 className="text-orange font-bold text-base md:text-lg">Volta à Ilha de Santo Amaro</h4>
+            </div>
             <RevealText
               delay={0.05}
-              className="text-foreground/60 text-sm md:text-base mt-2"
+              className="text-foreground/60 text-sm md:text-base"
             >
-              Idealizador da prova mais tradicional do país, que chega à sua 22ª
-              edição em março de 2026.
+              Idealizador da prova mais tradicional do país, que chega à sua 22ª edição em março de 2026.
             </RevealText>
           </div>
-          <div className="rounded-lg overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?q=80&w=2070&auto=format&fit=crop"
-              alt="Canoa havaiana"
-              className="w-full h-48 md:h-64 object-cover rounded-lg"
-            />
+
+          <div className="flex items-center gap-3 text-foreground/70">
+            <Award className="w-6 h-6 text-orange flex-shrink-0" />
+            <span className="text-base md:text-lg">Organizador dos primeiros campeonatos</span>
           </div>
         </div>
       ),
@@ -251,16 +241,21 @@ export function FabioStory() {
             a primeira guardaria do país, movimentando hoje cerca de 400 pessoas aos
             sábados.
           </RevealText>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
-              <Users className="w-7 h-7 text-orange mx-auto mb-2" />
-              <span className="text-xl md:text-2xl font-bold text-orange">Dragon Boat</span>
-              <p className="text-foreground/60 text-sm md:text-base mt-1">Introduziu no Brasil em 2007</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <Users className="w-6 h-6 text-orange" />
+                <h4 className="text-orange font-bold text-base md:text-lg">Dragon Boat</h4>
+              </div>
+              <p className="text-foreground/60 text-sm md:text-base">Introduziu a modalidade no Brasil em 2007.</p>
             </div>
-            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
-              <Trophy className="w-7 h-7 text-orange mx-auto mb-2" />
-              <span className="text-xl md:text-2xl font-bold text-orange">Cidadão Santista</span>
-              <p className="text-foreground/60 text-sm md:text-base mt-1">Título por sua contribuição ao esporte</p>
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <Trophy className="w-6 h-6 text-orange" />
+                <h4 className="text-orange font-bold text-base md:text-lg">Cidadão Santista</h4>
+              </div>
+              <p className="text-foreground/60 text-sm md:text-base">Título recebido por sua contribuição inestimável ao esporte.</p>
             </div>
           </div>
         </div>
@@ -277,34 +272,38 @@ export function FabioStory() {
             À frente da Associação Brasileira de Canoas Havaianas, desenvolve
             projetos que transformam vidas.
           </RevealText>
-          <div className="space-y-4">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <Heart className="w-6 h-6 text-orange mb-2" />
-              <h4 className="text-orange font-bold text-base md:text-lg">Projeto Kaora</h4>
+              <div className="flex items-center gap-2 mb-2">
+                <Heart className="w-6 h-6 text-orange" />
+                <h4 className="text-orange font-bold text-base md:text-lg">Projeto Kaora</h4>
+              </div>
               <RevealText
                 delay={0.05}
-                className="text-foreground/60 text-sm md:text-base mt-2"
+                className="text-foreground/60 text-sm md:text-base"
               >
-                Atendimento gratuito e multidisciplinar para 120 mulheres
-                sobreviventes do Câncer de Mama.
+                Atendimento gratuito e multidisciplinar para 120 mulheres sobreviventes do Câncer de Mama.
               </RevealText>
             </div>
+
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <Waves className="w-6 h-6 text-orange mb-2" />
-              <h4 className="text-orange font-bold text-base md:text-lg">Sahy Remando</h4>
+              <div className="flex items-center gap-2 mb-2">
+                <Waves className="w-6 h-6 text-orange" />
+                <h4 className="text-orange font-bold text-base md:text-lg">Sahy Remando</h4>
+              </div>
               <RevealText
                 delay={0.05}
-                className="text-foreground/60 text-sm md:text-base mt-2"
+                className="text-foreground/60 text-sm md:text-base"
               >
-                Na Barra do Sahy, promove esporte, qualidade de vida e formação
-                cidadã para crianças da comunidade.
+                Na Barra do Sahy, promove esporte, qualidade de vida e formação cidadã para crianças da comunidade.
               </RevealText>
             </div>
-            <img
-              src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2069&auto=format&fit=crop"
-              alt="Comunidade"
-              className="rounded-lg object-cover h-40 md:h-56 w-full shadow-lg"
-            />
+          </div>
+
+          <div className="flex items-center gap-3 text-foreground/70 mt-6">
+            <Star className="w-6 h-6 text-orange flex-shrink-0" />
+            <span className="text-base md:text-lg">Transformando vidas através do esporte</span>
           </div>
         </div>
       ),

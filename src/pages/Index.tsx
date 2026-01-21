@@ -235,28 +235,28 @@ const Index = () => {
                 <img 
                   src={opiumLogo} 
                   alt="OPIUM" 
-                  className="h-8 w-auto mb-4"
+                  className="h-10 w-auto mb-5"
                 />
-                <p className="text-sm text-foreground/60 font-light leading-relaxed">
+                <p className="text-base text-foreground/70 font-light leading-relaxed">
                   Há mais de 30 anos fabricando a história do mar. Surfskis de elite com DNA brasileiro.
                 </p>
               </div>
 
               {/* Contact */}
               <div>
-                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/50 mb-4">
+                <h4 className="text-sm tracking-[0.2em] uppercase text-orange font-medium mb-5">
                   Contato
                 </h4>
                 <div className="space-y-3">
                   <a 
                     href="tel:+5513997446684" 
-                    className="block text-sm text-foreground/80 hover:text-orange transition-colors py-2 -my-2"
+                    className="block text-base text-foreground/80 hover:text-white transition-colors py-2 -my-2"
                   >
                     (13) 99744-6684
                   </a>
                   <a 
                     href="mailto:atendimento@caiaquesopium.com.br" 
-                    className="block text-sm text-foreground/80 hover:text-orange transition-colors break-all py-2 -my-2"
+                    className="block text-base text-foreground/80 hover:text-white transition-colors break-all py-2 -my-2"
                   >
                     atendimento@caiaquesopium.com.br
                   </a>
@@ -265,21 +265,21 @@ const Index = () => {
 
               {/* Address */}
               <div>
-                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/50 mb-4">
+                <h4 className="text-sm tracking-[0.2em] uppercase text-orange font-medium mb-5">
                   Endereço
                 </h4>
-                <p className="text-sm text-foreground/80 font-light leading-relaxed">
+                <p className="text-base text-foreground/80 font-light leading-relaxed">
                   Rua Afonso Celso de Paula Lima, 16<br />
                   Ponta da Praia, Santos | SP
                 </p>
-                <p className="text-xs text-foreground/50 mt-3">
+                <p className="text-sm text-foreground/60 mt-3">
                   Garagem: Seg a Sex 08:00 - 14:00
                 </p>
               </div>
 
               {/* Social */}
               <div>
-                <h4 className="text-xs tracking-[0.2em] uppercase text-foreground/50 mb-4">
+                <h4 className="text-sm tracking-[0.2em] uppercase text-orange font-medium mb-5">
                   Redes Sociais
                 </h4>
                 <div className="flex gap-6">
@@ -287,7 +287,7 @@ const Index = () => {
                     href="https://instagram.com/opiumsurfski" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/80 hover:text-orange transition-colors py-2 -my-2"
+                    className="text-base text-foreground/80 hover:text-white transition-colors py-2 -my-2"
                   >
                     Instagram
                   </a>
@@ -295,7 +295,7 @@ const Index = () => {
                     href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os produtos Opium."
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/80 hover:text-orange transition-colors py-2 -my-2"
+                    className="text-base text-foreground/80 hover:text-white transition-colors py-2 -my-2"
                   >
                     WhatsApp
                   </a>

@@ -1,9 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Flag, Trophy, Anchor, Ship, Users, Award } from 'lucide-react';
 import championImage from '@/assets/champion-silhouette.jpg';
 import BlurText from '@/components/ui/BlurText';
-import FounderBioModal from './FounderBioModal';
+import { FabioStory } from './FabioStory';
 
 // Authority logos/badges - Títulos exatos da cliente
 const authorityLogos = [
@@ -28,7 +28,6 @@ const authorityBadges = [
 
 const ChampionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -249,32 +248,14 @@ const ChampionSection = () => {
                 ))}
               </div>
 
-              {/* Botão: Conheça a História de Fábio Paiva */}
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                onClick={() => setIsFounderModalOpen(true)}
-                className="group flex items-center gap-3 px-6 py-3 border border-orange/50 hover:border-orange hover:bg-orange/10 transition-all duration-300"
-              >
-                <span className="text-sm md:text-base font-sans font-medium text-foreground/90 group-hover:text-orange transition-colors">
-                  Conheça a História de Fábio Paiva
-                </span>
-                <svg 
-                  className="w-4 h-4 text-orange transform group-hover:translate-x-1 transition-transform" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </motion.button>
             </motion.div>
           </div>
         </div>
 
-        {/* ===== PARTE 3: Faixa de Logos de Autoridade (Dark) ===== */}
+        {/* ===== PARTE 3: Timeline - A Jornada de Fábio Paiva ===== */}
+        <FabioStory />
+
+        {/* ===== PARTE 4: Faixa de Logos de Autoridade (Dark) ===== */}
         <div className="relative py-12 md:py-16 border-t border-foreground/10" style={{ backgroundColor: '#050505' }}>
           <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             
@@ -313,12 +294,6 @@ const ChampionSection = () => {
           </div>
         </div>
       </section>
-
-      {/* Modal da Biografia do Fábio */}
-      <FounderBioModal 
-        isOpen={isFounderModalOpen} 
-        onClose={() => setIsFounderModalOpen(false)} 
-      />
     </>
   );
 };

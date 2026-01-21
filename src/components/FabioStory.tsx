@@ -1,6 +1,7 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { Trophy, Medal, Waves, Users, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Trophy, Medal, Waves, Users, Heart, ArrowRight } from "lucide-react";
 
 export function FabioStory() {
   const data = [
@@ -32,6 +33,20 @@ export function FabioStory() {
               </div>
             </div>
           </div>
+
+          {/* Action Button */}
+          <div className="mt-6">
+            <Button 
+              variant="outline" 
+              className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
+              asChild
+            >
+              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+                Ver Detalhes de 1984
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
+          </div>
         </div>
       ),
     },
@@ -55,6 +70,20 @@ export function FabioStory() {
               alt="Competição"
               className="rounded-lg object-cover h-32 md:h-44 w-full shadow-lg"
             />
+          </div>
+
+          {/* Action Button */}
+          <div className="mt-6">
+            <Button 
+              variant="outline" 
+              className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
+              asChild
+            >
+              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+                Ler sobre os Recordes
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
           </div>
         </div>
       ),
@@ -84,6 +113,20 @@ export function FabioStory() {
               className="w-full h-40 md:h-52 object-cover rounded-lg"
             />
           </div>
+
+          {/* Action Button */}
+          <div className="mt-6">
+            <Button 
+              variant="outline" 
+              className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
+              asChild
+            >
+              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+                A Chegada da Canoa Havaiana
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
+          </div>
         </div>
       ),
     },
@@ -106,6 +149,20 @@ export function FabioStory() {
               <span className="text-lg font-bold text-orange">Pioneiro</span>
               <p className="text-foreground/60 text-xs">Dragon Boat & Canoa</p>
             </div>
+          </div>
+
+          {/* Action Button */}
+          <div className="mt-6">
+            <Button 
+              variant="outline" 
+              className="group border-orange/50 hover:border-orange hover:bg-orange/10 text-foreground/80 hover:text-orange transition-all"
+              asChild
+            >
+              <a href="https://instagram.com/opiumsurfski" target="_blank" rel="noopener noreferrer">
+                Conheça a Canoa Brasil
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
           </div>
         </div>
       ),
@@ -137,6 +194,23 @@ export function FabioStory() {
               alt="Comunidade"
               className="rounded-lg object-cover h-32 md:h-44 w-full shadow-lg"
             />
+          </div>
+
+          {/* Action Button - Highlighted for social impact */}
+          <div className="mt-6">
+            <Button 
+              className="group bg-orange hover:bg-orange/90 text-background font-semibold transition-all"
+              asChild
+            >
+              <a 
+                href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os projetos sociais."
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Apoie os Projetos Sociais
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </Button>
           </div>
         </div>
       ),

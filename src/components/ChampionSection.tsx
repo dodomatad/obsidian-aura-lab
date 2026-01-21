@@ -14,18 +14,6 @@ const authorityLogos = [
   { icon: Award, title: 'Kaora' },
 ];
 
-const authorityBadges = [
-  { 
-    icon: Flag, 
-    title: 'Pioneiro desde 1985',
-    description: 'Primeira fábrica de surfskis do Brasil'
-  },
-  { 
-    icon: Trophy, 
-    title: '14 Anos Invicto',
-    description: 'Domínio absoluto nas competições'
-  },
-];
 
 const ChampionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -245,33 +233,6 @@ const ChampionSection = () => {
                 </p>
               </motion.div>
 
-              {/* Authority Badges Grid */}
-              <div className="grid grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-12">
-                {authorityBadges.map((badge, index) => (
-                  <motion.div
-                    key={badge.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                    className="group cursor-default"
-                  >
-                    <div className="flex items-start gap-3 md:gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center border border-foreground/30 group-hover:border-orange bg-foreground/5 transition-colors duration-300">
-                        <badge.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground/70 group-hover:text-orange transition-colors duration-300" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs md:text-sm font-sans font-medium text-foreground/90 tracking-wide mb-0.5 md:mb-1">
-                          {badge.title}
-                        </h4>
-                        <p className="text-[11px] md:text-xs text-foreground/60 font-sans font-light leading-relaxed">
-                          {badge.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
 
               {/* Botão: Conheça a História de Fábio Paiva */}
               <motion.div

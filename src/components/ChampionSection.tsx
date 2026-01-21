@@ -1,9 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { Flag, Trophy, Anchor, Ship, Users, Award } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Flag, Trophy, Anchor, Ship, Users, Award, ArrowRight } from 'lucide-react';
 import championImage from '@/assets/champion-silhouette.jpg';
 import BlurText from '@/components/ui/BlurText';
-import { FabioStory } from './FabioStory';
 
 // Authority logos/badges - Títulos exatos da cliente
 const authorityLogos = [
@@ -248,14 +248,29 @@ const ChampionSection = () => {
                 ))}
               </div>
 
+              {/* Botão: Conheça a História de Fábio Paiva */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
+                <Link
+                  to="/historia"
+                  className="group inline-flex items-center gap-3 px-6 py-3 border border-orange/50 hover:border-orange hover:bg-orange/10 transition-all duration-300"
+                >
+                  <span className="text-sm md:text-base font-sans font-medium text-foreground/90 group-hover:text-orange transition-colors">
+                    Conheça a História de Fábio Paiva
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-orange transform group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+
             </motion.div>
           </div>
         </div>
 
-        {/* ===== PARTE 3: Timeline - A Jornada de Fábio Paiva ===== */}
-        <FabioStory />
-
-        {/* ===== PARTE 4: Faixa de Logos de Autoridade (Dark) ===== */}
+        {/* ===== PARTE 3: Faixa de Logos de Autoridade (Dark) ===== */}
         <div className="relative py-12 md:py-16 border-t border-foreground/10" style={{ backgroundColor: '#050505' }}>
           <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             

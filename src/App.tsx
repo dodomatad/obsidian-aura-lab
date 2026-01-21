@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import OpiumLoader from "./components/ui/opium-loader";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
+import Historia from "./pages/Historia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/modelo/:id" element={<ProductDetail />} />
+        <Route path="/historia" element={<Historia />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

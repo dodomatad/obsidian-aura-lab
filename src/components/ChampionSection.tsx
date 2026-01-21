@@ -97,46 +97,7 @@ const ChampionSection = () => {
           </div>
         </div>
 
-        {/* ===== PARTE 2: Faixa de Logos de Autoridade (Dark) ===== */}
-        <div className="relative py-12 md:py-16 border-t border-foreground/10" style={{ backgroundColor: '#050505' }}>
-          <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-8 md:mb-10"
-            >
-              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold text-orange">
-                Projetos & Iniciativas
-              </span>
-            </motion.div>
-
-            {/* Authority Logos Grid - Invertidos para Dark */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-              {authorityLogos.map((logo, index) => (
-                <motion.div
-                  key={logo.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
-                >
-                  <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full mb-4 transition-all duration-300 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20">
-                    <logo.icon className="w-6 h-6 md:w-7 md:h-7 text-orange transition-colors duration-300" />
-                  </div>
-                  <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
-                    {logo.title}
-                  </h4>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ===== PARTE 3: História da Marca - A Origem (Dark) ===== */}
+        {/* ===== PARTE 2: História da Marca - A Origem (Dark) ===== */}
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
           
           {/* Left: Full-height Image */}
@@ -310,6 +271,45 @@ const ChampionSection = () => {
                 </svg>
               </motion.button>
             </motion.div>
+          </div>
+        </div>
+
+        {/* ===== PARTE 3: Faixa de Logos de Autoridade (Dark) ===== */}
+        <div className="relative py-12 md:py-16 border-t border-foreground/10" style={{ backgroundColor: '#050505' }}>
+          <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8 md:mb-10"
+            >
+              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold text-orange">
+                Projetos & Iniciativas
+              </span>
+            </motion.div>
+
+            {/* Authority Logos Grid - Invertidos para Dark */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+              {authorityLogos.map((logo, index) => (
+                <motion.div
+                  key={logo.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                  className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
+                >
+                  <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full mb-4 transition-all duration-300 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20">
+                    <logo.icon className="w-6 h-6 md:w-7 md:h-7 text-orange transition-colors duration-300" />
+                  </div>
+                  <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                    {logo.title}
+                  </h4>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

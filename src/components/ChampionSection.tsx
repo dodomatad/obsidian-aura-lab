@@ -217,9 +217,17 @@ const ChampionSection = () => {
           </div>
         </div>
 
-        {/* ===== PARTE 2: Nossos Diferenciais (Light Mode - Branco + Laranja Bold) ===== */}
-        <div className="bg-white py-16 md:py-24 lg:py-32">
-          <div className="max-w-5xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+        {/* ===== PARTE 2: Nossos Diferenciais (Dark Luxury) ===== */}
+        <div className="relative py-16 md:py-24 lg:py-32" style={{ backgroundColor: '#050505' }}>
+          {/* Subtle texture overlay */}
+          <div 
+            className="absolute inset-0 pointer-events-none opacity-5"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+
+          <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -229,20 +237,17 @@ const ChampionSection = () => {
               className="text-center mb-12 md:mb-16"
             >
               {/* Section label */}
-              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-orange-600 font-sans font-semibold">
+              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-orange font-sans font-semibold">
                 O que nos torna únicos
               </span>
 
-              {/* Title - NOSSOS DIFERENCIAIS */}
-              <h2 
-                className="display-hero text-3xl md:text-4xl lg:text-5xl mt-4 mb-6"
-                style={{ color: '#EA580C' }} // Laranja Escuro/Forte
-              >
+              {/* Title - NOSSOS DIFERENCIAIS - Laranja Vibrante Bold */}
+              <h2 className="display-hero text-3xl md:text-4xl lg:text-5xl mt-4 mb-6 text-orange font-bold">
                 NOSSOS DIFERENCIAIS
               </h2>
             </motion.div>
 
-            {/* Content - Laranja Bold */}
+            {/* Content - Texto claro com palavras-chave em laranja bold */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -250,27 +255,18 @@ const ChampionSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-6 md:space-y-8 max-w-3xl mx-auto"
             >
-              <p 
-                className="text-base md:text-lg lg:text-xl leading-relaxed font-sans font-bold text-center"
-                style={{ color: '#EA580C' }}
-              >
-                Com mais de 35 anos de experiência na fabricação de embarcações de alta performance, 
-                a Opium se consolidou como referência absoluta no mercado brasileiro.
+              <p className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200">
+                Com mais de <span className="text-orange font-bold">35 anos de experiência</span> na fabricação de embarcações de alta performance, 
+                a Opium se consolidou como <span className="text-orange font-bold">referência absoluta</span> no mercado brasileiro.
               </p>
 
-              <p 
-                className="text-base md:text-lg lg:text-xl leading-relaxed font-sans font-bold text-center"
-                style={{ color: '#EA580C' }}
-              >
+              <p className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200">
                 Nossa dedicação à excelência técnica e compromisso com a inovação nos permitiram 
-                conquistar 14 títulos consecutivos nas principais competições nacionais.
+                conquistar <span className="text-orange font-bold">14 títulos consecutivos</span> nas principais competições nacionais.
               </p>
 
-              <p 
-                className="text-base md:text-lg lg:text-xl leading-relaxed font-sans font-bold text-center"
-                style={{ color: '#EA580C' }}
-              >
-                Somos pioneiros na utilização de fibra de carbono de alta gramatura no Brasil, 
+              <p className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200">
+                Somos <span className="text-orange font-bold">pioneiros na fibra de carbono</span> de alta gramatura no Brasil, 
                 oferecendo embarcações que combinam leveza extrema, rigidez estrutural e 
                 durabilidade incomparável.
               </p>
@@ -278,8 +274,8 @@ const ChampionSection = () => {
           </div>
         </div>
 
-        {/* ===== PARTE 3: Faixa de Logos de Autoridade ===== */}
-        <div className="bg-white border-t border-neutral-200 py-12 md:py-16">
+        {/* ===== PARTE 3: Faixa de Logos de Autoridade (Dark) ===== */}
+        <div className="relative py-12 md:py-16 border-t border-foreground/10" style={{ backgroundColor: '#050505' }}>
           <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             
             <motion.div
@@ -289,15 +285,12 @@ const ChampionSection = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-8 md:mb-10"
             >
-              <span 
-                className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold"
-                style={{ color: '#EA580C' }}
-              >
+              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold text-orange">
                 Projetos & Iniciativas
               </span>
             </motion.div>
 
-            {/* Authority Logos Grid */}
+            {/* Authority Logos Grid - Invertidos para Dark */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {authorityLogos.map((logo, index) => (
                 <motion.div
@@ -306,24 +299,12 @@ const ChampionSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-neutral-50 transition-colors duration-300 rounded-lg"
+                  className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
                 >
-                  <div 
-                    className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full mb-4 transition-all duration-300"
-                    style={{ 
-                      backgroundColor: 'rgba(234, 88, 12, 0.1)',
-                      border: '2px solid rgba(234, 88, 12, 0.3)'
-                    }}
-                  >
-                    <logo.icon 
-                      className="w-6 h-6 md:w-7 md:h-7 transition-colors duration-300" 
-                      style={{ color: '#EA580C' }}
-                    />
+                  <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full mb-4 transition-all duration-300 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20">
+                    <logo.icon className="w-6 h-6 md:w-7 md:h-7 text-orange transition-colors duration-300" />
                   </div>
-                  <h4 
-                    className="text-sm md:text-base font-sans font-bold tracking-wide"
-                    style={{ color: '#EA580C' }}
-                  >
+                  <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                     {logo.title}
                   </h4>
                 </motion.div>

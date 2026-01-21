@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
@@ -223,93 +224,124 @@ const Index = () => {
 
 
 
-        {/* Footer with Real Data */}
-        <footer className="w-full px-6 md:px-16 py-16 md:py-20">
+        {/* Footer - Light Version */}
+        <footer className="w-full bg-white px-6 md:px-16 py-16 md:py-20">
           <div className="max-w-7xl mx-auto">
             
-
-            {/* Main Footer Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
-              {/* Brand */}
+            {/* Main Footer Grid - 3 Colunas */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+              
+              {/* COLUNA 1 - Logo, Descrição e Redes */}
               <div>
                 <img 
                   src={opiumLogo} 
                   alt="OPIUM" 
-                  className="h-10 w-auto mb-5"
+                  className="h-12 w-auto mb-6 brightness-0"
                 />
-                <p className="text-base text-foreground/70 font-light leading-relaxed">
-                  Há mais de 30 anos fabricando a história do mar. Surfskis de elite com DNA brasileiro.
+                <p className="text-base text-neutral-600 leading-relaxed mb-8">
+                  Desenvolvendo o que há de melhor para Canoas Havaianas e Surfski. Conheça nossos produtos!
                 </p>
-              </div>
-
-              {/* Contact */}
-              <div>
-                <h4 className="text-sm tracking-[0.2em] uppercase text-orange font-medium mb-5">
-                  Contato
-                </h4>
-                <div className="space-y-3">
+                
+                {/* Ícones de Redes Sociais (Quadrados com Borda) */}
+                <div className="flex gap-3">
                   <a 
-                    href="tel:+5513997446684" 
-                    className="block text-base text-foreground/80 hover:text-white transition-colors py-2 -my-2"
+                    href="https://facebook.com/opiumsurfski" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center border-2 border-neutral-800 text-neutral-800 hover:bg-neutral-800 hover:text-white transition-all"
                   >
-                    (13) 99744-6684
+                    <Facebook className="w-5 h-5" />
                   </a>
-                  <a 
-                    href="mailto:atendimento@caiaquesopium.com.br" 
-                    className="block text-base text-foreground/80 hover:text-white transition-colors break-all py-2 -my-2"
-                  >
-                    atendimento@caiaquesopium.com.br
-                  </a>
-                </div>
-              </div>
-
-              {/* Address */}
-              <div>
-                <h4 className="text-sm tracking-[0.2em] uppercase text-orange font-medium mb-5">
-                  Endereço
-                </h4>
-                <p className="text-base text-foreground/80 font-light leading-relaxed">
-                  Rua Afonso Celso de Paula Lima, 16<br />
-                  Ponta da Praia, Santos | SP
-                </p>
-                <p className="text-sm text-foreground/60 mt-3">
-                  Garagem: Seg a Sex 08:00 - 14:00
-                </p>
-              </div>
-
-              {/* Social */}
-              <div>
-                <h4 className="text-sm tracking-[0.2em] uppercase text-orange font-medium mb-5">
-                  Redes Sociais
-                </h4>
-                <div className="flex gap-6">
                   <a 
                     href="https://instagram.com/opiumsurfski" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-base text-foreground/80 hover:text-white transition-colors py-2 -my-2"
+                    className="w-10 h-10 flex items-center justify-center border-2 border-neutral-800 text-neutral-800 hover:bg-neutral-800 hover:text-white transition-all"
                   >
-                    Instagram
+                    <Instagram className="w-5 h-5" />
                   </a>
                   <a 
-                    href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os produtos Opium."
+                    href="https://twitter.com/opiumsurfski" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-base text-foreground/80 hover:text-white transition-colors py-2 -my-2"
+                    className="w-10 h-10 flex items-center justify-center border-2 border-neutral-800 text-neutral-800 hover:bg-neutral-800 hover:text-white transition-all"
                   >
-                    WhatsApp
+                    <Twitter className="w-5 h-5" />
                   </a>
+                </div>
+              </div>
+
+              {/* COLUNA 2 - Contatos */}
+              <div className="space-y-6">
+                {/* Telefone */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Telefone:</h4>
+                    <p className="text-base text-neutral-600">(13) 99744-6684 | (13) 99744-6684 (WHATS)</p>
+                  </div>
+                </div>
+
+                {/* E-mail */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">E-mail:</h4>
+                    <a 
+                      href="mailto:atendimento@caiaquesopium.com.br" 
+                      className="text-base text-neutral-600 hover:text-orange transition-colors"
+                    >
+                      atendimento@caiaquesopium.com.br
+                    </a>
+                  </div>
+                </div>
+
+                {/* Endereço */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Endereço:</h4>
+                    <p className="text-base text-neutral-600">
+                      Rua Afonso Celso de Paula Lima, 16<br />
+                      Ponta da Praia, Santos | SP
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* COLUNA 3 - Horários */}
+              <div className="space-y-6">
+                {/* Horário de Garagem */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Horário de Garagem</h4>
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      Segunda-Feira: 8:00 às 14:00<br />
+                      Terça a Sábado: 7:00 às 19:30<br />
+                      Domingo e Feriado: 8:00 às 18:30
+                    </p>
+                  </div>
+                </div>
+
+                {/* Horário de Secretaria */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Horário de Secretaria</h4>
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      Segunda, Sábado e Domingo: 8:00 às 14:00<br />
+                      Terça a Sexta: 8:00 às 19:00
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Bar */}
-            <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-xs text-foreground/40">
-                © 2025 Opium Hightec Line. Todos os direitos reservados.
-              </p>
-              <p className="text-xs text-foreground/30">
-                Surfskis de Elite desde 1985
+            {/* Linha Separadora */}
+            <div className="mt-12 pt-8 border-t border-neutral-200">
+              <p className="text-sm text-neutral-500 text-center">
+                © {new Date().getFullYear()} Opium Hightec Line. Todos os direitos reservados.
               </p>
             </div>
           </div>

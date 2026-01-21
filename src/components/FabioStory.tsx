@@ -1,17 +1,42 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { Trophy, Medal, Waves, Users, Heart } from "lucide-react";
+import { Trophy, Medal, Waves, Users, Heart, Anchor, Award } from "lucide-react";
 
 export function FabioStory() {
   const data = [
     {
-      title: "1984 - O Início",
+      title: "1962 - O Início de Tudo",
+      content: (
+        <div>
+          <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-6 leading-relaxed">
+            Filho de dois atletas santistas, os nadadores <span className="font-bold text-orange">Gilson Nunes Marques Pereira (o Kalu)</span> e <span className="font-bold text-orange">Dona Regina Stella</span>, Fábio nasceu em 10 de novembro de 1962.
+          </p>
+          <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed">
+            O espírito esportivo dos pais proporcionou uma infância livre. Ele e a irmã Cláudia divertiam-se participando de travessias marítimas feitas, literalmente, nas costas dos pais.
+          </p>
+          <div className="bg-orange/10 border border-orange/30 rounded-lg p-5 mb-6">
+            <Anchor className="w-7 h-7 text-orange mb-2" />
+            <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
+            <p className="text-foreground/70 text-sm md:text-base mt-2">
+              Aficionado pelo mar, aos 10 anos ganhou do pai o primeiro barco a remo na Ilha das Palmas, onde criou sua intimidade com as águas.
+            </p>
+          </div>
+          <div className="rounded-lg overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop"
+              alt="Santos, cidade natal"
+              className="w-full h-48 md:h-64 object-cover rounded-lg"
+            />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "1984 - O Primeiro Passo",
       content: (
         <div>
           <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed">
-            Iniciou sua trajetória no remo em 1984 e logo entrou para a história.
-            Tornou-se o <span className="font-bold text-orange">primeiro campeão brasileiro da Volta à Ilha de Vitória (ES)</span> e conquistou a
-            primeira medalha internacional da canoagem brasileira, sagrando-se <span className="font-bold text-orange">campeão sul-americano no Uruguai</span>.
+            Foi amor à primeira vista. Com dinheiro do seu primeiro estágio, comprou um caiaque e, em abril de 1984, <span className="font-bold text-orange">venceu sua primeira competição</span> mesmo com equipamentos defasados em relação aos profissionais.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-lg overflow-hidden">
@@ -23,12 +48,16 @@ export function FabioStory() {
             </div>
             <div className="flex flex-col gap-4 justify-center">
               <div className="flex items-center gap-3 text-foreground/70">
-                <Trophy className="w-6 h-6 text-orange" />
-                <span className="text-base md:text-lg">1º Campeão Volta à Ilha Vitória</span>
+                <Trophy className="w-6 h-6 text-orange flex-shrink-0" />
+                <span className="text-base md:text-lg">1º Campeão Volta à Ilha Vitória (ES)</span>
               </div>
               <div className="flex items-center gap-3 text-foreground/70">
-                <Medal className="w-6 h-6 text-orange" />
-                <span className="text-base md:text-lg">Medalha Internacional (Uruguai)</span>
+                <Medal className="w-6 h-6 text-orange flex-shrink-0" />
+                <span className="text-base md:text-lg">Campeão Sul-americano (Uruguai)</span>
+              </div>
+              <div className="flex items-center gap-3 text-foreground/70">
+                <Award className="w-6 h-6 text-orange flex-shrink-0" />
+                <span className="text-base md:text-lg">1ª Medalha Internacional da Canoagem BR</span>
               </div>
             </div>
           </div>
@@ -36,14 +65,28 @@ export function FabioStory() {
       ),
     },
     {
-      title: "Consagração",
+      title: "A Década de Ouro",
       content: (
         <div>
           <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed">
-            Uma carreira marcada pela invencibilidade: foi <span className="font-bold text-orange">campeão brasileiro invicto por 15 anos consecutivos</span>.
-            Disputou o Campeonato Mundial na Polônia e é detentor do <span className="font-bold text-orange">recorde de 24 horas em mar aberto (164 km)</span>.
-            No rafting, integrou a equipe Canoar (tricampeã brasileira) e competiu no desafiador Rio Orange, no deserto do Kalahari.
+            Uma trajetória espetacular com quase <span className="font-bold text-orange">700 troféus</span>. Fábio permaneceu <span className="font-bold text-orange">invicto no país por 15 anos consecutivos</span>.
           </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
+              <Trophy className="w-7 h-7 text-orange mb-2" />
+              <h4 className="text-orange font-bold text-base md:text-lg">Recordista 24 Horas</h4>
+              <p className="text-foreground/60 text-sm md:text-base mt-2">
+                Detentor da marca de 164 Km remados em mar aberto em um único dia.
+              </p>
+            </div>
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
+              <Waves className="w-7 h-7 text-orange mb-2" />
+              <h4 className="text-orange font-bold text-base md:text-lg">Rafting Extremo</h4>
+              <p className="text-foreground/60 text-sm md:text-base mt-2">
+                Com a equipe Canoar (tricampeã brasileira), desafiou o Rio Orange no deserto do Kalahari.
+              </p>
+            </div>
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <img
               src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=2070&auto=format&fit=crop"
@@ -60,22 +103,42 @@ export function FabioStory() {
       ),
     },
     {
-      title: "2000 - A Canoa Havaiana",
+      title: "O Nascimento da Opium",
       content: (
         <div>
           <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed">
-            Visionário, Fábio foi o <span className="font-bold text-orange">introdutor da canoa havaiana no Brasil</span>. Criou a primeira base da modalidade,
-            organizou os primeiros campeonatos e é o idealizador da <span className="font-bold text-orange">Volta à Ilha de Santo Amaro</span>,
-            a prova mais tradicional do país que chega à sua 22ª edição em março de 2026.
+            Na década de 90, em viagem à Espanha, conheceu a canoa havaiana e apaixonou-se. Foi o momento da virada: decidiu <span className="font-bold text-orange">abandonar a carreira de engenheiro</span> para se dedicar integralmente à canoagem.
           </p>
-          <div className="mb-6">
-            <div className="bg-orange/10 border border-orange/30 rounded-lg p-5">
-              <Waves className="w-7 h-7 text-orange mb-2" />
-              <span className="text-orange font-bold text-base md:text-lg">Marco Histórico</span>
-              <p className="text-foreground/70 text-sm md:text-base mt-2">
-                Trouxe a cultura da Polinésia para as águas brasileiras, mudando para sempre o cenário dos esportes náuticos no país.
-              </p>
-            </div>
+          <div className="bg-orange/10 border border-orange/30 rounded-lg p-5 mb-6">
+            <Anchor className="w-7 h-7 text-orange mb-2" />
+            <span className="text-orange font-bold text-base md:text-lg">De Engenheiro a Fabricante</span>
+            <p className="text-foreground/70 text-sm md:text-base mt-2">
+              Começou fabricando canoas de forma quase artesanal em Santos, dando início à <span className="font-bold">Opium</span>, empresa pioneira que hoje gera centenas de empregos.
+            </p>
+          </div>
+          <div className="rounded-lg overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2032&auto=format&fit=crop"
+              alt="Fabricação artesanal"
+              className="w-full h-48 md:h-64 object-cover rounded-lg"
+            />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "2000 - A Revolução Havaiana",
+      content: (
+        <div>
+          <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed">
+            Fábio foi oficialmente o <span className="font-bold text-orange">introdutor da canoa havaiana no Brasil</span>. Criou a primeira base da modalidade e organizou os primeiros campeonatos.
+          </p>
+          <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 mb-6">
+            <Waves className="w-7 h-7 text-orange mb-2" />
+            <h4 className="text-orange font-bold text-base md:text-lg">Volta à Ilha de Santo Amaro</h4>
+            <p className="text-foreground/60 text-sm md:text-base mt-2">
+              Idealizador da prova mais tradicional do país, que chega à sua 22ª edição em março de 2026.
+            </p>
           </div>
           <div className="rounded-lg overflow-hidden">
             <img
@@ -88,23 +151,22 @@ export function FabioStory() {
       ),
     },
     {
-      title: "Legado & Comunidade",
+      title: "Legado & Reconhecimento",
       content: (
         <div>
           <p className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed">
-            Fundador da <span className="font-bold text-orange">Canoa Brasil</span>, a primeira guardaria do país, que movimenta centenas de remadores semanalmente.
-            Em 2007, introduziu também o <span className="font-bold text-orange">Dragon Boat no Brasil</span>. Por sua contribuição inestimável ao esporte, recebeu o título de <span className="font-bold text-orange">Cidadão Santista</span>.
+            Fundador da <span className="font-bold text-orange">Canoa Brasil</span>, a primeira guardaria do país, movimentando hoje cerca de 400 pessoas aos sábados.
           </p>
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
               <Users className="w-7 h-7 text-orange mx-auto mb-2" />
-              <span className="text-3xl md:text-4xl font-bold text-orange">+400</span>
-              <p className="text-foreground/60 text-sm md:text-base mt-1">Pessoas aos Sábados</p>
+              <span className="text-xl md:text-2xl font-bold text-orange">Dragon Boat</span>
+              <p className="text-foreground/60 text-sm md:text-base mt-1">Introduziu no Brasil em 2007</p>
             </div>
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
               <Trophy className="w-7 h-7 text-orange mx-auto mb-2" />
-              <span className="text-xl md:text-2xl font-bold text-orange">Pioneiro</span>
-              <p className="text-foreground/60 text-sm md:text-base mt-1">Dragon Boat & Canoa</p>
+              <span className="text-xl md:text-2xl font-bold text-orange">Cidadão Santista</span>
+              <p className="text-foreground/60 text-sm md:text-base mt-1">Título por sua contribuição ao esporte</p>
             </div>
           </div>
         </div>

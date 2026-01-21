@@ -118,7 +118,7 @@ const ChampionSection = () => {
                 alt="Opium - Fábrica de Surfskis"
                 className="w-full h-[120%] object-cover"
                 style={{
-                  filter: 'grayscale(100%) contrast(1.2) brightness(0.85)',
+                  filter: 'contrast(1.1) brightness(0.95)',
                 }}
               />
             </motion.div>

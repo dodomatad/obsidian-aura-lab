@@ -80,32 +80,30 @@ export function FabioStory() {
       ),
     },
     {
-      title: "1984 - O Primeiro Passo",
+      title: "1984/85 - O Despertar do Campeão",
       content: (
         <div>
           <RevealText
             delay={0}
             className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
           >
-            Foi amor à primeira vista. Com dinheiro do seu primeiro estágio, comprou
-            um caiaque e, em abril de 1984,{" "}
+            Amor à primeira remada. Com dinheiro de estágio, comprou um caiaque e venceu sua primeira prova em 84. No ano seguinte, tornou-se o{" "}
             <span className="font-bold text-orange">
-              venceu sua primeira competição
-            </span>{" "}
-            mesmo com equipamentos defasados em relação aos profissionais.
+              primeiro campeão brasileiro da Volta à Ilha de Vitória
+            </span>.
           </RevealText>
           <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 mb-6">
             <RevealText
               delay={0.05}
               className="text-foreground/70 text-sm md:text-base"
             >
-              Tornou-se o primeiro campeão brasileiro da Volta à Ilha de Vitória e conquistou a primeira medalha internacional da canoagem brasileira (Campeão Sul-americano no Uruguai).
+              Conquistou a primeira medalha internacional da canoagem brasileira como Campeão Sul-americano no Uruguai, marcando o início de uma carreira lendária.
             </RevealText>
           </div>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-3 text-foreground/70">
               <Trophy className="w-6 h-6 text-orange flex-shrink-0" />
-              <span className="text-base md:text-lg">1º Campeão Brasileiro</span>
+              <span className="text-base md:text-lg">1º Campeão Brasileiro (1985)</span>
             </div>
             <div className="flex items-center gap-3 text-foreground/70">
               <Medal className="w-6 h-6 text-orange flex-shrink-0" />
@@ -116,41 +114,39 @@ export function FabioStory() {
       ),
     },
     {
-      title: "A Década de Ouro",
+      title: "A Década de Ouro & O Mundo",
       content: (
         <div>
           <RevealText
             delay={0}
             className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
           >
-            Uma trajetória espetacular com quase{" "}
-            <span className="font-bold text-orange">700 troféus</span>. Fábio
-            permaneceu{" "}
-            <span className="font-bold text-orange">
-              invicto no país por 15 anos consecutivos
-            </span>
-            .
+            Uma trajetória de{" "}
+            <span className="font-bold text-orange">700 troféus</span>. Fábio permaneceu{" "}
+            <span className="font-bold text-yellow-400">
+              invicto no país por 15 anos
+            </span>, mas seu remo foi além das fronteiras.
           </RevealText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <Trophy className="w-7 h-7 text-orange mb-2" />
-              <h4 className="text-orange font-bold text-base md:text-lg">Recordista 24 Horas</h4>
+              <Trophy className="w-7 h-7 text-yellow-400 mb-2" />
+              <h4 className="text-yellow-400 font-bold text-base md:text-lg">Vice-Campeão Mundial</h4>
               <RevealText
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base mt-2"
               >
-                Detentor da marca de 164 Km remados em mar aberto em um único dia.
+                Conquistou o 2º lugar no Mundial Oceânico na Ilha da Madeira e disputou o Mundial na Polônia.
               </RevealText>
             </div>
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <Waves className="w-7 h-7 text-orange mb-2" />
-              <h4 className="text-orange font-bold text-base md:text-lg">Rafting Extremo</h4>
+              <Medal className="w-7 h-7 text-blue-400 mb-2" />
+              <h4 className="text-blue-400 font-bold text-base md:text-lg">Recordista & Rafting</h4>
               <RevealText
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base mt-2"
               >
-                Com a equipe Canoar (tricampeã brasileira), desafiou o Rio Orange no deserto do Kalahari e foi Prata nos Jogos Mundiais da Natureza.
+                Recorde de 24h (164km) no mar e Prata nos Jogos Mundiais da Natureza com a equipe Canoar.
               </RevealText>
             </div>
           </div>

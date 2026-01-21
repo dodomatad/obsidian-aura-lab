@@ -1,7 +1,7 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { Button } from "@/components/ui/button";
-import { Trophy, Medal, Waves, Users, Heart, ExternalLink } from "lucide-react";
+import { Trophy, Medal, Waves, Users, Heart, ArrowRight } from "lucide-react";
 
 export function FabioStory() {
   const data = [
@@ -34,7 +34,6 @@ export function FabioStory() {
             </div>
           </div>
 
-          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
@@ -47,7 +46,7 @@ export function FabioStory() {
                 rel="noopener noreferrer"
               >
                 Ver Detalhes de 1984
-                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
           </div>
@@ -76,7 +75,6 @@ export function FabioStory() {
             />
           </div>
 
-          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
@@ -89,7 +87,7 @@ export function FabioStory() {
                 rel="noopener noreferrer"
               >
                 Ler sobre os Recordes
-                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
           </div>
@@ -122,7 +120,6 @@ export function FabioStory() {
             />
           </div>
 
-          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
@@ -135,7 +132,7 @@ export function FabioStory() {
                 rel="noopener noreferrer"
               >
                 A Chegada da Canoa Havaiana
-                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
           </div>
@@ -163,7 +160,6 @@ export function FabioStory() {
             </div>
           </div>
 
-          {/* Action Button - Opens in new tab */}
           <div className="mt-6">
             <Button 
               variant="outline" 
@@ -176,7 +172,7 @@ export function FabioStory() {
                 rel="noopener noreferrer"
               >
                 Conheça a Canoa Brasil
-                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
           </div>
@@ -212,7 +208,6 @@ export function FabioStory() {
             />
           </div>
 
-          {/* Action Button - Highlighted for social impact - Opens in new tab */}
           <div className="mt-6">
             <Button 
               className="group bg-orange hover:bg-orange/90 text-background font-semibold transition-all"
@@ -224,7 +219,7 @@ export function FabioStory() {
                 rel="noopener noreferrer"
               >
                 Apoie os Projetos Sociais
-                <ExternalLink className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
           </div>

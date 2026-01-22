@@ -16,10 +16,10 @@ import logoVoltaIlha from '@/assets/logo-volta-ilha.jpg';
 
 // Authority logos/badges - Using official logos where available
 const authorityLogos = [
-  { image: logoCanoaBrasil, title: 'Fundador Canoa Brasil' },
-  { image: logoVoltaIlha, title: 'Volta à Ilha de Santo Amaro' },
-  { image: logoSahyRemando, title: 'Projeto Sahy Remando' },
-  { image: logoKaora, title: 'Kaora' },
+  { image: logoCanoaBrasil, title: 'Fundador Canoa Brasil', link: 'https://www.instagram.com/penareiasahy' },
+  { image: logoVoltaIlha, title: 'Volta à Ilha de Santo Amaro', link: 'https://www.instagram.com/voltailhasantoamaro' },
+  { image: logoSahyRemando, title: 'Projeto Sahy Remando', link: 'https://www.instagram.com/projetosahyremando' },
+  { image: logoKaora, title: 'Kaora', link: 'https://www.instagram.com/projeto_kaora' },
 ];
 
 const ChampionSection = () => {
@@ -320,7 +320,12 @@ const ChampionSection = () => {
                       key={logo.title}
                       className="flex-[0_0_50%] min-w-0 px-2"
                     >
-                      <div className="group flex flex-col items-center text-center p-4 hover:bg-foreground/5 transition-colors duration-300 rounded-lg">
+                      <a 
+                        href={logo.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-col items-center text-center p-4 hover:bg-foreground/5 transition-colors duration-300 rounded-lg cursor-pointer"
+                      >
                         {logo.image ? (
                           <div className="w-28 h-28 flex items-center justify-center rounded-xl mb-4 bg-white p-3 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
                             <img 
@@ -337,7 +342,7 @@ const ChampionSection = () => {
                         <h4 className="text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                           {logo.title}
                         </h4>
-                      </div>
+                      </a>
                     </div>
                   ))}
                 </div>
@@ -379,13 +384,16 @@ const ChampionSection = () => {
             {/* Desktop: Grid */}
             <div className="hidden md:grid md:grid-cols-4 gap-8">
               {authorityLogos.map((logo, index) => (
-                <motion.div
+                <motion.a
                   key={logo.title}
+                  href={logo.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  className="group flex flex-col items-center text-center p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
+                  className="group flex flex-col items-center text-center p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg cursor-pointer"
                 >
                   {logo.image ? (
                     <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-white p-3 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
@@ -403,7 +411,7 @@ const ChampionSection = () => {
                   <h4 className="text-lg font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                     {logo.title}
                   </h4>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           </div>

@@ -8,6 +8,83 @@ import { Product, getAllProducts } from '@/data/products';
 // Get ALL products in a single unified list
 const allProducts = getAllProducts();
 
+// Autoplay configuration
+const AUTOPLAY_INTERVAL = 5000; // 5 seconds
+
+// ============================================
+// IMAGE FALLBACK COMPONENT
+// ============================================
+const ImageWithFallback = ({ 
+  src, 
+  alt, 
+  className, 
+  onLoad, 
+  style,
+  imageRef 
+}: { 
+  src: string; 
+  alt: string; 
+  className?: string; 
+  onLoad?: () => void;
+  style?: React.CSSProperties;
+  imageRef?: React.Ref<HTMLImageElement>;
+}) => {
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoad = () => {
+    setIsLoading(false);
+    onLoad?.();
+  };
+
+  const handleError = () => {
+    setHasError(true);
+    setIsLoading(false);
+  };
+
+  if (hasError) {
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg">
+        {/* Stylized boat silhouette */}
+        <svg 
+          viewBox="0 0 200 80" 
+          className="w-48 h-20 opacity-20 mb-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1"
+        >
+          <path d="M10 60 Q100 20 190 60" className="text-foreground/30" />
+          <path d="M30 55 L100 35 L170 55" className="text-orange/40" />
+          <ellipse cx="100" cy="58" rx="85" ry="8" className="text-foreground/10" fill="currentColor" />
+        </svg>
+        <span className="text-xs tracking-[0.3em] uppercase text-foreground/30 font-sans">
+          Imagem em Breve
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-full h-48 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-lg" />
+        </div>
+      )}
+      <img
+        ref={imageRef}
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={handleLoad}
+        onError={handleError}
+        className={className}
+        style={style}
+      />
+    </>
+  );
+};
+
 // ============================================
 // UNIFIED FLEET CAROUSEL - All boats in one slider
 // ============================================
@@ -15,8 +92,11 @@ const ProductShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const progressRef = useRef<NodeJS.Timeout | null>(null);
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
@@ -41,19 +121,57 @@ const ProductShowcase = () => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
     setImageLoaded(false);
+    setProgress(0); // Reset progress on manual navigation
   };
 
   const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % allProducts.length);
     setImageLoaded(false);
+    setProgress(0);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + allProducts.length) % allProducts.length);
     setImageLoaded(false);
+    setProgress(0);
   }, []);
+
+  // Smart Autoplay with progress tracking
+  useEffect(() => {
+    if (isHovered || isPaused || isTransitioning) {
+      // Clear progress interval when paused
+      if (progressRef.current) {
+        clearInterval(progressRef.current);
+        progressRef.current = null;
+      }
+      return;
+    }
+
+    // Progress bar animation (updates every 50ms for smooth animation)
+    const progressInterval = 50;
+    const steps = AUTOPLAY_INTERVAL / progressInterval;
+    let currentStep = 0;
+
+    progressRef.current = setInterval(() => {
+      currentStep++;
+      setProgress((currentStep / steps) * 100);
+
+      if (currentStep >= steps) {
+        nextSlide();
+        currentStep = 0;
+        setProgress(0);
+      }
+    }, progressInterval);
+
+    return () => {
+      if (progressRef.current) {
+        clearInterval(progressRef.current);
+        progressRef.current = null;
+      }
+    };
+  }, [currentIndex, isHovered, isPaused, isTransitioning, nextSlide]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -65,6 +183,13 @@ const ProductShowcase = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobile, nextSlide, prevSlide]);
+
+  // Touch handlers for mobile pause
+  const handleTouchStart = () => setIsPaused(true);
+  const handleTouchEnd = () => {
+    // Resume after a brief delay
+    setTimeout(() => setIsPaused(false), 1000);
+  };
 
   // Swipe handlers
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -123,15 +248,31 @@ const ProductShowcase = () => {
     ease: [0.32, 0.72, 0, 1] as const,
   };
 
-  // Category header animation
+  // Category header animation - smooth slide/fade
   const categoryVariants = {
-    enter: { opacity: 0, y: -10 },
-    center: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 10 },
+    enter: { opacity: 0, y: -15, filter: 'blur(4px)' },
+    center: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    exit: { opacity: 0, y: 15, filter: 'blur(4px)' },
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
+    <section 
+      className="relative min-h-screen w-full overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Progress Bar - Top */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-foreground/5 z-50">
+        <motion.div 
+          className="h-full bg-gradient-to-r from-orange/60 via-orange to-orange/60"
+          style={{ 
+            width: `${progress}%`,
+            boxShadow: '0 0 10px rgba(249, 115, 22, 0.5)',
+          }}
+          transition={{ duration: 0.05, ease: 'linear' }}
+        />
+      </div>
+
       {/* Noise texture overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
@@ -170,14 +311,14 @@ const ProductShowcase = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="relative z-20 px-6 md:px-16 pt-10 md:pt-16"
+        className="relative z-20 px-6 md:px-16 pt-12 md:pt-20"
       >
         <div className="mb-2">
           <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
             Performance
           </span>
         </div>
-        {/* Dynamic Category Title */}
+        {/* Dynamic Category Title with smooth transition */}
         <div className="overflow-hidden h-[3.5rem] md:h-[4.5rem]">
           <AnimatePresence mode="wait">
             <motion.h2 
@@ -186,7 +327,7 @@ const ProductShowcase = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
               className="display-hero text-foreground"
               style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
             >
@@ -283,22 +424,10 @@ const ProductShowcase = () => {
               }}
             />
 
-            {/* Skeleton loading placeholder */}
-            {!imageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center z-10">
-                <div className="w-full h-48 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-lg" />
-              </div>
-            )}
-
-            {/* Boat image */}
-            <motion.img
+            {/* Boat image with fallback */}
+            <motion.div
               layoutId={`boat-image-${currentProduct.id}`}
-              ref={(el) => { imageRefs.current[currentIndex] = el; }}
-              src={currentProduct.image}
-              alt={currentProduct.name}
-              loading="lazy"
-              onLoad={() => setImageLoaded(true)}
-              className={`w-full h-auto object-contain relative z-10 pointer-events-none transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`w-full h-auto relative z-10 transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               animate={{
                 y: isHovered && !isMobile ? -15 : 0,
                 scale: isHovered && !isMobile ? 1.04 : 1,
@@ -307,14 +436,22 @@ const ProductShowcase = () => {
                 y: { type: 'spring', stiffness: 120, damping: 15 },
                 scale: { type: 'spring', stiffness: 120, damping: 15 },
               }}
-              style={{
-                filter: `
-                  drop-shadow(0 50px 100px rgba(0,0,0,0.75)) 
-                  drop-shadow(0 25px 50px rgba(0,0,0,0.55))
-                `,
-                opacity: isThisProductTransitioning ? 0 : undefined,
-              }}
-            />
+            >
+              <ImageWithFallback
+                imageRef={(el) => { imageRefs.current[currentIndex] = el; }}
+                src={currentProduct.image}
+                alt={currentProduct.name}
+                onLoad={() => setImageLoaded(true)}
+                className="w-full h-auto object-contain pointer-events-none"
+                style={{
+                  filter: `
+                    drop-shadow(0 50px 100px rgba(0,0,0,0.75)) 
+                    drop-shadow(0 25px 50px rgba(0,0,0,0.55))
+                  `,
+                  opacity: isThisProductTransitioning ? 0 : undefined,
+                }}
+              />
+            </motion.div>
 
             {/* Mobile swipe hint */}
             {isMobile && (
@@ -405,12 +542,12 @@ const ProductShowcase = () => {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Dots - Grouped by Category */}
+      {/* Navigation Dots - Enhanced with glow effect */}
       <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-1.5 z-30 items-center">
         {allProducts.map((product, index) => {
-          // Add category separator
           const prevProduct = index > 0 ? allProducts[index - 1] : null;
           const isNewCategory = prevProduct && prevProduct.category !== product.category;
+          const isActive = index === currentIndex;
           
           return (
             <div key={product.id} className="flex items-center gap-2 md:gap-1.5">
@@ -422,22 +559,40 @@ const ProductShowcase = () => {
               <motion.button
                 onClick={() => goToSlide(index)}
                 className="relative group p-2 md:p-1.5 min-w-[40px] min-h-[40px] md:min-w-0 md:min-h-0 flex items-center justify-center"
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.85 }}
               >
+                {/* Dot */}
                 <motion.div
-                  className={`w-2.5 h-2.5 md:w-2 md:h-2 rounded-full transition-all duration-250 ${
-                    index === currentIndex ? 'bg-orange' : 'bg-foreground/20 group-hover:bg-foreground/40'
+                  className={`w-2.5 h-2.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
+                    isActive ? 'bg-orange' : 'bg-foreground/20 group-hover:bg-foreground/50'
                   }`}
-                  animate={{ scale: index === currentIndex ? 1.3 : 1 }}
+                  animate={{ 
+                    scale: isActive ? 1.4 : 1,
+                    boxShadow: isActive ? '0 0 12px rgba(249, 115, 22, 0.6)' : '0 0 0px transparent'
+                  }}
+                  transition={{ duration: 0.3 }}
                 />
-                {index === currentIndex && (
-                  <motion.div
-                    className="absolute inset-0 m-auto w-6 h-6 md:w-4 md:h-4 rounded-full border border-orange/40"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.25 }}
-                  />
+                
+                {/* Active ring with pulse */}
+                {isActive && (
+                  <>
+                    <motion.div
+                      className="absolute inset-0 m-auto w-6 h-6 md:w-4 md:h-4 rounded-full border border-orange/50"
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    {/* Pulse effect */}
+                    <motion.div
+                      className="absolute inset-0 m-auto w-6 h-6 md:w-4 md:h-4 rounded-full border border-orange/30"
+                      animate={{ 
+                        scale: [1, 1.5, 1],
+                        opacity: [0.5, 0, 0.5]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  </>
                 )}
               </motion.button>
             </div>
@@ -445,8 +600,21 @@ const ProductShowcase = () => {
         })}
       </div>
 
-      {/* Product Counter */}
-      <div className="absolute top-10 md:top-16 right-6 md:right-16 z-20">
+      {/* Product Counter + Pause Indicator */}
+      <div className="absolute top-12 md:top-20 right-6 md:right-16 z-20 flex items-center gap-3">
+        {/* Pause indicator */}
+        {(isHovered || isPaused) && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="flex items-center gap-1.5"
+          >
+            <div className="w-1.5 h-4 bg-foreground/30 rounded-sm" />
+            <div className="w-1.5 h-4 bg-foreground/30 rounded-sm" />
+          </motion.div>
+        )}
+        
         <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/30 font-mono">
           {String(currentIndex + 1).padStart(2, '0')} / {String(allProducts.length).padStart(2, '0')}
         </span>

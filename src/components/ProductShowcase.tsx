@@ -18,40 +18,28 @@ const CATEGORIES = ['Todos', 'Surfski Individual', 'Surfski Duplo', 'Canoa Havai
 type CategoryType = typeof CATEGORIES[number];
 
 // ============================================
-// IMAGE FALLBACK COMPONENT
+// IMAGE FALLBACK COMPONENT - Optimized to prevent flickering
 // ============================================
+interface ImageWithFallbackProps {
+  src: string;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+  imageRef?: (el: HTMLImageElement | null) => void;
+}
+
 const ImageWithFallback = ({ 
   src, 
   alt, 
   className, 
-  onLoad, 
   style,
   imageRef 
-}: { 
-  src: string; 
-  alt: string; 
-  className?: string; 
-  onLoad?: () => void;
-  style?: React.CSSProperties;
-  imageRef?: React.Ref<HTMLImageElement>;
-}) => {
+}: ImageWithFallbackProps) => {
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoad = () => {
-    setIsLoading(false);
-    onLoad?.();
-  };
-
-  const handleError = () => {
-    setHasError(true);
-    setIsLoading(false);
-  };
 
   if (hasError) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-muted to-background rounded-lg min-h-[200px]">
-        {/* Stylized boat silhouette */}
         <svg 
           viewBox="0 0 200 80" 
           className="w-48 h-20 opacity-20 mb-4"
@@ -71,23 +59,15 @@ const ImageWithFallback = ({
   }
 
   return (
-    <>
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-full h-48 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse rounded-lg" />
-        </div>
-      )}
-      <img
-        ref={imageRef}
-        src={src}
-        alt={alt}
-        loading="lazy"
-        onLoad={handleLoad}
-        onError={handleError}
-        className={className}
-        style={style}
-      />
-    </>
+    <img
+      ref={imageRef}
+      src={src}
+      alt={alt}
+      loading="eager"
+      onError={() => setHasError(true)}
+      className={className}
+      style={style}
+    />
   );
 };
 
@@ -100,8 +80,7 @@ const ProductShowcase = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [hasInteracted, setHasInteracted] = useState(false); // Track first interaction
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
@@ -127,21 +106,18 @@ const ProductShowcase = () => {
   const goToSlide = (index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
-    setImageLoaded(false);
-    setProgress(0); // Reset progress on manual navigation
+    setProgress(0);
   };
 
   const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % allProducts.length);
-    setImageLoaded(false);
     setProgress(0);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + allProducts.length) % allProducts.length);
-    setImageLoaded(false);
     setProgress(0);
   }, []);
 
@@ -485,10 +461,9 @@ const ProductShowcase = () => {
               }}
             />
 
-            {/* Boat image with fallback */}
+            {/* Boat image - simplified to prevent flickering */}
             <motion.div
-              layoutId={`boat-image-${currentProduct.id}`}
-              className={`w-full h-auto relative z-10 transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className="w-full h-auto relative z-10"
               animate={{
                 y: isHovered && !isMobile ? -15 : 0,
                 scale: isHovered && !isMobile ? 1.04 : 1,
@@ -502,14 +477,13 @@ const ProductShowcase = () => {
                 imageRef={(el) => { imageRefs.current[currentIndex] = el; }}
                 src={currentProduct.image}
                 alt={currentProduct.name}
-                onLoad={() => setImageLoaded(true)}
                 className="w-full h-auto object-contain pointer-events-none"
                 style={{
                   filter: `
                     drop-shadow(0 50px 100px rgba(0,0,0,0.75)) 
                     drop-shadow(0 25px 50px rgba(0,0,0,0.55))
                   `,
-                  opacity: isThisProductTransitioning ? 0 : undefined,
+                  opacity: isThisProductTransitioning ? 0 : 1,
                 }}
               />
             </motion.div>

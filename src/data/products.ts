@@ -5,6 +5,14 @@ import boatPink from '@/assets/boat-pink.png';
 import boatCarbon from '@/assets/boat-carbon.png';
 import boatCamo from '@/assets/boat-camo.png';
 
+// PONO Gallery Images
+import ponoDetail1 from '@/assets/boats/pono/pono-detail-1.jpg';
+import ponoDetail2 from '@/assets/boats/pono/pono-detail-2.jpg';
+import ponoDetail3 from '@/assets/boats/pono/pono-detail-3.jpg';
+import ponoDetail4 from '@/assets/boats/pono/pono-detail-4.jpg';
+import ponoDetail5 from '@/assets/boats/pono/pono-detail-5.jpg';
+import ponoDetail6 from '@/assets/boats/pono/pono-detail-6.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -34,6 +42,7 @@ export interface Product {
   features: string[];
   colors: ColorOption[];
   defaultImage: string;
+  galleryImages?: string[]; // Optional product photo gallery
 }
 
 // Complete fleet data
@@ -70,6 +79,14 @@ export const productsData: Record<string, Product> = {
       { id: 'camo', name: 'Camuflagem Ocean', color: '#4A6741', image: boatCamo },
     ],
     defaultImage: boatPono,
+    galleryImages: [
+      ponoDetail1,
+      ponoDetail2,
+      ponoDetail3,
+      ponoDetail4,
+      ponoDetail5,
+      ponoDetail6,
+    ],
   },
   moana: {
     id: 'moana',

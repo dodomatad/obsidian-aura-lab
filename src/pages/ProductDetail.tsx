@@ -261,10 +261,9 @@ const ProductDetail = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
                         transition={{ duration: 0.5, delay: 0.2 + index * 0.05 }}
-                        className="p-4 rounded-lg"
+                        className="p-4 rounded-lg bg-white/10"
                         style={{
-                          background: 'rgba(255, 255, 255, 0.03)',
-                          border: '1px solid rgba(255, 255, 255, 0.06)',
+                          border: '1px solid rgba(255, 255, 255, 0.15)',
                         }}
                       >
                         <div className="flex items-center gap-2 mb-2">

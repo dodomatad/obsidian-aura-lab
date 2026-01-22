@@ -310,25 +310,18 @@ const ChampionSection = () => {
               </span>
             </motion.div>
 
-            {/* Authority Logos Carousel */}
-            <div className="relative">
-              {/* Carousel Container */}
+            {/* Mobile: Carousel */}
+            <div className="md:hidden relative">
               <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex">
                   {authorityLogos.map((logo, index) => (
                     <div
                       key={logo.title}
-                      className="flex-[0_0_50%] md:flex-[0_0_25%] min-w-0 px-3"
+                      className="flex-[0_0_50%] min-w-0 px-2"
                     >
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                        className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
-                      >
+                      <div className="group flex flex-col items-center text-center p-4 hover:bg-foreground/5 transition-colors duration-300 rounded-lg">
                         {logo.image ? (
-                          <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
                             <img 
                               src={logo.image} 
                               alt={logo.title}
@@ -336,36 +329,36 @@ const ChampionSection = () => {
                             />
                           </div>
                         ) : (
-                          <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
-                            <span className="text-orange font-bold text-2xl md:text-3xl">22ª</span>
+                          <div className="w-20 h-20 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                            <span className="text-orange font-bold text-2xl">22ª</span>
                           </div>
                         )}
-                        <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                        <h4 className="text-sm font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                           {logo.title}
                         </h4>
-                      </motion.div>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Navigation Arrows */}
+              {/* Navigation Arrows - Mobile */}
               <button
                 onClick={scrollPrev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-8 h-8 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
                 aria-label="Anterior"
               >
-                <ChevronLeft className="w-5 h-5 text-foreground/70 hover:text-orange" />
+                <ChevronLeft className="w-4 h-4 text-foreground/70" />
               </button>
               <button
                 onClick={scrollNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-8 h-8 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
                 aria-label="Próximo"
               >
-                <ChevronRight className="w-5 h-5 text-foreground/70 hover:text-orange" />
+                <ChevronRight className="w-4 h-4 text-foreground/70" />
               </button>
 
-              {/* Dots Indicator */}
+              {/* Dots Indicator - Mobile */}
               <div className="flex justify-center gap-2 mt-6">
                 {authorityLogos.map((_, index) => (
                   <button
@@ -380,6 +373,37 @@ const ChampionSection = () => {
                   />
                 ))}
               </div>
+            </div>
+
+            {/* Desktop: Grid */}
+            <div className="hidden md:grid md:grid-cols-4 gap-8">
+              {authorityLogos.map((logo, index) => (
+                <motion.div
+                  key={logo.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                  className="group flex flex-col items-center text-center p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
+                >
+                  {logo.image ? (
+                    <div className="w-24 h-24 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                      <img 
+                        src={logo.image} 
+                        alt={logo.title}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-24 h-24 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                      <span className="text-orange font-bold text-3xl">22ª</span>
+                    </div>
+                  )}
+                  <h4 className="text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                    {logo.title}
+                  </h4>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>

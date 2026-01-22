@@ -1,19 +1,23 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Flag, Trophy, Anchor, Ship, Users, Award, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import championImage from '@/assets/fabio-champion.jpg';
 import BlurText from '@/components/ui/BlurText';
 import { useTransition } from '@/context/TransitionContext';
 
-// Authority logos/badges - Títulos exatos da cliente
-const authorityLogos = [
-  { icon: Anchor, title: 'Fundador Canoa Brasil' },
-  { icon: Ship, title: 'Volta à Ilha de Santo Amaro' },
-  { icon: Users, title: 'Projeto Sally Remo' },
-  { icon: Award, title: 'Kaora' },
-];
+// Import official logos
+import logoCanoaBrasil from '@/assets/logo-canoa-brasil.jpg';
+import logoKaora from '@/assets/logo-kaora.jpg';
+import logoSahyRemando from '@/assets/logo-sahy-remando.jpg';
 
+// Authority logos/badges - Using official logos where available
+const authorityLogos = [
+  { image: logoCanoaBrasil, title: 'Fundador Canoa Brasil' },
+  { image: null, title: 'Volta à Ilha de Santo Amaro', isText: true },
+  { image: logoSahyRemando, title: 'Projeto Sahy Remando' },
+  { image: logoKaora, title: 'Kaora' },
+];
 
 const ChampionSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -273,7 +277,7 @@ const ChampionSection = () => {
               </span>
             </motion.div>
 
-            {/* Authority Logos Grid - Invertidos para Dark */}
+            {/* Authority Logos Grid - With official logos */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {authorityLogos.map((logo, index) => (
                 <motion.div
@@ -284,9 +288,19 @@ const ChampionSection = () => {
                   transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
                   className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
                 >
-                  <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-full mb-4 transition-all duration-300 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20">
-                    <logo.icon className="w-6 h-6 md:w-7 md:h-7 text-orange transition-colors duration-300" />
-                  </div>
+                  {logo.image ? (
+                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                      <img 
+                        src={logo.image} 
+                        alt={logo.title}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                      <span className="text-orange font-bold text-2xl md:text-3xl">22ª</span>
+                    </div>
+                  )}
                   <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                     {logo.title}
                   </h4>

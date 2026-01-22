@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Timeline } from "@/components/ui/timeline";
-import { Trophy, Medal, Waves, Users, Heart, Anchor, Award, Baby, Hammer, MapPin, Briefcase, Star } from "lucide-react";
+import { Trophy, Medal, Users, Anchor, Award, Hammer, MapPin, Briefcase, Star } from "lucide-react";
 import fabioPortrait from "@/assets/fabio-paiva-portrait.jpg";
+import logoKaora from "@/assets/logo-kaora.jpg";
+import logoSahyRemando from "@/assets/logo-sahy-remando.jpg";
+import logoCanoaBrasil from "@/assets/logo-canoa-brasil.jpg";
 
 function RevealText({
   children,
@@ -229,14 +232,24 @@ export function FabioStory() {
       title: "Legado & Reconhecimento",
       content: (
         <div>
-          <RevealText
-            delay={0}
-            className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
-          >
-            Fundador da <span className="font-bold text-orange">Canoa Brasil</span>,
-            a primeira guardaria do país, movimentando hoje cerca de 400 pessoas aos
-            sábados.
-          </RevealText>
+          {/* Logo Canoa Brasil em destaque */}
+          <div className="flex flex-col md:flex-row gap-6 items-center mb-8">
+            <div className="bg-white rounded-xl p-4 shadow-lg flex-shrink-0">
+              <img 
+                src={logoCanoaBrasil} 
+                alt="Canoa Brasil" 
+                className="h-24 md:h-28 w-auto object-contain"
+              />
+            </div>
+            <RevealText
+              delay={0}
+              className="text-foreground/80 text-lg md:text-2xl font-normal leading-relaxed"
+            >
+              Fundador da <span className="font-bold text-orange">Canoa Brasil</span>,
+              a primeira guardaria do país, movimentando hoje cerca de 400 pessoas aos
+              sábados.
+            </RevealText>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
@@ -270,11 +283,16 @@ export function FabioStory() {
           </RevealText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Card Projeto Kaora com logo oficial */}
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <Heart className="w-6 h-6 text-orange" />
-                <h4 className="text-orange font-bold text-base md:text-lg">Projeto Kaora</h4>
+              <div className="bg-white rounded-lg p-3 mb-4 inline-block">
+                <img 
+                  src={logoKaora} 
+                  alt="Projeto Ka-Ora" 
+                  className="h-12 w-auto object-contain"
+                />
               </div>
+              <h4 className="text-orange font-bold text-base md:text-lg mb-2">Projeto Kaora</h4>
               <RevealText
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base"
@@ -283,11 +301,16 @@ export function FabioStory() {
               </RevealText>
             </div>
 
+            {/* Card Sahy Remando com logo oficial */}
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <Waves className="w-6 h-6 text-orange" />
-                <h4 className="text-orange font-bold text-base md:text-lg">Sahy Remando</h4>
+              <div className="bg-white rounded-lg p-3 mb-4 inline-block">
+                <img 
+                  src={logoSahyRemando} 
+                  alt="Sahy Remando" 
+                  className="h-12 w-auto object-contain"
+                />
               </div>
+              <h4 className="text-orange font-bold text-base md:text-lg mb-2">Sahy Remando</h4>
               <RevealText
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base"

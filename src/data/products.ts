@@ -27,6 +27,7 @@ export interface Product {
   category: 'Surfski Individual' | 'Surfski Duplo' | 'Canoa Havaiana';
   level: string;
   levelColor: string; // Tailwind class
+  difficultyLevel: number; // 0-100 numeric scale for StabilityMeter
   description: string;
   image: string;
   specs: ProductSpecs;
@@ -45,6 +46,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Individual',
     level: 'Fácil (Iniciante)',
     levelColor: 'text-emerald-400',
+    difficultyLevel: 15, // Mais Estável
     description: 'Ideal para iniciantes e nível intermediário. Atende até o avançado pois navega perfeitamente até nas piores condições de mar.',
     image: boatPono,
     specs: {
@@ -76,6 +78,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Individual',
     level: 'Fácil a Intermediário',
     levelColor: 'text-emerald-400',
+    difficultyLevel: 30,
     description: 'Ideal para iniciantes e intermediários, mas com performance que atende o nível avançado.',
     image: boatPono,
     specs: {
@@ -105,6 +108,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Individual',
     level: 'Fácil a Intermediário',
     levelColor: 'text-emerald-400',
+    difficultyLevel: 40,
     description: 'Versatilidade total. Ideal para quem busca evolução segura entre o nível iniciante e intermediário.',
     image: boatPono,
     specs: {
@@ -134,6 +138,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Individual',
     level: 'Intermediário a Avançado',
     levelColor: 'text-orange-400',
+    difficultyLevel: 70,
     description: 'Ideal para nível intermediário e avançado. O Surfski perfeito para Downwind e Competições.',
     image: boatSurfski,
     specs: {
@@ -163,6 +168,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Individual',
     level: 'Avançado (Elite)',
     levelColor: 'text-red-500',
+    difficultyLevel: 95, // Mais Veloz/Instável
     description: 'O Surfski mais rápido do Brasil. Para atletas que buscam velocidade pura, perfeito para competições de Alta Performance.',
     image: boatSurfski,
     specs: {
@@ -195,6 +201,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Duplo',
     level: 'Fácil (Duplo)',
     levelColor: 'text-emerald-400',
+    difficultyLevel: 20,
     description: 'Muito estável, leve e veloz. Atende todos os públicos e navega com segurança em qualquer condição de mar.',
     image: boatSurfski,
     specs: {
@@ -224,6 +231,7 @@ export const productsData: Record<string, Product> = {
     category: 'Surfski Duplo',
     level: 'Avançado (Duplo)',
     levelColor: 'text-red-500',
+    difficultyLevel: 90,
     description: 'O Surfski duplo mais rápido do Brasil. Perfeito para competições de Alta Performance, Downwind e Upwind.',
     image: boatSurfski,
     specs: {
@@ -255,6 +263,7 @@ export const productsData: Record<string, Product> = {
     category: 'Canoa Havaiana',
     level: 'Fácil (Individual)',
     levelColor: 'text-emerald-400',
+    difficultyLevel: 25,
     description: 'Canoa Individual. Muito estável, leve e veloz. Ideal para todos os públicos.',
     image: boatPono,
     specs: {
@@ -284,6 +293,7 @@ export const productsData: Record<string, Product> = {
     category: 'Canoa Havaiana',
     level: 'Fácil (Dupla)',
     levelColor: 'text-emerald-400',
+    difficultyLevel: 25,
     description: 'Canoa Dupla. Diversão garantida com estabilidade e velocidade.',
     image: boatPono,
     specs: {

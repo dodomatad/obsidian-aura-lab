@@ -322,7 +322,7 @@ const ChampionSection = () => {
                     >
                       <div className="group flex flex-col items-center text-center p-4 hover:bg-foreground/5 transition-colors duration-300 rounded-lg">
                         {logo.image ? (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                          <div className="w-28 h-28 flex items-center justify-center rounded-xl mb-4 bg-white p-3 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
                             <img 
                               src={logo.image} 
                               alt={logo.title}
@@ -330,11 +330,11 @@ const ChampionSection = () => {
                             />
                           </div>
                         ) : (
-                          <div className="w-20 h-20 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
-                            <span className="text-orange font-bold text-2xl">22ª</span>
+                          <div className="w-28 h-28 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                            <span className="text-orange font-bold text-3xl">22ª</span>
                           </div>
                         )}
-                        <h4 className="text-sm font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                        <h4 className="text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                           {logo.title}
                         </h4>
                       </div>
@@ -388,7 +388,7 @@ const ChampionSection = () => {
                   className="group flex flex-col items-center text-center p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
                 >
                   {logo.image ? (
-                    <div className="w-24 h-24 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                    <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-white p-3 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
                       <img 
                         src={logo.image} 
                         alt={logo.title}
@@ -396,11 +396,11 @@ const ChampionSection = () => {
                       />
                     </div>
                   ) : (
-                    <div className="w-24 h-24 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
-                      <span className="text-orange font-bold text-3xl">22ª</span>
+                    <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                      <span className="text-orange font-bold text-4xl">22ª</span>
                     </div>
                   )}
-                  <h4 className="text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                  <h4 className="text-lg font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
                     {logo.title}
                   </h4>
                 </motion.div>

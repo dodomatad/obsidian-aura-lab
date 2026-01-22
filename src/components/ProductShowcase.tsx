@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo, animate, useMotionValue, type AnimationPlaybackControls } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -63,7 +63,8 @@ const ImageWithFallback = ({
       ref={imageRef}
       src={src}
       alt={alt}
-      loading="eager"
+      loading="lazy"
+      decoding="async"
       onError={() => setHasError(true)}
       className={className}
       style={style}
@@ -79,10 +80,11 @@ const ProductShowcase = () => {
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const progressRef = useRef<NodeJS.Timeout | null>(null);
+  const autoplayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const progress = useMotionValue(0); // 0..1 (no React re-renders)
+  const progressAnimRef = useRef<AnimationPlaybackControls | null>(null);
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
@@ -106,55 +108,58 @@ const ProductShowcase = () => {
   const goToSlide = (index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
-    setProgress(0);
+    progress.set(0);
   };
 
   const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % allProducts.length);
-    setProgress(0);
+    progress.set(0);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + allProducts.length) % allProducts.length);
-    setProgress(0);
+    progress.set(0);
   }, []);
 
-  // Smart Autoplay with progress tracking
+  const stopAutoplay = useCallback(() => {
+    if (autoplayTimeoutRef.current) {
+      clearTimeout(autoplayTimeoutRef.current);
+      autoplayTimeoutRef.current = null;
+    }
+    if (progressAnimRef.current) {
+      progressAnimRef.current.stop();
+      progressAnimRef.current = null;
+    }
+  }, []);
+
+  // Smart Autoplay (no frequent React state updates)
   useEffect(() => {
-    if (isHovered || isPaused || isTransitioning) {
-      // Clear progress interval when paused
-      if (progressRef.current) {
-        clearInterval(progressRef.current);
-        progressRef.current = null;
-      }
-      return;
+    stopAutoplay();
+
+    if (isHovered || isPaused || isTransitioning) return;
+
+    const current = progress.get(); // 0..1
+    const remainingMs = Math.max(0, Math.round((1 - current) * AUTOPLAY_INTERVAL));
+    if (remainingMs === 0) {
+      progress.set(0);
     }
 
-    // Progress bar animation (updates every 50ms for smooth animation)
-    const progressInterval = 50;
-    const steps = AUTOPLAY_INTERVAL / progressInterval;
-    let currentStep = 0;
+    // Progress animation via MotionValue (no React re-render)
+    progressAnimRef.current = animate(progress, 1, {
+      duration: remainingMs / 1000,
+      ease: 'linear',
+    });
 
-    progressRef.current = setInterval(() => {
-      currentStep++;
-      setProgress((currentStep / steps) * 100);
-
-      if (currentStep >= steps) {
-        nextSlide();
-        currentStep = 0;
-        setProgress(0);
-      }
-    }, progressInterval);
+    autoplayTimeoutRef.current = setTimeout(() => {
+      nextSlide();
+    }, remainingMs);
 
     return () => {
-      if (progressRef.current) {
-        clearInterval(progressRef.current);
-        progressRef.current = null;
-      }
+      stopAutoplay();
     };
-  }, [currentIndex, isHovered, isPaused, isTransitioning, nextSlide]);
+  }, [currentIndex, isHovered, isPaused, isTransitioning, nextSlide, progress, stopAutoplay]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -271,11 +276,11 @@ const ProductShowcase = () => {
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-foreground/5 z-50">
         <motion.div 
           className="h-full bg-gradient-to-r from-orange/60 via-orange to-orange/60"
-          style={{ 
-            width: `${progress}%`,
+          style={{
+            scaleX: progress,
+            transformOrigin: '0% 50%',
             boxShadow: '0 0 10px rgba(249, 115, 22, 0.5)',
           }}
-          transition={{ duration: 0.05, ease: 'linear' }}
         />
       </div>
 

@@ -12,11 +12,12 @@ import { useTransition } from '@/context/TransitionContext';
 import logoCanoaBrasil from '@/assets/logo-canoa-brasil.jpg';
 import logoKaora from '@/assets/logo-kaora.jpg';
 import logoSahyRemando from '@/assets/logo-sahy-remando.jpg';
+import logoVoltaIlha from '@/assets/logo-volta-ilha.jpg';
 
 // Authority logos/badges - Using official logos where available
 const authorityLogos = [
   { image: logoCanoaBrasil, title: 'Fundador Canoa Brasil' },
-  { image: null, title: 'Volta à Ilha de Santo Amaro', isText: true },
+  { image: logoVoltaIlha, title: 'Volta à Ilha de Santo Amaro' },
   { image: logoSahyRemando, title: 'Projeto Sahy Remando' },
   { image: logoKaora, title: 'Kaora' },
 ];

@@ -4,6 +4,7 @@ import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Product, getAllProducts } from '@/data/products';
+import StabilityMeter from '@/components/ui/StabilityMeter';
 
 // Get ALL products in a single unified list
 const allProducts = getAllProducts();
@@ -590,8 +591,8 @@ const ProductShowcase = () => {
         </div>
       )}
 
-      {/* Model name + tagline + LEVEL BADGE */}
-      <div className="absolute bottom-24 md:bottom-20 left-1/2 -translate-x-1/2 text-center z-20 px-6">
+      {/* Model name + StabilityMeter */}
+      <div className="absolute bottom-20 md:bottom-16 left-1/2 -translate-x-1/2 text-center z-20 px-6 w-full max-w-md">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
@@ -607,14 +608,16 @@ const ProductShowcase = () => {
             </span>
             
             {/* Name */}
-            <h3 className="display-hero text-foreground mb-2" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
+            <h3 className="display-hero text-foreground mb-4" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
               {currentProduct.name}
             </h3>
             
-            {/* Level Badge with Color */}
-            <span className={`text-xs md:text-sm font-medium tracking-wide ${currentProduct.levelColor}`}>
-              {currentProduct.level}
-            </span>
+            {/* StabilityMeter - Visual difficulty indicator */}
+            <StabilityMeter 
+              level={currentProduct.difficultyLevel} 
+              levelText={currentProduct.level}
+              compact={true}
+            />
           </motion.div>
         </AnimatePresence>
       </div>

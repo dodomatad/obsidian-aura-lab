@@ -161,6 +161,17 @@ const ProductShowcase = () => {
     };
   }, [currentIndex, isHovered, isPaused, isTransitioning, nextSlide, progress, stopAutoplay]);
 
+  // Preload adjacent images for smoother transitions
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % allProducts.length;
+    const prevIndex = (currentIndex - 1 + allProducts.length) % allProducts.length;
+    
+    [nextIndex, prevIndex].forEach(index => {
+      const img = new Image();
+      img.src = allProducts[index].image;
+    });
+  }, [currentIndex]);
+
   // Keyboard navigation
   useEffect(() => {
     if (isMobile) return;
@@ -284,13 +295,15 @@ const ProductShowcase = () => {
         />
       </div>
 
-      {/* Noise texture overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* Noise texture overlay - disabled on mobile for performance */}
+      {!isMobile && (
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+      )}
 
       {/* Dramatic gradient */}
       <div 
@@ -303,18 +316,30 @@ const ProductShowcase = () => {
         }}
       />
 
-      {/* Animated spotlight */}
-      <motion.div 
-        className="absolute inset-0 pointer-events-none"
-        animate={{ opacity: [0.35, 0.5, 0.35] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        style={{
-          background: `
-            radial-gradient(ellipse 65% 45% at 50% 45%, rgba(50, 70, 110, 0.3) 0%, transparent 50%),
-            radial-gradient(ellipse 45% 30% at 50% 50%, rgba(249, 115, 22, 0.06) 0%, transparent 40%)
-          `,
-        }}
-      />
+      {/* Animated spotlight - static on mobile for performance */}
+      {isMobile ? (
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `
+              radial-gradient(ellipse 65% 45% at 50% 45%, rgba(50, 70, 110, 0.25) 0%, transparent 50%),
+              radial-gradient(ellipse 45% 30% at 50% 50%, rgba(249, 115, 22, 0.04) 0%, transparent 40%)
+            `,
+          }}
+        />
+      ) : (
+        <motion.div 
+          className="absolute inset-0 pointer-events-none"
+          animate={{ opacity: [0.35, 0.5, 0.35] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          style={{
+            background: `
+              radial-gradient(ellipse 65% 45% at 50% 45%, rgba(50, 70, 110, 0.3) 0%, transparent 50%),
+              radial-gradient(ellipse 45% 30% at 50% 50%, rgba(249, 115, 22, 0.06) 0%, transparent 40%)
+            `,
+          }}
+        />
+      )}
 
       {/* Dynamic Section Header */}
       <motion.div 
@@ -430,45 +455,52 @@ const ProductShowcase = () => {
               if (currentImageRef) handleProductClick(currentProduct, currentImageRef);
             }}
           >
-            {/* Specular light glow */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none -z-10"
-              animate={{ opacity: isHovered ? 0.8 : 0.5 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                background: `
-                  radial-gradient(ellipse 90% 70% at 50% 35%, rgba(60, 80, 120, 0.7) 0%, transparent 45%),
-                  radial-gradient(ellipse 70% 50% at 50% 45%, rgba(255, 255, 255, 0.08) 0%, transparent 35%)
-                `,
-                filter: 'blur(45px)',
-              }}
-            />
+            {/* Specular light glow - disabled on mobile */}
+            {!isMobile && (
+              <motion.div
+                className="absolute inset-0 pointer-events-none -z-10"
+                animate={{ opacity: isHovered ? 0.8 : 0.5 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  background: `
+                    radial-gradient(ellipse 90% 70% at 50% 35%, rgba(60, 80, 120, 0.7) 0%, transparent 45%),
+                    radial-gradient(ellipse 70% 50% at 50% 45%, rgba(255, 255, 255, 0.08) 0%, transparent 35%)
+                  `,
+                  filter: 'blur(45px)',
+                }}
+              />
+            )}
 
-            {/* Floor shadow */}
+            {/* Floor shadow - simplified on mobile */}
             <div 
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] h-[60%] pointer-events-none"
               style={{
-                background: `
-                  radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.85) 0%, transparent 50%),
-                  radial-gradient(ellipse 80% 60% at 50% 10%, rgba(30, 40, 60, 0.3) 0%, transparent 60%)
-                `,
-                filter: 'blur(35px)',
+                background: isMobile 
+                  ? 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.6) 0%, transparent 50%)'
+                  : `
+                    radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.85) 0%, transparent 50%),
+                    radial-gradient(ellipse 80% 60% at 50% 10%, rgba(30, 40, 60, 0.3) 0%, transparent 60%)
+                  `,
+                filter: isMobile ? 'blur(20px)' : 'blur(35px)',
                 transform: 'translateY(65%) scaleY(0.5)',
               }}
             />
             
-            {/* Reflection line */}
-            <div 
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[2px] pointer-events-none"
-              style={{
-                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.05) 70%, transparent 100%)',
-                transform: 'translateY(20px)',
-              }}
-            />
+            {/* Reflection line - desktop only */}
+            {!isMobile && (
+              <div 
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[2px] pointer-events-none"
+                style={{
+                  background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.05) 70%, transparent 100%)',
+                  transform: 'translateY(20px)',
+                }}
+              />
+            )}
 
-            {/* Boat image - simplified to prevent flickering */}
+            {/* Boat image - GPU optimized */}
             <motion.div
               className="w-full h-auto relative z-10"
+              style={{ willChange: 'transform' }}
               animate={{
                 y: isHovered && !isMobile ? -15 : 0,
                 scale: isHovered && !isMobile ? 1.04 : 1,
@@ -484,10 +516,11 @@ const ProductShowcase = () => {
                 alt={currentProduct.name}
                 className="w-full h-auto object-contain pointer-events-none"
                 style={{
-                  filter: `
-                    drop-shadow(0 50px 100px rgba(0,0,0,0.75)) 
-                    drop-shadow(0 25px 50px rgba(0,0,0,0.55))
-                  `,
+                  // Light shadow on mobile, full luxury shadow on desktop
+                  filter: isMobile 
+                    ? 'drop-shadow(0 15px 25px rgba(0,0,0,0.5))'
+                    : 'drop-shadow(0 50px 100px rgba(0,0,0,0.75)) drop-shadow(0 25px 50px rgba(0,0,0,0.55))',
+                  willChange: 'transform, opacity',
                   opacity: isThisProductTransitioning ? 0 : 1,
                 }}
               />

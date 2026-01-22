@@ -113,7 +113,7 @@ const ProductDetail = () => {
           className="fixed top-6 left-6 z-50 cursor-pointer"
         >
           <motion.div
-            className="flex items-center gap-3 px-5 py-3 rounded-full group"
+            className="flex items-center justify-center w-10 h-10 rounded-full"
             style={{
               background: 'rgba(255, 255, 255, 0.05)',
               backdropFilter: 'blur(20px)',
@@ -125,19 +125,11 @@ const ProductDetail = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             whileHover={{ 
               background: 'rgba(255, 255, 255, 0.1)',
-              scale: 1.02,
+              scale: 1.05,
+              x: -3,
             }}
           >
-            <motion.div
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground/10"
-              whileHover={{ x: -3 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            >
-              <ArrowLeft className="w-4 h-4 text-foreground/80" />
-            </motion.div>
-            <span className="text-xs tracking-[0.2em] uppercase text-foreground/70 group-hover:text-foreground transition-colors">
-              Voltar
-            </span>
+            <ArrowLeft className="w-4 h-4 text-foreground/80" />
           </motion.div>
         </MagneticButton>
 

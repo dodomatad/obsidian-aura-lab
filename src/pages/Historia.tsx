@@ -12,12 +12,12 @@ const Historia = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Button 
             variant="ghost" 
-            className="group text-foreground/70 hover:text-orange transition-colors"
+            size="icon"
+            className="w-10 h-10 rounded-full bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 hover:text-foreground transition-all"
             asChild
           >
             <Link to="/">
-              <ArrowLeft className="mr-2 w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Voltar ao Site
+              <ArrowLeft className="w-4 h-4" />
             </Link>
           </Button>
           

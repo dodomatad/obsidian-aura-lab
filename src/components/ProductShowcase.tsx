@@ -622,16 +622,9 @@ const ProductShowcase = () => {
             </span>
             
             {/* Name */}
-            <h3 className="display-hero text-foreground mb-4" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
+            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
               {currentProduct.name}
             </h3>
-            
-            {/* StabilityMeter - Visual difficulty indicator */}
-            <StabilityMeter 
-              level={currentProduct.difficultyLevel} 
-              levelText={currentProduct.level}
-              compact={true}
-            />
           </motion.div>
         </AnimatePresence>
       </div>

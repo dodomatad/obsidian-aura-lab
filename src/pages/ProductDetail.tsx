@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MessageCircle, Ruler, Move, Scale, Weight, Layers, TrendingUp } from 'lucide-react';
+import { ArrowLeft, MessageCircle, Ruler, Move, Scale, Weight, Layers } from 'lucide-react';
 import CustomCursor from '@/components/CustomCursor';
 import MagneticButton from '@/components/MagneticButton';
 import VideoBackground from '@/components/VideoBackground';
+import StabilityMeter from '@/components/ui/StabilityMeter';
 import { useTransition } from '@/context/TransitionContext';
 import { productsData } from '@/data/products';
 
@@ -226,13 +227,6 @@ const ProductDetail = () => {
                   {product.name}
                 </h1>
 
-                {/* Level Badge with Color */}
-                <div className="flex items-center gap-3 mb-8">
-                  <TrendingUp className={`w-4 h-4 ${getLevelColorClass()}`} />
-                  <span className={`text-sm font-medium ${getLevelColorClass()}`}>
-                    {product.level}
-                  </span>
-                </div>
                 
                 <p 
                   className="text-lg lg:text-xl font-sans font-light leading-loose"
@@ -293,6 +287,20 @@ const ProductDetail = () => {
                     );
                   })}
                 </div>
+              </motion.div>
+
+              {/* Stability Meter - Difficulty Level Indicator */}
+              <motion.div 
+                className="mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <StabilityMeter 
+                  level={typeof product.difficultyLevel === 'number' ? product.difficultyLevel : 50} 
+                  levelText={product.level}
+                  compact={false}
+                />
               </motion.div>
 
               {/* Features */}

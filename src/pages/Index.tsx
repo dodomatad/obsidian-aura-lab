@@ -12,6 +12,7 @@ import LiteVimeoEmbed from '@/components/LiteVimeoEmbed';
 
 // Lazy load heavy sections below the fold
 const ChampionSection = lazy(() => import('@/components/ChampionSection'));
+const SocialImpactSection = lazy(() => import('@/components/SocialImpactSection'));
 
 import MobileMenu from '@/components/MobileMenu';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
@@ -219,6 +220,17 @@ const Index = () => {
             </div>
           }>
             <ChampionSection />
+          </Suspense>
+        </div>
+
+        {/* Social Impact Section - Projects & Initiatives */}
+        <div className="pt-12 md:pt-20">
+          <Suspense fallback={
+            <div className="min-h-[400px] flex items-center justify-center">
+              <div className="w-12 h-12 border-2 border-orange/30 border-t-orange rounded-full animate-spin" />
+            </div>
+          }>
+            <SocialImpactSection />
           </Suspense>
         </div>
 

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -10,6 +10,11 @@ const allProducts = getAllProducts();
 
 // Autoplay configuration
 const AUTOPLAY_INTERVAL = 5000; // 5 seconds
+const TOUCH_RESUME_DELAY = 2000; // 2 seconds delay after touch ends
+
+// Category definitions
+const CATEGORIES = ['Todos', 'Surfski Individual', 'Surfski Duplo', 'Canoa Havaiana'] as const;
+type CategoryType = typeof CATEGORIES[number];
 
 // ============================================
 // IMAGE FALLBACK COMPONENT
@@ -44,7 +49,7 @@ const ImageWithFallback = ({
 
   if (hasError) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-lg">
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-muted to-background rounded-lg min-h-[200px]">
         {/* Stylized boat silhouette */}
         <svg 
           viewBox="0 0 200 80" 
@@ -94,6 +99,7 @@ const ProductShowcase = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false); // Track first interaction
   const [imageLoaded, setImageLoaded] = useState(false);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
@@ -184,19 +190,42 @@ const ProductShowcase = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobile, nextSlide, prevSlide]);
 
-  // Touch handlers for mobile pause
-  const handleTouchStart = () => setIsPaused(true);
+  // Touch handlers for mobile pause - improved with longer delay
+  const handleTouchStart = () => {
+    setIsPaused(true);
+    setHasInteracted(true); // Mark first interaction
+  };
+  
   const handleTouchEnd = () => {
-    // Resume after a brief delay
-    setTimeout(() => setIsPaused(false), 1000);
+    // Resume after longer delay to ensure user finished interacting
+    setTimeout(() => setIsPaused(false), TOUCH_RESUME_DELAY);
   };
 
   // Swipe handlers
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    setHasInteracted(true); // Mark first interaction
     const swipeThreshold = 50;
     if (info.offset.x > swipeThreshold) prevSlide();
     else if (info.offset.x < -swipeThreshold) nextSlide();
   };
+
+  // Jump to first product of a category
+  const jumpToCategory = useCallback((category: CategoryType) => {
+    setHasInteracted(true);
+    if (category === 'Todos') {
+      goToSlide(0);
+      return;
+    }
+    const firstIndex = allProducts.findIndex(p => p.category === category);
+    if (firstIndex !== -1) {
+      goToSlide(firstIndex);
+    }
+  }, []);
+
+  // Get active category for chips (including "Todos" when showing all)
+  const activeChipCategory = useMemo((): CategoryType => {
+    return currentProduct.category;
+  }, [currentProduct.category]);
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
@@ -337,6 +366,37 @@ const ProductShowcase = () => {
         </div>
       </motion.div>
 
+      {/* Category Chips - Mobile Navigation */}
+      {isMobile && (
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="relative z-30 flex gap-2 overflow-x-auto px-4 py-3 scrollbar-hide"
+        >
+          {CATEGORIES.map((cat) => {
+            const isActive = cat === 'Todos' 
+              ? false 
+              : activeChipCategory === cat;
+            
+            return (
+              <motion.button
+                key={cat}
+                onClick={() => jumpToCategory(cat)}
+                className={`flex-shrink-0 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border ${
+                  isActive 
+                    ? 'bg-orange text-white border-orange shadow-[0_0_15px_rgba(249,115,22,0.4)]' 
+                    : 'bg-white/5 text-foreground/60 border-white/10 hover:bg-white/10 hover:text-foreground/80'
+                }`}
+                whileTap={{ scale: 0.95 }}
+              >
+                {cat === 'Todos' ? 'Início' : cat.split(' ')[0]}
+              </motion.button>
+            );
+          })}
+        </motion.div>
+      )}
+
       {/* Giant background name */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <AnimatePresence mode="popLayout" custom={direction}>
@@ -453,18 +513,35 @@ const ProductShowcase = () => {
               />
             </motion.div>
 
-            {/* Mobile swipe hint */}
+            {/* Mobile swipe hint - fades out after first interaction */}
             {isMobile && (
-              <motion.div
-                className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-6 pointer-events-none flex items-center gap-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-              >
-                <motion.span animate={{ x: [-4, 4, -4] }} transition={{ duration: 1.2, repeat: Infinity }} className="text-foreground/45 text-lg">←</motion.span>
-                <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/45 font-sans">Deslize</span>
-                <motion.span animate={{ x: [4, -4, 4] }} transition={{ duration: 1.2, repeat: Infinity }} className="text-foreground/45 text-lg">→</motion.span>
-              </motion.div>
+              <AnimatePresence>
+                {!hasInteracted && (
+                  <motion.div
+                    className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-6 pointer-events-none flex items-center gap-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ delay: 0.6, duration: 0.4 }}
+                  >
+                    <motion.span 
+                      animate={{ x: [-4, 4, -4] }} 
+                      transition={{ duration: 1.2, repeat: Infinity }} 
+                      className="text-foreground/45 text-lg"
+                    >
+                      ←
+                    </motion.span>
+                    <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/45 font-sans">Deslize</span>
+                    <motion.span 
+                      animate={{ x: [4, -4, 4] }} 
+                      transition={{ duration: 1.2, repeat: Infinity }} 
+                      className="text-foreground/45 text-lg"
+                    >
+                      →
+                    </motion.span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             )}
 
             {/* Desktop hover hint */}

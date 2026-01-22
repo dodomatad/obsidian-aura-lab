@@ -6,251 +6,7 @@ import CustomCursor from '@/components/CustomCursor';
 import MagneticButton from '@/components/MagneticButton';
 import VideoBackground from '@/components/VideoBackground';
 import { useTransition } from '@/context/TransitionContext';
-
-// Import all boat images
-import boatPono from '@/assets/boat-pono.png';
-import boatSurfski from '@/assets/boat-surfski.png';
-import boatPink from '@/assets/boat-pink.png';
-import boatCarbon from '@/assets/boat-carbon.png';
-import boatCamo from '@/assets/boat-camo.png';
-
-interface ColorOption {
-  id: string;
-  name: string;
-  color: string;
-  image: string;
-}
-
-interface ProductData {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  specs: {
-    length: string;
-    beam: string;
-    weight: string;
-    capacity: string;
-    material: string;
-    level: string;
-  };
-  features: string[];
-  colors: ColorOption[];
-  defaultImage: string;
-}
-
-const productsData: Record<string, ProductData> = {
-  pono: {
-    id: 'pono',
-    name: 'PONO',
-    tagline: 'Estabilidade e Controle',
-    description: 'Ideal para iniciantes e longas travessias com estabilidade total.',
-    specs: {
-      length: '6.20m',
-      beam: '42cm',
-      weight: '11kg',
-      capacity: '120kg',
-      material: 'Fibra de Carbono + Kevlar',
-      level: 'Iniciante a Intermediário',
-    },
-    features: [
-      'Cockpit ergonômico com ajuste lombar',
-      'Proa hidrodinâmica para mínima resistência',
-      'Sistema de drenagem automática',
-      'Compartimentos estanques para equipamentos',
-      'Acabamento UV resistant',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Ártico', color: '#E8E8E8', image: boatPono },
-      { id: 'pink', name: 'Rosa Sunset', color: '#E8A4B8', image: boatPink },
-      { id: 'carbon', name: 'Carbono Stealth', color: '#2A2A2A', image: boatCarbon },
-      { id: 'camo', name: 'Camuflagem Ocean', color: '#4A6741', image: boatCamo },
-    ],
-    defaultImage: boatPono,
-  },
-  infinite: {
-    id: 'infinite',
-    name: 'INFINITE',
-    tagline: 'Velocidade Pura',
-    description: 'Design agressivo para alta performance em downwind.',
-    specs: {
-      length: '6.40m',
-      beam: '44cm',
-      weight: '12kg',
-      capacity: '95kg',
-      material: 'Carbono Pré-Preg Aeroespacial',
-      level: 'Avançado a Elite',
-    },
-    features: [
-      'Geometria de ataque para velocidade máxima',
-      'Leme integrado com controle por pedal',
-      'Cockpit de competição otimizado',
-      'Peso ultraleve sem comprometer rigidez',
-      'Hidrodinâmica testada em túnel de vento',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatSurfski },
-      { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
-      { id: 'camo', name: 'Tactical Green', color: '#3D4F3A', image: boatCamo },
-    ],
-    defaultImage: boatSurfski,
-  },
-  azimut: {
-    id: 'azimut',
-    name: 'AZIMUT',
-    tagline: 'A Evolução da Espécie',
-    description: 'O AZIMUT representa o ápice da engenharia náutica. Desenvolvido para atletas que exigem o máximo em velocidade e manobrabilidade.',
-    specs: {
-      length: '6.20m',
-      beam: '44cm',
-      weight: '12kg',
-      capacity: '100kg',
-      material: 'Carbono Pré-Preg',
-      level: 'Avançado',
-    },
-    features: [
-      'Design hidrodinâmico otimizado',
-      'Cockpit de competição',
-      'Sistema de leme responsivo',
-      'Construção ultraleve',
-      'Acabamento premium',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatSurfski },
-      { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
-    ],
-    defaultImage: boatSurfski,
-  },
-  moana: {
-    id: 'moana',
-    name: 'MOANA',
-    tagline: 'Conquiste o Oceano',
-    description: 'O MOANA foi criado para quem busca aventura e confiança no mar aberto. Estabilidade superior para longas jornadas.',
-    specs: {
-      length: '5.50m',
-      beam: '58cm',
-      weight: '16kg',
-      capacity: '115kg',
-      material: 'Fibra de Vidro + Carbono',
-      level: 'Intermediário',
-    },
-    features: [
-      'Alta estabilidade primária',
-      'Cockpit espaçoso e confortável',
-      'Compartimentos de carga',
-      'Ideal para travessias',
-      'Construção durável',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Oceano', color: '#E8E8E8', image: boatPono },
-      { id: 'camo', name: 'Camuflagem', color: '#4A6741', image: boatCamo },
-    ],
-    defaultImage: boatPono,
-  },
-  dw: {
-    id: 'dw',
-    name: 'DW',
-    tagline: 'Mestre das Ondas',
-    description: 'O DW (Downwind) é especializado para surfar ondas oceânicas. Projetado para performance máxima em condições de vento.',
-    specs: {
-      length: '6.50m',
-      beam: '46cm',
-      weight: '13kg',
-      capacity: '95kg',
-      material: 'Carbono Aeroespacial',
-      level: 'Elite',
-    },
-    features: [
-      'Proa projetada para ondas',
-      'Estabilidade em condições extremas',
-      'Aceleração rápida',
-      'Controle preciso de leme',
-      'Para atletas experientes',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Racing', color: '#F0F0F0', image: boatSurfski },
-      { id: 'carbon', name: 'Stealth Carbon', color: '#1A1A1A', image: boatCarbon },
-    ],
-    defaultImage: boatSurfski,
-  },
-  'oc1-race': {
-    id: 'oc1-race',
-    name: 'OC1 RACE',
-    tagline: 'Performance Polinésia',
-    description: 'Canoa havaiana de competição. O OC1 Race combina a tradição polinésia com tecnologia de ponta para máxima velocidade.',
-    specs: {
-      length: '6.50m',
-      beam: '40cm',
-      weight: '10kg',
-      capacity: '105kg',
-      material: 'Carbono + Kevlar',
-      level: 'Avançado',
-    },
-    features: [
-      'Design tradicional havaiano',
-      'Ama (flutuador) em carbono',
-      'Assento ergonômico ajustável',
-      'Conexões Iako reforçadas',
-      'Homologada para competições',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Tradicional', color: '#E8E8E8', image: boatPono },
-      { id: 'carbon', name: 'Carbon Race', color: '#2A2A2A', image: boatCarbon },
-    ],
-    defaultImage: boatPono,
-  },
-  'oc1-touring': {
-    id: 'oc1-touring',
-    name: 'OC1 TOURING',
-    tagline: 'Aventura no Mar',
-    description: 'Versão touring da canoa havaiana. Mais estável e confortável para longas remadas e exploração costeira.',
-    specs: {
-      length: '6.40m',
-      beam: '52cm',
-      weight: '17kg',
-      capacity: '120kg',
-      material: 'Fibra de Vidro + Carbono',
-      level: 'Iniciante a Intermediário',
-    },
-    features: [
-      'Estabilidade aumentada',
-      'Compartimento de carga',
-      'Conforto para longas remadas',
-      'Ama reforçada',
-      'Fácil entrada e saída',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Explorer', color: '#E8E8E8', image: boatPono },
-      { id: 'camo', name: 'Ocean Camo', color: '#4A6741', image: boatCamo },
-    ],
-    defaultImage: boatPono,
-  },
-  oc6: {
-    id: 'oc6',
-    name: 'OC6',
-    tagline: 'Espírito de Equipe',
-    description: 'A tradicional canoa havaiana para 6 remadores. Perfeita para equipes, competições e experiências em grupo.',
-    specs: {
-      length: '12.20m',
-      beam: '55cm',
-      weight: '180kg',
-      capacity: '600kg',
-      material: 'Fibra de Vidro Náutica',
-      level: 'Todos os níveis',
-    },
-    features: [
-      '6 assentos ergonômicos',
-      'Ama estabilizadora reforçada',
-      'Estrutura para competição',
-      'Transporte facilitado',
-      'Tradição havaiana autêntica',
-    ],
-    colors: [
-      { id: 'default', name: 'Branco Equipe', color: '#E8E8E8', image: boatPono },
-    ],
-    defaultImage: boatPono,
-  },
-};
+import { productsData } from '@/data/products';
 
 const specLabels: Record<string, { label: string; icon: typeof Ruler }> = {
   length: { label: 'Comprimento', icon: Ruler },
@@ -258,7 +14,6 @@ const specLabels: Record<string, { label: string; icon: typeof Ruler }> = {
   weight: { label: 'Peso', icon: Weight },
   capacity: { label: 'Capacidade', icon: Scale },
   material: { label: 'Material', icon: Layers },
-  level: { label: 'Nível', icon: TrendingUp },
 };
 
 const ProductDetail = () => {
@@ -278,15 +33,12 @@ const ProductDetail = () => {
   const product = id ? productsData[id] : null;
 
   useEffect(() => {
-    // Fade in after mount
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Show the boat image after the transition animation completes
   useEffect(() => {
     if (justTransitioned || !isTransitioning) {
-      // Small delay to ensure smooth handoff from transition overlay
       const timer = setTimeout(() => {
         setShowBoatImage(true);
       }, isTransitioning ? 0 : 400);
@@ -296,7 +48,6 @@ const ProductDetail = () => {
 
   const handleBack = () => {
     setIsExiting(true);
-    // Quick exit transition
     setTimeout(() => {
       navigate('/');
     }, 200);
@@ -311,6 +62,11 @@ const ProductDetail = () => {
   }
 
   const currentImage = product.colors.find(c => c.id === selectedColor)?.image || product.defaultImage;
+
+  // Get level color class
+  const getLevelColorClass = () => {
+    return product.levelColor || 'text-foreground/60';
+  };
 
   return (
     <>
@@ -349,7 +105,7 @@ const ProductDetail = () => {
           </span>
         </motion.div>
 
-        {/* Magnetic Back button - Fixed top left */}
+        {/* Magnetic Back button */}
         <MagneticButton
           onClick={handleBack}
           className="fixed top-6 left-6 z-50 cursor-pointer"
@@ -403,7 +159,7 @@ const ProductDetail = () => {
                 }}
               />
 
-              {/* Boat image with layoutId for shared element transition */}
+              {/* Boat image */}
               <motion.img
                 layoutId={`boat-image-${product.id}`}
                 key={selectedColor}
@@ -435,7 +191,7 @@ const ProductDetail = () => {
             </motion.div>
           </div>
 
-          {/* Right: Scrollable content - vertically centered */}
+          {/* Right: Scrollable content */}
           <div className="lg:w-1/2 px-8 lg:px-16 py-24 lg:py-32 flex items-center">
             <motion.div
               className="max-w-xl w-full"
@@ -443,18 +199,24 @@ const ProductDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              {/* Header - Delayed entrance after video reveal */}
+              {/* Header */}
               <motion.div 
                 className="mb-16"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 40 }}
                 transition={{ duration: 0.8, delay: 0, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
+                {/* Category Badge */}
+                <span className="text-xs tracking-[0.25em] uppercase text-orange/80 font-sans font-medium block mb-2">
+                  {product.category}
+                </span>
+                
                 <span className="text-sm tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium block mb-4">
                   {product.tagline}
                 </span>
+                
                 <h1 
-                  className="display-hero text-foreground mb-8"
+                  className="display-hero text-foreground mb-4"
                   style={{
                     fontSize: 'clamp(4rem, 12vw, 8rem)',
                     letterSpacing: '-0.03em',
@@ -463,6 +225,15 @@ const ProductDetail = () => {
                 >
                   {product.name}
                 </h1>
+
+                {/* Level Badge with Color */}
+                <div className="flex items-center gap-3 mb-8">
+                  <TrendingUp className={`w-4 h-4 ${getLevelColorClass()}`} />
+                  <span className={`text-sm font-medium ${getLevelColorClass()}`}>
+                    {product.level}
+                  </span>
+                </div>
+                
                 <p 
                   className="text-lg lg:text-xl font-sans font-light leading-loose"
                   style={{ color: '#E0E0E0' }}
@@ -471,7 +242,7 @@ const ProductDetail = () => {
                 </p>
               </motion.div>
 
-              {/* Divider with gradient - Delayed */}
+              {/* Divider */}
               <motion.div 
                 className="w-full h-px bg-gradient-to-r from-foreground/30 via-foreground/10 to-transparent mb-12"
                 initial={{ opacity: 0, scaleX: 0 }}
@@ -480,7 +251,7 @@ const ProductDetail = () => {
                 style={{ transformOrigin: 'left' }}
               />
 
-              {/* Specifications - Grid of Cards - Delayed */}
+              {/* Specifications */}
               <motion.div 
                 className="mb-16"
                 initial={{ opacity: 0, y: 30 }}
@@ -491,130 +262,130 @@ const ProductDetail = () => {
                   Especificações Técnicas
                 </h2>
                 
-                {/* Specs Grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   {Object.entries(product.specs).map(([key, value], index) => {
                     const spec = specLabels[key];
-                    const IconComponent = spec?.icon || Ruler;
+                    if (!spec || !value) return null;
+                    const IconComponent = spec.icon;
+                    
                     return (
                       <motion.div
                         key={key}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
-                        transition={{ delay: 0.2 + index * 0.06 }}
-                        className="group relative p-5 border border-foreground/10 hover:border-foreground/25 transition-all duration-300 hover:bg-foreground/[0.02] backdrop-blur-sm"
+                        transition={{ duration: 0.5, delay: 0.2 + index * 0.05 }}
+                        className="p-4 rounded-lg"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.03)',
+                          border: '1px solid rgba(255, 255, 255, 0.06)',
+                        }}
                       >
-                        {/* Icon */}
-                        <IconComponent className="w-4 h-4 text-foreground/30 mb-3 group-hover:text-foreground/50 transition-colors" />
-                        
-                        {/* Value - Large */}
-                        <div className="text-xl lg:text-2xl font-sans font-semibold text-foreground mb-1 tracking-tight">
+                        <div className="flex items-center gap-2 mb-2">
+                          <IconComponent className="w-4 h-4 text-orange/70" />
+                          <span className="text-xs tracking-wider uppercase text-foreground/40">
+                            {spec.label}
+                          </span>
+                        </div>
+                        <span className="text-lg font-medium text-foreground">
                           {value}
-                        </div>
-                        
-                        {/* Label - Small */}
-                        <div className="text-[10px] tracking-[0.2em] uppercase text-foreground/40 group-hover:text-foreground/60 transition-colors">
-                          {spec?.label || key}
-                        </div>
+                        </span>
                       </motion.div>
                     );
                   })}
                 </div>
               </motion.div>
 
-              {/* Features - Delayed */}
+              {/* Features */}
               <motion.div 
                 className="mb-16"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
-                transition={{ duration: 0.7, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.7, delay: 0.25 }}
               >
-                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-8">
+                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-6">
                   Características
                 </h2>
-                <ul className="space-y-5">
+                
+                <ul className="space-y-3">
                   {product.features.map((feature, index) => (
                     <motion.li
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: contentRevealed ? 1 : 0, x: contentRevealed ? 0 : -20 }}
-                      transition={{ delay: 0.3 + index * 0.04 }}
-                      className="flex items-start gap-5 text-foreground/70 font-sans group"
+                      transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
+                      className="flex items-start gap-3 text-foreground/70"
                     >
-                      <span className="flex-shrink-0 mt-2 w-3 h-px bg-foreground/40 group-hover:w-6 group-hover:bg-foreground/60 transition-all duration-300" />
-                      <span className="text-base leading-relaxed group-hover:text-foreground/90 transition-colors">
-                        {feature}
-                      </span>
+                      <span className="text-orange mt-1">•</span>
+                      <span>{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
               </motion.div>
 
-              {/* Color Selector - Delayed */}
+              {/* Color Selector */}
               <motion.div 
                 className="mb-16"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
-                transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ duration: 0.7, delay: 0.35 }}
               >
                 <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-6">
                   Cores Disponíveis
                 </h2>
-                <div className="flex gap-5">
+                
+                <div className="flex gap-4">
                   {product.colors.map((color) => (
-                    <motion.button
+                    <button
                       key={color.id}
                       onClick={() => setSelectedColor(color.id)}
-                      className="relative group"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="group flex flex-col items-center gap-2"
                     >
-                      <div 
-                        className={`w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+                      <div
+                        className={`w-12 h-12 rounded-full transition-all duration-300 ${
                           selectedColor === color.id 
-                            ? 'border-foreground ring-2 ring-foreground/20 ring-offset-2 ring-offset-background' 
-                            : 'border-foreground/20 hover:border-foreground/50'
+                            ? 'ring-2 ring-foreground ring-offset-2 ring-offset-background scale-110' 
+                            : 'opacity-60 hover:opacity-100 hover:scale-105'
                         }`}
                         style={{ backgroundColor: color.color }}
                       />
-                      {/* Tooltip */}
-                      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                        <span className="text-[10px] text-foreground/60 tracking-wide bg-background/80 backdrop-blur-sm px-2 py-1 rounded">
-                          {color.name}
-                        </span>
-                      </div>
-                    </motion.button>
+                      <span 
+                        className={`text-xs transition-all duration-300 ${
+                          selectedColor === color.id 
+                            ? 'text-foreground' 
+                            : 'text-foreground/40 group-hover:text-foreground/70'
+                        }`}
+                      >
+                        {color.name}
+                      </span>
+                    </button>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Divider - Delayed */}
-              <motion.div 
-                className="w-full h-px bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent mb-12"
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={{ opacity: contentRevealed ? 1 : 0, scaleX: contentRevealed ? 1 : 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                style={{ transformOrigin: 'left' }}
-              />
-
-              {/* CTA Button - Delayed */}
+              {/* CTA Button */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
-                transition={{ delay: 0.45, duration: 0.6 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
+                transition={{ duration: 0.7, delay: 0.45 }}
               >
-                <a
-                  href={`https://wa.me/5500000000000?text=Olá! Gostaria de saber mais sobre o modelo ${product.name}`}
+                <motion.a
+                  href={`https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre o ${product.name}.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-4 px-12 py-6 bg-foreground text-background font-sans text-sm tracking-[0.2em] uppercase hover:bg-foreground/90 transition-all duration-300 group"
+                  className="inline-flex items-center gap-4 px-10 py-5 bg-white text-black text-sm tracking-widest uppercase font-bold transition-all duration-300 hover:shadow-xl hover:shadow-white/20"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  Consultar Especialista
-                </a>
-                <p className="text-xs text-foreground/40 mt-5 tracking-wide">
-                  Resposta em até 24 horas úteis
-                </p>
+                  <MessageCircle className="w-5 h-5" />
+                  <span>Consultar Especialista</span>
+                  <motion.span
+                    animate={{ x: [0, 6, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className="text-lg"
+                  >
+                    →
+                  </motion.span>
+                </motion.a>
               </motion.div>
             </motion.div>
           </div>

@@ -4,31 +4,17 @@ import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BlurText from '@/components/ui/BlurText';
-import boatPono from '@/assets/boat-pono.png';
-import boatSurfski from '@/assets/boat-surfski.png';
+import { 
+  Product, 
+  getSurfskiIndividual, 
+  getSurfskiDuplo, 
+  getCanoasHavaianas 
+} from '@/data/products';
 
-interface Product {
-  id: string;
-  name: string;
-  tagline: string;
-  image: string;
-}
-
-// Surfskis de Elite - Main Hero Products
-const surfskiProducts: Product[] = [
-  { id: 'pono', name: 'PONO', tagline: 'Estabilidade e Controle', image: boatPono },
-  { id: 'infinite', name: 'INFINITE', tagline: 'Velocidade Pura', image: boatSurfski },
-  { id: 'azimut', name: 'AZIMUT', tagline: 'A Evolução da Espécie', image: boatSurfski },
-  { id: 'moana', name: 'MOANA', tagline: 'Conquiste o Oceano', image: boatPono },
-  { id: 'dw', name: 'DW', tagline: 'Mestre das Ondas', image: boatSurfski },
-];
-
-// Canoas Havaianas
-const canoaProducts: Product[] = [
-  { id: 'oc1-race', name: 'OC1 RACE', tagline: 'Performance Polinésia', image: boatPono },
-  { id: 'oc1-touring', name: 'OC1 TOURING', tagline: 'Aventura no Mar', image: boatSurfski },
-  { id: 'oc6', name: 'OC6', tagline: 'Espírito de Equipe', image: boatPono },
-];
+// Get products by category
+const surfskiIndividualProducts = getSurfskiIndividual();
+const surfskiDuploProducts = getSurfskiDuplo();
+const canoaProducts = getCanoasHavaianas();
 
 // ============================================
 // LOADING SKELETON - While carousel loads
@@ -46,7 +32,7 @@ const CarouselSkeleton = () => (
 );
 
 // ============================================
-// HERO 3D CAROUSEL - For Surfski de Elite
+// HERO 3D CAROUSEL - For Surfski Individual
 // ============================================
 const Hero3DCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,7 +43,7 @@ const Hero3DCarousel = () => {
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
-  const currentProduct = surfskiProducts[currentIndex];
+  const currentProduct = surfskiIndividualProducts[currentIndex];
 
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
     saveScrollPosition();
@@ -82,13 +68,13 @@ const Hero3DCarousel = () => {
 
   const nextSlide = useCallback(() => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % surfskiProducts.length);
+    setCurrentIndex((prev) => (prev + 1) % surfskiIndividualProducts.length);
     setImageLoaded(false);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + surfskiProducts.length) % surfskiProducts.length);
+    setCurrentIndex((prev) => (prev - 1 + surfskiIndividualProducts.length) % surfskiIndividualProducts.length);
     setImageLoaded(false);
   }, []);
 
@@ -134,7 +120,7 @@ const Hero3DCarousel = () => {
   // Luxury smooth transition - longer duration for push effect
   const smoothTransition = {
     duration: 0.85,
-    ease: [0.32, 0.72, 0, 1] as const, // Smooth out-expo curve
+    ease: [0.32, 0.72, 0, 1] as const,
   };
 
   // Title synced with image - same timing
@@ -182,7 +168,7 @@ const Hero3DCarousel = () => {
         }}
       />
 
-      {/* Animated spotlight - reduced animation complexity */}
+      {/* Animated spotlight */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"
         animate={{ opacity: [0.35, 0.5, 0.35] }}
@@ -212,7 +198,7 @@ const Hero3DCarousel = () => {
           className="display-hero text-foreground"
           style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
         >
-          Surfski de Elite<span className="text-orange">.</span>
+          Surfski Individual<span className="text-orange">.</span>
         </h2>
       </motion.div>
 
@@ -241,7 +227,7 @@ const Hero3DCarousel = () => {
         </AnimatePresence>
       </div>
 
-      {/* 3D Boat Carousel - GPU accelerated */}
+      {/* 3D Boat Carousel */}
       <motion.div 
         className="relative z-10 h-[52vh] md:h-[58vh] flex items-center justify-center mt-2"
         style={{ touchAction: 'pan-y', willChange: 'transform' }}
@@ -267,7 +253,7 @@ const Hero3DCarousel = () => {
               if (currentImageRef) handleProductClick(currentProduct, currentImageRef);
             }}
           >
-            {/* Specular light glow - simplified */}
+            {/* Specular light glow */}
             <motion.div
               className="absolute inset-0 pointer-events-none -z-10"
               animate={{ opacity: isHovered ? 0.8 : 0.5 }}
@@ -281,7 +267,7 @@ const Hero3DCarousel = () => {
               }}
             />
 
-            {/* Floor shadow - enhanced grounding effect */}
+            {/* Floor shadow */}
             <div 
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] h-[60%] pointer-events-none"
               style={{
@@ -310,7 +296,7 @@ const Hero3DCarousel = () => {
               </div>
             )}
 
-            {/* Boat image - lazy loaded */}
+            {/* Boat image */}
             <motion.img
               layoutId={`boat-image-${currentProduct.id}`}
               ref={(el) => { imageRefs.current[currentIndex] = el; }}
@@ -396,7 +382,7 @@ const Hero3DCarousel = () => {
         </div>
       )}
 
-      {/* Model name + tagline */}
+      {/* Model name + tagline + LEVEL BADGE */}
       <div className="absolute bottom-24 md:bottom-20 left-1/2 -translate-x-1/2 text-center z-20 px-6">
         <AnimatePresence mode="wait">
           <motion.div
@@ -405,20 +391,29 @@ const Hero3DCarousel = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.35 }}
+            className="flex flex-col items-center"
           >
-            <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1.5">
-              {currentProduct.tagline}
+            {/* Category */}
+            <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1">
+              {currentProduct.category}
             </span>
-            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
+            
+            {/* Name */}
+            <h3 className="display-hero text-foreground mb-2" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
               {currentProduct.name}
             </h3>
+            
+            {/* Level Badge with Color */}
+            <span className={`text-xs md:text-sm font-medium tracking-wide ${currentProduct.levelColor}`}>
+              {currentProduct.level}
+            </span>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Navigation Dots - Larger on mobile for better visibility */}
+      {/* Navigation Dots */}
       <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-3 md:gap-2.5 z-30">
-        {surfskiProducts.map((product, index) => (
+        {surfskiIndividualProducts.map((product, index) => (
           <motion.button
             key={product.id}
             onClick={() => goToSlide(index)}
@@ -448,7 +443,7 @@ const Hero3DCarousel = () => {
 };
 
 // ============================================
-// HORIZONTAL SLIDER - For Canoas (Lazy loaded)
+// HORIZONTAL SLIDER - For other categories
 // ============================================
 interface SliderRowProps {
   title: string;
@@ -465,7 +460,6 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
     saveScrollPosition();
     const rect = imageElement.getBoundingClientRect();
     
-    // Show dramatic OpiumLoader, then trigger navigation transition
     showLoader(() => {
       startTransition({
         productId: product.id,
@@ -488,7 +482,7 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
       transition={{ duration: 0.7 }}
       className="relative py-20 md:py-32 overflow-hidden"
     >
-      {/* Subtle background - no boxy effect */}
+      {/* Subtle background */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -547,7 +541,7 @@ const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
 };
 
 // ============================================
-// PRODUCT CARD - Glassmorphism style
+// PRODUCT CARD - With level badge
 // ============================================
 interface ProductCardProps {
   product: Product;
@@ -591,7 +585,7 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
           }}
         />
 
-        {/* Product Image - lazy loaded */}
+        {/* Product Image */}
         <div className="relative aspect-[16/10] mb-3 overflow-hidden">
           <img
             ref={imageRef}
@@ -608,14 +602,22 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
           />
         </div>
 
-        {/* Info */}
+        {/* Info with Level Badge */}
         <div className="relative z-10">
+          {/* Category */}
           <span className="text-[8px] md:text-[9px] tracking-[0.25em] uppercase text-foreground/35 font-sans block mb-0.5">
-            {product.tagline}
+            {product.category}
           </span>
-          <h3 className="text-base md:text-lg font-medium tracking-wider text-foreground">
+          
+          {/* Name */}
+          <h3 className="text-base md:text-lg font-medium tracking-wider text-foreground mb-1">
             {product.name}
           </h3>
+          
+          {/* Level Badge */}
+          <span className={`text-xs font-medium ${product.levelColor}`}>
+            {product.level}
+          </span>
         </div>
 
       </div>
@@ -624,18 +626,25 @@ const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardPr
 };
 
 // ============================================
-// MAIN COMPONENT - With Suspense for lazy loading
+// MAIN COMPONENT - Full Fleet Display
 // ============================================
 const ProductShowcase = () => {
   return (
     <Suspense fallback={<CarouselSkeleton />}>
-      {/* Hero 3D Carousel - Surfski de Elite */}
+      {/* Hero 3D Carousel - Surfski Individual */}
       <Hero3DCarousel />
+
+      {/* Horizontal Slider - Surfski Duplo */}
+      <SliderRow
+        title="Surfski Duplo"
+        subtitle="Performance em Dupla"
+        products={surfskiDuploProducts}
+      />
 
       {/* Horizontal Slider - Canoas Havaianas */}
       <SliderRow
         title="Canoas Havaianas"
-        subtitle="Tradição"
+        subtitle="Tradição Polinésia"
         products={canoaProducts}
       />
     </Suspense>

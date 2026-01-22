@@ -1,40 +1,17 @@
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import BlurText from '@/components/ui/BlurText';
-import { 
-  Product, 
-  getSurfskiIndividual, 
-  getSurfskiDuplo, 
-  getCanoasHavaianas 
-} from '@/data/products';
+import { Product, getAllProducts } from '@/data/products';
 
-// Get products by category
-const surfskiIndividualProducts = getSurfskiIndividual();
-const surfskiDuploProducts = getSurfskiDuplo();
-const canoaProducts = getCanoasHavaianas();
+// Get ALL products in a single unified list
+const allProducts = getAllProducts();
 
 // ============================================
-// LOADING SKELETON - While carousel loads
+// UNIFIED FLEET CAROUSEL - All boats in one slider
 // ============================================
-const CarouselSkeleton = () => (
-  <div className="relative min-h-screen w-full flex items-center justify-center">
-    <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-    <motion.div
-      className="w-[60%] max-w-2xl h-48 rounded-lg"
-      style={{ background: 'rgba(255,255,255,0.03)' }}
-      animate={{ opacity: [0.3, 0.6, 0.3] }}
-      transition={{ duration: 1.5, repeat: Infinity }}
-    />
-  </div>
-);
-
-// ============================================
-// HERO 3D CAROUSEL - For Surfski Individual
-// ============================================
-const Hero3DCarousel = () => {
+const ProductShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -43,13 +20,13 @@ const Hero3DCarousel = () => {
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
-  const currentProduct = surfskiIndividualProducts[currentIndex];
+  const currentProduct = allProducts[currentIndex];
+  const currentCategory = currentProduct.category;
 
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
     saveScrollPosition();
     const rect = imageElement.getBoundingClientRect();
     
-    // Show dramatic OpiumLoader, then trigger navigation transition
     showLoader(() => {
       startTransition({
         productId: product.id,
@@ -68,13 +45,13 @@ const Hero3DCarousel = () => {
 
   const nextSlide = useCallback(() => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % surfskiIndividualProducts.length);
+    setCurrentIndex((prev) => (prev + 1) % allProducts.length);
     setImageLoaded(false);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + surfskiIndividualProducts.length) % surfskiIndividualProducts.length);
+    setCurrentIndex((prev) => (prev - 1 + allProducts.length) % allProducts.length);
     setImageLoaded(false);
   }, []);
 
@@ -89,7 +66,7 @@ const Hero3DCarousel = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobile, nextSlide, prevSlide]);
 
-  // Swipe handlers - optimized for mobile
+  // Swipe handlers
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const swipeThreshold = 50;
     if (info.offset.x > swipeThreshold) prevSlide();
@@ -98,7 +75,7 @@ const Hero3DCarousel = () => {
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
-  // Smooth slide animation - boat pushes old boat out
+  // Smooth slide animation
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? '80%' : '-80%',
@@ -117,13 +94,12 @@ const Hero3DCarousel = () => {
     }),
   };
 
-  // Luxury smooth transition - longer duration for push effect
   const smoothTransition = {
     duration: 0.85,
     ease: [0.32, 0.72, 0, 1] as const,
   };
 
-  // Title synced with image - same timing
+  // Text animation synced with boat
   const textVariants = {
     enter: (direction: number) => ({ 
       x: direction > 0 ? 150 : -150, 
@@ -147,9 +123,16 @@ const Hero3DCarousel = () => {
     ease: [0.32, 0.72, 0, 1] as const,
   };
 
+  // Category header animation
+  const categoryVariants = {
+    enter: { opacity: 0, y: -10 },
+    center: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 10 },
+  };
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Noise texture overlay - optimized */}
+      {/* Noise texture overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
         style={{
@@ -181,7 +164,7 @@ const Hero3DCarousel = () => {
         }}
       />
 
-      {/* Section Header */}
+      {/* Dynamic Section Header */}
       <motion.div 
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -194,15 +177,26 @@ const Hero3DCarousel = () => {
             Performance
           </span>
         </div>
-        <h2 
-          className="display-hero text-foreground"
-          style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
-        >
-          Surfski Individual<span className="text-orange">.</span>
-        </h2>
+        {/* Dynamic Category Title */}
+        <div className="overflow-hidden h-[3.5rem] md:h-[4.5rem]">
+          <AnimatePresence mode="wait">
+            <motion.h2 
+              key={currentCategory}
+              variants={categoryVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+              className="display-hero text-foreground"
+              style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
+            >
+              {currentCategory}<span className="text-orange">.</span>
+            </motion.h2>
+          </AnimatePresence>
+        </div>
       </motion.div>
 
-      {/* Giant background name - synced with boat animation */}
+      {/* Giant background name */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <AnimatePresence mode="popLayout" custom={direction}>
           <motion.h2 
@@ -393,7 +387,7 @@ const Hero3DCarousel = () => {
             transition={{ duration: 0.35 }}
             className="flex flex-col items-center"
           >
-            {/* Category */}
+            {/* Category Badge */}
             <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1">
               {currentProduct.category}
             </span>
@@ -411,243 +405,53 @@ const Hero3DCarousel = () => {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-3 md:gap-2.5 z-30">
-        {surfskiIndividualProducts.map((product, index) => (
-          <motion.button
-            key={product.id}
-            onClick={() => goToSlide(index)}
-            className="relative group p-3 md:p-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 flex items-center justify-center"
-            whileHover={{ scale: 1.15 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <motion.div
-              className={`w-3 h-3 md:w-2 md:h-2 rounded-full transition-all duration-250 ${
-                index === currentIndex ? 'bg-orange' : 'bg-foreground/20 group-hover:bg-foreground/40'
-              }`}
-              animate={{ scale: index === currentIndex ? 1.3 : 1 }}
-            />
-            {index === currentIndex && (
-              <motion.div
-                className="absolute inset-0 m-auto w-7 h-7 md:w-5 md:h-5 rounded-full border border-orange/40"
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.25 }}
-              />
-            )}
-          </motion.button>
-        ))}
+      {/* Navigation Dots - Grouped by Category */}
+      <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-1.5 z-30 items-center">
+        {allProducts.map((product, index) => {
+          // Add category separator
+          const prevProduct = index > 0 ? allProducts[index - 1] : null;
+          const isNewCategory = prevProduct && prevProduct.category !== product.category;
+          
+          return (
+            <div key={product.id} className="flex items-center gap-2 md:gap-1.5">
+              {/* Category separator line */}
+              {isNewCategory && (
+                <div className="w-px h-3 bg-foreground/15 mx-1" />
+              )}
+              
+              <motion.button
+                onClick={() => goToSlide(index)}
+                className="relative group p-2 md:p-1.5 min-w-[40px] min-h-[40px] md:min-w-0 md:min-h-0 flex items-center justify-center"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <motion.div
+                  className={`w-2.5 h-2.5 md:w-2 md:h-2 rounded-full transition-all duration-250 ${
+                    index === currentIndex ? 'bg-orange' : 'bg-foreground/20 group-hover:bg-foreground/40'
+                  }`}
+                  animate={{ scale: index === currentIndex ? 1.3 : 1 }}
+                />
+                {index === currentIndex && (
+                  <motion.div
+                    className="absolute inset-0 m-auto w-6 h-6 md:w-4 md:h-4 rounded-full border border-orange/40"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.25 }}
+                  />
+                )}
+              </motion.button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Product Counter */}
+      <div className="absolute top-10 md:top-16 right-6 md:right-16 z-20">
+        <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/30 font-mono">
+          {String(currentIndex + 1).padStart(2, '0')} / {String(allProducts.length).padStart(2, '0')}
+        </span>
       </div>
     </section>
-  );
-};
-
-// ============================================
-// HORIZONTAL SLIDER - For other categories
-// ============================================
-interface SliderRowProps {
-  title: string;
-  subtitle: string;
-  products: Product[];
-}
-
-const SliderRow = ({ title, subtitle, products }: SliderRowProps) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const { startTransition, saveScrollPosition, showLoader } = useTransition();
-  const isMobile = useIsMobile();
-
-  const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
-    saveScrollPosition();
-    const rect = imageElement.getBoundingClientRect();
-    
-    showLoader(() => {
-      startTransition({
-        productId: product.id,
-        productName: product.name,
-        imageUrl: product.image,
-        imageRect: rect,
-      });
-    });
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-  };
-
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7 }}
-      className="relative py-20 md:py-32 overflow-hidden"
-    >
-      {/* Subtle background */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(ellipse 100% 50% at 50% 30%, rgba(6, 182, 212, 0.015) 0%, transparent 60%)
-          `,
-        }}
-      />
-
-      {/* Header */}
-      <div className="relative z-10 px-6 md:px-16 mb-6 flex items-end justify-between">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center gap-2.5 mb-1.5">
-            <div className="w-6 md:w-8 h-px bg-gradient-to-r from-orange to-transparent" />
-            <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/75 font-sans font-medium">
-              {subtitle}
-            </span>
-          </div>
-          <BlurText
-            text={`${title}.`}
-            animateBy="words"
-            delay={120}
-            direction="top"
-            className="display-hero text-foreground"
-          />
-        </motion.div>
-
-        <button onClick={scrollRight} className="hidden md:flex items-center gap-1.5 text-foreground/35 hover:text-foreground/70 transition-colors group">
-          <span className="text-xs tracking-wider uppercase">Ver Mais</span>
-          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-        </button>
-      </div>
-
-      {/* Horizontal Scroll */}
-      <div className="relative">
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute left-0 top-0 bottom-0 w-6 md:w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-
-        <div
-          ref={scrollRef}
-          className="flex gap-4 md:gap-5 overflow-x-auto scrollbar-hide px-6 md:px-16 pb-3"
-          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
-        >
-          {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} onProductClick={handleProductClick} isMobile={isMobile} />
-          ))}
-        </div>
-      </div>
-    </motion.section>
-  );
-};
-
-// ============================================
-// PRODUCT CARD - With level badge
-// ============================================
-interface ProductCardProps {
-  product: Product;
-  index: number;
-  onProductClick: (product: Product, imageElement: HTMLImageElement) => void;
-  isMobile: boolean;
-}
-
-const ProductCard = ({ product, index, onProductClick, isMobile }: ProductCardProps) => {
-  const imageRef = useRef<HTMLImageElement>(null);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="flex-shrink-0 w-[85vw] sm:w-[65vw] md:w-[38vw] lg:w-[30vw] max-w-[420px] group cursor-pointer"
-      style={{ scrollSnapAlign: 'center' }}
-      whileHover={isMobile ? undefined : { y: -8 }}
-      onClick={() => {
-        if (imageRef.current) onProductClick(product, imageRef.current);
-      }}
-    >
-      <div 
-        className="relative p-4 md:p-5 rounded-lg overflow-hidden h-full"
-        style={{
-          background: 'rgba(255, 255, 255, 0.018)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.04)',
-        }}
-      >
-        {/* Hover spotlight */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-          style={{
-            background: `
-              radial-gradient(ellipse 85% 65% at 50% 25%, rgba(50, 70, 100, 0.4) 0%, transparent 40%),
-              radial-gradient(ellipse 65% 45% at 50% 50%, rgba(249, 115, 22, 0.05) 0%, transparent 30%)
-            `,
-          }}
-        />
-
-        {/* Product Image */}
-        <div className="relative aspect-[16/10] mb-3 overflow-hidden">
-          <img
-            ref={imageRef}
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            className="w-full h-full object-contain transition-transform duration-400 group-hover:scale-104"
-            style={{
-              filter: `
-                drop-shadow(0 30px 60px rgba(0,0,0,0.55)) 
-                drop-shadow(0 15px 30px rgba(0,0,0,0.4))
-              `,
-            }}
-          />
-        </div>
-
-        {/* Info with Level Badge */}
-        <div className="relative z-10">
-          {/* Category */}
-          <span className="text-[8px] md:text-[9px] tracking-[0.25em] uppercase text-foreground/35 font-sans block mb-0.5">
-            {product.category}
-          </span>
-          
-          {/* Name */}
-          <h3 className="text-base md:text-lg font-medium tracking-wider text-foreground mb-1">
-            {product.name}
-          </h3>
-          
-          {/* Level Badge */}
-          <span className={`text-xs font-medium ${product.levelColor}`}>
-            {product.level}
-          </span>
-        </div>
-
-      </div>
-    </motion.div>
-  );
-};
-
-// ============================================
-// MAIN COMPONENT - Full Fleet Display
-// ============================================
-const ProductShowcase = () => {
-  return (
-    <Suspense fallback={<CarouselSkeleton />}>
-      {/* Hero 3D Carousel - Surfski Individual */}
-      <Hero3DCarousel />
-
-      {/* Horizontal Slider - Surfski Duplo */}
-      <SliderRow
-        title="Surfski Duplo"
-        subtitle="Performance em Dupla"
-        products={surfskiDuploProducts}
-      />
-
-      {/* Horizontal Slider - Canoas Havaianas */}
-      <SliderRow
-        title="Canoas Havaianas"
-        subtitle="Tradição Polinésia"
-        products={canoaProducts}
-      />
-    </Suspense>
   );
 };
 

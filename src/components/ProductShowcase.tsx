@@ -222,12 +222,12 @@ const ProductShowcase = () => {
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
-  // Smooth slide animation
+  // Smooth slide animation - lighter on mobile (less pixels to repaint)
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '80%' : '-80%',
+      x: direction > 0 ? (isMobile ? '30%' : '80%') : (isMobile ? '-30%' : '-80%'),
       opacity: 0,
-      scale: 0.85,
+      scale: isMobile ? 0.95 : 0.85,
     }),
     center: {
       x: 0,
@@ -235,14 +235,14 @@ const ProductShowcase = () => {
       scale: 1,
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? '-80%' : '80%',
+      x: direction > 0 ? (isMobile ? '-30%' : '-80%') : (isMobile ? '30%' : '80%'),
       opacity: 0,
-      scale: 0.85,
+      scale: isMobile ? 0.95 : 0.85,
     }),
   };
 
   const smoothTransition = {
-    duration: 0.85,
+    duration: isMobile ? 0.5 : 0.85, // Faster on mobile = less frames to render
     ease: [0.32, 0.72, 0, 1] as const,
   };
 
@@ -476,13 +476,14 @@ const ProductShowcase = () => {
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] h-[60%] pointer-events-none"
               style={{
                 background: isMobile 
-                  ? 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.6) 0%, transparent 50%)'
+                  ? 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.5) 0%, transparent 45%)'
                   : `
                     radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.85) 0%, transparent 50%),
                     radial-gradient(ellipse 80% 60% at 50% 10%, rgba(30, 40, 60, 0.3) 0%, transparent 60%)
                   `,
-                filter: isMobile ? 'blur(20px)' : 'blur(35px)',
-                transform: 'translateY(65%) scaleY(0.5)',
+                // Mobile: NO blur filter (pure gradient is GPU-free), Desktop: keep blur
+                filter: isMobile ? 'none' : 'blur(35px)',
+                transform: 'translateY(65%) scaleY(0.5) translateZ(0)',
               }}
             />
             
@@ -516,11 +517,12 @@ const ProductShowcase = () => {
                 alt={currentProduct.name}
                 className="w-full h-auto object-contain pointer-events-none"
                 style={{
-                  // Light shadow on mobile, full luxury shadow on desktop
+                  // Optimized shadow: smaller blur radius on mobile (less GPU calc)
                   filter: isMobile 
-                    ? 'drop-shadow(0 15px 25px rgba(0,0,0,0.5))'
+                    ? 'drop-shadow(0 8px 12px rgba(0,0,0,0.6))'
                     : 'drop-shadow(0 50px 100px rgba(0,0,0,0.75)) drop-shadow(0 25px 50px rgba(0,0,0,0.55))',
-                  willChange: 'transform, opacity',
+                  willChange: 'transform',
+                  transform: 'translateZ(0)', // Force GPU layer
                   opacity: isThisProductTransitioning ? 0 : 1,
                 }}
               />

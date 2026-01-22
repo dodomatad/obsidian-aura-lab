@@ -148,8 +148,9 @@ const LiteVimeoEmbed = ({
             minHeight: '56.25vw',
             top: '50%',
             left: '50%',
-            transform: 'translate(-50%, -50%)',
+            transform: 'translate(-50%, -50%) translateZ(0)', // GPU acceleration
             border: 'none',
+            willChange: 'transform',
           }}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           title={title}

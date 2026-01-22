@@ -6,6 +6,7 @@ import CustomCursor from '@/components/CustomCursor';
 import MagneticButton from '@/components/MagneticButton';
 import VideoBackground from '@/components/VideoBackground';
 import StabilityMeter from '@/components/ui/StabilityMeter';
+import ProductMiniGallery from '@/components/ui/ProductMiniGallery';
 import { useTransition } from '@/context/TransitionContext';
 import { productsData } from '@/data/products';
 
@@ -302,6 +303,18 @@ const ProductDetail = () => {
                   compact={false}
                 />
               </motion.div>
+
+              {/* Product Gallery - Real Photos */}
+              {product.galleryImages && product.galleryImages.length > 0 && (
+                <motion.div 
+                  className="mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
+                >
+                  <ProductMiniGallery images={product.galleryImages} />
+                </motion.div>
+              )}
 
               {/* Features */}
               <motion.div 

@@ -1,7 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import championImage from '@/assets/fabio-champion.jpg';
 import BlurText from '@/components/ui/BlurText';
 import { useTransition } from '@/context/TransitionContext';
@@ -28,6 +30,37 @@ const ChampionSection = () => {
   });
 
   const imageY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+
+  // Embla Carousel for Authority Logos
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: 'center',
+      skipSnaps: false,
+    },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
 
   return (
     <>
@@ -277,35 +310,76 @@ const ChampionSection = () => {
               </span>
             </motion.div>
 
-            {/* Authority Logos Grid - With official logos */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-              {authorityLogos.map((logo, index) => (
-                <motion.div
-                  key={logo.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
-                >
-                  {logo.image ? (
-                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
-                      <img 
-                        src={logo.image} 
-                        alt={logo.title}
-                        className="w-full h-full object-contain"
-                      />
+            {/* Authority Logos Carousel */}
+            <div className="relative">
+              {/* Carousel Container */}
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
+                  {authorityLogos.map((logo, index) => (
+                    <div
+                      key={logo.title}
+                      className="flex-[0_0_50%] md:flex-[0_0_25%] min-w-0 px-3"
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                        className="group flex flex-col items-center text-center p-4 md:p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg"
+                      >
+                        {logo.image ? (
+                          <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-white p-2 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                            <img 
+                              src={logo.image} 
+                              alt={logo.title}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                            <span className="text-orange font-bold text-2xl md:text-3xl">22ª</span>
+                          </div>
+                        )}
+                        <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                          {logo.title}
+                        </h4>
+                      </motion.div>
                     </div>
-                  ) : (
-                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl mb-4 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
-                      <span className="text-orange font-bold text-2xl md:text-3xl">22ª</span>
-                    </div>
-                  )}
-                  <h4 className="text-sm md:text-base font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
-                    {logo.title}
-                  </h4>
-                </motion.div>
-              ))}
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={scrollPrev}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-5 h-5 text-foreground/70 hover:text-orange" />
+              </button>
+              <button
+                onClick={scrollNext}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-5 h-5 text-foreground/70 hover:text-orange" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 mt-6">
+                {authorityLogos.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => emblaApi?.scrollTo(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === selectedIndex 
+                        ? 'bg-orange w-6' 
+                        : 'bg-foreground/30 hover:bg-foreground/50'
+                    }`}
+                    aria-label={`Ir para slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

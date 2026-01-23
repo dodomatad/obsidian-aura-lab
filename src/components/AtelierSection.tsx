@@ -64,7 +64,7 @@ const AtelierSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full py-20 md:py-48">
+    <section className="relative min-h-screen w-full py-12 md:py-32">
       
       {/* Breathing Glow Effect - Spotlight behind images */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -105,7 +105,7 @@ const AtelierSection = () => {
       </div>
 
       {/* Header */}
-      <div className="px-6 md:px-16 mb-12 md:mb-20">
+      <div className="px-6 md:px-16 mb-6 md:mb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -179,7 +179,7 @@ const AtelierSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex items-center gap-3 mt-8"
+          className="flex items-center gap-3 mt-4"
         >
           {atelierImages.map((img, index) => (
             <button
@@ -199,7 +199,7 @@ const AtelierSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mt-6 text-sm text-muted-foreground text-center"
+          className="mt-4 text-sm text-foreground text-center"
         >
           Personalize seu barco com cores e acabamentos exclusivos
         </motion.p>
@@ -211,10 +211,10 @@ const AtelierSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="px-8 md:px-16 mt-20 text-center"
+        className="px-8 md:px-16 mt-8 text-center"
       >
         {/* Lista de benefícios */}
-        <ul className="text-muted-foreground text-sm md:text-base mb-10 max-w-lg mx-auto space-y-3 text-left">
+        <ul className="text-foreground text-sm md:text-base mb-8 max-w-lg mx-auto space-y-2 text-left">
           <li className="flex items-start gap-3">
             <span className="text-foreground mt-1">•</span>
             <span>Realizando o desejo do barco dos sonhos</span>

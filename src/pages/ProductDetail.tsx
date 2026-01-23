@@ -7,6 +7,7 @@ import MagneticButton from '@/components/MagneticButton';
 import VideoBackground from '@/components/VideoBackground';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 import ProductMiniGallery from '@/components/ui/ProductMiniGallery';
+import AtelierCarousel from '@/components/ui/AtelierCarousel';
 import { useTransition } from '@/context/TransitionContext';
 import { productsData } from '@/data/products';
 
@@ -380,11 +381,21 @@ const ProductDetail = () => {
                 </div>
               </motion.div>
 
+              {/* Ateliê Carousel - Fixed lifestyle/colors gallery */}
+              <motion.div 
+                className="mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+              >
+                <AtelierCarousel />
+              </motion.div>
+
               {/* CTA Button */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
-                transition={{ duration: 0.7, delay: 0.45 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               >
                 <motion.a
                   href={`https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre o ${product.name}.`}

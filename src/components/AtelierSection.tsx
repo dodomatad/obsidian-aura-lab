@@ -211,20 +211,20 @@ const AtelierSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="px-8 md:px-16 mt-8 text-center"
+        className="px-8 md:px-16 mt-4 text-center"
       >
         {/* Lista de benefícios */}
-        <ul className="text-foreground text-sm md:text-base mb-8 max-w-lg mx-auto space-y-2 text-left">
+        <ul className="text-orange text-sm md:text-base mb-6 max-w-lg mx-auto space-y-1 text-left">
           <li className="flex items-start gap-3">
-            <span className="text-foreground mt-1">•</span>
+            <span className="text-orange mt-1">•</span>
             <span>Realizando o desejo do barco dos sonhos</span>
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-foreground mt-1">•</span>
+            <span className="text-orange mt-1">•</span>
             <span>Aqui você pode escolher a coloração do seu barco</span>
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-foreground mt-1">•</span>
+            <span className="text-orange mt-1">•</span>
             <span>Escolha o modelo que você deseja</span>
           </li>
         </ul>

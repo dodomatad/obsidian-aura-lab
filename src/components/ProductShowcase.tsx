@@ -3,11 +3,16 @@ import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { useTransition } from '@/context/TransitionContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Product, getAllProducts } from '@/data/products';
+import { Product, productsData } from '@/data/products';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 
-// Get ALL products in a single unified list
-const allProducts = getAllProducts();
+// Custom order for the fleet carousel
+const CUSTOM_ORDER = ['moana', 'haka', 'dw', 'infinity', 'siou', 'pono', 'huna'] as const;
+
+// Get ALL products in the custom order
+const allProducts: Product[] = CUSTOM_ORDER
+  .map(id => productsData[id])
+  .filter((p): p is Product => p !== undefined);
 
 // Autoplay configuration
 const AUTOPLAY_INTERVAL = 5000; // 5 seconds

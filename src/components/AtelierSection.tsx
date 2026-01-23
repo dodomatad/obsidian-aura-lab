@@ -24,7 +24,6 @@ const atelierImages: AtelierImage[] = [
 const AtelierSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [rotationDeg, setRotationDeg] = useState<Record<string, number>>({});
 
   const current = useMemo(() => atelierImages[currentIndex], [currentIndex]);
 
@@ -48,7 +47,7 @@ const AtelierSection = () => {
     }
   };
 
-  // Transição mais leve (menos deslocamento = menos “frame drop”)
+  // Transição leve e fluida
   const slideVariants = {
     enter: (dir: number) => ({
       x: dir > 0 ? 24 : -24,
@@ -62,18 +61,6 @@ const AtelierSection = () => {
       x: dir > 0 ? -24 : 24,
       opacity: 0,
     }),
-  };
-
-  const handleImageLoad = (id: string) => (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.currentTarget;
-    // Se a imagem veio “em pé” (EXIF/orientação), força rotação para horizontal.
-    // (heurística: altura maior que largura)
-    const shouldRotate = img.naturalHeight > img.naturalWidth;
-    setRotationDeg((prev) => {
-      const next = shouldRotate ? 90 : 0;
-      if (prev[id] === next) return prev;
-      return { ...prev, [id]: next };
-    });
   };
 
   return (
@@ -158,13 +145,9 @@ const AtelierSection = () => {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
               className="absolute inset-0 w-full h-full object-cover"
-              onLoad={handleImageLoad(current.id)}
               style={{
                 imageOrientation: 'from-image',
                 willChange: 'transform, opacity',
-                transform: `translateZ(0) rotate(${rotationDeg[current.id] ?? 0}deg)` ,
-                // Se rotacionar, evita cortar demais
-                objectFit: rotationDeg[current.id] ? 'contain' : 'cover',
               }}
             />
           </AnimatePresence>

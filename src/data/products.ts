@@ -6,6 +6,7 @@ import boatSurfski from '@/assets/boat-surfski.png';
 import boatPink from '@/assets/boat-pink.png';
 import boatCarbon from '@/assets/boat-carbon.png';
 import boatCamo from '@/assets/boat-camo.png';
+import boatInfinity from '@/assets/boat-infinity.jpg';
 
 // PONO Gallery Images
 import ponoDetail1 from '@/assets/boats/pono/pono-detail-1.jpg';
@@ -199,7 +200,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-red-500',
     difficultyLevel: 95, // Mais Veloz/Instável
     description: 'O Surfski mais rápido do Brasil. Para atletas que buscam velocidade pura, perfeito para competições de Alta Performance.',
-    image: boatSurfski,
+    image: boatInfinity,
     specs: {
       length: '6.45m',
       beam: '40cm',
@@ -215,11 +216,11 @@ export const productsData: Record<string, Product> = {
       'Hidrodinâmica testada em túnel de vento',
     ],
     colors: [
-      { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatSurfski },
+      { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatInfinity },
       { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
       { id: 'camo', name: 'Tactical Green', color: '#3D4F3A', image: boatCamo },
     ],
-    defaultImage: boatSurfski,
+    defaultImage: boatInfinity,
     galleryImages: [
       infinityDetail1, // Perfil lateral completo
       infinityDetail2, // Cockpit (assento)

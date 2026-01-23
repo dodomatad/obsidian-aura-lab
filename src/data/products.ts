@@ -42,6 +42,7 @@ import siouCarrying from '@/assets/boats/siou/siou-carrying.jpg';
 import siouYellowRack from '@/assets/boats/siou/siou-yellow-rack.jpg';
 
 // MOANA Gallery Images
+import moanaCover from '@/assets/boats/moana/moana-cover.jpg';
 import moanaProfile from '@/assets/boats/moana/moana-profile.jpg';
 import moanaAngle from '@/assets/boats/moana/moana-angle.jpg';
 import moanaCockpit from '@/assets/boats/moana/moana-cockpit.jpg';
@@ -133,7 +134,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 30,
     description: 'Ideal para iniciantes e intermediários, mas com performance que atende o nível avançado.',
-    image: moanaProfile,
+    image: moanaCover,
     specs: {
       length: '6.40m',
       beam: '43cm',
@@ -149,17 +150,18 @@ export const productsData: Record<string, Product> = {
       'Construção durável',
     ],
     colors: [
-      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: moanaProfile },
+      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: moanaCover },
       { id: 'camo', name: 'Camuflagem', color: '#4A6741', image: boatCamo },
     ],
-    defaultImage: moanaProfile,
+    defaultImage: moanaCover,
     galleryImages: [
-      moanaProfile,  // 1. Capa: Perfil lateral completo na praia
-      moanaAngle,    // 2. Barco inteiro em ângulo diagonal
-      moanaCockpit,  // 3. Vista superior do cockpit (assento)
-      moanaLogo,     // 4. Detalhe do logo MOANA
-      moanaSeat,     // 5. Vista superior do assento/bico
-      moanaDuo,      // 6. Dois barcos na praia
+      moanaCover,    // 1. Capa: Dois barcos na praia (destaque)
+      moanaProfile,  // 2. Perfil lateral completo
+      moanaAngle,    // 3. Barco inteiro em ângulo diagonal
+      moanaCockpit,  // 4. Vista superior do cockpit
+      moanaLogo,     // 5. Detalhe do logo MOANA
+      moanaSeat,     // 6. Vista superior do assento/bico
+      moanaDuo,      // 7. Dois barcos variação
     ],
   },
   siou: {

@@ -40,6 +40,15 @@ import siouAction1 from '@/assets/boats/siou/siou-action-1.jpg';
 import siouAction2 from '@/assets/boats/siou/siou-action-2.jpg';
 import siouCarrying from '@/assets/boats/siou/siou-carrying.jpg';
 import siouYellowRack from '@/assets/boats/siou/siou-yellow-rack.jpg';
+
+// MOANA Gallery Images
+import moanaProfile from '@/assets/boats/moana/moana-profile.jpg';
+import moanaAngle from '@/assets/boats/moana/moana-angle.jpg';
+import moanaCockpit from '@/assets/boats/moana/moana-cockpit.jpg';
+import moanaLogo from '@/assets/boats/moana/moana-logo.jpg';
+import moanaSeat from '@/assets/boats/moana/moana-seat.jpg';
+import moanaDuo from '@/assets/boats/moana/moana-duo.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -124,7 +133,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 30,
     description: 'Ideal para iniciantes e intermediários, mas com performance que atende o nível avançado.',
-    image: boatSurfski,
+    image: moanaProfile,
     specs: {
       length: '6.40m',
       beam: '43cm',
@@ -140,10 +149,18 @@ export const productsData: Record<string, Product> = {
       'Construção durável',
     ],
     colors: [
-      { id: 'default', name: 'Branco Oceano', color: '#E8E8E8', image: boatSurfski },
+      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: moanaProfile },
       { id: 'camo', name: 'Camuflagem', color: '#4A6741', image: boatCamo },
     ],
-    defaultImage: boatSurfski,
+    defaultImage: moanaProfile,
+    galleryImages: [
+      moanaProfile,  // 1. Capa: Perfil lateral completo na praia
+      moanaAngle,    // 2. Barco inteiro em ângulo diagonal
+      moanaCockpit,  // 3. Vista superior do cockpit (assento)
+      moanaLogo,     // 4. Detalhe do logo MOANA
+      moanaSeat,     // 5. Vista superior do assento/bico
+      moanaDuo,      // 6. Dois barcos na praia
+    ],
   },
   siou: {
     id: 'siou',

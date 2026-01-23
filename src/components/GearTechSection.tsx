@@ -128,7 +128,7 @@ const GearTechSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-3 md:mt-4 text-base md:text-lg text-foreground/50 font-sans font-light max-w-xl"
+            className="mt-1 md:mt-2 text-base md:text-lg text-foreground font-sans font-light max-w-xl"
           >
             Equipamentos premium para completar sua experiência no mar.
           </motion.p>
@@ -243,16 +243,12 @@ const GearTechSection = () => {
           href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os acessórios Opium."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 group border border-foreground/20 text-foreground hover:border-orange hover:text-orange"
-          style={{
-            background: 'transparent',
-          }}
+          className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 group bg-white text-orange font-bold hover:shadow-lg hover:shadow-white/20"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           <span>Consultar Acessórios</span>
           <motion.span
-            className="group-hover:text-orange transition-colors"
             animate={{ x: [0, 4, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           >

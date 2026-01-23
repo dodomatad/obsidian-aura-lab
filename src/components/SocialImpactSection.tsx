@@ -112,7 +112,7 @@ const SocialImpactSection = () => {
       case 'Social':
         return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
       case 'Comunidade':
-        return 'bg-orange/20 text-orange border-orange/30';
+        return 'bg-white/20 text-white border-white/30';
       default:
         return 'bg-white/10 text-white/70 border-white/20';
     }
@@ -191,7 +191,7 @@ const SocialImpactSection = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="relative h-full rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 hover:border-orange/40 transition-all duration-500"
+                      className="relative h-full rounded-2xl overflow-hidden bg-neutral-900 border border-white/10 hover:border-foreground/40 transition-all duration-500"
                     >
                       {/* Image Container */}
                       <div className="relative h-56 md:h-64 overflow-hidden">
@@ -213,7 +213,7 @@ const SocialImpactSection = () => {
 
                       {/* Content */}
                       <div className="p-5 md:p-6">
-                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-orange transition-colors duration-300">
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-foreground transition-colors duration-300">
                           {project.title}
                         </h3>
                         <p className="text-sm md:text-base text-neutral-400 leading-relaxed">
@@ -221,7 +221,7 @@ const SocialImpactSection = () => {
                         </p>
                         
                         {/* View more indicator */}
-                        <div className="mt-4 flex items-center gap-2 text-orange/70 group-hover:text-orange transition-colors">
+                        <div className="mt-4 flex items-center gap-2 text-foreground/70 group-hover:text-foreground transition-colors">
                           <span className="text-sm font-medium">Ver mais</span>
                           <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </div>

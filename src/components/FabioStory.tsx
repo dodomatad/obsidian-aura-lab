@@ -125,7 +125,7 @@ export function FabioStory() {
             className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
           >
             Uma trajetória de{" "}
-            <span className="font-bold text-orange">700 troféus</span>. Fábio permaneceu{" "}
+            <span className="font-bold text-foreground">700 troféus</span>. Fábio permaneceu{" "}
             <span className="font-bold text-yellow-400">
               invicto no país por 15 anos
             </span>, mas seu remo foi além das fronteiras.
@@ -245,7 +245,7 @@ export function FabioStory() {
               delay={0}
               className="text-foreground/80 text-lg md:text-2xl font-normal leading-relaxed"
             >
-              Fundador da <span className="font-bold text-orange">Canoa Brasil</span>,
+              Fundador da <span className="font-bold text-foreground">Canoa Brasil</span>,
               a primeira guardaria do país, movimentando hoje cerca de 400 pessoas aos
               sábados.
             </RevealText>
@@ -254,8 +254,8 @@ export function FabioStory() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-2">
-                <Users className="w-6 h-6 text-orange" />
-                <h4 className="text-orange font-bold text-base md:text-lg">Dragon Boat</h4>
+                <Users className="w-6 h-6 text-foreground" />
+                <h4 className="text-foreground font-bold text-base md:text-lg">Dragon Boat</h4>
               </div>
               <p className="text-foreground/60 text-sm md:text-base">Introduziu a modalidade no Brasil em 2007.</p>
             </div>

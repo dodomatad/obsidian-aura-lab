@@ -117,7 +117,7 @@ const ChampionSection = () => {
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
                 Nossa dedicação à excelência técnica e compromisso com a inovação nos permitiram 
-                conquistar <span className="text-orange font-bold">14 títulos consecutivos</span> nas principais competições nacionais.
+                conquistar <span className="text-foreground font-bold">14 títulos consecutivos</span> nas principais competições nacionais.
               </motion.p>
 
               <motion.p 
@@ -127,7 +127,7 @@ const ChampionSection = () => {
                 transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
-                Somos <span className="text-orange font-bold">pioneiros na fibra de carbono</span> de alta gramatura no Brasil, 
+                Somos <span className="text-foreground font-bold">pioneiros na fibra de carbono</span> de alta gramatura no Brasil, 
                 oferecendo embarcações que combinam leveza extrema, rigidez estrutural e 
                 durabilidade incomparável.
               </motion.p>

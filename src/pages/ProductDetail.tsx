@@ -201,7 +201,7 @@ const ProductDetail = () => {
                 transition={{ duration: 0.8, delay: 0, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 {/* Category Badge */}
-                <span className="text-xs tracking-[0.25em] uppercase text-orange/80 font-sans font-medium block mb-2">
+                <span className="text-xs tracking-[0.25em] uppercase text-foreground/80 font-sans font-medium block mb-2">
                   {product.category}
                 </span>
                 
@@ -267,7 +267,7 @@ const ProductDetail = () => {
                         }}
                       >
                         <div className="flex items-center gap-2 mb-2">
-                          <IconComponent className="w-4 h-4 text-orange/70" />
+                          <IconComponent className="w-4 h-4 text-foreground/70" />
                           <span className="text-xs tracking-wider uppercase text-foreground/40">
                             {spec.label}
                           </span>
@@ -327,7 +327,7 @@ const ProductDetail = () => {
                       transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
                       className="flex items-start gap-3 text-foreground/70"
                     >
-                      <span className="text-orange mt-1">•</span>
+                      <span className="text-foreground mt-1">•</span>
                       <span>{feature}</span>
                     </motion.li>
                   ))}

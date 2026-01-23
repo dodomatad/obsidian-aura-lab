@@ -74,7 +74,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 viewport={{ once: true }}
                 className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-background flex items-center justify-center"
               >
-                <div className="h-4 w-4 rounded-full bg-orange/30 border-2 border-orange p-2" />
+                <div className="h-4 w-4 rounded-full bg-foreground/30 border-2 border-foreground p-2" />
               </motion.div>
               <motion.h3 
                 initial={{ opacity: 0, x: -20 }}
@@ -114,7 +114,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-orange via-orange to-transparent from-[0%] via-[10%] rounded-full"
+            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-foreground via-foreground to-transparent from-[0%] via-[10%] rounded-full"
           />
         </div>
       </div>

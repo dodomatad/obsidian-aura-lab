@@ -56,6 +56,14 @@ import hunaLogo from '@/assets/boats/huna/huna-logo.jpg';
 import hunaCockpit from '@/assets/boats/huna/huna-cockpit.jpg';
 import hunaBow from '@/assets/boats/huna/huna-bow.jpg';
 
+// HAKA OC1 Gallery Images
+import hakaProfile from '@/assets/boats/haka/haka-profile.jpg';
+import hakaAction from '@/assets/boats/haka/haka-action.jpg';
+import hakaPov from '@/assets/boats/haka/haka-pov.jpg';
+import hakaCockpit from '@/assets/boats/haka/haka-cockpit.jpg';
+import hakaBow from '@/assets/boats/haka/haka-bow.jpg';
+import hakaWater from '@/assets/boats/haka/haka-water.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -356,7 +364,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
     description: 'Canoa Individual. Muito estável, leve e veloz. Ideal para todos os públicos.',
-    image: boatSurfski,
+    image: hakaProfile,
     specs: {
       length: '6.30m',
       beam: '40cm',
@@ -372,10 +380,18 @@ export const productsData: Record<string, Product> = {
       'Homologada para competições',
     ],
     colors: [
-      { id: 'default', name: 'Branco Tradicional', color: '#E8E8E8', image: boatSurfski },
+      { id: 'default', name: 'Amarelo & Branco', color: '#F5A623', image: hakaProfile },
       { id: 'carbon', name: 'Carbon Race', color: '#2A2A2A', image: boatCarbon },
     ],
-    defaultImage: boatSurfski,
+    defaultImage: hakaProfile,
+    galleryImages: [
+      hakaProfile,  // 1. Capa: Perfil na água com Ama amarelo
+      hakaAction,   // 2. Ação: Atleta remando (escala e contexto)
+      hakaPov,      // 3. Imersão: POV do cockpit olhando para frente
+      hakaCockpit,  // 4. Cockpit: Detalhe do assento na água
+      hakaBow,      // 5. Detalhes: Close no bico com logo Opium
+      hakaWater,    // 6. Extra: Canoa na água vista frontal
+    ],
   },
   'huna-oc2': {
     id: 'huna-oc2',

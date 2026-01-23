@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
+import LocationMap from '@/components/LocationMap';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
@@ -307,47 +308,10 @@ const Index = () => {
                     </a>
                   </div>
                 </div>
-
-                {/* Endereço */}
-                <div className="flex items-start gap-3">
-                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Endereço:</h4>
-                    <p className="text-base text-neutral-600">
-                      Rua Afonso Celso de Paula Lima, 16<br />
-                      Ponta da Praia, Santos | SP
-                    </p>
-                  </div>
-                </div>
               </div>
 
-              {/* COLUNA 3 - Horários */}
-              <div className="space-y-6">
-                {/* Horário de Garagem */}
-                <div className="flex items-start gap-3">
-                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Horário de Garagem</h4>
-                    <p className="text-base text-neutral-600 leading-relaxed">
-                      Segunda-Feira: 8:00 às 14:00<br />
-                      Terça a Sábado: 7:00 às 19:30<br />
-                      Domingo e Feriado: 8:00 às 18:30
-                    </p>
-                  </div>
-                </div>
-
-                {/* Horário de Secretaria */}
-                <div className="flex items-start gap-3">
-                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Horário de Secretaria</h4>
-                    <p className="text-base text-neutral-600 leading-relaxed">
-                      Segunda, Sábado e Domingo: 8:00 às 14:00<br />
-                      Terça a Sexta: 8:00 às 19:00
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {/* COLUNA 3 - Mapa de Localização */}
+              <LocationMap />
             </div>
 
             {/* Linha Separadora */}

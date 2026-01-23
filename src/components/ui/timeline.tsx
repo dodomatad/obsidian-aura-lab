@@ -56,7 +56,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         </motion.p>
       </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
+      <div ref={ref} className="relative max-w-7xl mx-auto pb-20 px-4 md:px-8 lg:px-10">
         {data.map((item, index) => (
           <motion.div
             key={index}
@@ -72,7 +72,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-background flex items-center justify-center"
+                className="h-10 absolute left-0 md:left-3 w-10 rounded-full bg-background flex items-center justify-center"
               >
                 <div className="h-4 w-4 rounded-full bg-foreground/30 border-2 border-foreground p-2" />
               </motion.div>
@@ -92,7 +92,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
               viewport={{ once: true }}
-              className="relative pl-20 pr-4 md:pl-4 w-full"
+              className="relative pl-14 pr-0 md:pl-4 w-full"
             >
               <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-foreground/50">
                 {item.title}
@@ -107,7 +107,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           style={{
             height: height + "px",
           }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-foreground/20 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+          className="absolute left-4 md:left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-foreground/20 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
         >
           <motion.div
             style={{

@@ -97,7 +97,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 30,
     description: 'Ideal para iniciantes e intermediários, mas com performance que atende o nível avançado.',
-    image: boatPono,
+    image: boatSurfski,
     specs: {
       length: '6.40m',
       beam: '43cm',
@@ -113,10 +113,10 @@ export const productsData: Record<string, Product> = {
       'Construção durável',
     ],
     colors: [
-      { id: 'default', name: 'Branco Oceano', color: '#E8E8E8', image: boatPono },
+      { id: 'default', name: 'Branco Oceano', color: '#E8E8E8', image: boatSurfski },
       { id: 'camo', name: 'Camuflagem', color: '#4A6741', image: boatCamo },
     ],
-    defaultImage: boatPono,
+    defaultImage: boatSurfski,
   },
   siou: {
     id: 'siou',
@@ -127,7 +127,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 40,
     description: 'Versatilidade total. Ideal para quem busca evolução segura entre o nível iniciante e intermediário.',
-    image: boatPono,
+    image: boatSurfski,
     specs: {
       length: '6.00m',
       beam: '45cm',
@@ -143,10 +143,10 @@ export const productsData: Record<string, Product> = {
       'Fácil manobra',
     ],
     colors: [
-      { id: 'default', name: 'Branco Classic', color: '#E8E8E8', image: boatPono },
+      { id: 'default', name: 'Branco Classic', color: '#E8E8E8', image: boatSurfski },
       { id: 'carbon', name: 'Carbono', color: '#2A2A2A', image: boatCarbon },
     ],
-    defaultImage: boatPono,
+    defaultImage: boatSurfski,
   },
   dw: {
     id: 'dw',
@@ -282,7 +282,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
     description: 'Canoa Individual. Muito estável, leve e veloz. Ideal para todos os públicos.',
-    image: boatPono,
+    image: boatSurfski,
     specs: {
       length: '6.30m',
       beam: '40cm',
@@ -298,10 +298,10 @@ export const productsData: Record<string, Product> = {
       'Homologada para competições',
     ],
     colors: [
-      { id: 'default', name: 'Branco Tradicional', color: '#E8E8E8', image: boatPono },
+      { id: 'default', name: 'Branco Tradicional', color: '#E8E8E8', image: boatSurfski },
       { id: 'carbon', name: 'Carbon Race', color: '#2A2A2A', image: boatCarbon },
     ],
-    defaultImage: boatPono,
+    defaultImage: boatSurfski,
   },
   'huna-oc2': {
     id: 'huna-oc2',
@@ -312,7 +312,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
     description: 'Canoa Dupla. Diversão garantida com estabilidade e velocidade.',
-    image: boatPono,
+    image: boatSurfski,
     specs: {
       length: '7.00m',
       beam: '45cm',
@@ -328,10 +328,10 @@ export const productsData: Record<string, Product> = {
       'Fácil entrada e saída',
     ],
     colors: [
-      { id: 'default', name: 'Branco Explorer', color: '#E8E8E8', image: boatPono },
+      { id: 'default', name: 'Branco Explorer', color: '#E8E8E8', image: boatSurfski },
       { id: 'camo', name: 'Ocean Camo', color: '#4A6741', image: boatCamo },
     ],
-    defaultImage: boatPono,
+    defaultImage: boatSurfski,
   },
 };
 

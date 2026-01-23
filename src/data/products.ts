@@ -13,6 +13,16 @@ import ponoDetail4 from '@/assets/boats/pono/pono-detail-4.jpg';
 import ponoDetail5 from '@/assets/boats/pono/pono-detail-5.jpg';
 import ponoDetail6 from '@/assets/boats/pono/pono-detail-6.jpg';
 
+// INFINITY Gallery Images
+import infinityDetail1 from '@/assets/boats/infinity/infinity-detail-1.jpg';
+import infinityDetail2 from '@/assets/boats/infinity/infinity-detail-2.jpg';
+import infinityDetail3 from '@/assets/boats/infinity/infinity-detail-3.jpg';
+import infinityDetail4 from '@/assets/boats/infinity/infinity-detail-4.jpg';
+import infinityDetail5 from '@/assets/boats/infinity/infinity-detail-5.jpg';
+import infinityDetail6 from '@/assets/boats/infinity/infinity-detail-6.jpg';
+import infinityDetail7 from '@/assets/boats/infinity/infinity-detail-7.jpg';
+import infinityDetail8 from '@/assets/boats/infinity/infinity-detail-8.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -208,6 +218,16 @@ export const productsData: Record<string, Product> = {
       { id: 'camo', name: 'Tactical Green', color: '#3D4F3A', image: boatCamo },
     ],
     defaultImage: boatSurfski,
+    galleryImages: [
+      infinityDetail1, // Perfil lateral completo
+      infinityDetail2, // Cockpit (assento)
+      infinityDetail3, // Vista bico/frente
+      infinityDetail4, // Lateral popa
+      infinityDetail5, // Detalhe bico com logo
+      infinityDetail6, // Lateral com cockpit
+      infinityDetail7, // Deck frontal com cordas
+      infinityDetail8, // Lateral com logo INFINITY
+    ],
   },
 
   // --- SURFSKI DUPLO ---

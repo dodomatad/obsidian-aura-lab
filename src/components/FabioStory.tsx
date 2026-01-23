@@ -205,11 +205,13 @@ export function FabioStory() {
             transition={{ duration: 0.6 }}
             className="mb-8 rounded-xl overflow-hidden shadow-2xl border border-foreground/10"
           >
-            <img 
-              src={jornalSantos} 
-              alt="Jornal da Baixada - Primeira competição de canoas havaianas em Santos, 2001" 
-              className="w-full h-auto object-cover"
-            />
+            <div className="aspect-[2/1] max-h-[280px] overflow-hidden">
+              <img 
+                src={jornalSantos} 
+                alt="Jornal da Baixada - Primeira competição de canoas havaianas em Santos, 2001" 
+                className="w-full h-full object-cover"
+              />
+            </div>
             <div className="bg-foreground/5 px-4 py-3 border-t border-foreground/10">
               <p className="text-foreground/50 text-xs md:text-sm italic text-center">
                 Jornal da Baixada, Agosto/2001 — A primeira competição de canoas havaianas da América do Sul
@@ -261,11 +263,13 @@ export function FabioStory() {
             transition={{ duration: 0.6 }}
             className="mb-8 rounded-xl overflow-hidden shadow-2xl border border-foreground/10"
           >
-            <img 
-              src={tochaOlimpica} 
-              alt="Fábio Paiva carregando a Tocha Olímpica com a comunidade do remo" 
-              className="w-full h-auto object-cover"
-            />
+            <div className="aspect-[2/1] max-h-[280px] overflow-hidden">
+              <img 
+                src={tochaOlimpica} 
+                alt="Fábio Paiva carregando a Tocha Olímpica com a comunidade do remo" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
 
           {/* Logo Canoa Brasil em destaque */}

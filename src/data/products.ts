@@ -199,9 +199,12 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: dwDetail1,
     galleryImages: [
-      dwDetail1,  // Perfil completo azul/verde (OK)
-      dwDetail3,  // Cockpit frontal (OK)
-      dwDetail4,  // Cockpit vista superior (OK)
+      dwDetail1,  // Perfil completo azul/verde
+      dwCover,    // Perfil lateral com logo DW SURF SKI
+      dwDetail2,  // Vista lateral (estava invertida/rotacionada)
+      dwDetail3,  // Cockpit frontal
+      dwDetail4,  // Cockpit vista superior
+      dwDetail5,  // Detalhe pedais/assento
     ],
   },
   infinity: {

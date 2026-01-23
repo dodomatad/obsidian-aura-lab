@@ -1,12 +1,47 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ProductMiniGalleryProps {
   images: string[];
+  /** Optional per-image transform fixes (useful for photos with wrong orientation) */
+  transforms?: Record<
+    string,
+    {
+      rotate?: 0 | 90 | 180 | 270;
+      flipX?: boolean;
+      flipY?: boolean;
+      /** When a transform is applied, "contain" avoids awkward crops */
+      fit?: 'cover' | 'contain';
+    }
+  >;
 }
 
-const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
+const ProductMiniGallery = ({ images, transforms }: ProductMiniGalleryProps) => {
   const [mainImage, setMainImage] = useState(images[0]);
+
+  const getImageFix = useMemo(() => {
+    return (imgSrc: string) => {
+      const fix = transforms?.[imgSrc];
+      if (!fix) {
+        return {
+          objectFit: 'cover' as 'cover' | 'contain',
+          transform: undefined as string | undefined,
+        };
+      }
+
+      const parts: string[] = [];
+      if (fix.flipX) parts.push('scaleX(-1)');
+      if (fix.flipY) parts.push('scaleY(-1)');
+      if (typeof fix.rotate === 'number' && fix.rotate !== 0) {
+        parts.push(`rotate(${fix.rotate}deg)`);
+      }
+
+      return {
+        objectFit: (fix.fit ?? 'contain') as 'cover' | 'contain',
+        transform: parts.length ? parts.join(' ') : undefined,
+      };
+    };
+  }, [transforms]);
 
   if (!images || images.length === 0) {
     return null;
@@ -27,17 +62,26 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
         }}
       >
         <AnimatePresence mode="wait">
+          {(() => {
+            const fix = getImageFix(mainImage);
+            return (
           <motion.img 
             key={mainImage}
             src={mainImage} 
             alt="Detalhe do barco" 
-            className="w-full h-full object-cover"
-            style={{ imageOrientation: 'from-image' }}
+            className="w-full h-full"
+            style={{
+              imageOrientation: 'from-image',
+              objectFit: fix.objectFit,
+              transform: fix.transform,
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
           />
+            );
+          })()}
         </AnimatePresence>
         
         {/* Subtle gradient overlay for depth */}
@@ -52,6 +96,9 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
       {/* Thumbnails */}
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
         {images.map((img, idx) => (
+          (() => {
+            const fix = getImageFix(img);
+            return (
           <motion.button 
             key={idx} 
             onClick={() => setMainImage(img)}
@@ -71,10 +118,16 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
             <img 
               src={img} 
               alt={`Miniatura ${idx + 1}`} 
-              className="w-full h-full object-cover"
-              style={{ imageOrientation: 'from-image' }}
+              className="w-full h-full"
+              style={{
+                imageOrientation: 'from-image',
+                objectFit: fix.objectFit,
+                transform: fix.transform,
+              }}
             />
           </motion.button>
+            );
+          })()
         ))}
       </div>
     </div>

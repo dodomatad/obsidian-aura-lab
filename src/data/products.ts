@@ -26,6 +26,14 @@ import infinityDetail6 from '@/assets/boats/infinity/infinity-detail-6.jpg';
 import infinityDetail7 from '@/assets/boats/infinity/infinity-detail-7.jpg';
 import infinityDetail8 from '@/assets/boats/infinity/infinity-detail-8.jpg';
 
+// DW Gallery Images
+import dwCover from '@/assets/boats/dw/dw-cover.jpg';
+import dwDetail1 from '@/assets/boats/dw/dw-detail-1.jpg';
+import dwDetail2 from '@/assets/boats/dw/dw-detail-2.jpg';
+import dwDetail3 from '@/assets/boats/dw/dw-detail-3.jpg';
+import dwDetail4 from '@/assets/boats/dw/dw-detail-4.jpg';
+import dwDetail5 from '@/assets/boats/dw/dw-detail-5.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -170,7 +178,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
     description: 'Ideal para nível intermediário e avançado. O Surfski perfeito para Downwind e Competições.',
-    image: boatSurfski,
+    image: dwCover,
     specs: {
       length: '6.20m',
       beam: '42cm',
@@ -186,10 +194,18 @@ export const productsData: Record<string, Product> = {
       'Para atletas experientes',
     ],
     colors: [
-      { id: 'default', name: 'Branco Racing', color: '#F0F0F0', image: boatSurfski },
+      { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwCover },
       { id: 'carbon', name: 'Stealth Carbon', color: '#1A1A1A', image: boatCarbon },
     ],
-    defaultImage: boatSurfski,
+    defaultImage: dwCover,
+    galleryImages: [
+      dwCover,    // Perfil lateral com logo DW SURF SKI
+      dwDetail1,  // Perfil completo azul/verde
+      dwDetail2,  // Vista lateral invertida
+      dwDetail3,  // Cockpit frontal
+      dwDetail4,  // Cockpit vista superior
+      dwDetail5,  // Detalhe pedais/assento
+    ],
   },
   infinity: {
     id: 'infinity',

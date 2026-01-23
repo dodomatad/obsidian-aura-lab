@@ -25,7 +25,7 @@ const TimelineItem = ({
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(itemRef, { 
-    margin: "-40% 0px -40% 0px",
+    margin: "-30% 0px -30% 0px",
     once: false 
   });
   
@@ -42,7 +42,7 @@ const TimelineItem = ({
       ref={itemRef}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-20%" }}
+      viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="flex justify-start pt-12 md:pt-20 md:gap-10"
     >
@@ -62,13 +62,13 @@ const TimelineItem = ({
             animate={isInView ? {
               scale: [1, 1.4, 1],
               opacity: [0.5, 0.8, 0.5],
-            } : {}}
+            } : { scale: 1, opacity: 0 }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className={`absolute inset-1 rounded-full ${isInView ? 'bg-orange/30' : 'bg-transparent'}`}
+            className="absolute inset-1 rounded-full bg-orange/30"
           />
           {/* Core dot */}
           <motion.div 
@@ -90,7 +90,7 @@ const TimelineItem = ({
         
         {/* Desktop title */}
         <motion.h3 
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0.4, x: -10 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0.5, x: -5 }}
           transition={{ duration: 0.5 }}
           className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-foreground/50"
         >
@@ -105,16 +105,16 @@ const TimelineItem = ({
           scale: 1,
           filter: "blur(0px)"
         } : {
-          opacity: 0.4,
-          scale: 0.98,
-          filter: "blur(2px)"
+          opacity: 0.6,
+          scale: 0.99,
+          filter: "blur(1px)"
         }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="relative pl-14 pr-0 md:pl-4 w-full"
       >
         {/* Mobile title */}
         <motion.h3 
-          animate={isInView ? { opacity: 1 } : { opacity: 0.5 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0.6 }}
           transition={{ duration: 0.5 }}
           className="md:hidden block text-2xl mb-4 text-left font-bold text-foreground/50"
         >
@@ -123,6 +123,38 @@ const TimelineItem = ({
         {item.content}
       </motion.div>
     </motion.div>
+  );
+};
+
+// Parallax image wrapper component
+export const ParallaxImage = ({ 
+  src, 
+  alt, 
+  className = "",
+  containerClassName = ""
+}: { 
+  src: string; 
+  alt: string; 
+  className?: string;
+  containerClassName?: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  return (
+    <div ref={ref} className={`overflow-hidden ${containerClassName}`}>
+      <motion.img
+        src={src}
+        alt={alt}
+        style={{ y }}
+        className={`w-full h-[120%] object-cover ${className}`}
+      />
+    </div>
   );
 };
 
@@ -144,7 +176,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   });
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
   return (
     <div
@@ -201,22 +233,16 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               height: heightTransform,
               opacity: glowOpacity,
             }}
-            className="absolute inset-x-0 top-0 w-[2px] rounded-full"
-            // Using inline style for gradient since we need specific orange/gold colors
-            // that represent the brand's premium feel
-          >
-            <div className="w-full h-full bg-gradient-to-b from-orange via-amber-400 to-orange" />
-          </motion.div>
+            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-orange via-amber-400 to-orange rounded-full"
+          />
           {/* Glow effect for the progress line */}
           <motion.div
             style={{
               height: heightTransform,
               opacity: glowOpacity,
             }}
-            className="absolute left-[-3px] top-0 w-[8px] blur-sm rounded-full"
-          >
-            <div className="w-full h-full bg-gradient-to-b from-orange/50 via-amber-400/30 to-orange/50" />
-          </motion.div>
+            className="absolute left-[-3px] top-0 w-[8px] bg-gradient-to-b from-orange/40 via-amber-400/20 to-orange/40 blur-sm rounded-full"
+          />
         </div>
       </div>
     </div>

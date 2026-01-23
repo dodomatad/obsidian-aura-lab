@@ -7,7 +7,7 @@ import { Product, productsData } from '@/data/products';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 
 // Custom order for the fleet carousel
-const CUSTOM_ORDER = ['moana', 'haka', 'dw', 'infinity', 'siou', 'pono', 'huna'] as const;
+const CUSTOM_ORDER = ['moana', 'haka-oc1', 'dw', 'infinity', 'siou', 'pono', 'huna-oc2'] as const;
 
 // Get ALL products in the custom order
 const allProducts: Product[] = CUSTOM_ORDER

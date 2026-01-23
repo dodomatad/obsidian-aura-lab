@@ -57,6 +57,7 @@ import hunaCockpit from '@/assets/boats/huna/huna-cockpit.jpg';
 import hunaBow from '@/assets/boats/huna/huna-bow.jpg';
 
 // HAKA OC1 Gallery Images
+import hakaCover from '@/assets/boats/haka/haka-cover.jpg';
 import hakaProfile from '@/assets/boats/haka/haka-profile.jpg';
 import hakaAction from '@/assets/boats/haka/haka-action.jpg';
 import hakaPov from '@/assets/boats/haka/haka-pov.jpg';
@@ -364,7 +365,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
     description: 'Canoa Individual. Muito estável, leve e veloz. Ideal para todos os públicos.',
-    image: hakaProfile,
+    image: hakaCover,
     specs: {
       length: '6.30m',
       beam: '40cm',
@@ -380,17 +381,18 @@ export const productsData: Record<string, Product> = {
       'Homologada para competições',
     ],
     colors: [
-      { id: 'default', name: 'Amarelo & Branco', color: '#F5A623', image: hakaProfile },
+      { id: 'default', name: 'Amarelo & Branco', color: '#F5A623', image: hakaCover },
       { id: 'carbon', name: 'Carbon Race', color: '#2A2A2A', image: boatCarbon },
     ],
-    defaultImage: hakaProfile,
+    defaultImage: hakaCover,
     galleryImages: [
-      hakaProfile,  // 1. Capa: Perfil na água com Ama amarelo
-      hakaAction,   // 2. Ação: Atleta remando (escala e contexto)
-      hakaPov,      // 3. Imersão: POV do cockpit olhando para frente
-      hakaCockpit,  // 4. Cockpit: Detalhe do assento na água
-      hakaBow,      // 5. Detalhes: Close no bico com logo Opium
-      hakaWater,    // 6. Extra: Canoa na água vista frontal
+      hakaCover,    // 1. Capa: HAKA na água com Ama amarelo (destaque)
+      hakaProfile,  // 2. Perfil lateral
+      hakaAction,   // 3. Ação: Atleta remando (escala e contexto)
+      hakaPov,      // 4. Imersão: POV do cockpit olhando para frente
+      hakaCockpit,  // 5. Cockpit: Detalhe do assento na água
+      hakaBow,      // 6. Detalhes: Close no bico com logo Opium
+      hakaWater,    // 7. Extra: Canoa na água vista frontal
     ],
   },
   'huna-oc2': {

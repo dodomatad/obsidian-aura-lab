@@ -112,7 +112,7 @@ const GearTechSection = () => {
           className="max-w-4xl"
         >
           <div className="mb-4 md:mb-6">
-            <span className="text-[10px] tracking-[0.4em] uppercase text-orange/80 font-sans font-medium">
+            <span className="text-sm md:text-base tracking-[0.4em] uppercase text-orange font-bold">
               Equipamentos
             </span>
           </div>

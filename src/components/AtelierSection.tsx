@@ -1,30 +1,69 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import BlurText from '@/components/ui/BlurText';
-import boatPink from '@/assets/boat-pink.png';
-import boatCamo from '@/assets/boat-camo.png';
-import boatCarbon from '@/assets/boat-carbon.png';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface ColorOption {
+// Import atelier REAL lifestyle images
+import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
+import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.jpg';
+import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.jpg';
+import atelierColorsPalette from '@/assets/atelier/atelier-colors-palette.jpg';
+
+interface AtelierImage {
   id: string;
-  name: string;
-  image: string;
-  color: string;
+  src: string;
+  alt: string;
 }
 
-const colors: ColorOption[] = [
-  { id: 'pink', name: 'Rosa Audaz', image: boatPink, color: '#d4708f' },
-  { id: 'camo', name: 'Camuflagem', image: boatCamo, color: '#5a6b4a' },
-  { id: 'carbon', name: 'Carbono', image: boatCarbon, color: '#3a4a5e' },
+const atelierImages: AtelierImage[] = [
+  { id: 'paddle', src: atelierLifestylePaddle, alt: 'Lifestyle: remada e personalização' },
+  { id: 'carry', src: atelierLifestyleCarry, alt: 'Lifestyle: transporte do barco' },
+  { id: 'exotic', src: atelierCustomExotic, alt: 'Customização: cores exóticas' },
+  { id: 'palette', src: atelierColorsPalette, alt: 'Paleta de cores e combinações' },
 ];
 
 const AtelierSection = () => {
-  const [selectedColor, setSelectedColor] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  // Autoplay
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % atelierImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goTo = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    if (index < 0) {
+      setCurrentIndex(atelierImages.length - 1);
+    } else if (index >= atelierImages.length) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(index);
+    }
+  };
+
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? -300 : 300,
+      opacity: 0,
+    }),
+  };
 
   return (
     <section className="relative min-h-screen w-full py-20 md:py-48">
       
-      {/* Breathing Glow Effect - Spotlight behind boat */}
+      {/* Breathing Glow Effect - Spotlight behind images */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/2 left-1/2 w-[70%] h-[50%] -translate-x-1/2 -translate-y-1/2"
@@ -79,90 +118,85 @@ const AtelierSection = () => {
         </motion.div>
       </div>
 
-      {/* Boat Display - Centered */}
+      {/* Image Carousel - Real Photos */}
       <div className="relative flex flex-col items-center justify-center px-4 md:px-16">
-        {/* Boat Image with Smooth Transition - Larger on mobile */}
+        {/* Carousel Container */}
         <div 
-          className="relative w-full max-w-4xl aspect-[16/9] flex items-center justify-center"
+          className="relative w-full max-w-4xl aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-2xl"
+          style={{
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.img
-              key={colors[selectedColor].id}
-              src={colors[selectedColor].image}
-              alt={colors[selectedColor].name}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97 }}
+              key={atelierImages[currentIndex].id}
+              src={atelierImages[currentIndex].src}
+              alt={atelierImages[currentIndex].alt}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ 
-                duration: 0.6, 
+                duration: 0.5, 
                 ease: [0.25, 0.46, 0.45, 0.94],
-                opacity: { duration: 0.5 }
               }}
-              className="w-full md:w-[90%] h-auto object-contain"
-              style={{
-                filter: `drop-shadow(0 40px 80px ${colors[selectedColor].color}40)`,
-              }}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ imageOrientation: 'from-image' }}
             />
           </AnimatePresence>
+
+          {/* Gradient overlays for depth */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/50 via-transparent to-transparent" />
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-transparent to-background/20" />
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => goTo(currentIndex - 1)}
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/40 backdrop-blur-sm flex items-center justify-center text-foreground/80 hover:bg-background/60 transition-all z-10"
+            aria-label="Foto anterior"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => goTo(currentIndex + 1)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/40 backdrop-blur-sm flex items-center justify-center text-foreground/80 hover:bg-background/60 transition-all z-10"
+            aria-label="Próxima foto"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
 
-        {/* Color Selector - Simple Dots */}
+        {/* Dots Indicator */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex items-center gap-6 mt-12"
+          className="flex items-center gap-3 mt-8"
         >
-          {colors.map((color, index) => (
+          {atelierImages.map((img, index) => (
             <button
-              key={color.id}
-              onClick={() => setSelectedColor(index)}
-              className="group relative flex flex-col items-center gap-3 transition-all"
-            >
-              {/* Color Dot */}
-              <div
-                className={`w-11 h-11 md:w-8 md:h-8 rounded-full transition-all duration-300 ${
-                  selectedColor === index 
-                    ? 'scale-100 ring-2 ring-foreground ring-offset-2 ring-offset-background' 
-                    : 'scale-90 opacity-60 hover:opacity-100 hover:scale-100'
-                }`}
-                style={{ backgroundColor: color.color }}
-              />
-              
-              {/* Label - Shows on selection */}
-              <span 
-                className={`text-xs tracking-wide transition-all duration-300 ${
-                  selectedColor === index 
-                    ? 'text-foreground opacity-100' 
-                    : 'text-muted-foreground opacity-0 group-hover:opacity-100'
-                }`}
-              >
-                {color.name}
-              </span>
-            </button>
+              key={img.id}
+              onClick={() => goTo(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                currentIndex === index 
+                  ? 'bg-foreground w-6' 
+                  : 'bg-foreground/30 hover:bg-foreground/50'
+              }`}
+              aria-label={`Ir para imagem ${index + 1}`}
+            />
           ))}
         </motion.div>
 
-        {/* Selected Color Name */}
-        <motion.div
+        {/* Caption */}
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mt-8 text-center"
+          className="mt-6 text-sm text-muted-foreground text-center"
         >
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={colors[selectedColor].id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="text-sm text-muted-foreground"
-            >
-              Acabamento <span className="text-foreground">{colors[selectedColor].name}</span>
-            </motion.p>
-          </AnimatePresence>
-        </motion.div>
+          Personalize seu barco com cores e acabamentos exclusivos
+        </motion.p>
       </div>
 
       {/* CTA - Destaque com lista */}

@@ -57,12 +57,12 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
             onClick={() => setMainImage(img)}
             className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden transition-all duration-300 ${
               mainImage === img 
-                ? 'ring-2 ring-orange opacity-100' 
+                ? 'ring-2 ring-foreground opacity-100' 
                 : 'opacity-40 grayscale hover:opacity-70 hover:grayscale-0'
             }`}
             style={{
               border: mainImage === img 
-                ? '2px solid rgba(249, 115, 22, 0.8)' 
+                ? '2px solid rgba(255, 255, 255, 0.8)' 
                 : '2px solid transparent',
             }}
             whileHover={{ scale: 1.05 }}

@@ -286,11 +286,11 @@ const ProductShowcase = () => {
       {/* Progress Bar - Top */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-foreground/5 z-50">
         <motion.div 
-          className="h-full bg-gradient-to-r from-orange/60 via-orange to-orange/60"
+          className="h-full bg-gradient-to-r from-foreground/60 via-foreground to-foreground/60"
           style={{
             scaleX: progress,
             transformOrigin: '0% 50%',
-            boxShadow: '0 0 10px rgba(249, 115, 22, 0.5)',
+            boxShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
           }}
         />
       </div>
@@ -350,7 +350,7 @@ const ProductShowcase = () => {
         className="relative z-20 px-6 md:px-16 pt-12 md:pt-20"
       >
         <div className="mb-2">
-          <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
+          <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/80 font-sans font-medium">
             Performance
           </span>
         </div>
@@ -367,7 +367,7 @@ const ProductShowcase = () => {
               className="display-hero text-foreground"
               style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
             >
-              {currentCategory}<span className="text-orange">.</span>
+              {currentCategory}<span className="text-foreground">.</span>
             </motion.h2>
           </AnimatePresence>
         </div>
@@ -392,7 +392,7 @@ const ProductShowcase = () => {
                 onClick={() => jumpToCategory(cat)}
                 className={`flex-shrink-0 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border ${
                   isActive 
-                    ? 'bg-orange text-white border-orange shadow-[0_0_15px_rgba(249,115,22,0.4)]' 
+                    ? 'bg-foreground text-background border-foreground shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
                     : 'bg-white/5 text-foreground/60 border-white/10 hover:bg-white/10 hover:text-foreground/80'
                 }`}
                 whileTap={{ scale: 0.95 }}

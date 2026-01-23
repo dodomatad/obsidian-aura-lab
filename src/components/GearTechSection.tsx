@@ -182,12 +182,12 @@ const GearTechSection = () => {
                     <div 
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                       style={{
-                        background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(249, 115, 22, 0.08) 0%, transparent 50%)',
+                        background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 50%)',
                       }}
                     />
 
                     {/* Icon - Larger */}
-                    <div className="mb-6 text-orange">
+                    <div className="mb-6 text-foreground">
                       <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
                         {item.icon}
                       </div>

@@ -178,7 +178,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
     description: 'Ideal para nível intermediário e avançado. O Surfski perfeito para Downwind e Competições.',
-    image: dwCover,
+    image: dwDetail1,
     specs: {
       length: '6.20m',
       beam: '42cm',
@@ -194,17 +194,14 @@ export const productsData: Record<string, Product> = {
       'Para atletas experientes',
     ],
     colors: [
-      { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwCover },
+      { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwDetail1 },
       { id: 'carbon', name: 'Stealth Carbon', color: '#1A1A1A', image: boatCarbon },
     ],
-    defaultImage: dwCover,
+    defaultImage: dwDetail1,
     galleryImages: [
-      dwCover,    // Perfil lateral com logo DW SURF SKI
-      dwDetail1,  // Perfil completo azul/verde
-      dwDetail2,  // Vista lateral invertida
+      dwDetail1,  // Perfil completo azul/verde (orientação correta)
       dwDetail3,  // Cockpit frontal
       dwDetail4,  // Cockpit vista superior
-      dwDetail5,  // Detalhe pedais/assento
     ],
   },
   infinity: {

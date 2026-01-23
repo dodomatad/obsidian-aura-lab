@@ -65,27 +65,6 @@ const ProductDetail = () => {
 
   const currentImage = product.colors.find(c => c.id === selectedColor)?.image || product.defaultImage;
 
-  const galleryTransforms = (() => {
-    if (!product.galleryImages?.length) return undefined;
-    if (product.id !== 'dw') return undefined;
-
-    // DW photos: some files come with wrong orientation; fix via CSS transforms.
-    // If any photo still looks off, we can adjust these degrees.
-    const map: Record<string, { rotate?: 0 | 90 | 180 | 270; fit?: 'cover' | 'contain' }> = {};
-    for (const src of product.galleryImages) {
-      if (src.includes('dw-cover')) {
-        map[src] = { rotate: 90, fit: 'contain' };
-      }
-      if (src.includes('dw-detail-2')) {
-        map[src] = { rotate: 180, fit: 'contain' };
-      }
-      if (src.includes('dw-detail-5')) {
-        map[src] = { rotate: 90, fit: 'contain' };
-      }
-    }
-    return Object.keys(map).length ? map : undefined;
-  })();
-
   // Get level color class
   const getLevelColorClass = () => {
     return product.levelColor || 'text-foreground/60';
@@ -324,7 +303,7 @@ const ProductDetail = () => {
                   animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
                   transition={{ duration: 0.6, delay: 0.25 }}
                 >
-                  <ProductMiniGallery images={product.galleryImages} transforms={galleryTransforms} />
+                  <ProductMiniGallery images={product.galleryImages} />
                 </motion.div>
               )}
 

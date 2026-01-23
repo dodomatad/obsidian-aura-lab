@@ -34,6 +34,11 @@ import dwDetail3 from '@/assets/boats/dw/dw-detail-3.jpg';
 import dwDetail4 from '@/assets/boats/dw/dw-detail-4.jpg';
 import dwDetail5 from '@/assets/boats/dw/dw-detail-5.jpg';
 
+// SIOU Gallery Images
+import siouAction1 from '@/assets/boats/siou/siou-action-1.jpg';
+import siouAction2 from '@/assets/boats/siou/siou-action-2.jpg';
+import siouCarrying from '@/assets/boats/siou/siou-carrying.jpg';
+import siouYellowRack from '@/assets/boats/siou/siou-yellow-rack.jpg';
 export interface ColorOption {
   id: string;
   name: string;
@@ -148,7 +153,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 40,
     description: 'Versatilidade total. Ideal para quem busca evolução segura entre o nível iniciante e intermediário.',
-    image: boatSurfski,
+    image: siouAction1,
     specs: {
       length: '6.00m',
       beam: '45cm',
@@ -164,10 +169,16 @@ export const productsData: Record<string, Product> = {
       'Fácil manobra',
     ],
     colors: [
-      { id: 'default', name: 'Branco Classic', color: '#E8E8E8', image: boatSurfski },
-      { id: 'carbon', name: 'Carbono', color: '#2A2A2A', image: boatCarbon },
+      { id: 'default', name: 'Azul Ocean', color: '#4A90D9', image: siouAction1 },
+      { id: 'yellow', name: 'Amarelo Sunrise', color: '#F5A623', image: siouYellowRack },
     ],
-    defaultImage: boatSurfski,
+    defaultImage: siouAction1,
+    galleryImages: [
+      siouAction1,    // 1. Destaque: Atleta remando no mar (barco azul)
+      siouCarrying,   // 2. Contexto: Barco sendo carregado (mostra leveza)
+      siouAction2,    // 3. Ação: Atleta no pier
+      siouYellowRack, // 4. Variação: Modelo amarelo no rack
+    ],
   },
   dw: {
     id: 'dw',

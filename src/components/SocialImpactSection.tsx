@@ -8,6 +8,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 // Import project images
 import kaoraPool from '@/assets/kaora-pool.jpg';
 import kaoraOutubroRosa from '@/assets/kaora-outubro-rosa.jpg';
+import kaoraTeamCanoe from '@/assets/kaora-team-canoe.jpg';
 import sahyUnity from '@/assets/social/sahy-project-unity.jpg';
 import sahyBeach from '@/assets/social/sahy-project-beach.jpg';
 import fabioVoltaIlha from '@/assets/fabio-volta-ilha.jpg';
@@ -38,6 +39,13 @@ const projects = [
     image: kaoraOutubroRosa,
     title: 'Outubro Rosa',
     description: 'Celebrando a força e a resiliência das mulheres através do esporte e da conscientização.',
+    tag: 'Saúde & Vida',
+    link: 'https://www.instagram.com/projeto_kaora',
+  },
+  {
+    image: kaoraTeamCanoe,
+    title: 'Equipe Kaora',
+    description: 'Mulheres guerreiras levantando a canoa juntas — símbolo de união, força e superação.',
     tag: 'Saúde & Vida',
     link: 'https://www.instagram.com/projeto_kaora',
   },

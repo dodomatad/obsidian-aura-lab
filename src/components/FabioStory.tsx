@@ -6,7 +6,7 @@ import fabioPortrait from "@/assets/fabio-paiva-portrait.jpg";
 import logoKaora from "@/assets/logo-kaora.jpg";
 import logoSahyRemando from "@/assets/logo-sahy-remando.jpg";
 import logoCanoaBrasil from "@/assets/logo-canoa-brasil.jpg";
-
+import jornalSantos from "@/assets/jornal-santos-2001.jpg";
 function RevealText({
   children,
   delay = 0,
@@ -196,6 +196,26 @@ export function FabioStory() {
       title: "2000 - A Revolução Havaiana",
       content: (
         <div>
+          {/* Recorte de Jornal - Prova histórica */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-8 rounded-xl overflow-hidden shadow-2xl border border-foreground/10"
+          >
+            <img 
+              src={jornalSantos} 
+              alt="Jornal da Baixada - Primeira competição de canoas havaianas em Santos, 2001" 
+              className="w-full h-auto object-cover"
+            />
+            <div className="bg-foreground/5 px-4 py-3 border-t border-foreground/10">
+              <p className="text-foreground/50 text-xs md:text-sm italic text-center">
+                Jornal da Baixada, Agosto/2001 — A primeira competição de canoas havaianas da América do Sul
+              </p>
+            </div>
+          </motion.div>
+
           <RevealText
             delay={0}
             className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"

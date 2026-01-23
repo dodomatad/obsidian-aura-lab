@@ -125,7 +125,7 @@ const AtelierSection = () => {
       <div className="relative flex flex-col items-center justify-center px-4 md:px-16">
         {/* Carousel Container */}
         <div 
-          className="relative w-full max-w-4xl aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-2xl"
+          className="relative w-full max-w-3xl aspect-[4/3] overflow-hidden rounded-2xl"
           style={{
             border: '1px solid rgba(255, 255, 255, 0.1)',
           }}

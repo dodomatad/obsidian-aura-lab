@@ -122,11 +122,11 @@ const CustomCursor = () => {
         style={{ opacity: 0, willChange: 'transform' }}
       >
         <div
-          className="rounded-full bg-neutral-900"
+          className="rounded-full bg-white"
           style={{
             width: '12px',
             height: '12px',
-            mixBlendMode: 'exclusion',
+            mixBlendMode: 'difference',
             transition: 'width 0.12s ease-out, height 0.12s ease-out',
             willChange: 'width, height',
           }}
@@ -139,9 +139,9 @@ const CustomCursor = () => {
         style={{ opacity: 0, willChange: 'transform' }}
       >
         <div
-          className="w-20 h-20 rounded-full border border-neutral-900/30"
+          className="w-20 h-20 rounded-full border border-white/30"
           style={{
-            mixBlendMode: 'exclusion',
+            mixBlendMode: 'difference',
             opacity: 0,
             transform: 'scale(0.5)',
             transition: 'opacity 0.12s ease-out, transform 0.12s ease-out',

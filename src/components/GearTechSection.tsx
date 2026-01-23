@@ -82,7 +82,7 @@ const GearTechSection = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section ref={sectionRef} className="relative py-28 md:py-40 overflow-hidden">
+    <section ref={sectionRef} className="relative py-12 md:py-40 overflow-hidden">
       
       {/* Background subtle gradient */}
       <div 

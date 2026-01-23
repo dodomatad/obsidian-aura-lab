@@ -1,5 +1,7 @@
 // Central product data for the complete Opium fleet
-import boatPono from '@/assets/boat-pono.png';
+// NOTE: use a cache-busting filename for the real PONO cover photo.
+// Some browsers can keep an older cached version of boat-pono.png.
+import boatPono from '@/assets/boat-pono-photo.png';
 import boatSurfski from '@/assets/boat-surfski.png';
 import boatPink from '@/assets/boat-pink.png';
 import boatCarbon from '@/assets/boat-carbon.png';

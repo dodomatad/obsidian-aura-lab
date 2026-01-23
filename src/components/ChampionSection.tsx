@@ -67,7 +67,7 @@ const ChampionSection = () => {
     <>
       <section ref={sectionRef} className="relative w-full overflow-hidden">
         {/* ===== PARTE 1: Nossos Diferenciais (Dark Luxury) ===== */}
-        <div className="relative py-16 md:py-24 lg:py-32" style={{ backgroundColor: '#050505' }}>
+        <div className="relative py-8 md:py-24 lg:py-32" style={{ backgroundColor: '#050505' }}>
           {/* Subtle texture overlay */}
           <div 
             className="absolute inset-0 pointer-events-none opacity-5"

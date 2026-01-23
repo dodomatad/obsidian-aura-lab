@@ -32,6 +32,7 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
             src={mainImage} 
             alt="Detalhe do barco" 
             className="w-full h-full object-cover"
+            style={{ imageOrientation: 'from-image' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -71,6 +72,7 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
               src={img} 
               alt={`Miniatura ${idx + 1}`} 
               className="w-full h-full object-cover"
+              style={{ imageOrientation: 'from-image' }}
             />
           </motion.button>
         ))}

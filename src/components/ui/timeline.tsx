@@ -28,6 +28,13 @@ const TimelineItem = ({
     margin: "-30% 0px -30% 0px",
     once: false 
   });
+
+  // Fail-safe: never keep the item hidden if IntersectionObserver fails.
+  // We allow the "reveal" translation to settle only after the first in-view.
+  const [hasRevealed, setHasRevealed] = useState(false);
+  useEffect(() => {
+    if (isInView && !hasRevealed) setHasRevealed(true);
+  }, [isInView, hasRevealed]);
   
   // Calculate when this item's dot should glow based on scroll progress
   const itemProgress = index / (totalItems - 1);
@@ -40,9 +47,8 @@ const TimelineItem = ({
   return (
     <motion.div
       ref={itemRef}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
+      initial={{ opacity: 1, y: 28 }}
+      animate={{ opacity: 1, y: hasRevealed ? 0 : 28 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="flex justify-start pt-12 md:pt-20 md:gap-10"
     >

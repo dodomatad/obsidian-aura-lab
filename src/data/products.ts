@@ -387,12 +387,11 @@ export const productsData: Record<string, Product> = {
     defaultImage: hakaCover,
     galleryImages: [
       hakaCover,    // 1. Capa: HAKA na água com Ama amarelo (destaque)
-      hakaProfile,  // 2. Perfil lateral
-      hakaAction,   // 3. Ação: Atleta remando (escala e contexto)
-      hakaPov,      // 4. Imersão: POV do cockpit olhando para frente
-      hakaCockpit,  // 5. Cockpit: Detalhe do assento na água
-      hakaBow,      // 6. Detalhes: Close no bico com logo Opium
-      hakaWater,    // 7. Extra: Canoa na água vista frontal
+      hakaAction,   // 2. Ação: Atleta remando (escala e contexto)
+      hakaPov,      // 3. Imersão: POV do cockpit olhando para frente
+      hakaCockpit,  // 4. Cockpit: Detalhe do assento na água
+      hakaBow,      // 5. Detalhes: Close no bico com logo Opium
+      hakaWater,    // 6. Extra: Canoa na água vista frontal
     ],
   },
   'huna-oc2': {

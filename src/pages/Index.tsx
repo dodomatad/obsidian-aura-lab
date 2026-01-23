@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
 import GearTechSection from '@/components/GearTechSection';
+import ColorStudio from '@/components/ColorStudio';
 
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
@@ -210,6 +211,11 @@ const Index = () => {
         {/* Gear & Tech Section - Accessories with infinite scroll */}
         <div className="pt-12 md:pt-20">
           <GearTechSection />
+        </div>
+
+        {/* Color Studio Section - Custom Paint Shop */}
+        <div id="colorstudio" className="pt-12 md:pt-20">
+          <ColorStudio />
         </div>
 
         {/* Champion Journey Section - Lazy loaded for performance */}

@@ -241,8 +241,8 @@ const Index = () => {
         <footer className="w-full bg-white px-6 md:px-16 py-16 md:py-20">
           <div className="max-w-7xl mx-auto">
             
-            {/* Main Footer Grid - 3 Colunas */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+            {/* Main Footer Grid - 4 Colunas */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10">
               
               {/* COLUNA 1 - Logo, Descrição e Redes */}
               <div>
@@ -310,7 +310,35 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* COLUNA 3 - Mapa de Localização */}
+              {/* COLUNA 3 - Horários */}
+              <div className="space-y-6">
+                {/* Horário de Garagem */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Horário de Garagem</h4>
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      Segunda-Feira: 8:00 às 14:00<br />
+                      Terça a Sábado: 7:00 às 19:30<br />
+                      Domingo e Feriado: 8:00 às 18:30
+                    </p>
+                  </div>
+                </div>
+
+                {/* Horário de Secretaria */}
+                <div className="flex items-start gap-3">
+                  <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-base font-semibold text-neutral-900 mb-1">Horário de Secretaria</h4>
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      Segunda, Sábado e Domingo: 8:00 às 14:00<br />
+                      Terça a Sexta: 8:00 às 19:00
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* COLUNA 4 - Mapa de Localização */}
               <LocationMap />
             </div>
 

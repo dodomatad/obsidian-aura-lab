@@ -341,9 +341,15 @@ const ProductDetail = () => {
                 animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
                 transition={{ duration: 0.7, delay: 0.35 }}
               >
-                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-6">
+                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-4">
                   Cores Disponíveis
                 </h2>
+                
+                {/* Info text */}
+                <p className="text-sm text-foreground/60 mb-6 leading-relaxed">
+                  Você pode escolher a cor e o desenho que deseja para o seu barco. 
+                  <span className="text-foreground/80"> Personalize do seu jeito.</span>
+                </p>
                 
                 <div className="flex gap-4">
                   {product.colors.map((color) => (

@@ -73,21 +73,21 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
 
           {/* Logo container */}
           <div className="relative flex flex-col items-center">
-            {/* Reveal mask animation */}
-            <div className="overflow-hidden px-4">
+            {/* Logo text - no overflow hidden to prevent clipping */}
+            <div className="px-8 w-full flex justify-center">
               <motion.h1
-                initial={{ y: 100, opacity: 0 }}
+                initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ 
                   duration: 1.2, 
                   delay: 0.3,
                   ease: [0.16, 1, 0.3, 1] 
                 }}
-                className="font-display font-bold text-foreground tracking-tighter text-center whitespace-nowrap"
+                className="font-display font-bold text-foreground text-center"
                 style={{
-                  fontSize: 'clamp(2.5rem, 12vw, 8rem)',
-                  lineHeight: 1,
-                  letterSpacing: '-0.02em',
+                  fontSize: 'clamp(3rem, 15vw, 8rem)',
+                  lineHeight: 1.1,
+                  letterSpacing: '0.05em',
                 }}
               >
                 OPIUM

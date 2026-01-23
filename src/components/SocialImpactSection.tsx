@@ -7,12 +7,26 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 // Import project images
 import kaoraPool from '@/assets/kaora-pool.jpg';
-import kaoraBeach from '@/assets/kaora-beach.jpg';
-import sahyInstruction from '@/assets/sahy-instruction.jpg';
-import fabioVoltaIlha from '@/assets/fabio-volta-ilha.jpg';
 import kaoraOutubroRosa from '@/assets/kaora-outubro-rosa.jpg';
+import sahyUnity from '@/assets/social/sahy-project-unity.jpg';
+import sahyBeach from '@/assets/social/sahy-project-beach.jpg';
+import fabioVoltaIlha from '@/assets/fabio-volta-ilha.jpg';
 
 const projects = [
+  {
+    image: sahyUnity,
+    title: 'Projeto Sahy Remando',
+    description: 'Inclusão social através da canoagem. Formando cidadãos e futuros atletas com valores e disciplina.',
+    tag: 'Social',
+    link: 'https://www.instagram.com/projetosahyremando',
+  },
+  {
+    image: sahyBeach,
+    title: 'Sahy Remando na Praia',
+    description: 'Jovens reunidos na praia, aprendendo técnicas de remo e construindo amizades para a vida.',
+    tag: 'Social',
+    link: 'https://www.instagram.com/projetosahyremando',
+  },
   {
     image: kaoraPool,
     title: 'Projeto Kaora',
@@ -28,25 +42,11 @@ const projects = [
     link: 'https://www.instagram.com/projeto_kaora',
   },
   {
-    image: sahyInstruction,
-    title: 'Sahy Remando',
-    description: 'Formando cidadãos e futuros atletas. Educação através do remo.',
-    tag: 'Social',
-    link: 'https://www.instagram.com/projetosahyremando',
-  },
-  {
     image: fabioVoltaIlha,
     title: 'Eventos & Comunidade',
     description: 'Fábio Paiva liderando as maiores provas de canoagem do Brasil, como a Volta à Ilha.',
     tag: 'Comunidade',
     link: 'https://www.instagram.com/voltailhasantoamaro',
-  },
-  {
-    image: kaoraBeach,
-    title: 'União e Superação',
-    description: 'Equipe Kaora reunida na praia, celebrando conquistas e espalhando esperança.',
-    tag: 'Comunidade',
-    link: 'https://www.instagram.com/projeto_kaora',
   },
 ];
 

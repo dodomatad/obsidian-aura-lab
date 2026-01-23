@@ -227,7 +227,7 @@ const ChampionSection = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="mb-6 md:mb-8"
               >
-                <span className="text-base md:text-lg tracking-[0.25em] uppercase text-orange-500 font-sans font-bold">
+                <span className="text-xl md:text-2xl tracking-[0.2em] uppercase text-orange-500 font-sans font-bold">
                   A Origem
                 </span>
               </motion.div>

@@ -7,6 +7,7 @@ import logoKaora from "@/assets/logo-kaora.jpg";
 import logoSahyRemando from "@/assets/logo-sahy-remando.jpg";
 import logoCanoaBrasil from "@/assets/logo-canoa-brasil.jpg";
 import jornalSantos from "@/assets/jornal-santos-2001.jpg";
+import tochaOlimpica from "@/assets/fabio-tocha-olimpica.jpg";
 function RevealText({
   children,
   delay = 0,
@@ -252,6 +253,21 @@ export function FabioStory() {
       title: "Legado & Reconhecimento",
       content: (
         <div>
+          {/* Foto da Tocha Olímpica */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-8 rounded-xl overflow-hidden shadow-2xl border border-foreground/10"
+          >
+            <img 
+              src={tochaOlimpica} 
+              alt="Fábio Paiva carregando a Tocha Olímpica com a comunidade do remo" 
+              className="w-full h-auto object-cover"
+            />
+          </motion.div>
+
           {/* Logo Canoa Brasil em destaque */}
           <div className="flex flex-col md:flex-row gap-6 items-center mb-8">
             <div className="bg-white rounded-xl p-4 shadow-lg flex-shrink-0">

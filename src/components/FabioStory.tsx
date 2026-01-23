@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Timeline, ParallaxImage } from "@/components/ui/timeline";
+import { Timeline } from "@/components/ui/timeline";
 import { Trophy, Medal, Users, Anchor, Award, Hammer, MapPin, Briefcase, Star } from "lucide-react";
 import fabioPortrait from "@/assets/fabio-paiva-portrait.jpg";
 import logoKaora from "@/assets/logo-kaora.jpg";
@@ -253,7 +253,7 @@ export function FabioStory() {
       title: "Legado & Reconhecimento",
       content: (
         <div>
-          {/* Foto da Tocha Olímpica com Parallax */}
+          {/* Foto da Tocha Olímpica */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -261,11 +261,10 @@ export function FabioStory() {
             transition={{ duration: 0.6 }}
             className="mb-8 rounded-xl overflow-hidden shadow-2xl border border-foreground/10"
           >
-            <ParallaxImage 
+            <img 
               src={tochaOlimpica} 
               alt="Fábio Paiva carregando a Tocha Olímpica com a comunidade do remo" 
-              containerClassName="max-h-[300px]"
-              className="object-center"
+              className="w-full max-h-[300px] object-cover object-center"
             />
             <div className="bg-foreground/5 px-4 py-3 border-t border-foreground/10">
               <p className="text-foreground/50 text-xs md:text-sm italic text-center">

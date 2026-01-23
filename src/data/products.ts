@@ -50,6 +50,12 @@ import moanaLogo from '@/assets/boats/moana/moana-logo.jpg';
 import moanaSeat from '@/assets/boats/moana/moana-seat.jpg';
 import moanaDuo from '@/assets/boats/moana/moana-duo.jpg';
 
+// HUNA OC2 Gallery Images
+import hunaAma from '@/assets/boats/huna/huna-ama.jpg';
+import hunaLogo from '@/assets/boats/huna/huna-logo.jpg';
+import hunaCockpit from '@/assets/boats/huna/huna-cockpit.jpg';
+import hunaBow from '@/assets/boats/huna/huna-bow.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -380,7 +386,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
     description: 'Canoa Dupla. Diversão garantida com estabilidade e velocidade.',
-    image: boatSurfski,
+    image: hunaAma,
     specs: {
       length: '7.00m',
       beam: '45cm',
@@ -396,10 +402,16 @@ export const productsData: Record<string, Product> = {
       'Fácil entrada e saída',
     ],
     colors: [
-      { id: 'default', name: 'Branco Explorer', color: '#E8E8E8', image: boatSurfski },
+      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: hunaAma },
       { id: 'camo', name: 'Ocean Camo', color: '#4A6741', image: boatCamo },
     ],
-    defaultImage: boatSurfski,
+    defaultImage: hunaAma,
+    galleryImages: [
+      hunaAma,      // 1. Destaque: Ama (flutuador vermelho) conectado
+      hunaLogo,     // 2. Identidade: Logo HUNA em close
+      hunaCockpit,  // 3. Interior: Sistema de pedais/leme
+      hunaBow,      // 4. Detalhe: Bico com logo OPIUM
+    ],
   },
 };
 

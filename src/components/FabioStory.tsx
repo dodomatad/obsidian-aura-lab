@@ -208,7 +208,7 @@ export function FabioStory() {
             <img 
               src={jornalSantos} 
               alt="Jornal da Baixada - Primeira competição de canoas havaianas em Santos, 2001" 
-              className="w-full max-h-[300px] object-cover object-top"
+              className="w-full h-auto"
             />
             <div className="bg-foreground/5 px-4 py-3 border-t border-foreground/10">
               <p className="text-foreground/50 text-xs md:text-sm italic text-center">

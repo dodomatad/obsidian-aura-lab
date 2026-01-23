@@ -1,24 +1,27 @@
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Palette } from 'lucide-react';
 
-// Import atelier lifestyle images
+// Import atelier lifestyle images (FIXO: independente do modelo selecionado)
+import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
+import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.jpg';
+import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.jpg';
 import atelierColorsPalette from '@/assets/atelier/atelier-colors-palette.jpg';
-import atelierLifestyleClub from '@/assets/atelier/atelier-lifestyle-club.jpg';
-import atelierCustomBows from '@/assets/atelier/atelier-custom-bows.jpg';
-import atelierLifestyleField from '@/assets/atelier/atelier-lifestyle-field.jpg';
 
 const atelierImages = [
-  { src: atelierColorsPalette, alt: 'Paleta de cores vibrantes' },
-  { src: atelierLifestyleClub, alt: 'Clube náutico com barcos personalizados' },
-  { src: atelierCustomBows, alt: 'Bicos personalizados em cores diversas' },
-  { src: atelierLifestyleField, alt: 'Barco personalizado no gramado' },
+  { src: atelierLifestylePaddle, alt: 'Lifestyle: remada e personalização' },
+  { src: atelierLifestyleCarry, alt: 'Lifestyle: transporte do barco personalizado' },
+  { src: atelierCustomExotic, alt: 'Customização: acabamento e cores exóticas' },
+  { src: atelierColorsPalette, alt: 'Ateliê: paleta de cores e combinações' },
 ];
 
 const AtelierCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  const slideBasis = '85%';
+  const slideGap = 12; // px
+
+  const slides = useMemo(() => atelierImages, []);
 
   const goTo = (index: number) => {
     if (index < 0) {
@@ -30,15 +33,40 @@ const AtelierCarousel = () => {
     }
   };
 
-  const handleDragEnd = (_: any, info: { offset: { x: number } }) => {
-    const threshold = 50;
-    if (info.offset.x > threshold) {
-      goTo(currentIndex - 1);
-    } else if (info.offset.x < -threshold) {
-      goTo(currentIndex + 1);
-    }
-    setIsDragging(false);
+  const scrollToIndex = (index: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const slide = el.querySelector<HTMLElement>(`[data-atelier-slide="${index}"]`);
+    if (!slide) return;
+
+    el.scrollTo({
+      left: slide.offsetLeft,
+      behavior: 'smooth',
+    });
   };
+
+  useEffect(() => {
+    scrollToIndex(currentIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex]);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const onScroll = () => {
+      // Estimativa estável: usa o primeiro slide como referência
+      const first = el.querySelector<HTMLElement>('[data-atelier-slide="0"]');
+      if (!first) return;
+      const slideWidth = first.getBoundingClientRect().width + slideGap;
+      const idx = Math.round(el.scrollLeft / slideWidth);
+      if (idx !== currentIndex) setCurrentIndex(Math.max(0, Math.min(slides.length - 1, idx)));
+    };
+
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [currentIndex, slides.length]);
 
   return (
     <div className="w-full">
@@ -51,63 +79,66 @@ const AtelierCarousel = () => {
       </div>
 
       {/* Carousel Container */}
-      <div 
-        ref={containerRef}
-        className="relative w-full overflow-hidden rounded-xl"
-        style={{
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-        }}
-      >
-        {/* Main Image Area - Shows 1.25 images to indicate more */}
-        <div className="relative aspect-[4/3] w-full">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={currentIndex}
-              src={atelierImages[currentIndex].src}
-              alt={atelierImages[currentIndex].alt}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ imageOrientation: 'from-image' }}
-              initial={{ opacity: 0, x: isDragging ? 0 : 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: isDragging ? 0 : -50 }}
-              transition={{ duration: 0.3 }}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragStart={() => setIsDragging(true)}
-              onDragEnd={handleDragEnd}
-            />
-          </AnimatePresence>
-
-          {/* Gradient overlays for depth */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-transparent to-black/20" />
+      <div className="relative w-full rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+        {/* Horizontal slider (mostra ~1.15 slides) */}
+        <div className="relative">
+          <div
+            ref={scrollerRef}
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth"
+            style={{
+              gap: `${slideGap}px`,
+              padding: '0px 0px',
+              scrollbarWidth: 'none',
+            }}
+          >
+            {slides.map((img, idx) => (
+              <div
+                key={idx}
+                data-atelier-slide={idx}
+                className="shrink-0 snap-start"
+                style={{ flexBasis: slideBasis }}
+              >
+                <div className="relative aspect-[4/3] w-full">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ imageOrientation: 'from-image' }}
+                    loading="lazy"
+                  />
+                  {/* Depth overlays */}
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-transparent to-background/30" />
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Navigation Arrows */}
           <button
             onClick={() => goTo(currentIndex - 1)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-foreground/80 hover:bg-black/60 transition-all z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/40 backdrop-blur-sm flex items-center justify-center text-foreground/80 hover:bg-background/60 transition-all z-10"
             aria-label="Foto anterior"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={() => goTo(currentIndex + 1)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-foreground/80 hover:bg-black/60 transition-all z-10"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/40 backdrop-blur-sm flex items-center justify-center text-foreground/80 hover:bg-background/60 transition-all z-10"
             aria-label="Próxima foto"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
 
           {/* Swipe hint */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-xs text-foreground/50 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full pointer-events-none">
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-xs text-foreground/50 bg-background/30 backdrop-blur-sm px-3 py-1 rounded-full pointer-events-none">
             ← Deslize →
           </div>
         </div>
 
         {/* Dots Indicator */}
-        <div className="flex justify-center gap-2 py-3 bg-black/20">
-          {atelierImages.map((_, idx) => (
+        <div className="flex justify-center gap-2 py-3 bg-background/20">
+          {slides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}

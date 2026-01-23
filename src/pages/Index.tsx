@@ -198,22 +198,22 @@ const Index = () => {
         {/* ============================================ */}
         
         {/* Product Showcase - Editorial Layout with Scroll Snap */}
-        <div id="modelos" className="pt-16 md:pt-24">
+        <div id="modelos" className="pt-8 md:pt-12">
           <ProductShowcase />
         </div>
 
         {/* Atelier Section - Color Selector */}
-        <div id="atelier" className="pt-12 md:pt-20">
+        <div id="atelier" className="pt-6 md:pt-10">
           <AtelierSection />
         </div>
 
         {/* Gear & Tech Section - Accessories with infinite scroll */}
-        <div className="pt-12 md:pt-20">
+        <div className="pt-6 md:pt-10">
           <GearTechSection />
         </div>
 
         {/* Champion Journey Section - Lazy loaded for performance */}
-        <div id="champion" className="pt-12 md:pt-20">
+        <div id="champion" className="pt-6 md:pt-10">
           <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center">
               <div className="w-12 h-12 border-2 border-orange/30 border-t-orange rounded-full animate-spin" />
@@ -224,7 +224,7 @@ const Index = () => {
         </div>
 
         {/* Social Impact Section - Projects & Initiatives */}
-        <div className="pt-12 md:pt-20">
+        <div className="pt-6 md:pt-10">
           <Suspense fallback={
             <div className="min-h-[400px] flex items-center justify-center">
               <div className="w-12 h-12 border-2 border-orange/30 border-t-orange rounded-full animate-spin" />

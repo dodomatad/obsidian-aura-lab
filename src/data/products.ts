@@ -80,6 +80,34 @@ export interface ProductSpecs {
   material?: string;
 }
 
+// New interface for technical profile data
+export interface TechProfile {
+  // Rider profile
+  idealFor: string[]; // e.g., ["Iniciantes", "Intermediários"]
+  notRecommendedFor?: string[]; // e.g., ["Competição de elite"]
+  heightRecommendation?: string; // e.g., "Até 1,85m" or "Todos os tamanhos"
+  
+  // Technical characteristics
+  stability: 'very-high' | 'high' | 'medium' | 'low';
+  speed: 'low' | 'medium' | 'high' | 'very-high';
+  maneuverability: 'low' | 'medium' | 'high' | 'very-high';
+  comfort: 'medium' | 'high' | 'very-high';
+  cargoCapacity?: 'low' | 'medium' | 'high';
+  boardingEase?: 'easy' | 'medium' | 'hard';
+  
+  // Use cases
+  bestFor: string[]; // e.g., ["Travessias", "Treinos diários", "Downwind"]
+  conditions: string[]; // e.g., ["Mar calmo", "Mar agitado", "Represa"]
+  
+  // Key differentials
+  highlights: string[];
+  
+  // Comparison notes
+  similarTo?: string; // e.g., "Comparável ao V10 da EPIC"
+  comparedToFleet?: string; // Position in fleet hierarchy
+  notRecommendedReason?: string; // Why not recommended for certain uses
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -95,6 +123,7 @@ export interface Product {
   colors: ColorOption[];
   defaultImage: string;
   galleryImages?: string[]; // Optional product photo gallery
+  techProfile: TechProfile; // New technical profile data
 }
 
 // Complete fleet data
@@ -139,55 +168,35 @@ export const productsData: Record<string, Product> = {
       ponoDetail5,
       ponoDetail6,
     ],
-  },
-  moana: {
-    id: 'moana',
-    name: 'MOANA',
-    tagline: 'Conquiste o Oceano',
-    category: 'Surfski Individual',
-    level: 'Fácil a Intermediário',
-    levelColor: 'text-emerald-400',
-    difficultyLevel: 30,
-    description: 'Ideal para iniciantes e intermediários, mas com performance que atende o nível avançado.',
-    image: moanaCover,
-    specs: {
-      length: '6.40m',
-      beam: '43cm',
-      weight: '12kg',
-      capacity: '115kg',
-      material: 'Fibra de Vidro + Carbono',
+    techProfile: {
+      idealFor: ['Iniciantes', 'Intermediários', 'Avançados que buscam conforto'],
+      heightRecommendation: 'Todos os tamanhos',
+      stability: 'very-high',
+      speed: 'medium',
+      maneuverability: 'medium',
+      comfort: 'very-high',
+      cargoCapacity: 'medium',
+      boardingEase: 'easy',
+      bestFor: ['Aprendizado', 'Treinos diários', 'Travessias', 'Mar agitado'],
+      conditions: ['Mar calmo', 'Mar agitado', 'Represa', 'Qualquer condição'],
+      highlights: [
+        'O mais estável da frota',
+        'Divisor de águas: combina estabilidade com velocidade',
+        'Ângulo de ataque otimizado (assento mais alto)',
+        'Velocidade próxima do SIOU e MOANA, porém muito mais estável',
+      ],
+      comparedToFleet: 'O barco mais estável da linha. Posição #1 em estabilidade.',
     },
-    features: [
-      'Alta estabilidade primária',
-      'Cockpit espaçoso e confortável',
-      'Compartimentos de carga',
-      'Ideal para travessias',
-      'Construção durável',
-    ],
-    colors: [
-      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: moanaCover },
-      { id: 'camo', name: 'Camuflagem', color: '#4A6741', image: boatCamo },
-    ],
-    defaultImage: moanaCover,
-    galleryImages: [
-      moanaCover,    // 1. Capa: Dois barcos na praia (destaque)
-      moanaProfile,  // 2. Perfil lateral completo
-      moanaAngle,    // 3. Barco inteiro em ângulo diagonal
-      moanaCockpit,  // 4. Vista superior do cockpit
-      moanaLogo,     // 5. Detalhe do logo MOANA
-      moanaSeat,     // 6. Vista superior do assento/bico
-      moanaDuo,      // 7. Dois barcos variação
-    ],
   },
   siou: {
     id: 'siou',
     name: 'SIOU',
-    tagline: 'Versatilidade Total',
+    tagline: 'O Mais Manobrável',
     category: 'Surfski Individual',
     level: 'Fácil a Intermediário',
     levelColor: 'text-emerald-400',
-    difficultyLevel: 40,
-    description: 'Versatilidade total. Ideal para quem busca evolução segura entre o nível iniciante e intermediário.',
+    difficultyLevel: 25,
+    description: 'O barco mais manobrável da frota. Ideal para costeiras e quem busca controle total em qualquer situação.',
     image: siouCover,
     specs: {
       length: '6.00m',
@@ -198,9 +207,9 @@ export const productsData: Record<string, Product> = {
     },
     features: [
       'Design versátil para evolução',
-      'Estabilidade superior',
+      'Manobrabilidade incomparável',
       'Cockpit confortável',
-      'Ideal para aprendizado',
+      'Ideal para costeiras',
       'Fácil manobra',
     ],
     colors: [
@@ -209,22 +218,103 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: siouCover,
     galleryImages: [
-      siouCover,      // 1. Capa: Atleta remando close-up
-      siouAction1,    // 2. Ação: Atleta remando no mar
-      siouCarrying,   // 3. Contexto: Barco sendo carregado
-      siouAction2,    // 4. Ação: Atleta no pier
-      siouYellowRack, // 5. Variação: Modelo amarelo no rack
+      siouCover,
+      siouAction1,
+      siouCarrying,
+      siouAction2,
+      siouYellowRack,
     ],
+    techProfile: {
+      idealFor: ['Iniciantes', 'Intermediários', 'Amantes de costeira'],
+      heightRecommendation: 'Todos os tamanhos',
+      stability: 'high',
+      speed: 'medium',
+      maneuverability: 'very-high',
+      comfort: 'high',
+      cargoCapacity: 'high',
+      boardingEase: 'hard',
+      bestFor: ['Costeiras', 'Travessias com carga', 'Mar de vento', 'Exploração'],
+      conditions: ['Mar calmo', 'Mar agitado', 'Downwind', 'Upwind'],
+      highlights: [
+        'Barco mais manobrável da frota',
+        'Giro de 360° em raio muito pequeno',
+        'Mais alto = melhor borda livre para carregar carga',
+        'Ideal para "lamber pedras" em costeiras',
+        'Fica mais estável com carga (centro de gravidade mais baixo)',
+      ],
+      comparedToFleet: 'Mais estável que MOANA. Velocidade similar ao PONO. Posição #2 em estabilidade.',
+    },
+  },
+  moana: {
+    id: 'moana',
+    name: 'MOANA',
+    tagline: 'Baixo, Rápido e Prazeroso',
+    category: 'Surfski Individual',
+    level: 'Fácil a Intermediário',
+    levelColor: 'text-emerald-400',
+    difficultyLevel: 40,
+    description: 'O barco mais baixo e mais gostoso de remar. Fácil de embarcar, encaixa perfeitamente nas ondas do mar brasileiro.',
+    image: moanaCover,
+    specs: {
+      length: '6.40m',
+      beam: '43cm',
+      weight: '12kg',
+      capacity: '115kg',
+      material: 'Fibra de Vidro + Carbono',
+    },
+    features: [
+      'O mais baixo da frota (fácil de carregar)',
+      'Cockpit espaçoso até 1,85m',
+      'Encaixa muito bem nas ondas',
+      'Ideal para downwind brasileiro',
+      'Construção durável',
+    ],
+    colors: [
+      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: moanaCover },
+      { id: 'camo', name: 'Camuflagem', color: '#4A6741', image: boatCamo },
+    ],
+    defaultImage: moanaCover,
+    galleryImages: [
+      moanaCover,
+      moanaProfile,
+      moanaAngle,
+      moanaCockpit,
+      moanaLogo,
+      moanaSeat,
+      moanaDuo,
+    ],
+    techProfile: {
+      idealFor: ['Iniciantes', 'Intermediários', 'Pessoas até 1,85m'],
+      notRecommendedFor: ['Travessias com muita carga'],
+      heightRecommendation: 'Até 1,85m (cabine confortável)',
+      stability: 'high',
+      speed: 'high',
+      maneuverability: 'high',
+      comfort: 'very-high',
+      cargoCapacity: 'low',
+      boardingEase: 'easy',
+      bestFor: ['Downwind', 'Ondas curtas', 'Treinos de prazer', 'Mar de vento'],
+      conditions: ['Mar agitado', 'Downwind', 'Ondas do Brasil'],
+      highlights: [
+        'O mais baixo = mais fácil de carregar debaixo do braço',
+        'O mais gostoso de remar da frota',
+        'Barco mais fácil de embarcar (baixo)',
+        'Encaixa muito facilmente nas ondas',
+        'Mais rápido que PONO e SIOU',
+      ],
+      notRecommendedReason: 'Por ser baixo, não é ideal para travessias com carga (água entra na cabine)',
+      comparedToFleet: 'Mais instável que PONO e SIOU, porém mais rápido. Posição #3 em estabilidade.',
+    },
   },
   dw: {
     id: 'dw',
     name: 'DW',
-    tagline: 'Mestre das Ondas',
+    tagline: 'Alto Desempenho Acessível',
     category: 'Surfski Individual',
     level: 'Intermediário a Avançado',
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
-    description: 'Ideal para nível intermediário e avançado. O Surfski perfeito para Downwind e Competições.',
+    description: 'Surfski de alto desempenho para quem quer velocidade sem sofrer. Similar ao V10 da EPIC.',
     image: dwDetail1,
     specs: {
       length: '6.20m',
@@ -238,7 +328,7 @@ export const productsData: Record<string, Product> = {
       'Estabilidade em condições extremas',
       'Aceleração rápida',
       'Controle preciso de leme',
-      'Para atletas experientes',
+      'Barco mais longo = mais velocidade',
     ],
     colors: [
       { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwDetail1 },
@@ -246,20 +336,41 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: dwDetail1,
     galleryImages: [
-      dwDetail1,  // Perfil completo azul/verde (OK)
-      dwDetail3,  // Cockpit frontal (OK)
-      dwDetail4,  // Cockpit vista superior (OK)
+      dwDetail1,
+      dwDetail3,
+      dwDetail4,
     ],
+    techProfile: {
+      idealFor: ['Intermediários experientes', 'Avançados', 'Competidores'],
+      notRecommendedFor: ['Iniciantes', 'Quem nunca remou'],
+      heightRecommendation: 'Todos os tamanhos',
+      stability: 'medium',
+      speed: 'high',
+      maneuverability: 'medium',
+      comfort: 'high',
+      boardingEase: 'medium',
+      bestFor: ['Downwind', 'Competições regionais', 'Treino de velocidade'],
+      conditions: ['Mar agitado', 'Downwind', 'Competições'],
+      highlights: [
+        'Alto desempenho acessível',
+        'Similar ao V10 da EPIC',
+        'Fácil de adaptar para intermediários',
+        'Velocidade sem sofrimento',
+        'Barco de entrada para competição',
+      ],
+      similarTo: 'V10 da EPIC',
+      comparedToFleet: 'Categoria de alto desempenho. Requer habilidade. Posição #4 em estabilidade.',
+    },
   },
   infinity: {
     id: 'infinity',
     name: 'INFINITY',
-    tagline: 'Velocidade Pura',
+    tagline: 'O Mais Rápido do Brasil',
     category: 'Surfski Individual',
     level: 'Avançado (Elite)',
     levelColor: 'text-red-500',
     difficultyLevel: 95, // Mais Veloz/Instável
-    description: 'O Surfski mais rápido do Brasil. Para atletas que buscam velocidade pura, perfeito para competições de Alta Performance.',
+    description: 'Comprovadamente o surfski mais rápido do mercado brasileiro. Fred Longhin, na casa dos 50 anos, ganhou o campeonato brasileiro de faixa azul usando o Infinity.',
     image: boatInfinity,
     specs: {
       length: '6.45m',
@@ -282,27 +393,47 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: boatInfinity,
     galleryImages: [
-      infinityDetail1, // Perfil lateral completo
-      infinityDetail2, // Cockpit (assento)
-      infinityDetail3, // Vista bico/frente
-      infinityDetail4, // Lateral popa
-      infinityDetail5, // Detalhe bico com logo
-      infinityDetail6, // Lateral com cockpit
-      infinityDetail7, // Deck frontal com cordas
-      infinityDetail8, // Lateral com logo INFINITY
+      infinityDetail1,
+      infinityDetail2,
+      infinityDetail3,
+      infinityDetail4,
+      infinityDetail5,
+      infinityDetail6,
+      infinityDetail7,
+      infinityDetail8,
     ],
+    techProfile: {
+      idealFor: ['Atletas de elite', 'Competidores profissionais', 'Quem busca velocidade pura'],
+      notRecommendedFor: ['Iniciantes', 'Intermediários', 'Quem busca estabilidade'],
+      heightRecommendation: 'Atletas treinados (altura sentada é mais importante que altura em pé)',
+      stability: 'low',
+      speed: 'very-high',
+      maneuverability: 'medium',
+      comfort: 'medium',
+      boardingEase: 'hard',
+      bestFor: ['Competições de elite', 'Recordes', 'Downwind profissional'],
+      conditions: ['Competições', 'Atletas experientes', 'Alta performance'],
+      highlights: [
+        'O surfski mais rápido do Brasil',
+        'Comprovadamente mais rápido internacionalmente',
+        'Fred Longhin (50+ anos) ganhou campeonato brasileiro com ele',
+        'Para quem busca alto desempenho sem igual',
+        'O mais instável = o mais rápido',
+      ],
+      comparedToFleet: 'O barco mais rápido e mais instável. Posição #5 (último) em estabilidade, #1 em velocidade.',
+    },
   },
 
   // --- SURFSKI DUPLO ---
   azimut: {
     id: 'azimut',
     name: 'AZIMUT',
-    tagline: 'Duplo Estável',
+    tagline: 'O Duplo Mais Divertido',
     category: 'Surfski Duplo',
     level: 'Fácil (Duplo)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 20,
-    description: 'Muito estável, leve e veloz. Atende todos os públicos e navega com segurança em qualquer condição de mar.',
+    description: 'O barco "feliz". Surfa, enfrenta qualquer mar, diverte iniciantes e avançados. Relação velocidade-estabilidade-conforto incomparável.',
     image: boatSurfski,
     specs: {
       length: '7.40m',
@@ -312,10 +443,10 @@ export const productsData: Record<string, Product> = {
       material: 'Carbono Pré-Preg',
     },
     features: [
-      'Design hidrodinâmico otimizado',
-      'Cockpit de competição duplo',
-      'Sistema de leme responsivo',
-      'Construção ultraleve',
+      'O duplo mais divertido do mercado',
+      'Surfa ondas com facilidade',
+      'Não tem medo de mar nenhum',
+      'Funciona para todos os níveis',
       'Acabamento premium',
     ],
     colors: [
@@ -323,16 +454,36 @@ export const productsData: Record<string, Product> = {
       { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: boatSurfski,
+    techProfile: {
+      idealFor: ['Iniciantes', 'Intermediários', 'Avançados', 'Casais', 'Amigos'],
+      notRecommendedFor: ['Competição de alto nível'],
+      heightRecommendation: 'Todos os tamanhos (duplo ajustável)',
+      stability: 'very-high',
+      speed: 'high',
+      maneuverability: 'high',
+      comfort: 'very-high',
+      boardingEase: 'easy',
+      bestFor: ['Diversão', 'Surf', 'Travessias em dupla', 'Treinos recreativos'],
+      conditions: ['Qualquer condição', 'Mar agitado', 'Ondas', 'Mar calmo'],
+      highlights: [
+        'O barco "feliz" - surfa e diverte',
+        'Não tem medo de mar nenhum',
+        'Funciona com dupla de níveis diferentes',
+        'Relação velocidade-estabilidade-conforto incomparável',
+        'Iniciante vai se dar bem, avançado vai se divertir',
+      ],
+      comparedToFleet: 'Duplo mais estável e divertido. Para diversão, não competição.',
+    },
   },
   'molokay-ss': {
     id: 'molokay-ss',
     name: 'MOLOKAY SS',
-    tagline: 'Performance Dupla',
+    tagline: 'O Duplo Mais Rápido',
     category: 'Surfski Duplo',
     level: 'Avançado (Duplo)',
     levelColor: 'text-red-500',
     difficultyLevel: 90,
-    description: 'O Surfski duplo mais rápido do Brasil. Perfeito para competições de Alta Performance, Downwind e Upwind.',
+    description: 'Indubitavelmente o surfski duplo mais rápido que existe. Para quem quer competir em alto nível.',
     image: boatSurfski,
     specs: {
       length: '7.50m',
@@ -342,7 +493,7 @@ export const productsData: Record<string, Product> = {
       material: 'Carbono Aeroespacial',
     },
     features: [
-      'Velocidade máxima em dupla',
+      'O duplo mais rápido do mercado',
       'Estabilidade para alta performance',
       'Cockpits sincronizados',
       'Ideal para competições',
@@ -353,18 +504,39 @@ export const productsData: Record<string, Product> = {
       { id: 'carbon', name: 'Carbon Elite', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: boatSurfski,
+    techProfile: {
+      idealFor: ['Duplas competitivas', 'Atletas experientes', 'Competidores de elite'],
+      notRecommendedFor: ['Iniciantes', 'Duplas recreativas'],
+      heightRecommendation: 'Atletas treinados',
+      stability: 'low',
+      speed: 'very-high',
+      maneuverability: 'medium',
+      comfort: 'medium',
+      boardingEase: 'hard',
+      bestFor: ['Competições', 'Downwind profissional', 'Recordes'],
+      conditions: ['Competições', 'Alta performance'],
+      highlights: [
+        'O duplo mais rápido que existe',
+        'Similar ao EPIC duplo',
+        'Para quem quer competir de verdade',
+        'Requer habilidade de ambos os remadores',
+        'Incomparável em velocidade',
+      ],
+      similarTo: 'EPIC duplo',
+      comparedToFleet: 'Duplo de competição. O mais rápido, requer habilidade.',
+    },
   },
 
   // --- CANOAS HAVAIANAS ---
   'haka-oc1': {
     id: 'haka-oc1',
     name: 'HAKA OC1',
-    tagline: 'Performance Polinésia',
+    tagline: 'A BMW das Canoas',
     category: 'Canoa Havaiana',
     level: 'Fácil (Individual)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
-    description: 'Canoa Individual. Muito estável, leve e veloz. Ideal para todos os públicos.',
+    description: 'A BMW das canoas. Cópia do Pueo, considerado até hoje o melhor modelo para o mar brasileiro.',
     image: hakaCover,
     specs: {
       length: '6.30m',
@@ -374,7 +546,7 @@ export const productsData: Record<string, Product> = {
       material: 'Carbono + Kevlar',
     },
     features: [
-      'Design tradicional havaiano',
+      'Design baseado no Pueo (Hawaii)',
       'Ama (flutuador) em carbono',
       'Assento ergonômico ajustável',
       'Conexões Iako reforçadas',
@@ -386,23 +558,43 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: hakaCover,
     galleryImages: [
-      hakaCover,    // 1. Capa: HAKA na água com Ama amarelo (destaque)
-      hakaAction,   // 2. Ação: Atleta remando (escala e contexto)
-      hakaPov,      // 3. Imersão: POV do cockpit olhando para frente
-      hakaCockpit,  // 4. Cockpit: Detalhe do assento na água
-      hakaBow,      // 5. Detalhes: Close no bico com logo Opium
-      hakaWater,    // 6. Extra: Canoa na água vista frontal
+      hakaCover,
+      hakaAction,
+      hakaPov,
+      hakaCockpit,
+      hakaBow,
+      hakaWater,
     ],
+    techProfile: {
+      idealFor: ['Todos os níveis', 'Amantes de canoa havaiana', 'Iniciantes a avançados'],
+      heightRecommendation: 'Todos os tamanhos',
+      stability: 'very-high',
+      speed: 'high',
+      maneuverability: 'high',
+      comfort: 'very-high',
+      boardingEase: 'easy',
+      bestFor: ['Mar brasileiro', 'Surf', 'Treinos', 'Competições'],
+      conditions: ['Mar calmo', 'Mar agitado', 'Ondas', 'Mar de vento'],
+      highlights: [
+        'A "BMW das canoas" - confortável e premium',
+        'Baseada no Pueo (Hawaii) - melhor para nosso mar',
+        'Volume médio ideal para mar de vento brasileiro',
+        'Pega onda bem, surfa, vai em mar liso e agitado',
+        'Não precisamos de outro modelo - ela atende todos os sentidos',
+      ],
+      similarTo: 'Pueo (Outrigger Connection)',
+      comparedToFleet: 'A única OC1 da frota. Escolhida por ser a melhor para condições brasileiras.',
+    },
   },
   'huna-oc2': {
     id: 'huna-oc2',
     name: 'HUNA OC2',
-    tagline: 'Aventura em Dupla',
+    tagline: 'Canoa Dupla de Surf',
     category: 'Canoa Havaiana',
     level: 'Fácil (Dupla)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
-    description: 'Canoa Dupla. Diversão garantida com estabilidade e velocidade.',
+    description: 'Cópia do Ozone, a maior marca de canoas havaianas do mundo. Flutuador na cabine da frente para surfar mais.',
     image: hunaAma,
     specs: {
       length: '7.00m',
@@ -412,8 +604,8 @@ export const productsData: Record<string, Product> = {
       material: 'Fibra de Vidro + Carbono',
     },
     features: [
-      'Estabilidade para dupla',
-      'Compartimento de carga',
+      'Design baseado no Ozone',
+      'Flutuador na cabine da frente (surfa mais)',
       'Conforto para longas remadas',
       'Ama reforçada',
       'Fácil entrada e saída',
@@ -424,11 +616,31 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: hunaAma,
     galleryImages: [
-      hunaAma,      // 1. Destaque: Ama (flutuador vermelho) conectado
-      hunaLogo,     // 2. Identidade: Logo HUNA em close
-      hunaCockpit,  // 3. Interior: Sistema de pedais/leme
-      hunaBow,      // 4. Detalhe: Bico com logo OPIUM
+      hunaAma,
+      hunaLogo,
+      hunaCockpit,
+      hunaBow,
     ],
+    techProfile: {
+      idealFor: ['Duplas', 'Famílias', 'Amigos', 'Todos os níveis'],
+      heightRecommendation: 'Todos os tamanhos',
+      stability: 'very-high',
+      speed: 'high',
+      maneuverability: 'high',
+      comfort: 'very-high',
+      boardingEase: 'easy',
+      bestFor: ['Surf em dupla', 'Travessias', 'Diversão', 'Treinos'],
+      conditions: ['Mar calmo', 'Mar agitado', 'Ondas'],
+      highlights: [
+        'Baseada no Ozone - maior marca de canoas havaianas do mundo',
+        'Flutuador só na cabine da frente = surfa muito mais',
+        'Mastro mais curto joga centro de gravidade para frente',
+        'Muito mais fácil de pegar ondas que canoas com flutuador atrás',
+        'Confortável e rápida',
+      ],
+      similarTo: 'Ozone',
+      comparedToFleet: 'A única OC2 da frota. Design otimizado para surf.',
+    },
   },
 };
 
@@ -452,4 +664,14 @@ export const specLabels: Record<string, { label: string }> = {
   weight: { label: 'Peso' },
   capacity: { label: 'Capacidade' },
   material: { label: 'Material' },
+};
+
+// Level labels for tech profile
+export const levelLabels = {
+  stability: { 'very-high': 'Muito Alta', 'high': 'Alta', 'medium': 'Média', 'low': 'Baixa' },
+  speed: { 'very-high': 'Muito Alta', 'high': 'Alta', 'medium': 'Média', 'low': 'Baixa' },
+  maneuverability: { 'very-high': 'Muito Alta', 'high': 'Alta', 'medium': 'Média', 'low': 'Baixa' },
+  comfort: { 'very-high': 'Muito Alto', 'high': 'Alto', 'medium': 'Médio' },
+  cargoCapacity: { 'high': 'Alta', 'medium': 'Média', 'low': 'Baixa' },
+  boardingEase: { 'easy': 'Fácil', 'medium': 'Média', 'hard': 'Difícil' },
 };

@@ -7,6 +7,7 @@ import MagneticButton from '@/components/MagneticButton';
 import VideoBackground from '@/components/VideoBackground';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 import ProductMiniGallery from '@/components/ui/ProductMiniGallery';
+import ProductTechSheet from '@/components/ui/ProductTechSheet';
 import AtelierCarousel from '@/components/ui/AtelierCarousel';
 import { useTransition } from '@/context/TransitionContext';
 import { productsData } from '@/data/products';
@@ -308,32 +309,21 @@ const ProductDetail = () => {
                 </motion.div>
               )}
 
-              {/* Features */}
-              <motion.div 
-                className="mb-16"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-              >
-                <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-6">
-                  Características
-                </h2>
-                
-                <ul className="space-y-3">
-                  {product.features.map((feature, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: contentRevealed ? 1 : 0, x: contentRevealed ? 0 : -20 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
-                      className="flex items-start gap-3 text-foreground/70"
-                    >
-                      <span className="text-foreground mt-1">•</span>
-                      <span>{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+              {/* Technical Profile Sheet - Complete Product Info */}
+              {product.techProfile && (
+                <motion.div 
+                  className="mb-16"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 30 }}
+                  transition={{ duration: 0.7, delay: 0.25 }}
+                >
+                  <ProductTechSheet 
+                    techProfile={product.techProfile}
+                    productName={product.name}
+                    contentRevealed={contentRevealed}
+                  />
+                </motion.div>
+              )}
 
               {/* Color Selector */}
               <motion.div 

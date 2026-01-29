@@ -253,7 +253,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil a Intermediário',
     levelColor: 'text-emerald-400',
     difficultyLevel: 40,
-    description: 'O barco mais baixo e mais gostoso de remar. Fácil de embarcar, encaixa perfeitamente nas ondas do mar brasileiro.',
+    description: 'O barco mais baixo e mais prazeroso de remar. Fácil de embarcar, encaixa perfeitamente nas ondas do mar brasileiro.',
     image: moanaCover,
     specs: {
       length: '6.40m',
@@ -297,7 +297,7 @@ export const productsData: Record<string, Product> = {
       conditions: ['Mar agitado', 'Downwind', 'Ondas do Brasil'],
       highlights: [
         'O mais baixo = mais fácil de carregar debaixo do braço',
-        'O mais gostoso de remar da frota',
+        'O mais prazeroso de remar da frota',
         'Barco mais fácil de embarcar (baixo)',
         'Encaixa muito facilmente nas ondas',
         'Mais rápido que PONO e SIOU',

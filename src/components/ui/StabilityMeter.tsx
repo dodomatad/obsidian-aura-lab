@@ -59,7 +59,7 @@ const StabilityMeter = ({ level, levelText, compact = false }: StabilityMeterPro
       {/* Header */}
       <div className="flex justify-between items-end mb-3">
         <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-foreground/40 uppercase">
-          Nível de Domínio
+          Estabilidade
         </span>
         <span className="text-sm md:text-base font-medium text-foreground">
           {levelText}

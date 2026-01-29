@@ -536,7 +536,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil (Individual)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
-    description: 'A BMW das canoas. Cópia do Pueo, considerado até hoje o melhor modelo para o mar brasileiro.',
+    description: 'A BMW das canoas. Modelo premium considerado até hoje o melhor para o mar brasileiro.',
     image: hakaCover,
     specs: {
       length: '6.30m',
@@ -594,7 +594,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil (Dupla)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
-    description: 'Cópia do Ozone, a maior marca de canoas havaianas do mundo. Flutuador na cabine da frente para surfar mais.',
+    description: 'Canoa havaiana com flutuador na cabine da frente para surfar mais. Design otimizado para o mar brasileiro.',
     image: hunaAma,
     specs: {
       length: '7.00m',

@@ -13,6 +13,7 @@ import logoCanoaBrasil from '@/assets/logo-canoa-brasil.jpg';
 import logoKaora from '@/assets/logo-kaora.jpg';
 import logoSahyRemando from '@/assets/logo-sahy-remando.jpg';
 import logoVoltaIlha from '@/assets/logo-volta-ilha.jpg';
+import logoGaragemOceanica from '@/assets/social/garagem-oceanica.jpg';
 
 // Authority logos/badges - Using official logos where available
 const authorityLogos = [
@@ -20,6 +21,7 @@ const authorityLogos = [
   { image: logoVoltaIlha, title: 'Volta à Ilha de Santo Amaro', link: 'https://www.instagram.com/voltailhasantoamaro' },
   { image: logoSahyRemando, title: 'Projeto Sahy Remando', link: 'https://www.instagram.com/projetosahyremando' },
   { image: logoKaora, title: 'Kaora', link: 'https://www.instagram.com/projeto_kaora' },
+  { image: logoGaragemOceanica, title: 'Garagem Oceânica', link: 'https://www.instagram.com/garagemoceanicacanoagem?igsh=MThoeHQwbWMzOGd5Ng==' },
 ];
 
 const ChampionSection = () => {

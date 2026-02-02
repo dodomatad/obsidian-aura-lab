@@ -12,7 +12,7 @@ import kaoraTeamCanoe from '@/assets/kaora-team-canoe.jpg';
 import sahyUnity from '@/assets/social/sahy-project-unity.jpg';
 import sahyBeach from '@/assets/social/sahy-project-beach.jpg';
 import fabioVoltaIlha from '@/assets/fabio-volta-ilha.jpg';
-import garagemOceanica from '@/assets/social/garagem-oceanica.jpg';
+
 
 const projects = [
   {
@@ -56,13 +56,6 @@ const projects = [
     description: 'Fábio Paiva liderando as maiores provas de canoagem do Brasil, como a Volta à Ilha.',
     tag: 'Comunidade',
     link: 'https://www.instagram.com/voltailhasantoamaro',
-  },
-  {
-    image: garagemOceanica,
-    title: 'Garagem Oceânica',
-    description: 'Espaço dedicado à canoagem oceânica, reunindo atletas e amantes do esporte em um ambiente acolhedor.',
-    tag: 'Comunidade',
-    link: 'https://www.instagram.com/garagemoceanicacanoagem?igsh=MThoeHQwbWMzOGd5Ng==',
   },
 ];
 

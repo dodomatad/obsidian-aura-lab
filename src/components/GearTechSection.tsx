@@ -240,7 +240,7 @@ const GearTechSection = () => {
         className="relative z-10 px-6 md:px-16 mt-16 md:mt-20 text-center"
       >
         <motion.a
-          href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os acessórios Opium."
+          href="https://wa.me/qr/Q6ARXXVI73VQM1"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 font-sans text-sm tracking-[0.15em] uppercase transition-all duration-300 group bg-white text-orange font-bold hover:shadow-lg hover:shadow-white/20"

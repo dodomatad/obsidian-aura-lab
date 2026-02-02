@@ -233,7 +233,7 @@ const AtelierSection = () => {
 
         {/* Botão maior e mais destacado */}
         <motion.a
-          href="https://wa.me/5513997446684?text=Olá! Gostaria de personalizar minha embarcação."
+          href="https://wa.me/qr/Q6ARXXVI73VQM1"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-4 px-12 py-5 bg-white text-black text-sm md:text-base tracking-widest uppercase font-bold transition-all duration-300 hover:shadow-xl hover:shadow-white/30"

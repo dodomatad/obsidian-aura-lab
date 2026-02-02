@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Timeline } from "@/components/ui/timeline";
 import { Trophy, Medal, Users, Anchor, Award, Hammer, MapPin, Briefcase, Star } from "lucide-react";
-import fabioPortrait from "@/assets/fabio-paiva-portrait.jpg";
+import fabioPortrait from "@/assets/fabio-opium-shirt.jpg";
 import logoKaora from "@/assets/logo-kaora.jpg";
 import logoSahyRemando from "@/assets/logo-sahy-remando.jpg";
 import logoCanoaBrasil from "@/assets/logo-canoa-brasil.jpg";

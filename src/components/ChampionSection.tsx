@@ -383,38 +383,74 @@ const ChampionSection = () => {
               </div>
             </div>
 
-            {/* Desktop: Grid */}
-            <div className="hidden md:grid md:grid-cols-4 gap-8">
-              {authorityLogos.map((logo, index) => (
-                <motion.a
-                  key={logo.title}
-                  href={logo.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  className="group flex flex-col items-center text-center p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg cursor-pointer"
-                >
-                  {logo.image ? (
-                    <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-white p-3 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
-                      <img 
-                        src={logo.image} 
-                        alt={logo.title}
-                        className="w-full h-full object-contain"
-                      />
+            {/* Desktop: Carousel */}
+            <div className="hidden md:block relative">
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
+                  {authorityLogos.map((logo) => (
+                    <div
+                      key={logo.title}
+                      className="flex-[0_0_25%] min-w-0 px-3"
+                    >
+                      <a 
+                        href={logo.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-col items-center text-center p-6 hover:bg-foreground/5 transition-colors duration-300 rounded-lg cursor-pointer"
+                      >
+                        {logo.image ? (
+                          <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-white p-3 shadow-lg group-hover:shadow-orange/20 transition-all duration-300">
+                            <img 
+                              src={logo.image} 
+                              alt={logo.title}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
+                            <span className="text-orange font-bold text-4xl">22ª</span>
+                          </div>
+                        )}
+                        <h4 className="text-lg font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
+                          {logo.title}
+                        </h4>
+                      </a>
                     </div>
-                  ) : (
-                    <div className="w-32 h-32 flex items-center justify-center rounded-xl mb-5 bg-orange/10 border-2 border-orange/30 group-hover:border-orange group-hover:bg-orange/20 transition-all duration-300">
-                      <span className="text-orange font-bold text-4xl">22ª</span>
-                    </div>
-                  )}
-                  <h4 className="text-lg font-sans font-bold tracking-wide text-foreground/90 group-hover:text-orange transition-colors duration-300">
-                    {logo.title}
-                  </h4>
-                </motion.a>
-              ))}
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Arrows - Desktop */}
+              <button
+                onClick={scrollPrev}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-5 h-5 text-foreground/70" />
+              </button>
+              <button
+                onClick={scrollNext}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-5 h-5 text-foreground/70" />
+              </button>
+
+              {/* Dots Indicator - Desktop */}
+              <div className="flex justify-center gap-2 mt-6">
+                {authorityLogos.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => emblaApi?.scrollTo(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === selectedIndex 
+                        ? 'bg-orange w-6' 
+                        : 'bg-foreground/30 hover:bg-foreground/50'
+                    }`}
+                    aria-label={`Ir para slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

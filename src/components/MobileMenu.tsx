@@ -165,7 +165,7 @@ const MobileMenu = () => {
         {/* CTA WhatsApp Button */}
         <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-foreground/10">
           <motion.a
-            href="https://wa.me/5513997446684?text=Olá! Gostaria de saber mais sobre os produtos Opium."
+            href="https://wa.me/qr/Q6ARXXVI73VQM1"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}

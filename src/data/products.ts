@@ -536,7 +536,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil (Individual)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
-    description: 'A BMW das canoas. Modelo premium considerado até hoje o melhor para o mar brasileiro.',
+    description: 'Considerada modelo premium entre as canoas, trazendo conforto e estabilidade para navegar.',
     image: hakaCover,
     specs: {
       length: '6.30m',

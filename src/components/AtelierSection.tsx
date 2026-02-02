@@ -3,11 +3,10 @@ import { useMemo, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import atelier REAL lifestyle images
-import atelierCustomBows from '@/assets/atelier/atelier-custom-bows.jpg';
+import atelierColorsPalette from '@/assets/atelier/atelier-colors-palette.jpg';
 import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
 import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.jpg';
 import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.jpg';
-import atelierColorsPalette from '@/assets/atelier/atelier-colors-palette.jpg';
 
 interface AtelierImage {
   id: string;
@@ -16,11 +15,10 @@ interface AtelierImage {
 }
 
 const atelierImages: AtelierImage[] = [
-  { id: 'bows', src: atelierCustomBows, alt: 'Proas personalizadas e cores vibrantes' },
+  { id: 'palette', src: atelierColorsPalette, alt: 'Paleta de cores e combinações' },
   { id: 'paddle', src: atelierLifestylePaddle, alt: 'Lifestyle: remada e personalização' },
   { id: 'carry', src: atelierLifestyleCarry, alt: 'Lifestyle: transporte do barco' },
   { id: 'exotic', src: atelierCustomExotic, alt: 'Customização: cores exóticas' },
-  { id: 'palette', src: atelierColorsPalette, alt: 'Paleta de cores e combinações' },
 ];
 
 const AtelierSection = () => {

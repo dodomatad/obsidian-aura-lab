@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import championImage from '@/assets/fabio-champion.jpg';
+import championImage from '@/assets/fabio-opium-shirt.jpg';
 import BlurText from '@/components/ui/BlurText';
 import { useTransition } from '@/context/TransitionContext';
 

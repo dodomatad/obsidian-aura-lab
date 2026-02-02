@@ -576,7 +576,7 @@ export const productsData: Record<string, Product> = {
       bestFor: ['Mar brasileiro', 'Surf', 'Treinos', 'Competições'],
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas', 'Mar de vento'],
       highlights: [
-        'A "BMW das canoas" - confortável e premium',
+        'Trazendo mais conforto e estabilidade',
         'Baseada no Pueo (Hawaii) - melhor para nosso mar',
         'Volume médio ideal para mar de vento brasileiro',
         'Pega onda bem, surfa, vai em mar liso e agitado',

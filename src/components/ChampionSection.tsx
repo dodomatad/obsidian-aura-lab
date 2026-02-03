@@ -284,12 +284,12 @@ const ChampionSection = () => {
                 <Link
                   to="/historia"
                   onClick={saveScrollPosition}
-                  className="group inline-flex items-center gap-3 px-6 py-3 border border-orange/50 hover:border-orange hover:bg-orange/10 transition-all duration-300"
+                  className="group inline-flex items-center gap-3 px-6 py-3 border border-foreground/50 hover:border-foreground hover:bg-foreground/10 transition-all duration-300"
                 >
-                  <span className="text-sm md:text-base font-sans font-medium text-foreground/90 group-hover:text-orange transition-colors">
+                  <span className="text-sm md:text-base font-sans font-medium text-orange group-hover:text-foreground transition-colors">
                     Conheça a História de Fábio Paiva
                   </span>
-                  <ArrowRight className="w-4 h-4 text-orange transform group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-foreground transform group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
 

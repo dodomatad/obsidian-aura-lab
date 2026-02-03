@@ -4,7 +4,7 @@ import LocationMap from '@/components/LocationMap';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
-import GearTechSection from '@/components/GearTechSection';
+
 
 import LoadingScreen from '@/components/LoadingScreen';
 import AtmosphereParticles from '@/components/AtmosphereParticles';
@@ -208,10 +208,6 @@ const Index = () => {
           <AtelierSection />
         </div>
 
-        {/* Gear & Tech Section - Accessories with infinite scroll */}
-        <div className="pt-2 md:pt-4">
-          <GearTechSection />
-        </div>
 
         {/* Champion Journey Section - Lazy loaded for performance */}
         <div id="champion" className="pt-2 md:pt-4">

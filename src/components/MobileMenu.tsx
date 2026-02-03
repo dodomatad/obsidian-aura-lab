@@ -119,8 +119,8 @@ const MobileMenu = () => {
           WebkitBackdropFilter: 'blur(30px)',
         }}
       >
-        {/* Header with Paddle Close Button */}
-        <SheetHeader className="p-6 pb-4 border-b border-foreground/10 flex flex-row items-center justify-between">
+        {/* Header */}
+        <SheetHeader className="p-6 pb-4 border-b border-foreground/10">
           <SheetTitle className="text-left">
             <img 
               src={opiumLogo} 
@@ -128,15 +128,6 @@ const MobileMenu = () => {
               className="h-6 w-auto"
             />
           </SheetTitle>
-          
-          {/* Custom Paddle Close Button */}
-          <button
-            onClick={() => setOpen(false)}
-            className="p-2 rounded-lg transition-all duration-300 hover:bg-foreground/10 active:bg-foreground/20 text-foreground/80"
-            aria-label="Fechar menu"
-          >
-            <PaddleMenuButton isOpen={true} />
-          </button>
         </SheetHeader>
 
         {/* Navigation Links */}

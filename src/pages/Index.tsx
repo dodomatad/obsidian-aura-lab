@@ -157,7 +157,7 @@ const Index = () => {
             
             {/* Video Background - Lite Vimeo Embed para performance */}
             <LiteVimeoEmbed
-              videoId="1152065041"
+              videoId="1161464159"
               title="Hero Background Video"
               className="absolute inset-0"
               autoplayOnLoad={true}

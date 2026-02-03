@@ -83,11 +83,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
                   delay: 0.3,
                   ease: [0.16, 1, 0.3, 1] 
                 }}
-                className="font-display font-bold text-foreground text-center"
+                className="font-display font-bold text-foreground text-center whitespace-nowrap"
                 style={{
-                  fontSize: 'clamp(3rem, 15vw, 8rem)',
+                  fontSize: 'clamp(2.5rem, 12vw, 8rem)',
                   lineHeight: 1.1,
-                  letterSpacing: '0.05em',
+                  letterSpacing: '0.02em',
                 }}
               >
                 OPIUM

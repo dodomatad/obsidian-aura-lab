@@ -40,8 +40,13 @@ const LiteVimeoEmbed = ({
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
 
-  // Full player URL - background mode for seamless autoplay
-  const playerUrl = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=1&autopause=0&playsinline=1&dnt=1`;
+  /**
+   * Full player URL
+   *
+   * NOTE: Vimeo "background=1" can be inconsistent on some mobile browsers.
+   * We keep autoplay/muted/loop but avoid background mode for better reliability.
+   */
+  const playerUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&playsinline=1&dnt=1`;
 
   // Activate on mount for background videos
   useEffect(() => {
@@ -141,16 +146,13 @@ const LiteVimeoEmbed = ({
           }`}
           style={{ 
             position: 'absolute',
-            filter: 'brightness(0.85)',
-            width: '177.78vh',
-            height: '100vh',
-            minWidth: '100%',
-            minHeight: '56.25vw',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%) translateZ(0)', // GPU acceleration
+            inset: 0,
+            width: '100%',
+            height: '100%',
             border: 'none',
-            willChange: 'transform',
+            filter: 'brightness(0.85)',
+            transform: 'translateZ(0)', // GPU acceleration
+            willChange: 'opacity, transform',
           }}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           title={title}

@@ -148,14 +148,14 @@ const LiteVimeoEmbed = ({
             position: 'absolute',
             top: '50%',
             left: '50%',
-            width: '177.78vh', // 16:9 aspect ratio cover
-            height: '100vh',
-            minWidth: '100%',
-            minHeight: '56.25vw',
+            // Cover both landscape (desktop) and portrait (mobile) screens
+            width: 'max(177.78vh, 100vw)',
+            height: 'max(100vh, 56.25vw)',
             transform: 'translate(-50%, -50%) translateZ(0)',
             border: 'none',
             filter: 'brightness(0.85)',
             willChange: 'opacity, transform',
+            objectFit: 'cover',
           }}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
           title={title}

@@ -7,7 +7,7 @@ import { Product, productsData } from '@/data/products';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 
 // Custom order for the fleet carousel
-const CUSTOM_ORDER = ['moana', 'haka-oc1', 'dw', 'infinity', 'siou', 'pono', 'huna-oc2', 'azimut'] as const;
+const CUSTOM_ORDER = ['moana', 'haka-oc1', 'dw', 'infinity', 'siou', 'pono', 'huna-oc2'] as const;
 
 // Get ALL products in the custom order
 const allProducts: Product[] = CUSTOM_ORDER
@@ -18,8 +18,8 @@ const allProducts: Product[] = CUSTOM_ORDER
 const AUTOPLAY_INTERVAL = 5000; // 5 seconds
 const TOUCH_RESUME_DELAY = 2000; // 2 seconds delay after touch ends
 
-// Category definitions
-const CATEGORIES = ['Todos', 'Surfski Individual', 'Surfski Duplo', 'Canoa Havaiana'] as const;
+// Category definitions - only categories with images in the carousel
+const CATEGORIES = ['Todos', 'Surfski Individual', 'Canoa Havaiana'] as const;
 type CategoryType = typeof CATEGORIES[number];
 
 // ============================================
@@ -220,9 +220,12 @@ const ProductShowcase = () => {
     }
   }, []);
 
-  // Get active category for chips (including "Todos" when showing all)
+  // Get active category for chips (only show categories in CATEGORIES)
   const activeChipCategory = useMemo((): CategoryType => {
-    return currentProduct.category;
+    const cat = currentProduct.category;
+    // Map product category to chip category (handle Surfski Duplo → fallback)
+    if (cat === 'Surfski Duplo') return 'Surfski Individual';
+    return cat as CategoryType;
   }, [currentProduct.category]);
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
@@ -402,7 +405,7 @@ const ProductShowcase = () => {
                 }`}
                 whileTap={{ scale: 0.95 }}
               >
-                {cat === 'Todos' ? 'Início' : cat === 'Surfski Individual' ? 'Surfski' : cat === 'Surfski Duplo' ? 'Duplo' : 'Canoa'}
+                {cat === 'Todos' ? 'Início' : cat === 'Surfski Individual' ? 'Surfski' : 'Canoa'}
               </motion.button>
             );
           })}

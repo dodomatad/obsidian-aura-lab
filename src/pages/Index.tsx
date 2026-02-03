@@ -287,7 +287,7 @@ const Index = () => {
                   <span className="w-3 h-3 bg-orange rounded-full mt-1.5 flex-shrink-0" />
                   <div>
                     <h4 className="text-base font-semibold text-neutral-900 mb-1">Telefone:</h4>
-                    <p className="text-base text-neutral-600">(13) 99744-6684 | (13) 99744-6684 (WHATS)</p>
+                    <p className="text-base text-neutral-600">(13) 99744-6684</p>
                   </div>
                 </div>
 

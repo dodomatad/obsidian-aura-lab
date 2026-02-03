@@ -34,8 +34,8 @@ const ChampionSection = () => {
 
   const imageY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
 
-  // Embla Carousel for Authority Logos
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+  // Embla Carousel for Authority Logos - Mobile
+  const [emblaMobileRef, emblaMobileApi] = useEmblaCarousel(
     { 
       loop: true, 
       align: 'center',
@@ -44,26 +44,47 @@ const ChampionSection = () => {
     [Autoplay({ delay: 3000, stopOnInteraction: false })]
   );
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
+  // Embla Carousel for Authority Logos - Desktop
+  const [emblaDesktopRef, emblaDesktopApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: 'center',
+      skipSnaps: false,
+    },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const [selectedIndexMobile, setSelectedIndexMobile] = useState(0);
+  const [selectedIndexDesktop, setSelectedIndexDesktop] = useState(0);
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
+  const scrollPrevMobile = useCallback(() => emblaMobileApi && emblaMobileApi.scrollPrev(), [emblaMobileApi]);
+  const scrollNextMobile = useCallback(() => emblaMobileApi && emblaMobileApi.scrollNext(), [emblaMobileApi]);
+  const scrollPrevDesktop = useCallback(() => emblaDesktopApi && emblaDesktopApi.scrollPrev(), [emblaDesktopApi]);
+  const scrollNextDesktop = useCallback(() => emblaDesktopApi && emblaDesktopApi.scrollNext(), [emblaDesktopApi]);
+
+  const onSelectMobile = useCallback(() => {
+    if (!emblaMobileApi) return;
+    setSelectedIndexMobile(emblaMobileApi.selectedScrollSnap());
+  }, [emblaMobileApi]);
+
+  const onSelectDesktop = useCallback(() => {
+    if (!emblaDesktopApi) return;
+    setSelectedIndexDesktop(emblaDesktopApi.selectedScrollSnap());
+  }, [emblaDesktopApi]);
 
   useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on('select', onSelect);
-    emblaApi.on('reInit', onSelect);
-  }, [emblaApi, onSelect]);
+    if (!emblaMobileApi) return;
+    onSelectMobile();
+    emblaMobileApi.on('select', onSelectMobile);
+    emblaMobileApi.on('reInit', onSelectMobile);
+  }, [emblaMobileApi, onSelectMobile]);
+
+  useEffect(() => {
+    if (!emblaDesktopApi) return;
+    onSelectDesktop();
+    emblaDesktopApi.on('select', onSelectDesktop);
+    emblaDesktopApi.on('reInit', onSelectDesktop);
+  }, [emblaDesktopApi, onSelectDesktop]);
 
   return (
     <>
@@ -315,9 +336,9 @@ const ChampionSection = () => {
 
             {/* Mobile: Carousel */}
             <div className="md:hidden relative">
-              <div className="overflow-hidden" ref={emblaRef}>
+              <div className="overflow-hidden" ref={emblaMobileRef}>
                 <div className="flex">
-                  {authorityLogos.map((logo, index) => (
+                  {authorityLogos.map((logo) => (
                     <div
                       key={logo.title}
                       className="flex-[0_0_50%] min-w-0 px-2"
@@ -352,14 +373,14 @@ const ChampionSection = () => {
 
               {/* Navigation Arrows - Mobile */}
               <button
-                onClick={scrollPrev}
+                onClick={scrollPrevMobile}
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-8 h-8 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-4 h-4 text-foreground/70" />
               </button>
               <button
-                onClick={scrollNext}
+                onClick={scrollNextMobile}
                 className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-8 h-8 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
                 aria-label="Próximo"
               >
@@ -371,9 +392,9 @@ const ChampionSection = () => {
                 {authorityLogos.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => emblaApi?.scrollTo(index)}
+                    onClick={() => emblaMobileApi?.scrollTo(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === selectedIndex 
+                      index === selectedIndexMobile 
                         ? 'bg-orange w-6' 
                         : 'bg-foreground/30 hover:bg-foreground/50'
                     }`}
@@ -385,7 +406,7 @@ const ChampionSection = () => {
 
             {/* Desktop: Carousel */}
             <div className="hidden md:block relative">
-              <div className="overflow-hidden" ref={emblaRef}>
+              <div className="overflow-hidden" ref={emblaDesktopRef}>
                 <div className="flex">
                   {authorityLogos.map((logo) => (
                     <div
@@ -422,14 +443,14 @@ const ChampionSection = () => {
 
               {/* Navigation Arrows - Desktop */}
               <button
-                onClick={scrollPrev}
+                onClick={scrollPrevDesktop}
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-5 h-5 text-foreground/70" />
               </button>
               <button
-                onClick={scrollNext}
+                onClick={scrollNextDesktop}
                 className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 flex items-center justify-center rounded-full bg-foreground/10 hover:bg-orange/20 border border-foreground/20 hover:border-orange transition-all duration-300 z-10"
                 aria-label="Próximo"
               >
@@ -441,9 +462,9 @@ const ChampionSection = () => {
                 {authorityLogos.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => emblaApi?.scrollTo(index)}
+                    onClick={() => emblaDesktopApi?.scrollTo(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === selectedIndex 
+                      index === selectedIndexDesktop 
                         ? 'bg-orange w-6' 
                         : 'bg-foreground/30 hover:bg-foreground/50'
                     }`}

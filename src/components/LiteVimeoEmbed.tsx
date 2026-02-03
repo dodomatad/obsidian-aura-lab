@@ -46,7 +46,7 @@ const LiteVimeoEmbed = ({
    * NOTE: Vimeo "background=1" can be inconsistent on some mobile browsers.
    * We keep autoplay/muted/loop but avoid background mode for better reliability.
    */
-  const playerUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&playsinline=1&dnt=1`;
+  const playerUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&playsinline=1&dnt=1&controls=0&title=0&byline=0&portrait=0`;
 
   // Activate on mount for background videos
   useEffect(() => {

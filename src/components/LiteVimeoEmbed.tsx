@@ -146,12 +146,15 @@ const LiteVimeoEmbed = ({
           }`}
           style={{ 
             position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
+            top: '50%',
+            left: '50%',
+            width: '177.78vh', // 16:9 aspect ratio cover
+            height: '100vh',
+            minWidth: '100%',
+            minHeight: '56.25vw',
+            transform: 'translate(-50%, -50%) translateZ(0)',
             border: 'none',
             filter: 'brightness(0.85)',
-            transform: 'translateZ(0)', // GPU acceleration
             willChange: 'opacity, transform',
           }}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"

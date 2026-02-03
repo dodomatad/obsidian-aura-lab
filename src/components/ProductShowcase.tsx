@@ -7,7 +7,7 @@ import { Product, productsData } from '@/data/products';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 
 // Custom order for the fleet carousel
-const CUSTOM_ORDER = ['moana', 'haka-oc1', 'dw', 'infinity', 'siou', 'pono', 'huna-oc2'] as const;
+const CUSTOM_ORDER = ['moana', 'haka-oc1', 'dw', 'infinity', 'siou', 'pono', 'huna-oc2', 'azimut'] as const;
 
 // Get ALL products in the custom order
 const allProducts: Product[] = CUSTOM_ORDER
@@ -402,7 +402,7 @@ const ProductShowcase = () => {
                 }`}
                 whileTap={{ scale: 0.95 }}
               >
-                {cat === 'Todos' ? 'Início' : cat.split(' ')[0]}
+                {cat === 'Todos' ? 'Início' : cat === 'Surfski Individual' ? 'Surfski' : cat === 'Surfski Duplo' ? 'Duplo' : 'Canoa'}
               </motion.button>
             );
           })}

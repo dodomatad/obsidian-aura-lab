@@ -297,20 +297,20 @@ const ChampionSection = () => {
 
               {/* Botão: Conheça a História de Fábio Paiva */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.7 }}
               >
                 <Link
                   to="/historia"
                   onClick={saveScrollPosition}
-                  className="group inline-flex items-center gap-3 px-6 py-3 border border-foreground/50 hover:border-foreground hover:bg-foreground/10 transition-all duration-300"
+                  className="group relative inline-flex items-center gap-4 px-8 py-4 bg-orange hover:bg-orange/90 rounded-lg shadow-lg shadow-orange/30 hover:shadow-xl hover:shadow-orange/40 transition-all duration-300 transform hover:scale-105"
                 >
-                  <span className="text-sm md:text-base font-sans font-medium text-orange group-hover:text-foreground transition-colors">
+                  <span className="text-base md:text-lg font-sans font-bold text-background tracking-wide">
                     Conheça a História de Fábio Paiva
                   </span>
-                  <ArrowRight className="w-4 h-4 text-foreground transform group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 text-background transform group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
 

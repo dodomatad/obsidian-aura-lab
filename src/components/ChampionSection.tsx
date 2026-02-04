@@ -307,10 +307,10 @@ const ChampionSection = () => {
                   onClick={saveScrollPosition}
                   className="group relative inline-flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-orange hover:bg-orange/90 rounded-lg shadow-lg shadow-orange/30 hover:shadow-xl hover:shadow-orange/40 transition-all duration-300 transform hover:scale-105"
                 >
-                  <span className="text-sm md:text-base font-sans font-bold text-background tracking-wide">
+                  <span className="text-sm md:text-base font-sans font-bold text-foreground tracking-wide">
                     Conheça a História de Fábio Paiva
                   </span>
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-background transform group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-foreground transform group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
 

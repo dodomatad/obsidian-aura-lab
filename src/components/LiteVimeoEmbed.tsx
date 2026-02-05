@@ -148,9 +148,11 @@ const LiteVimeoEmbed = ({
             position: 'absolute',
             top: '50%',
             left: '50%',
-            // Cover entire screen - 150% zoom for full coverage
-            width: 'max(200vh, 150vw)',
-            height: 'max(150vh, 75vw)',
+            // Full screen coverage for both portrait and landscape videos
+            // Desktop (landscape): needs extra width due to vertical video
+            // Mobile (portrait): video aspect ratio matches better
+            width: '300vmax',
+            height: '300vmax',
             transform: 'translate(-50%, -50%) translateZ(0)',
             border: 'none',
             filter: 'brightness(0.85)',

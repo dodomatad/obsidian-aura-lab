@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTransition } from '@/context/TransitionContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LiteVimeoEmbedProps {
   videoId: string;
@@ -31,6 +32,7 @@ const LiteVimeoEmbed = ({
 }: LiteVimeoEmbedProps) => {
   const { hasSeenIntro } = useTransition();
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const isMobile = useIsMobile();
   
   // Always preload for background videos
   const shouldPreload = preloadDuringLoading ?? autoplayOnLoad ?? hasSeenIntro;
@@ -151,8 +153,8 @@ const LiteVimeoEmbed = ({
             // Full screen coverage for both portrait and landscape videos
             // Desktop (landscape): needs extra width due to vertical video
             // Mobile (portrait): video aspect ratio matches better
-            width: '300vmax',
-            height: '300vmax',
+            width: isMobile ? '150vmax' : '300vmax',
+            height: isMobile ? '150vmax' : '300vmax',
             transform: 'translate(-50%, -50%) translateZ(0)',
             border: 'none',
             filter: 'brightness(0.85)',

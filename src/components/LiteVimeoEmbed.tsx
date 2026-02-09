@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTransition } from '@/context/TransitionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import Player from '@vimeo/player';
 
 interface LiteVimeoEmbedProps {
   videoId: string;
@@ -49,6 +50,30 @@ const LiteVimeoEmbed = ({
    * We keep autoplay/muted/loop but avoid background mode for better reliability.
    */
   const playerUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&playsinline=1&dnt=1&controls=0&title=0&byline=0&portrait=0`;
+
+  // Use Vimeo Player API to loop at half duration
+  useEffect(() => {
+    if (!iframeRef.current || !iframeLoaded) return;
+    
+    const player = new Player(iframeRef.current);
+    let halfDuration = 0;
+
+    player.getDuration().then((duration: number) => {
+      halfDuration = duration / 2;
+    });
+
+    const onTimeUpdate = (data: { seconds: number }) => {
+      if (halfDuration > 0 && data.seconds >= halfDuration) {
+        player.setCurrentTime(0);
+      }
+    };
+
+    player.on('timeupdate', onTimeUpdate);
+
+    return () => {
+      player.off('timeupdate', onTimeUpdate);
+    };
+  }, [iframeLoaded]);
 
   // Activate on mount for background videos
   useEffect(() => {

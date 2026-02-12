@@ -322,20 +322,6 @@ const ProductTechSheet = ({ techProfile, productName, contentRevealed }: Product
           ))}
         </ul>
         
-        {/* Similar to */}
-        {techProfile.similarTo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="mt-4 pt-4 border-t border-white/5 flex items-center gap-2"
-          >
-            <AlertCircle className="w-3.5 h-3.5 text-foreground/40" />
-            <span className="text-xs text-foreground/50">
-              Comparável ao: <span className="text-foreground/70 font-medium">{techProfile.similarTo}</span>
-            </span>
-          </motion.div>
-        )}
       </motion.div>
 
       {/* Card 5: Posição na Frota */}

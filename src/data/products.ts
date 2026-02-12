@@ -151,7 +151,8 @@ export const productsData: Record<string, Product> = {
       'Proa hidrodinâmica para mínima resistência',
       'Sistema de drenagem automática',
       'Compartimentos estanques para equipamentos',
-      'Acabamento UV resistant',
+      'Acabamento resistente a UV',
+      'Boa manobrabilidade para o nível de estabilidade',
     ],
     colors: [
       { id: 'default', name: 'Branco Ártico', color: '#E8E8E8', image: boatPono },
@@ -173,7 +174,7 @@ export const productsData: Record<string, Product> = {
       heightRecommendation: 'Todos os tamanhos',
       stability: 'very-high',
       speed: 'medium',
-      maneuverability: 'medium',
+      maneuverability: 'high',
       comfort: 'very-high',
       cargoCapacity: 'medium',
       boardingEase: 'easy',
@@ -260,7 +261,7 @@ export const productsData: Record<string, Product> = {
       beam: '43cm',
       weight: '12kg',
       capacity: '115kg',
-      material: 'Fibra de Vidro + Carbono',
+      material: 'Fibra de Carbono + Divinicel',
     },
     features: [
       'O mais baixo da frota (fácil de carregar)',
@@ -314,7 +315,7 @@ export const productsData: Record<string, Product> = {
     level: 'Intermediário a Avançado',
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
-    description: 'Surfski de alto desempenho para quem quer velocidade sem sofrer. Similar ao V10 da EPIC.',
+    description: 'Surfski de alto desempenho para quem quer evoluir. Transição perfeita do intermediário para a alta performance.',
     image: dwDetail1,
     specs: {
       length: '6.20m',
@@ -353,12 +354,11 @@ export const productsData: Record<string, Product> = {
       conditions: ['Mar agitado', 'Downwind', 'Competições'],
       highlights: [
         'Alto desempenho acessível',
-        'Similar ao V10 da EPIC',
+        'Transição natural para quem vem de barcos mais estáveis',
         'Fácil de adaptar para intermediários',
-        'Velocidade sem sofrimento',
+        'Performance sem sofrimento',
         'Barco de entrada para competição',
       ],
-      similarTo: 'V10 da EPIC',
       comparedToFleet: 'Categoria de alto desempenho. Requer habilidade. Posição #4 em estabilidade.',
     },
   },
@@ -389,7 +389,7 @@ export const productsData: Record<string, Product> = {
     colors: [
       { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatInfinity },
       { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
-      { id: 'camo', name: 'Tactical Green', color: '#3D4F3A', image: boatCamo },
+      { id: 'camo', name: 'Verde Tático', color: '#3D4F3A', image: boatCamo },
     ],
     defaultImage: boatInfinity,
     galleryImages: [
@@ -517,12 +517,11 @@ export const productsData: Record<string, Product> = {
       conditions: ['Competições', 'Alta performance'],
       highlights: [
         'O duplo mais rápido que existe',
-        'Similar ao EPIC duplo',
         'Para quem quer competir de verdade',
         'Requer habilidade de ambos os remadores',
         'Incomparável em velocidade',
       ],
-      similarTo: 'EPIC duplo',
+      
       comparedToFleet: 'Duplo de competição. O mais rápido, requer habilidade.',
     },
   },
@@ -531,7 +530,7 @@ export const productsData: Record<string, Product> = {
   'haka-oc1': {
     id: 'haka-oc1',
     name: 'HAKA OC1',
-    tagline: 'A BMW das Canoas',
+    tagline: 'Premium em Conforto e Estabilidade',
     category: 'Canoa Havaiana',
     level: 'Fácil (Individual)',
     levelColor: 'text-emerald-400',
@@ -546,7 +545,7 @@ export const productsData: Record<string, Product> = {
       material: 'Carbono + Kevlar',
     },
     features: [
-      'Design baseado no Pueo (Hawaii)',
+      'Inspirada em designs havaianos clássicos',
       'Ama (flutuador) em carbono',
       'Assento ergonômico ajustável',
       'Conexões Iako reforçadas',
@@ -576,13 +575,13 @@ export const productsData: Record<string, Product> = {
       bestFor: ['Mar brasileiro', 'Surf', 'Treinos', 'Competições'],
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas', 'Mar de vento'],
       highlights: [
-        'Trazendo mais conforto e estabilidade',
-        'Baseada no Pueo (Hawaii) - melhor para nosso mar',
+        'Conforto e estabilidade incomparáveis',
+        'Inspirada nos melhores designs havaianos, otimizada para o mar brasileiro',
         'Volume médio ideal para mar de vento brasileiro',
         'Pega onda bem, surfa, vai em mar liso e agitado',
         'Não precisamos de outro modelo - ela atende todos os sentidos',
       ],
-      similarTo: 'Pueo (Outrigger Connection)',
+      
       comparedToFleet: 'A única OC1 da frota. Escolhida por ser a melhor para condições brasileiras.',
     },
   },
@@ -604,7 +603,7 @@ export const productsData: Record<string, Product> = {
       material: 'Fibra de Vidro + Carbono',
     },
     features: [
-      'Design baseado no Ozone',
+      'Inspirada em designs havaianos clássicos',
       'Flutuador na cabine da frente (surfa mais)',
       'Conforto para longas remadas',
       'Ama reforçada',
@@ -632,13 +631,13 @@ export const productsData: Record<string, Product> = {
       bestFor: ['Surf em dupla', 'Travessias', 'Diversão', 'Treinos'],
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas'],
       highlights: [
-        'Baseada no Ozone - maior marca de canoas havaianas do mundo',
+        'Inspirada nos melhores designs havaianos do mundo',
         'Flutuador só na cabine da frente = surfa muito mais',
         'Mastro mais curto joga centro de gravidade para frente',
         'Muito mais fácil de pegar ondas que canoas com flutuador atrás',
         'Confortável e rápida',
       ],
-      similarTo: 'Ozone',
+      
       comparedToFleet: 'A única OC2 da frota. Design otimizado para surf.',
     },
   },

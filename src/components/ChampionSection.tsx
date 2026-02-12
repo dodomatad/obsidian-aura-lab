@@ -128,8 +128,8 @@ const ChampionSection = () => {
                 transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
-                Com mais de <span className="text-orange font-bold">35 anos de experiência</span> na fabricação de embarcações de alta performance, 
-                a Opium se consolidou como <span className="text-orange font-bold">referência absoluta</span> no mercado brasileiro.
+                Com mais de <span className="text-orange font-bold">35 anos dedicados à canoagem oceânica</span> e à fabricação de embarcações de alta performance, 
+                a Opium é a <span className="text-orange font-bold">maior referência em canoas havaianas e surfskis do Brasil</span>.
               </motion.p>
 
               <motion.p 
@@ -139,8 +139,8 @@ const ChampionSection = () => {
                 transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
-                Nossa dedicação à excelência técnica e compromisso com a inovação nos permitiram 
-                conquistar <span className="text-foreground font-bold">14 títulos consecutivos</span> nas principais competições nacionais.
+                São <span className="text-foreground font-bold">14 títulos consecutivos</span> em competições nacionais e presença em provas internacionais, 
+                equipando atletas do <span className="text-foreground font-bold">iniciante ao pódio</span>.
               </motion.p>
 
               <motion.p 
@@ -150,9 +150,9 @@ const ChampionSection = () => {
                 transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
-                Somos <span className="text-foreground font-bold">pioneiros na fibra de carbono</span> de alta gramatura no Brasil, 
-                oferecendo embarcações que combinam leveza extrema, rigidez estrutural e 
-                durabilidade incomparável.
+                <span className="text-foreground font-bold">Pioneiros na fibra de carbono de alta gramatura</span> no Brasil, 
+                fabricamos surfskis e canoas havaianas com resina epóxi aeronáutica, cura em autoclave a 80&deg;C 
+                e pintura em poliuretano naval — leveza, rigidez e durabilidade incomparáveis.
               </motion.p>
             </div>
           </div>
@@ -272,7 +272,7 @@ const ChampionSection = () => {
                 transition={{ duration: 0.6, delay: 0.35 }}
                 className="text-base md:text-xl text-foreground/50 font-sans font-light mb-8 md:mb-10 tracking-wide"
               >
-                Nascida para Dominar o Mar
+                Feita para se Integrar ao Mar
               </motion.p>
 
               {/* Brand Story - Foco na EMPRESA */}
@@ -284,7 +284,7 @@ const ChampionSection = () => {
                 className="space-y-4 md:space-y-6 mb-10 md:mb-12"
               >
                 <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
-                  Há mais de <span className="text-foreground font-medium">35 anos</span>, a Opium nasceu de uma garagem em Santos. O que começou como um sonho se transformou na maior referência em surfskis do Brasil.
+                  Há mais de <span className="text-foreground font-medium">35 anos</span>, a Opium nasceu de uma garagem em Santos. O que começou como um sonho se transformou na maior referência em canoas havaianas e surfskis do Brasil.
                 </p>
                 <p className="text-base md:text-xl text-foreground/70 leading-relaxed font-sans font-light">
                   Nossa fábrica é onde a <span className="text-foreground font-medium">tradição encontra a inovação</span>. Cada embarcação é resultado de décadas de pesquisa, materiais de ponta e o feedback direto de campeões.
@@ -330,7 +330,7 @@ const ChampionSection = () => {
               className="text-center mb-8 md:mb-10"
             >
               <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold text-orange">
-                Projetos & Iniciativas
+                Projetos, Iniciativas e Parcerias
               </span>
             </motion.div>
 

@@ -24,7 +24,7 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isTransitioning, justTransitioned } = useTransition();
-  const [selectedColor, setSelectedColor] = useState<string>('default');
+  
   const [isLoaded, setIsLoaded] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [showBoatImage, setShowBoatImage] = useState(false);
@@ -65,7 +65,7 @@ const ProductDetail = () => {
     );
   }
 
-  const currentImage = product.colors.find(c => c.id === selectedColor)?.image || product.defaultImage;
+  const currentImage = product.defaultImage;
 
   // Get level color class
   const getLevelColorClass = () => {
@@ -158,7 +158,6 @@ const ProductDetail = () => {
               {/* Boat image */}
               <motion.img
                 layoutId={`boat-image-${product.id}`}
-                key={selectedColor}
                 src={currentImage}
                 alt={product.name}
                 className="w-full h-auto object-contain relative z-10"
@@ -325,7 +324,7 @@ const ProductDetail = () => {
                 </motion.div>
               )}
 
-              {/* Color Selector */}
+              {/* Personalização */}
               <motion.div 
                 className="mb-16"
                 initial={{ opacity: 0, y: 30 }}
@@ -333,42 +332,13 @@ const ProductDetail = () => {
                 transition={{ duration: 0.7, delay: 0.35 }}
               >
                 <h2 className="text-sm tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium mb-4">
-                  Cores Disponíveis
+                  Personalização
                 </h2>
                 
-                {/* Info text */}
-                <p className="text-sm text-foreground/60 mb-6 leading-relaxed">
-                  Você pode escolher a cor e o desenho que deseja para o seu barco. 
-                  <span className="text-foreground/80"> Personalize do seu jeito.</span>
+                <p className="text-sm text-foreground/60 leading-relaxed">
+                  Cada barco Opium é fabricado sob encomenda. Você escolhe a cor, o desenho e os acabamentos.{' '}
+                  <span className="text-foreground/80 font-medium">Consulte nossa equipe</span> para conhecer as opções de pintura e personalização disponíveis.
                 </p>
-                
-                <div className="flex gap-4">
-                  {product.colors.map((color) => (
-                    <button
-                      key={color.id}
-                      onClick={() => setSelectedColor(color.id)}
-                      className="group flex flex-col items-center gap-2"
-                    >
-                      <div
-                        className={`w-12 h-12 rounded-full transition-all duration-300 ${
-                          selectedColor === color.id 
-                            ? 'ring-2 ring-foreground ring-offset-2 ring-offset-background scale-110' 
-                            : 'opacity-60 hover:opacity-100 hover:scale-105'
-                        }`}
-                        style={{ backgroundColor: color.color }}
-                      />
-                      <span 
-                        className={`text-xs transition-all duration-300 ${
-                          selectedColor === color.id 
-                            ? 'text-foreground' 
-                            : 'text-foreground/40 group-hover:text-foreground/70'
-                        }`}
-                      >
-                        {color.name}
-                      </span>
-                    </button>
-                  ))}
-                </div>
               </motion.div>
 
               {/* Ateliê Carousel - Fixed lifestyle/colors gallery */}

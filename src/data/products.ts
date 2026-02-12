@@ -333,7 +333,7 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwDetail1 },
-      { id: 'carbon', name: 'Stealth Carbon', color: '#1A1A1A', image: boatCarbon },
+      { id: 'carbon', name: 'Carbono Stealth', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: dwDetail1,
     galleryImages: [
@@ -389,7 +389,7 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatInfinity },
-      { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
+      { id: 'carbon', name: 'Carbono Total', color: '#1A1A1A', image: boatCarbon },
       { id: 'camo', name: 'Verde Tático', color: '#3D4F3A', image: boatCamo },
     ],
     defaultImage: boatInfinity,
@@ -452,7 +452,7 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatSurfski },
-      { id: 'carbon', name: 'Full Carbon', color: '#1A1A1A', image: boatCarbon },
+      { id: 'carbon', name: 'Carbono Total', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: boatSurfski,
     techProfile: {
@@ -501,8 +501,8 @@ export const productsData: Record<string, Product> = {
       'Construção ultraleve',
     ],
     colors: [
-      { id: 'default', name: 'Branco Racing', color: '#F0F0F0', image: boatSurfski },
-      { id: 'carbon', name: 'Carbon Elite', color: '#1A1A1A', image: boatCarbon },
+      { id: 'default', name: 'Branco Competição', color: '#F0F0F0', image: boatSurfski },
+      { id: 'carbon', name: 'Carbono Elite', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: boatSurfski,
     techProfile: {
@@ -555,7 +555,7 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'Amarelo & Branco', color: '#F5A623', image: hakaCover },
-      { id: 'carbon', name: 'Carbon Race', color: '#2A2A2A', image: boatCarbon },
+      { id: 'carbon', name: 'Carbono Corrida', color: '#2A2A2A', image: boatCarbon },
     ],
     defaultImage: hakaCover,
     galleryImages: [
@@ -614,7 +614,7 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: hunaAma },
-      { id: 'camo', name: 'Ocean Camo', color: '#4A6741', image: boatCamo },
+      { id: 'camo', name: 'Camuflagem Oceano', color: '#4A6741', image: boatCamo },
     ],
     defaultImage: hunaAma,
     galleryImages: [

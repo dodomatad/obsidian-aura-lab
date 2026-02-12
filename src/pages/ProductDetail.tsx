@@ -336,8 +336,8 @@ const ProductDetail = () => {
                 </h2>
                 
                 <p className="text-sm text-foreground/60 leading-relaxed">
-                  Cada barco Opium é fabricado sob encomenda. Você escolhe a cor, o desenho e os acabamentos.{' '}
-                  <span className="text-foreground/80 font-medium">Consulte nossa equipe</span> para conhecer as opções de pintura e personalização disponíveis.
+                  Cada barco Opium é fabricado sob encomenda, com opções de pinturas padrão da marca.{' '}
+                  <span className="text-foreground/80 font-medium">Consulte nossa equipe</span> para conhecer as opções disponíveis e possibilidades de personalização.
                 </p>
               </motion.div>
 

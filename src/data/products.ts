@@ -174,7 +174,7 @@ export const productsData: Record<string, Product> = {
       heightRecommendation: 'Todos os tamanhos',
       stability: 'very-high',
       speed: 'medium',
-      maneuverability: 'high',
+      maneuverability: 'medium',
       comfort: 'very-high',
       cargoCapacity: 'medium',
       boardingEase: 'easy',
@@ -261,7 +261,7 @@ export const productsData: Record<string, Product> = {
       beam: '43cm',
       weight: '12kg',
       capacity: '115kg',
-      material: 'Fibra de Carbono + Divinicel',
+      material: 'Fibra de Carbono',
     },
     features: [
       'O mais baixo da frota (fácil de carregar)',
@@ -359,6 +359,7 @@ export const productsData: Record<string, Product> = {
         'Performance sem sofrimento',
         'Barco de entrada para competição',
       ],
+      similarTo: 'V10 da EPIC',
       comparedToFleet: 'Categoria de alto desempenho. Requer habilidade. Posição #4 em estabilidade.',
     },
   },
@@ -522,6 +523,7 @@ export const productsData: Record<string, Product> = {
         'Incomparável em velocidade',
       ],
       
+      similarTo: 'EPIC duplo',
       comparedToFleet: 'Duplo de competição. O mais rápido, requer habilidade.',
     },
   },
@@ -530,7 +532,7 @@ export const productsData: Record<string, Product> = {
   'haka-oc1': {
     id: 'haka-oc1',
     name: 'HAKA OC1',
-    tagline: 'Premium em Conforto e Estabilidade',
+    tagline: 'A BMW das Canoas',
     category: 'Canoa Havaiana',
     level: 'Fácil (Individual)',
     levelColor: 'text-emerald-400',
@@ -545,7 +547,7 @@ export const productsData: Record<string, Product> = {
       material: 'Carbono + Kevlar',
     },
     features: [
-      'Inspirada em designs havaianos clássicos',
+      'Design baseado no Pueo (Hawaii)',
       'Ama (flutuador) em carbono',
       'Assento ergonômico ajustável',
       'Conexões Iako reforçadas',
@@ -576,12 +578,13 @@ export const productsData: Record<string, Product> = {
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas', 'Mar de vento'],
       highlights: [
         'Conforto e estabilidade incomparáveis',
-        'Inspirada nos melhores designs havaianos, otimizada para o mar brasileiro',
+        'Baseada no Pueo (Hawaii), otimizada para o mar brasileiro',
         'Volume médio ideal para mar de vento brasileiro',
         'Pega onda bem, surfa, vai em mar liso e agitado',
         'Não precisamos de outro modelo - ela atende todos os sentidos',
       ],
       
+      similarTo: 'Pueo (Outrigger Connection)',
       comparedToFleet: 'A única OC1 da frota. Escolhida por ser a melhor para condições brasileiras.',
     },
   },
@@ -603,7 +606,7 @@ export const productsData: Record<string, Product> = {
       material: 'Fibra de Vidro + Carbono',
     },
     features: [
-      'Inspirada em designs havaianos clássicos',
+      'Design baseado no Ozone',
       'Flutuador na cabine da frente (surfa mais)',
       'Conforto para longas remadas',
       'Ama reforçada',
@@ -631,13 +634,14 @@ export const productsData: Record<string, Product> = {
       bestFor: ['Surf em dupla', 'Travessias', 'Diversão', 'Treinos'],
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas'],
       highlights: [
-        'Inspirada nos melhores designs havaianos do mundo',
+        'Baseada no Ozone, otimizada para o mar brasileiro',
         'Flutuador só na cabine da frente = surfa muito mais',
         'Mastro mais curto joga centro de gravidade para frente',
         'Muito mais fácil de pegar ondas que canoas com flutuador atrás',
         'Confortável e rápida',
       ],
       
+      similarTo: 'Ozone',
       comparedToFleet: 'A única OC2 da frota. Design otimizado para surf.',
     },
   },

@@ -324,6 +324,28 @@ const ProductTechSheet = ({ techProfile, productName, contentRevealed }: Product
         
       </motion.div>
 
+      {/* Similar To */}
+      {techProfile.similarTo && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: contentRevealed ? 1 : 0, y: contentRevealed ? 0 : 20 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="p-4 rounded-lg bg-white/5 border border-white/10"
+        >
+          <div className="flex items-start gap-3">
+            <Compass className="w-4 h-4 text-foreground/50 flex-shrink-0 mt-0.5" />
+            <div>
+              <span className="text-xs text-foreground/40 uppercase tracking-wider block mb-1">
+                Referência de Mercado
+              </span>
+              <p className="text-sm text-foreground/70">
+                Inspirado no <span className="text-foreground/90 font-medium">{techProfile.similarTo}</span>
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Card 5: Posição na Frota */}
       {techProfile.comparedToFleet && (
         <motion.div

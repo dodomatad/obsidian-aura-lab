@@ -150,9 +150,8 @@ const ChampionSection = () => {
                 transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
-                <span className="text-foreground font-bold">Pioneiros na fibra de carbono de alta gramatura</span> no Brasil, 
-                fabricamos surfskis e canoas havaianas com resina epóxi aeronáutica, cura em autoclave a 80&deg;C 
-                e pintura em poliuretano naval — leveza, rigidez e durabilidade incomparáveis.
+                Somos <span className="text-foreground font-bold">pioneiros na fibra de carbono de alta gramatura</span> no Brasil, 
+                fabricando surfskis e canoas havaianas com tecnologia que garante leveza, rigidez e durabilidade incomparáveis.
               </motion.p>
             </div>
           </div>

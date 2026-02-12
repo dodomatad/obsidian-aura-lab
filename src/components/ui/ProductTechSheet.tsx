@@ -61,6 +61,16 @@ const getSpeedColor = (level: string): string => {
 };
 
 // Metric bar component
+// Map display labels to levelLabels keys
+const labelKeyMap: Record<string, string> = {
+  'Estabilidade': 'stability',
+  'Velocidade': 'speed',
+  'Manobrabilidade': 'maneuverability',
+  'Conforto': 'comfort',
+  'Capacidade de Carga': 'cargoCapacity',
+  'Facilidade de Embarque': 'boardingEase',
+};
+
 const MetricBar = ({ 
   label, 
   level, 
@@ -75,7 +85,8 @@ const MetricBar = ({
   delay: number;
 }) => {
   const percentage = getLevelPercentage(level);
-  const levelLabel = (levelLabels as Record<string, Record<string, string>>)[label.toLowerCase()]?.[level] || level;
+  const key = labelKeyMap[label] || label.toLowerCase();
+  const levelLabel = (levelLabels as Record<string, Record<string, string>>)[key]?.[level] || level;
   
   return (
     <motion.div

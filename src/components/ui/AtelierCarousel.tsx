@@ -39,10 +39,16 @@ const AtelierCarousel = () => {
     const slide = el.querySelector<HTMLElement>(`[data-atelier-slide="${index}"]`);
     if (!slide) return;
 
+    // Temporarily disable snap to allow programmatic scroll
+    el.style.scrollSnapType = 'none';
     el.scrollTo({
       left: slide.offsetLeft,
       behavior: 'smooth',
     });
+    // Re-enable snap after scroll completes
+    setTimeout(() => {
+      el.style.scrollSnapType = 'x mandatory';
+    }, 500);
   };
 
   useEffect(() => {

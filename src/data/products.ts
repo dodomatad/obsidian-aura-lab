@@ -40,6 +40,9 @@ import siouAction1 from '@/assets/boats/siou/siou-action-1.jpg';
 import siouAction2 from '@/assets/boats/siou/siou-action-2.jpg';
 import siouCarrying from '@/assets/boats/siou/siou-carrying.jpg';
 import siouYellowRack from '@/assets/boats/siou/siou-yellow-rack.jpg';
+import siouPaddleClose from '@/assets/boats/siou/siou-paddle-close.jpg';
+import siouProfileWater from '@/assets/boats/siou/siou-profile-water.jpg';
+import siouRearBridge from '@/assets/boats/siou/siou-rear-bridge.jpg';
 
 // MOANA Gallery Images
 import moanaCover from '@/assets/boats/moana/moana-cover.jpg';
@@ -224,6 +227,9 @@ export const productsData: Record<string, Product> = {
       siouCarrying,
       siouAction2,
       siouYellowRack,
+      siouPaddleClose,
+      siouProfileWater,
+      siouRearBridge,
     ],
     techProfile: {
       idealFor: ['Iniciantes', 'Intermediários', 'Amantes de costeira'],

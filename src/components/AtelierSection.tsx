@@ -211,21 +211,13 @@ const AtelierSection = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="px-8 md:px-16 mt-4 text-center"
       >
-        {/* Lista de benefícios */}
-        <ul className="text-orange text-sm md:text-base mb-6 max-w-lg mx-auto space-y-1 text-left">
-          <li className="flex items-start gap-3">
-            <span className="text-orange mt-1">•</span>
-            <span>Realizando o desejo do barco dos sonhos</span>
-          </li>
-          <li className="flex items-start gap-3">
-            <span className="text-orange mt-1">•</span>
-            <span>Aqui você pode escolher a coloração do seu barco</span>
-          </li>
-          <li className="flex items-start gap-3">
-            <span className="text-orange mt-1">•</span>
-            <span>Escolha o modelo que você deseja</span>
-          </li>
-        </ul>
+        {/* Texto informativo */}
+        <p className="text-foreground/60 text-sm md:text-base mb-3 max-w-lg mx-auto leading-relaxed">
+          Todos os barcos são fabricados sob encomenda com as <span className="text-foreground font-medium">cores padrão Opium</span>.
+        </p>
+        <p className="text-foreground/60 text-sm md:text-base mb-6 max-w-lg mx-auto leading-relaxed">
+          Customizações possuem valores e viabilidades técnicas específicas. Consulte nosso especialista.
+        </p>
 
         {/* Botão maior e mais destacado */}
         <motion.a

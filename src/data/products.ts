@@ -96,6 +96,13 @@ import hakaPov from '@/assets/boats/haka/haka-pov.jpg';
 import hakaCockpit from '@/assets/boats/haka/haka-cockpit.jpg';
 import hakaBow from '@/assets/boats/haka/haka-bow.jpg';
 import hakaWater from '@/assets/boats/haka/haka-water.jpg';
+import hakaWaterCity from '@/assets/boats/haka/haka-water-city.jpg';
+import hakaBowLogo from '@/assets/boats/haka/haka-bow-logo.jpg';
+import hakaAmaClose from '@/assets/boats/haka/haka-ama-close.jpg';
+import hakaProfileWater from '@/assets/boats/haka/haka-profile-water.jpg';
+import hakaPaddlingRear from '@/assets/boats/haka/haka-paddling-rear.jpg';
+import hakaPaddlingFront from '@/assets/boats/haka/haka-paddling-front.jpg';
+import hakaCockpitDetail from '@/assets/boats/haka/haka-cockpit-detail.jpg';
 
 export interface ColorOption {
   id: string;
@@ -626,6 +633,13 @@ export const productsData: Record<string, Product> = {
       hakaCockpit,
       hakaBow,
       hakaWater,
+      hakaWaterCity,
+      hakaBowLogo,
+      hakaAmaClose,
+      hakaProfileWater,
+      hakaPaddlingRear,
+      hakaPaddlingFront,
+      hakaCockpitDetail,
     ],
     techProfile: {
       idealFor: ['Todos os níveis', 'Amantes de canoa havaiana', 'Iniciantes a avançados'],

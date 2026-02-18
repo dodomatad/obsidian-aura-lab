@@ -2,14 +2,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Palette } from 'lucide-react';
 
 // Import atelier lifestyle images (FIXO: independente do modelo selecionado)
-import atelierCustomBows from '@/assets/atelier/atelier-custom-bows.jpg';
-
 import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
 import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.jpg';
 import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.jpg';
 
 const atelierImages = [
-  { src: atelierCustomBows, alt: 'Proas personalizadas e cores vibrantes' },
   
   { src: atelierLifestylePaddle, alt: 'Lifestyle: remada e personalização' },
   { src: atelierLifestyleCarry, alt: 'Lifestyle: transporte do barco personalizado' },

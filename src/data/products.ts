@@ -15,6 +15,12 @@ import ponoDetail3 from '@/assets/boats/pono/pono-detail-3.jpg';
 import ponoDetail4 from '@/assets/boats/pono/pono-detail-4.jpg';
 import ponoDetail5 from '@/assets/boats/pono/pono-detail-5.jpg';
 import ponoDetail6 from '@/assets/boats/pono/pono-detail-6.jpg';
+import ponoBowOrange from '@/assets/boats/pono/pono-bow-orange.jpg';
+import ponoProfileLandscape from '@/assets/boats/pono/pono-profile-landscape.jpg';
+import ponoCockpitDetail from '@/assets/boats/pono/pono-cockpit-detail.jpg';
+import ponoSternRudder from '@/assets/boats/pono/pono-stern-rudder.jpg';
+import ponoDeckLogo from '@/assets/boats/pono/pono-deck-logo.jpg';
+import ponoNoseLogo from '@/assets/boats/pono/pono-nose-logo.jpg';
 
 // INFINITY Gallery Images
 import infinityDetail1 from '@/assets/boats/infinity/infinity-detail-1.jpg';
@@ -179,6 +185,12 @@ export const productsData: Record<string, Product> = {
       ponoDetail4,
       ponoDetail5,
       ponoDetail6,
+      ponoBowOrange,
+      ponoProfileLandscape,
+      ponoCockpitDetail,
+      ponoSternRudder,
+      ponoDeckLogo,
+      ponoNoseLogo,
     ],
     techProfile: {
       idealFor: ['Iniciantes', 'Intermediários', 'Avançados que buscam conforto'],

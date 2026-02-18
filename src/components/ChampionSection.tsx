@@ -329,7 +329,7 @@ const ChampionSection = () => {
               className="text-center mb-8 md:mb-10"
             >
               <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold text-orange">
-                Projetos, Iniciativas e Parcerias
+                Projetos e Parcerias
               </span>
             </motion.div>
 

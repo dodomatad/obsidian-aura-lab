@@ -174,7 +174,7 @@ export const productsData: Record<string, Product> = {
       heightRecommendation: 'Todos os tamanhos',
       stability: 'very-high',
       speed: 'medium',
-      maneuverability: 'medium',
+      maneuverability: 'high',
       comfort: 'very-high',
       cargoCapacity: 'medium',
       boardingEase: 'easy',
@@ -261,7 +261,7 @@ export const productsData: Record<string, Product> = {
       beam: '43cm',
       weight: '12kg',
       capacity: '115kg',
-      material: 'Fibra de Carbono',
+      material: 'Fibra de Vidro + Carbono + Divinicel',
     },
     features: [
       'O mais baixo da frota (fácil de carregar)',
@@ -371,7 +371,7 @@ export const productsData: Record<string, Product> = {
     level: 'Avançado (Elite)',
     levelColor: 'text-red-500',
     difficultyLevel: 95, // Mais Veloz/Instável
-    description: 'Comprovadamente o surfski mais rápido do mercado brasileiro. Fred Longhin, na casa dos 50 anos, ganhou o campeonato brasileiro de faixa azul usando o Infinity.',
+    description: 'Comprovadamente o surfski mais rápido do mercado da canoagem oceânica brasileira. Fred Longhin, na casa dos 50 anos, ganhou o campeonato brasileiro de faixa azul usando o Infinity.',
     image: boatInfinity,
     specs: {
       length: '6.45m',

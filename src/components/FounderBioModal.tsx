@@ -8,7 +8,7 @@ interface FounderBioModalProps {
 }
 
 const achievements = [
-  { icon: Award, title: '14 Anos Invicto', description: 'Domínio absoluto nas competições de canoagem oceânica' },
+  { icon: Award, title: '17 Títulos Consecutivos', description: 'Liderança absoluta nas competições de canoagem oceânica' },
   { icon: Flame, title: 'Tocha Olímpica 2016', description: 'Condutor da Tocha Olímpica no Rio de Janeiro' },
   { icon: Globe, title: 'Tocha Pan-Americana 2007', description: 'Condutor da Tocha nos Jogos Pan-Americanos' },
   { icon: Users, title: 'Pioneiro Nacional', description: 'Introdutor da canoagem oceânica no Brasil' },
@@ -98,7 +98,7 @@ const FounderBioModal = ({ isOpen, onClose }: FounderBioModalProps) => {
                       </p>
                       
                       <p className="text-base md:text-lg text-foreground/70 leading-relaxed font-sans font-light">
-                        Com <span className="text-foreground font-medium">14 anos de invencibilidade</span> nas principais competições nacionais, Fábio construiu um legado que transcende troféus. Cada vitória foi um laboratório para aperfeiçoar as embarcações que hoje levam atletas ao pódio.
+                        Com <span className="text-foreground font-medium">17 títulos consecutivos</span> em competições nacionais e internacionais, Fábio construiu um legado que transcende troféus. Cada vitória foi um laboratório para aperfeiçoar as embarcações que hoje levam atletas ao pódio.
                       </p>
                       
                       <p className="text-base md:text-lg text-foreground/70 leading-relaxed font-sans font-light">
@@ -106,7 +106,7 @@ const FounderBioModal = ({ isOpen, onClose }: FounderBioModalProps) => {
                       </p>
 
                       <p className="text-base md:text-lg text-foreground/60 leading-relaxed font-sans font-light italic border-l-2 border-orange/30 pl-6">
-                        "Cada barco que construímos carrega a mesma filosofia que me levou à vitória: dominar o mar com técnica, paixão e excelência absoluta."
+                        "Cada barco que construímos carrega a mesma filosofia que me levou à vitória: integrar-se ao mar com técnica, paixão e excelência absoluta."
                       </p>
                     </div>
 

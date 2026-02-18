@@ -139,7 +139,7 @@ const ChampionSection = () => {
                 transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
                 className="text-base md:text-lg lg:text-xl leading-relaxed font-sans text-center text-neutral-200"
               >
-                São <span className="text-foreground font-bold">14 títulos consecutivos</span> em competições nacionais e presença em provas internacionais, 
+                São <span className="text-foreground font-bold">17 títulos consecutivos</span> em competições nacionais e internacionais, 
                 equipando atletas do <span className="text-foreground font-bold">iniciante ao pódio</span>.
               </motion.p>
 

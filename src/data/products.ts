@@ -81,6 +81,7 @@ import moanaAerial from '@/assets/boats/moana/moana-aerial.jpg';
 import moanaSeatTop from '@/assets/boats/moana/moana-seat-top.jpg';
 
 // HUNA OC2 Gallery Images
+import hunaCover from '@/assets/boats/huna/huna-cover.jpg';
 import hunaAma from '@/assets/boats/huna/huna-ama.jpg';
 import hunaLogo from '@/assets/boats/huna/huna-logo.jpg';
 import hunaCockpit from '@/assets/boats/huna/huna-cockpit.jpg';
@@ -672,7 +673,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
     description: 'Canoa havaiana com flutuador na cabine da frente para surfar mais. Design otimizado para o mar brasileiro.',
-    image: hunaAma,
+    image: hunaCover,
     specs: {
       length: '7.00m',
       beam: '45cm',
@@ -688,13 +689,13 @@ export const productsData: Record<string, Product> = {
       'Fácil entrada e saída',
     ],
     colors: [
-      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: hunaAma },
+      { id: 'default', name: 'Vermelho & Branco', color: '#C41E3A', image: hunaCover },
       { id: 'camo', name: 'Camuflagem Oceano', color: '#4A6741', image: boatCamo },
     ],
-    defaultImage: hunaAma,
+    defaultImage: hunaCover,
     galleryImages: [
+      hunaCover,
       hunaAma,
-      hunaLogo,
       hunaCockpit,
       hunaBow,
       hunaDetailHardware,

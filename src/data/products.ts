@@ -44,6 +44,14 @@ import dwDetail2 from '@/assets/boats/dw/dw-detail-2.jpg';
 import dwDetail3 from '@/assets/boats/dw/dw-detail-3.jpg';
 import dwDetail4 from '@/assets/boats/dw/dw-detail-4.jpg';
 import dwDetail5 from '@/assets/boats/dw/dw-detail-5.jpg';
+import dwProfileRack from '@/assets/boats/dw/dw-profile-rack.jpg';
+import dwBowHatch from '@/assets/boats/dw/dw-bow-hatch.jpg';
+import dwCockpitDetail from '@/assets/boats/dw/dw-cockpit-detail.jpg';
+import dwDeckPov from '@/assets/boats/dw/dw-deck-pov.jpg';
+import dwSternLogo from '@/assets/boats/dw/dw-stern-logo.jpg';
+import dwFullProfile from '@/assets/boats/dw/dw-full-profile.jpg';
+import dwBowLogo from '@/assets/boats/dw/dw-bow-logo.jpg';
+import dwDeckAngle from '@/assets/boats/dw/dw-deck-angle.jpg';
 
 // SIOU Gallery Images
 import siouCover from '@/assets/boats/siou/siou-cover.jpg';
@@ -381,6 +389,14 @@ export const productsData: Record<string, Product> = {
       dwDetail1,
       dwDetail3,
       dwDetail4,
+      dwProfileRack,
+      dwBowHatch,
+      dwCockpitDetail,
+      dwDeckPov,
+      dwSternLogo,
+      dwFullProfile,
+      dwBowLogo,
+      dwDeckAngle,
     ],
     techProfile: {
       idealFor: ['Intermediários experientes', 'Avançados', 'Competidores'],

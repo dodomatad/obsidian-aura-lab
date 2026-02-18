@@ -49,13 +49,13 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
         />
       </div>
 
-      {/* Thumbnails */}
-      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      {/* Thumbnails - Grid layout for full visibility */}
+      <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-2">
         {images.map((img, idx) => (
           <motion.button 
             key={idx} 
             onClick={() => setMainImage(img)}
-            className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden transition-all duration-300 ${
+            className={`aspect-square rounded-lg overflow-hidden transition-all duration-300 ${
               mainImage === img 
                 ? 'ring-2 ring-foreground opacity-100' 
                 : 'opacity-40 grayscale hover:opacity-70 hover:grayscale-0'

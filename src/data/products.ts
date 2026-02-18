@@ -52,6 +52,14 @@ import moanaCockpit from '@/assets/boats/moana/moana-cockpit.jpg';
 import moanaLogo from '@/assets/boats/moana/moana-logo.jpg';
 import moanaSeat from '@/assets/boats/moana/moana-seat.jpg';
 import moanaDuo from '@/assets/boats/moana/moana-duo.jpg';
+import moanaBowLogo from '@/assets/boats/moana/moana-bow-logo.jpg';
+import moanaCockpitBeach from '@/assets/boats/moana/moana-cockpit-beach.jpg';
+import moanaSternDetail from '@/assets/boats/moana/moana-stern-detail.jpg';
+import moanaDeckTop from '@/assets/boats/moana/moana-deck-top.jpg';
+import moanaBowInterior from '@/assets/boats/moana/moana-bow-interior.jpg';
+import moanaSideBeach from '@/assets/boats/moana/moana-side-beach.jpg';
+import moanaAerial from '@/assets/boats/moana/moana-aerial.jpg';
+import moanaSeatTop from '@/assets/boats/moana/moana-seat-top.jpg';
 
 // HUNA OC2 Gallery Images
 import hunaAma from '@/assets/boats/huna/huna-ama.jpg';
@@ -289,6 +297,14 @@ export const productsData: Record<string, Product> = {
       moanaLogo,
       moanaSeat,
       moanaDuo,
+      moanaBowLogo,
+      moanaCockpitBeach,
+      moanaSternDetail,
+      moanaDeckTop,
+      moanaBowInterior,
+      moanaSideBeach,
+      moanaAerial,
+      moanaSeatTop,
     ],
     techProfile: {
       idealFor: ['Iniciantes', 'Intermediários', 'Pessoas até 1,85m'],

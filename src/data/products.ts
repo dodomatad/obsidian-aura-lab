@@ -31,6 +31,14 @@ import infinityDetail5 from '@/assets/boats/infinity/infinity-detail-5.jpg';
 import infinityDetail6 from '@/assets/boats/infinity/infinity-detail-6.jpg';
 import infinityDetail7 from '@/assets/boats/infinity/infinity-detail-7.jpg';
 import infinityDetail8 from '@/assets/boats/infinity/infinity-detail-8.jpg';
+import infinityBowGreen from '@/assets/boats/infinity/infinity-bow-green.jpg';
+import infinityBowHatch from '@/assets/boats/infinity/infinity-bow-hatch.jpg';
+import infinityLogoSide from '@/assets/boats/infinity/infinity-logo-side.jpg';
+import infinityAerialYellow from '@/assets/boats/infinity/infinity-aerial-yellow.jpg';
+import infinityDeckRigging from '@/assets/boats/infinity/infinity-deck-rigging.jpg';
+import infinityLogoClose from '@/assets/boats/infinity/infinity-logo-close.jpg';
+import infinityProfileBlue from '@/assets/boats/infinity/infinity-profile-blue.jpg';
+import infinitySternRudder from '@/assets/boats/infinity/infinity-stern-rudder.jpg';
 
 // DW Gallery Images
 import dwCover from '@/assets/boats/dw/dw-cover.jpg';
@@ -438,6 +446,14 @@ export const productsData: Record<string, Product> = {
       infinityDetail6,
       infinityDetail7,
       infinityDetail8,
+      infinityBowGreen,
+      infinityBowHatch,
+      infinityLogoSide,
+      infinityAerialYellow,
+      infinityDeckRigging,
+      infinityLogoClose,
+      infinityProfileBlue,
+      infinitySternRudder,
     ],
     techProfile: {
       idealFor: ['Atletas de elite', 'Competidores profissionais', 'Quem busca velocidade pura'],

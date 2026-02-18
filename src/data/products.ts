@@ -72,6 +72,8 @@ import hunaAma from '@/assets/boats/huna/huna-ama.jpg';
 import hunaLogo from '@/assets/boats/huna/huna-logo.jpg';
 import hunaCockpit from '@/assets/boats/huna/huna-cockpit.jpg';
 import hunaBow from '@/assets/boats/huna/huna-bow.jpg';
+import hunaDetailHardware from '@/assets/boats/huna/huna-detail-hardware.jpg';
+import hunaDeckRigging from '@/assets/boats/huna/huna-deck-rigging.jpg';
 
 // HAKA OC1 Gallery Images
 import hakaCover from '@/assets/boats/haka/haka-cover.jpg';
@@ -656,6 +658,8 @@ export const productsData: Record<string, Product> = {
       hunaLogo,
       hunaCockpit,
       hunaBow,
+      hunaDetailHardware,
+      hunaDeckRigging,
     ],
     techProfile: {
       idealFor: ['Duplas', 'Famílias', 'Amigos', 'Todos os níveis'],

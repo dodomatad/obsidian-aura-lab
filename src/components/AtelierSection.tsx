@@ -14,10 +14,9 @@ interface AtelierImage {
 }
 
 const atelierImages: AtelierImage[] = [
-  { id: 'paddle', src: atelierLifestylePaddle, alt: 'Lifestyle: remada e personalização' },
+  { id: 'exotic', src: atelierCustomExotic, alt: 'Customização: cores exóticas' },
   { id: 'paddle', src: atelierLifestylePaddle, alt: 'Lifestyle: remada e personalização' },
   { id: 'carry', src: atelierLifestyleCarry, alt: 'Lifestyle: transporte do barco' },
-  { id: 'exotic', src: atelierCustomExotic, alt: 'Customização: cores exóticas' },
 ];
 
 const AtelierSection = () => {

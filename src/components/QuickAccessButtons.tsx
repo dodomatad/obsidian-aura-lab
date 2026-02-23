@@ -28,16 +28,16 @@ const QuickAccessButtons = () => {
   };
 
   return (
-    <section className="relative z-10 w-full px-4 md:px-16 -mt-12 md:-mt-16">
+    <section className="relative z-10 w-full py-10 md:py-14 border-b border-foreground/[0.06]">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-        className="max-w-4xl mx-auto"
+        className="max-w-4xl mx-auto px-4 md:px-16"
       >
         {/* Section label */}
-        <div className="text-center mb-4 md:mb-6">
+        <div className="text-center mb-5 md:mb-7">
           <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/50 font-sans">
             Encontre seu barco
           </span>
@@ -59,7 +59,6 @@ const QuickAccessButtons = () => {
               className="group relative overflow-hidden rounded-xl p-4 md:p-5 text-center cursor-pointer border border-foreground/[0.06] transition-all duration-300 hover:border-orange/30"
               style={{
                 background: 'rgba(255, 255, 255, 0.03)',
-                backdropFilter: 'blur(10px)',
               }}
             >
               {/* Hover glow */}

@@ -87,6 +87,7 @@ const ProductShowcase = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [filterCategory, setFilterCategory] = useState<CategoryType>('Todos');
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const autoplayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progress = useMotionValue(0); // 0..1 (no React re-renders)
@@ -94,8 +95,14 @@ const ProductShowcase = () => {
   const { startTransition, saveScrollPosition, isTransitioning, transitionData, showLoader } = useTransition();
   const isMobile = useIsMobile();
 
-  const currentProduct = allProducts[currentIndex];
-  const currentCategory = currentProduct.category;
+  // Filtered product list based on active category
+  const filteredProducts = useMemo(() => {
+    if (filterCategory === 'Todos') return allProducts;
+    return allProducts.filter(p => p.category === filterCategory);
+  }, [filterCategory]);
+
+  const currentProduct = filteredProducts[currentIndex] || filteredProducts[0];
+  const currentCategory = currentProduct?.category;
 
   const handleProductClick = (product: Product, imageElement: HTMLImageElement) => {
     saveScrollPosition();
@@ -119,15 +126,15 @@ const ProductShowcase = () => {
 
   const nextSlide = useCallback(() => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % allProducts.length);
+    setCurrentIndex((prev) => (prev + 1) % filteredProducts.length);
     progress.set(0);
-  }, []);
+  }, [filteredProducts.length]);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + allProducts.length) % allProducts.length);
+    setCurrentIndex((prev) => (prev - 1 + filteredProducts.length) % filteredProducts.length);
     progress.set(0);
-  }, []);
+  }, [filteredProducts.length]);
 
   const stopAutoplay = useCallback(() => {
     if (autoplayTimeoutRef.current) {
@@ -169,14 +176,14 @@ const ProductShowcase = () => {
 
   // Preload adjacent images for smoother transitions
   useEffect(() => {
-    const nextIndex = (currentIndex + 1) % allProducts.length;
-    const prevIndex = (currentIndex - 1 + allProducts.length) % allProducts.length;
+    const nextIndex = (currentIndex + 1) % filteredProducts.length;
+    const prevIndex = (currentIndex - 1 + filteredProducts.length) % filteredProducts.length;
     
     [nextIndex, prevIndex].forEach(index => {
       const img = new Image();
-      img.src = allProducts[index].image;
+      img.src = filteredProducts[index].image;
     });
-  }, [currentIndex]);
+  }, [currentIndex, filteredProducts]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -189,22 +196,34 @@ const ProductShowcase = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobile, nextSlide, prevSlide]);
 
-  // Listen for quick access button events
+  // Listen for quick access button events — now sets filter
   useEffect(() => {
     const handleJump = (e: Event) => {
       const detail = (e as CustomEvent).detail as string;
-      if (detail === 'canoa-oc1') {
-        const idx = allProducts.findIndex(p => p.id === 'haka-oc1');
-        if (idx !== -1) goToSlide(idx);
-      } else if (detail === 'canoa-oc2') {
-        const idx = allProducts.findIndex(p => p.id === 'huna-oc2');
-        if (idx !== -1) goToSlide(idx);
+      let targetCategory: CategoryType = 'Todos';
+      if (detail === 'canoa-oc1' || detail === 'canoa-oc2') {
+        targetCategory = 'Canoa Havaiana';
       } else if (detail === 'surfski-individual') {
-        const idx = allProducts.findIndex(p => p.category === 'Surfski Individual');
-        if (idx !== -1) goToSlide(idx);
+        targetCategory = 'Surfski Individual';
       } else if (detail === 'surfski-duplo') {
-        const idx = allProducts.findIndex(p => p.category === 'Surfski Duplo');
-        if (idx !== -1) goToSlide(idx);
+        targetCategory = 'Surfski Duplo';
+      }
+      setFilterCategory(targetCategory);
+      setCurrentIndex(0);
+      setDirection(0);
+      progress.set(0);
+
+      // If a specific model was requested, jump to it within the filtered list
+      if (detail === 'canoa-oc2') {
+        setTimeout(() => {
+          // After filter applies, find huna-oc2 in filtered list
+          const filtered = allProducts.filter(p => p.category === targetCategory);
+          const idx = filtered.findIndex(p => p.id === 'huna-oc2');
+          if (idx > 0) {
+            setDirection(1);
+            setCurrentIndex(idx);
+          }
+        }, 50);
       }
     };
     window.addEventListener('jump-to-product', handleJump);
@@ -230,23 +249,17 @@ const ProductShowcase = () => {
     else if (info.offset.x < -swipeThreshold) nextSlide();
   };
 
-  // Jump to first product of a category
+  // Jump to first product of a category (filter mode)
   const jumpToCategory = useCallback((category: CategoryType) => {
     setHasInteracted(true);
-    if (category === 'Todos') {
-      goToSlide(0);
-      return;
-    }
-    const firstIndex = allProducts.findIndex(p => p.category === category);
-    if (firstIndex !== -1) {
-      goToSlide(firstIndex);
-    }
+    setFilterCategory(category);
+    setCurrentIndex(0);
+    setDirection(0);
+    progress.set(0);
   }, []);
 
   // Get active category for chips
-  const activeChipCategory = useMemo((): CategoryType => {
-    return currentProduct.category as CategoryType;
-  }, [currentProduct.category]);
+  const activeChipCategory = filterCategory;
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
 
@@ -414,9 +427,7 @@ const ProductShowcase = () => {
           className="relative z-30 flex gap-2 overflow-x-auto px-4 py-3 scrollbar-hide"
         >
           {CATEGORIES.map((cat) => {
-            const isActive = cat === 'Todos' 
-              ? false 
-              : activeChipCategory === cat;
+            const isActive = activeChipCategory === cat;
             
             return (
               <motion.button
@@ -663,8 +674,8 @@ const ProductShowcase = () => {
 
       {/* Navigation Dots - Enhanced with glow effect */}
       <div className="absolute bottom-8 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-1.5 z-30 items-center">
-        {allProducts.map((product, index) => {
-          const prevProduct = index > 0 ? allProducts[index - 1] : null;
+        {filteredProducts.map((product, index) => {
+          const prevProduct = index > 0 ? filteredProducts[index - 1] : null;
           const isNewCategory = prevProduct && prevProduct.category !== product.category;
           const isActive = index === currentIndex;
           
@@ -735,7 +746,7 @@ const ProductShowcase = () => {
         )}
         
         <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/30 font-mono">
-          {String(currentIndex + 1).padStart(2, '0')} / {String(allProducts.length).padStart(2, '0')}
+          {String(currentIndex + 1).padStart(2, '0')} / {String(filteredProducts.length).padStart(2, '0')}
         </span>
       </div>
     </section>

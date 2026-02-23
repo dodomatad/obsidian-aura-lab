@@ -399,6 +399,10 @@ const ProductShowcase = () => {
             </motion.h2>
           </AnimatePresence>
         </div>
+        {/* Aviso de personalização sob consulta */}
+        <p className="text-[10px] md:text-xs text-foreground/40 mt-3 tracking-wide">
+          Cores e acabamentos personalizados sob consulta com nosso especialista.
+        </p>
       </motion.div>
 
       {/* Category Chips - Mobile Navigation */}

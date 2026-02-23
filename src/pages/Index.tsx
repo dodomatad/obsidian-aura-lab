@@ -4,6 +4,7 @@ import LocationMap from '@/components/LocationMap';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
+import QuickAccessButtons from '@/components/QuickAccessButtons';
 
 
 import LoadingScreen from '@/components/LoadingScreen';
@@ -198,8 +199,11 @@ const Index = () => {
         {/* LUXURY SPACING: Large gaps between sections */}
         {/* ============================================ */}
         
+        {/* Quick Access Buttons - Category shortcuts */}
+        <QuickAccessButtons />
+
         {/* Product Showcase - Editorial Layout with Scroll Snap */}
-        <div id="modelos" className="pt-4 md:pt-6">
+        <div id="modelos" className="pt-8 md:pt-12">
           <ProductShowcase />
         </div>
 

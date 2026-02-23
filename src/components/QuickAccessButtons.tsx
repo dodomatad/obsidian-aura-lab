@@ -4,14 +4,13 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 interface QuickAccessCategory {
   label: string;
   eventDetail: string;
-  icon: string; // emoji for visual punch
 }
 
 const CATEGORIES: QuickAccessCategory[] = [
-  { label: 'Canoa OC1', eventDetail: 'canoa-oc1', icon: '🛶' },
-  { label: 'Canoa OC2', eventDetail: 'canoa-oc2', icon: '🛶' },
-  { label: 'Surfski Individual', eventDetail: 'surfski-individual', icon: '🏄' },
-  { label: 'Surfski Duplo', eventDetail: 'surfski-duplo', icon: '🏄‍♂️' },
+  { label: 'Canoa OC1', eventDetail: 'canoa-oc1' },
+  { label: 'Canoa OC2', eventDetail: 'canoa-oc2' },
+  { label: 'Surfski Individual', eventDetail: 'surfski-individual' },
+  { label: 'Surfski Duplo', eventDetail: 'surfski-duplo' },
 ];
 
 const QuickAccessButtons = () => {
@@ -68,11 +67,8 @@ const QuickAccessButtons = () => {
                 }}
               />
               
-              {/* Icon */}
-              <span className="text-2xl md:text-3xl block mb-2">{cat.icon}</span>
-              
               {/* Label */}
-              <span className="text-[11px] md:text-xs font-bold tracking-wider uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300">
+              <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300">
                 {cat.label}
               </span>
             </motion.a>

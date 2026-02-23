@@ -27,23 +27,28 @@ const QuickAccessButtons = () => {
   };
 
   return (
-    <section className="relative z-10 w-full py-10 md:py-14 border-b border-foreground/[0.06]">
+    <section className="relative z-10 w-full py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-        className="max-w-4xl mx-auto px-4 md:px-16"
+        className="max-w-3xl mx-auto px-6 md:px-16"
       >
         {/* Section label */}
-        <div className="text-center mb-5 md:mb-7">
-          <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/50 font-sans">
+        <div className="text-center mb-3">
+          <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-foreground/40 font-sans">
             Encontre seu barco
           </span>
         </div>
+        
+        {/* Section subtitle */}
+        <p className="text-center text-foreground/25 text-[10px] md:text-[11px] tracking-widest uppercase mb-10 md:mb-14">
+          Acesso direto ao modelo
+        </p>
 
         {/* Button Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
           {CATEGORIES.map((cat, i) => (
             <motion.a
               key={cat.eventDetail}
@@ -55,7 +60,7 @@ const QuickAccessButtons = () => {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="group relative overflow-hidden rounded-xl p-4 md:p-5 text-center cursor-pointer border border-foreground/[0.06] transition-all duration-300 hover:border-orange/30"
+              className="group relative overflow-hidden rounded-xl p-5 md:p-6 text-center cursor-pointer border border-foreground/[0.08] transition-all duration-300 hover:border-orange/30"
               style={{
                 background: 'rgba(255, 255, 255, 0.03)',
               }}

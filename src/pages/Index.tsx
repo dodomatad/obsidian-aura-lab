@@ -203,7 +203,7 @@ const Index = () => {
         <QuickAccessButtons />
 
         {/* Product Showcase - Editorial Layout with Scroll Snap */}
-        <div id="modelos" className="pt-20 md:pt-28">
+        <div id="modelos" className="pt-24 md:pt-36">
           <ProductShowcase />
         </div>
 

@@ -141,7 +141,7 @@ const SocialImpactSection = () => {
           className="text-center mb-12 md:mb-16"
         >
           <span className="inline-block text-orange/80 text-sm font-semibold tracking-widest uppercase mb-4">
-            Nossas Iniciativas
+            Projetos e Parcerias
           </span>
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 tracking-tight">
             ALÉM DO ESPORTE

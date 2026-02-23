@@ -7,7 +7,8 @@ import { Product, productsData } from '@/data/products';
 import StabilityMeter from '@/components/ui/StabilityMeter';
 
 // Custom order for the fleet carousel
-const CUSTOM_ORDER = ['moana', 'haka-oc1', 'dw', 'infinity', 'siou', 'pono', 'huna-oc2'] as const;
+// Canoas first (carro-chefe), then Surfski Individual, then Surfski Duplo
+const CUSTOM_ORDER = ['haka-oc1', 'huna-oc2', 'pono', 'siou', 'moana', 'dw', 'infinity', 'azimut', 'molokay-ss'] as const;
 
 // Get ALL products in the custom order
 const allProducts: Product[] = CUSTOM_ORDER
@@ -18,8 +19,8 @@ const allProducts: Product[] = CUSTOM_ORDER
 const AUTOPLAY_INTERVAL = 5000; // 5 seconds
 const TOUCH_RESUME_DELAY = 2000; // 2 seconds delay after touch ends
 
-// Category definitions - only categories with images in the carousel
-const CATEGORIES = ['Todos', 'Surfski Individual', 'Canoa Havaiana'] as const;
+// Category definitions
+const CATEGORIES = ['Todos', 'Canoa Havaiana', 'Surfski Individual', 'Surfski Duplo'] as const;
 type CategoryType = typeof CATEGORIES[number];
 
 // ============================================
@@ -188,6 +189,28 @@ const ProductShowcase = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobile, nextSlide, prevSlide]);
 
+  // Listen for quick access button events
+  useEffect(() => {
+    const handleJump = (e: Event) => {
+      const detail = (e as CustomEvent).detail as string;
+      if (detail === 'canoa-oc1') {
+        const idx = allProducts.findIndex(p => p.id === 'haka-oc1');
+        if (idx !== -1) goToSlide(idx);
+      } else if (detail === 'canoa-oc2') {
+        const idx = allProducts.findIndex(p => p.id === 'huna-oc2');
+        if (idx !== -1) goToSlide(idx);
+      } else if (detail === 'surfski-individual') {
+        const idx = allProducts.findIndex(p => p.category === 'Surfski Individual');
+        if (idx !== -1) goToSlide(idx);
+      } else if (detail === 'surfski-duplo') {
+        const idx = allProducts.findIndex(p => p.category === 'Surfski Duplo');
+        if (idx !== -1) goToSlide(idx);
+      }
+    };
+    window.addEventListener('jump-to-product', handleJump);
+    return () => window.removeEventListener('jump-to-product', handleJump);
+  }, []);
+
   // Touch handlers for mobile pause - improved with longer delay
   const handleTouchStart = () => {
     setIsPaused(true);
@@ -220,12 +243,9 @@ const ProductShowcase = () => {
     }
   }, []);
 
-  // Get active category for chips (only show categories in CATEGORIES)
+  // Get active category for chips
   const activeChipCategory = useMemo((): CategoryType => {
-    const cat = currentProduct.category;
-    // Map product category to chip category (handle Surfski Duplo → fallback)
-    if (cat === 'Surfski Duplo') return 'Surfski Individual';
-    return cat as CategoryType;
+    return currentProduct.category as CategoryType;
   }, [currentProduct.category]);
 
   const isThisProductTransitioning = isTransitioning && transitionData?.productId === currentProduct.id;
@@ -405,7 +425,7 @@ const ProductShowcase = () => {
                 }`}
                 whileTap={{ scale: 0.95 }}
               >
-                {cat === 'Todos' ? 'Início' : cat === 'Surfski Individual' ? 'Surfski' : 'Canoa'}
+                {cat === 'Todos' ? 'Início' : cat === 'Surfski Individual' ? 'Surfski' : cat === 'Surfski Duplo' ? 'Duplo' : 'Canoa'}
               </motion.button>
             );
           })}

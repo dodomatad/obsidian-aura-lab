@@ -111,7 +111,7 @@ const Index = () => {
               onClick={(e) => handleNavClick(e, 'modelos')}
               className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
-              Modelos
+              Produtos
             </a>
             <a 
               href="#atelier" 

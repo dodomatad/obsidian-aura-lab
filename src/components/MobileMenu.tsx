@@ -76,7 +76,7 @@ const MobileMenu = () => {
 
   const menuItems = [
     { icon: Home, label: 'Início', href: '#hero', id: 'hero' },
-    { icon: Ship, label: 'Modelos', href: '#modelos', id: 'modelos' },
+    { icon: Ship, label: 'Produtos', href: '#modelos', id: 'modelos' },
     { icon: Cpu, label: 'Tecnologia', href: '#atelier', id: 'atelier' },
     { icon: Users, label: 'História', href: '#champion', id: 'champion' },
   ];

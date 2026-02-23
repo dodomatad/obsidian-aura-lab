@@ -243,7 +243,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil a Intermediário',
     levelColor: 'text-emerald-400',
     difficultyLevel: 25,
-    description: 'O barco mais manobrável da frota. Ideal para costeiras e quem busca controle total em qualquer situação.',
+    description: 'O barco mais manobrável da frota. Ideal para todos os tipos de mares e para quem busca controle total em qualquer situação.',
     image: siouCover,
     specs: {
       length: '6.00m',
@@ -256,7 +256,7 @@ export const productsData: Record<string, Product> = {
       'Design versátil para evolução',
       'Manobrabilidade incomparável',
       'Cockpit confortável',
-      'Ideal para costeiras',
+      'Ideal para todos os tipos de mares',
       'Fácil manobra',
     ],
     colors: [
@@ -275,7 +275,7 @@ export const productsData: Record<string, Product> = {
       siouRearBridge,
     ],
     techProfile: {
-      idealFor: ['Iniciantes', 'Intermediários', 'Amantes de costeira'],
+      idealFor: ['Iniciantes', 'Intermediários', 'Todos os tipos de mar'],
       heightRecommendation: 'Todos os tamanhos',
       stability: 'high',
       speed: 'medium',
@@ -283,13 +283,13 @@ export const productsData: Record<string, Product> = {
       comfort: 'high',
       cargoCapacity: 'high',
       boardingEase: 'hard',
-      bestFor: ['Costeiras', 'Travessias com carga', 'Mar de vento', 'Exploração'],
+      bestFor: ['Todos os tipos de mares', 'Travessias com carga', 'Mar de vento', 'Exploração'],
       conditions: ['Mar calmo', 'Mar agitado', 'Downwind', 'Upwind'],
       highlights: [
         'Barco mais manobrável da frota',
         'Giro de 360° em raio muito pequeno',
         'Mais alto = melhor borda livre para carregar carga',
-        'Ideal para "lamber pedras" em costeiras',
+        'Ideal para todos os tipos de mares',
         'Fica mais estável com carga (centro de gravidade mais baixo)',
       ],
       comparedToFleet: 'Mais estável que MOANA. Velocidade similar ao PONO. Posição #2 em estabilidade.',

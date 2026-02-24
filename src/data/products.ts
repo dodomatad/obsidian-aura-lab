@@ -187,10 +187,9 @@ export const productsData: Record<string, Product> = {
       material: 'Fibra de Carbono + Kevlar',
     },
     features: [
-      'Cockpit ergonômico com ajuste lombar',
-      'Proa hidrodinâmica para mínima resistência',
-      'Sistema de drenagem automática',
-      'Compartimentos estanques para equipamentos',
+      'Cockpit ergonômico e confortável',
+      'Proa com design hidrodinâmico',
+      'Compartimentos para equipamentos',
       'Acabamento resistente a UV',
       'Boa manobrabilidade para o nível de estabilidade',
     ],
@@ -387,7 +386,7 @@ export const productsData: Record<string, Product> = {
       'Estabilidade em condições extremas',
       'Aceleração rápida',
       'Controle preciso de leme',
-      'Barco mais longo = mais velocidade',
+      'Construção em Carbono Aeroespacial',
     ],
     colors: [
       { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwDetail1 },
@@ -448,10 +447,10 @@ export const productsData: Record<string, Product> = {
     },
     features: [
       'Geometria de ataque para velocidade máxima',
-      'Leme integrado com controle por pedal',
+      'Leme com controle por pedal',
       'Cockpit de competição otimizado',
       'Peso ultraleve sem comprometer rigidez',
-      'Hidrodinâmica testada em túnel de vento',
+      'Construção em Carbono Pré-Preg Aeroespacial',
     ],
     colors: [
       { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatInfinity },

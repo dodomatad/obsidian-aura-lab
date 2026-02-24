@@ -4,6 +4,7 @@ import LocationMap from '@/components/LocationMap';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
 import AtelierSection from '@/components/AtelierSection';
+import TechnologySection from '@/components/TechnologySection';
 import QuickAccessButtons from '@/components/QuickAccessButtons';
 
 
@@ -221,8 +222,9 @@ const Index = () => {
           <ProductShowcase />
         </div>
 
-        {/* Atelier Section - Color Selector */}
+        {/* Technology Section + Atelier */}
         <div id="atelier" className="pt-2 md:pt-4">
+          <TechnologySection />
           <AtelierSection />
         </div>
 

@@ -440,7 +440,7 @@ const ProductShowcase = () => {
                 }`}
                 whileTap={{ scale: 0.95 }}
               >
-                {cat === 'Todos' ? 'Início' : cat === 'Surfski Individual' ? 'Surfski' : cat === 'Surfski Duplo' ? 'Duplo' : 'Canoa'}
+                {cat === 'Todos' ? 'Início' : cat === 'Canoa Havaiana' ? 'Canoa OC1 & OC2' : cat}
               </motion.button>
             );
           })}

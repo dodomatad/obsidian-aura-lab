@@ -41,7 +41,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-lg md:text-4xl mb-4 text-foreground max-w-4xl font-display font-bold"
+          className="text-3xl md:text-5xl lg:text-6xl mb-6 max-w-5xl font-display font-bold leading-tight"
+          style={{ color: 'hsl(var(--orange))' }}
         >
           A Jornada de Fábio Paiva
         </motion.h2>
@@ -50,9 +51,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-foreground/60 text-sm md:text-base max-w-sm"
+          className="text-foreground/70 text-base md:text-xl max-w-3xl leading-relaxed font-medium"
         >
-          De atleta visionário a formador de gerações: uma história marcada pela excelência e pioneirismo no mar.
+          O visionário que introduziu a Canoa Havaiana no Brasil e o maior fomentador da canoagem oceânica brasileira.
         </motion.p>
       </div>
 

@@ -1,13 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Timeline } from "@/components/ui/timeline";
-import { Trophy, Medal, Users, Anchor, Award, Hammer, MapPin, Briefcase, Star } from "lucide-react";
+import { Trophy, Medal, Users, Anchor, Award, Hammer, MapPin, Briefcase, Star, ImageIcon } from "lucide-react";
 import fabioPortrait from "@/assets/fabio-opium-shirt.jpg";
 import logoKaora from "@/assets/logo-kaora.jpg";
 import logoSahyRemando from "@/assets/logo-sahy-remando.jpg";
 import logoCanoaBrasil from "@/assets/logo-canoa-brasil.jpg";
 import jornalSantos from "@/assets/jornal-santos-2001.jpg";
 import tochaOlimpica from "@/assets/fabio-tocha-olimpica.jpg";
+
 function RevealText({
   children,
   delay = 0,
@@ -33,51 +34,62 @@ function RevealText({
 export function FabioStory() {
   const data = [
     {
-      title: "O Visionário do Mar",
+      title: "O Campeão & Pioneiro",
       content: (
-        <div className="flex flex-col md:flex-row gap-8 items-stretch">
-          {/* ÁREA DA FOTO DE RETRATO DO FÁBIO */}
-          <div className="md:w-2/5 relative group">
-            <img
-              src={fabioPortrait}
-              alt="Fábio Paiva - Lenda Viva da Canoagem"
-              className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-2xl"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
-              <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-orange" />
-                <span className="text-white font-semibold text-sm">Lenda Viva da Canoagem</span>
+        <div>
+          <div className="flex flex-col md:flex-row gap-8 items-stretch mb-8">
+            <div className="md:w-2/5 relative group">
+              <img
+                src={fabioPortrait}
+                alt="Fábio Paiva - Lenda Viva da Canoagem"
+                className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-2xl"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+                <div className="flex items-center gap-2">
+                  <Star className="w-5 h-5 text-orange" />
+                  <span className="text-white font-semibold text-sm">Lenda Viva da Canoagem</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* ÁREA DO TEXTO INTRODUTÓRIO */}
-          <div className="md:w-3/5 flex flex-col justify-center">
-            <div className="mb-6">
+            <div className="md:w-3/5 flex flex-col justify-center">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Fábio Paiva
               </h3>
               <RevealText
                 delay={0}
-                className="text-foreground/80 text-lg md:text-xl font-normal leading-relaxed"
+                className="text-foreground/80 text-lg md:text-xl font-normal leading-relaxed mb-4"
               >
-                Filho de dois atletas santistas, os nadadores{" "}
-                <span className="font-bold text-orange">Gilson Nunes Marques Pereira (o Kalu)</span> e{" "}
-                <span className="font-bold text-orange">Dona Regina Stella</span>, nascido em 10 de novembro de 1962.
+                <span className="font-bold text-orange">Introdutor oficial da canoa havaiana no Brasil</span>, 
+                fundador da <span className="font-bold text-foreground">Opium Hightec Line</span> e 
+                maior fomentador da canoagem oceânica brasileira.
               </RevealText>
-            </div>
-
-            <div className="bg-orange/10 border border-orange/30 rounded-lg p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <Anchor className="w-6 h-6 text-orange" />
-                <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
-              </div>
               <RevealText
                 delay={0.05}
-                className="text-foreground/70 text-sm md:text-base"
+                className="text-foreground/70 text-base leading-relaxed"
               >
-                O espírito esportivo dos pais proporcionou uma infância livre. Divertia-se participando de travessias marítimas feitas, literalmente, nas costas dos pais. Aos 10 anos, ganhou o primeiro barco a remo na Ilha das Palmas, onde criou sua intimidade com as águas.
+                Invicto no país por 15 anos, acumulou mais de 700 troféus, 
+                foi Vice-Campeão Mundial Oceânico na Ilha da Madeira 
+                e detém o recorde de 24h no mar com 164km percorridos.
               </RevealText>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
+              <Trophy className="w-7 h-7 text-orange mx-auto mb-2" />
+              <h4 className="text-orange font-bold text-2xl md:text-3xl">700+</h4>
+              <p className="text-foreground/60 text-sm mt-1">Troféus conquistados</p>
+            </div>
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
+              <Medal className="w-7 h-7 text-yellow-400 mx-auto mb-2" />
+              <h4 className="text-yellow-400 font-bold text-2xl md:text-3xl">15 anos</h4>
+              <p className="text-foreground/60 text-sm mt-1">Invicto no Brasil</p>
+            </div>
+            <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
+              <Award className="w-7 h-7 text-blue-400 mx-auto mb-2" />
+              <h4 className="text-blue-400 font-bold text-2xl md:text-3xl">164km</h4>
+              <p className="text-foreground/60 text-sm mt-1">Recorde 24h no mar</p>
             </div>
           </div>
         </div>
@@ -194,10 +206,37 @@ export function FabioStory() {
       ),
     },
     {
+      title: "As Origens — DNA do Mar",
+      content: (
+        <div>
+          <RevealText
+            delay={0}
+            className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
+          >
+            Nascido em 10 de novembro de 1962, filho de dois atletas santistas: os nadadores{" "}
+            <span className="font-bold text-orange">Gilson Nunes Marques Pereira (o Kalu)</span> e{" "}
+            <span className="font-bold text-orange">Dona Regina Stella</span>.
+          </RevealText>
+
+          <div className="bg-orange/10 border border-orange/30 rounded-lg p-5">
+            <div className="flex items-center gap-2 mb-2">
+              <Anchor className="w-6 h-6 text-orange" />
+              <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
+            </div>
+            <RevealText
+              delay={0.05}
+              className="text-foreground/70 text-sm md:text-base"
+            >
+              O espírito esportivo dos pais proporcionou uma infância livre. Divertia-se participando de travessias marítimas feitas, literalmente, nas costas dos pais. Aos 10 anos, ganhou o primeiro barco a remo na Ilha das Palmas, onde criou sua intimidade com as águas.
+            </RevealText>
+          </div>
+        </div>
+      ),
+    },
+    {
       title: "2000 - A Revolução Havaiana",
       content: (
         <div>
-          {/* Recorte de Jornal - Prova histórica */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -253,7 +292,6 @@ export function FabioStory() {
       title: "Legado & Reconhecimento",
       content: (
         <div>
-          {/* Foto da Tocha Olímpica */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -273,7 +311,6 @@ export function FabioStory() {
             </div>
           </motion.div>
 
-          {/* Logo Canoa Brasil em destaque */}
           <div className="flex flex-col md:flex-row gap-6 items-center mb-8">
             <div className="bg-white rounded-xl p-4 shadow-lg flex-shrink-0">
               <img 
@@ -324,7 +361,6 @@ export function FabioStory() {
           </RevealText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Card Projeto Kaora com logo oficial */}
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
               <div className="bg-white rounded-lg p-3 mb-4 inline-block">
                 <img 
@@ -342,7 +378,6 @@ export function FabioStory() {
               </RevealText>
             </div>
 
-            {/* Card Sahy Remando com logo oficial */}
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
               <div className="bg-white rounded-lg p-3 mb-4 inline-block">
                 <img 
@@ -364,6 +399,38 @@ export function FabioStory() {
           <div className="flex items-center gap-3 text-foreground/70 mt-6">
             <Star className="w-6 h-6 text-orange flex-shrink-0" />
             <span className="text-base md:text-lg">Transformando vidas através do esporte</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Acervo Histórico",
+      content: (
+        <div>
+          <RevealText
+            delay={0}
+            className="text-foreground/80 text-lg md:text-xl font-normal mb-8 leading-relaxed"
+          >
+            Décadas de conquistas registradas em jornais, televisão e pódios ao redor do mundo.
+            <span className="text-foreground/50 italic block mt-2 text-base">
+              Galeria em construção — novas imagens serão adicionadas em breve.
+            </span>
+          </RevealText>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {["Recortes de Jornal", "Aparições na TV", "Pódios & Premiações", "Competições Internacionais", "Bastidores & Treinos", "Com a Comunidade"].map((label) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="aspect-[4/3] rounded-xl border-2 border-dashed border-foreground/15 bg-foreground/5 flex flex-col items-center justify-center gap-3 hover:border-orange/30 hover:bg-orange/5 transition-all duration-300 cursor-default"
+              >
+                <ImageIcon className="w-8 h-8 text-foreground/20" />
+                <span className="text-foreground/40 text-xs md:text-sm font-medium text-center px-2">{label}</span>
+              </motion.div>
+            ))}
           </div>
         </div>
       ),

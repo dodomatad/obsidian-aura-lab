@@ -177,7 +177,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil (Iniciante)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 15, // Mais Estável
-    description: 'Ideal para iniciantes e nível intermediário. Atende até o avançado pois navega perfeitamente até nas piores condições de mar.',
+    description: 'O surfski mais estável do Brasil. Porta de entrada para muitos remadores no surfski, atendendo a todos os públicos e níveis. Navega perfeitamente até nas piores condições de mar.',
     image: boatPono,
     specs: {
       length: '6.20m',
@@ -372,7 +372,7 @@ export const productsData: Record<string, Product> = {
     level: 'Intermediário a Avançado',
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
-    description: 'Surfski de alto desempenho para quem quer evoluir. Transição perfeita do intermediário para a alta performance.',
+    description: 'Surfski de alto desempenho para Downwind. Mesmo nível de estabilidade do V10. Transição perfeita do intermediário para a alta performance.',
     image: dwDetail1,
     specs: {
       length: '6.20m',
@@ -424,19 +424,19 @@ export const productsData: Record<string, Product> = {
         'Performance sem sofrimento',
         'Barco de entrada para competição',
       ],
-      similarTo: 'V10 da EPIC',
+      similarTo: 'Mesmo nível de estabilidade do V10',
       comparedToFleet: 'Categoria de alto desempenho. Requer habilidade. Posição #4 em estabilidade.',
     },
   },
   infinity: {
     id: 'infinity',
     name: 'INFINITY',
-    tagline: 'O Mais Rápido do Brasil',
+    tagline: 'Entre os Mais Rápidos do Mundo',
     category: 'Surfski Individual',
     level: 'Avançado (Elite)',
     levelColor: 'text-red-500',
     difficultyLevel: 95, // Mais Veloz/Instável
-    description: 'Comprovadamente o surfski mais rápido do mercado da canoagem oceânica brasileira. Fred Longhin, na casa dos 50 anos, ganhou o campeonato brasileiro de faixa azul usando o Infinity.',
+    description: 'Comprovadamente está entre os surfskis mais rápidos do mundo. Fred Longhin, na casa dos 50 anos, ganhou o campeonato brasileiro de faixa azul usando o Infinity.',
     image: boatInfinity,
     specs: {
       length: '6.45m',
@@ -699,7 +699,6 @@ export const productsData: Record<string, Product> = {
       hunaCockpit,
       hunaBow,
       hunaDetailHardware,
-      hunaDeckRigging,
     ],
     techProfile: {
       idealFor: ['Duplas', 'Famílias', 'Amigos', 'Todos os níveis'],

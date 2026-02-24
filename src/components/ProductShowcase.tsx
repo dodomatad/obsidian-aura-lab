@@ -424,7 +424,7 @@ const ProductShowcase = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="relative z-30 flex flex-wrap justify-center gap-2 px-4 py-3"
+          className="relative z-30 grid grid-cols-2 gap-2 px-6 py-3"
         >
           {CATEGORIES.map((cat) => {
             const isActive = activeChipCategory === cat;
@@ -433,7 +433,7 @@ const ProductShowcase = () => {
               <motion.button
                 key={cat}
                 onClick={() => jumpToCategory(cat)}
-                className={`px-3 py-2 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border ${
+                className={`px-3 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border text-center ${
                   isActive 
                     ? 'bg-foreground text-background border-foreground shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
                     : 'bg-white/5 text-foreground/60 border-white/10 hover:bg-white/10 hover:text-foreground/80'

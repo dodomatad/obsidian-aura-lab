@@ -3,8 +3,7 @@ import { Facebook, Instagram, Twitter } from 'lucide-react';
 import LocationMap from '@/components/LocationMap';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ProductShowcase from '@/components/ProductShowcase';
-import AtelierSection from '@/components/AtelierSection';
-import TechnologySection from '@/components/TechnologySection';
+import { useNavigate } from 'react-router-dom';
 import QuickAccessButtons from '@/components/QuickAccessButtons';
 
 
@@ -26,6 +25,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import opiumLogo from '@/assets/opium-logo-official.png';
 
 const Index = () => {
+  const navigate = useNavigate();
   const { hasSeenIntro, getSavedScrollPosition, clearScrollPosition } = useTransition();
   const [isLoadingComplete, setIsLoadingComplete] = useState(hasSeenIntro);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -122,8 +122,8 @@ const Index = () => {
               Produtos
             </a>
             <a 
-              href="#atelier" 
-              onClick={(e) => handleNavClick(e, 'atelier')}
+              href="/tecnologia" 
+              onClick={(e) => { e.preventDefault(); navigate('/tecnologia'); }}
               className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               Tecnologia
@@ -222,11 +222,6 @@ const Index = () => {
           <ProductShowcase />
         </div>
 
-        {/* Technology Section + Atelier */}
-        <div id="atelier" className="pt-2 md:pt-4">
-          <TechnologySection />
-          <AtelierSection />
-        </div>
 
 
         {/* Champion Journey Section - Lazy loaded for performance */}

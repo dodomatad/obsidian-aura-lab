@@ -748,5 +748,5 @@ export const levelLabels = {
   maneuverability: { 'very-high': 'Muito Alta', 'high': 'Alta', 'medium': 'Média', 'low': 'Baixa' },
   comfort: { 'very-high': 'Muito Alto', 'high': 'Alto', 'medium': 'Médio' },
   cargoCapacity: { 'high': 'Alta', 'medium': 'Média', 'low': 'Baixa' },
-  boardingEase: { 'easy': 'Fácil', 'medium': 'Média', 'hard': 'Difícil' },
+  boardingEase: { 'easy': 'Fácil', 'medium': 'Média', 'hard': 'Difícil', 'high': 'Fácil', 'low': 'Difícil' },
 };

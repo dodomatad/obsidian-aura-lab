@@ -195,9 +195,9 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'Branco Ártico', color: '#E8E8E8', image: boatPono },
-      { id: 'pink', name: 'Rosa Sunset', color: '#E8A4B8', image: boatPink },
-      { id: 'carbon', name: 'Carbono Stealth', color: '#2A2A2A', image: boatCarbon },
-      { id: 'camo', name: 'Camuflagem Ocean', color: '#4A6741', image: boatCamo },
+      { id: 'pink', name: 'Rosa Pôr do Sol', color: '#E8A4B8', image: boatPink },
+      { id: 'carbon', name: 'Carbono Furtivo', color: '#2A2A2A', image: boatCarbon },
+      { id: 'camo', name: 'Camuflagem Oceano', color: '#4A6741', image: boatCamo },
     ],
     defaultImage: boatPono,
     galleryImages: [
@@ -260,8 +260,8 @@ export const productsData: Record<string, Product> = {
       'Fácil manobra',
     ],
     colors: [
-      { id: 'default', name: 'Azul Ocean', color: '#4A90D9', image: siouCover },
-      { id: 'yellow', name: 'Amarelo Sunrise', color: '#F5A623', image: siouYellowRack },
+      { id: 'default', name: 'Azul Oceano', color: '#4A90D9', image: siouCover },
+      { id: 'yellow', name: 'Amarelo Aurora', color: '#F5A623', image: siouYellowRack },
     ],
     defaultImage: siouCover,
     galleryImages: [
@@ -284,7 +284,7 @@ export const productsData: Record<string, Product> = {
       cargoCapacity: 'high',
       boardingEase: 'medium',
       bestFor: ['Todos os tipos de mares', 'Travessias com carga', 'Mar de vento', 'Exploração'],
-      conditions: ['Mar calmo', 'Mar agitado', 'Downwind', 'Upwind'],
+      conditions: ['Mar calmo', 'Mar agitado', 'Downwind', 'Contra o vento'],
       highlights: [
         'Barco mais manobrável da frota',
         'Giro de 360° em raio muito pequeno',
@@ -372,7 +372,7 @@ export const productsData: Record<string, Product> = {
     level: 'Intermediário a Avançado',
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
-    description: 'Surfski de alto desempenho para Downwind. Transição perfeita do intermediário para a alta performance.',
+    description: 'Surfski de alto desempenho para Downwind. Transição perfeita do intermediário para o alto desempenho.',
     image: dwDetail1,
     specs: {
       length: '6.20m',
@@ -389,7 +389,7 @@ export const productsData: Record<string, Product> = {
     ],
     colors: [
       { id: 'default', name: 'DW Azul/Verde', color: '#1E3A5F', image: dwDetail1 },
-      { id: 'carbon', name: 'Carbono Stealth', color: '#1A1A1A', image: boatCarbon },
+      { id: 'carbon', name: 'Carbono Furtivo', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: dwDetail1,
     galleryImages: [
@@ -420,7 +420,7 @@ export const productsData: Record<string, Product> = {
         'Alto desempenho acessível',
         'Transição natural para quem vem de barcos mais estáveis',
         'Fácil de adaptar para intermediários',
-        'Performance sem sofrimento',
+        'Desempenho sem sofrimento',
         'Barco de entrada para competição',
       ],
       comparedToFleet: 'Categoria de alto desempenho. Requer habilidade. Posição #4 em estabilidade.',
@@ -450,7 +450,7 @@ export const productsData: Record<string, Product> = {
       'Construção em Carbono Pré-Preg Aeroespacial',
     ],
     colors: [
-      { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatInfinity },
+      { id: 'default', name: 'Branco Competição', color: '#F0F0F0', image: boatInfinity },
       { id: 'carbon', name: 'Carbono Total', color: '#1A1A1A', image: boatCarbon },
       { id: 'camo', name: 'Verde Tático', color: '#3D4F3A', image: boatCamo },
     ],
@@ -479,7 +479,7 @@ export const productsData: Record<string, Product> = {
       comfort: 'medium',
       boardingEase: 'hard',
       bestFor: ['Competições de elite', 'Recordes', 'Downwind profissional'],
-      conditions: ['Competições', 'Atletas experientes', 'Alta performance'],
+      conditions: ['Competições', 'Atletas experientes', 'Alto desempenho'],
       highlights: [
         'O surfski mais rápido do Brasil',
         'Comprovadamente está entre os surfskis mais rápidos do mundo',
@@ -517,7 +517,7 @@ export const productsData: Record<string, Product> = {
       'Acabamento premium',
     ],
     colors: [
-      { id: 'default', name: 'Branco Performance', color: '#F0F0F0', image: boatSurfski },
+      { id: 'default', name: 'Branco Competição', color: '#F0F0F0', image: boatSurfski },
       { id: 'carbon', name: 'Carbono Total', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: boatSurfski,
@@ -561,14 +561,14 @@ export const productsData: Record<string, Product> = {
     },
     features: [
       'O duplo mais rápido do mercado',
-      'Estabilidade para alta performance',
+      'Estabilidade para alto desempenho',
       'Cockpits sincronizados',
       'Ideal para competições',
       'Construção ultraleve',
     ],
     colors: [
       { id: 'default', name: 'Branco Competição', color: '#F0F0F0', image: boatSurfski },
-      { id: 'carbon', name: 'Carbono Elite', color: '#1A1A1A', image: boatCarbon },
+      { id: 'carbon', name: 'Carbono Competição', color: '#1A1A1A', image: boatCarbon },
     ],
     defaultImage: boatSurfski,
     techProfile: {
@@ -581,7 +581,7 @@ export const productsData: Record<string, Product> = {
       comfort: 'medium',
       boardingEase: 'hard',
       bestFor: ['Competições', 'Downwind profissional', 'Recordes'],
-      conditions: ['Competições', 'Alta performance'],
+      conditions: ['Competições', 'Alto desempenho'],
       highlights: [
         'O duplo mais rápido que existe',
         'Para quem quer competir de verdade',
@@ -612,7 +612,7 @@ export const productsData: Record<string, Product> = {
       material: 'Carbono',
     },
     features: [
-      'Design baseado no Pueo (Hawaii)',
+      'Design inspirado nos melhores modelos havaianos',
       'Ama (flutuador) em carbono',
       'Assento ergonômico ajustável',
       'Conexões Iako reforçadas',
@@ -650,13 +650,12 @@ export const productsData: Record<string, Product> = {
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas', 'Mar de vento'],
       highlights: [
         'Conforto e estabilidade incomparáveis',
-        'Baseada no Pueo (Hawaii), otimizada para o mar brasileiro',
+        'Inspirada nos melhores modelos havaianos, otimizada para o mar brasileiro',
         'Volume médio ideal para mar de vento brasileiro',
         'Pega onda bem, surfa, vai em mar liso e agitado',
         'Não precisamos de outro modelo - ela atende todos os sentidos',
       ],
       
-      similarTo: 'Pueo (Outrigger Connection)',
       comparedToFleet: 'A única OC1 da frota. Escolhida por ser a melhor para condições brasileiras.',
     },
   },
@@ -678,7 +677,7 @@ export const productsData: Record<string, Product> = {
       material: 'Fibra de Vidro + Carbono',
     },
     features: [
-      'Design baseado no Ozone',
+      'Design otimizado para surf',
       'Flutuador na cabine da frente (surfa mais)',
       'Conforto para longas remadas',
       'Ama reforçada',
@@ -708,14 +707,13 @@ export const productsData: Record<string, Product> = {
       bestFor: ['Surf em dupla', 'Travessias', 'Diversão', 'Treinos'],
       conditions: ['Mar calmo', 'Mar agitado', 'Ondas'],
       highlights: [
-        'Baseada no Ozone, otimizada para o mar brasileiro',
+        'Design otimizado para o mar brasileiro',
         'Flutuador só na cabine da frente = surfa muito mais',
         'Mastro mais curto joga centro de gravidade para frente',
         'Muito mais fácil de pegar ondas que canoas com flutuador atrás',
         'Confortável e rápida',
       ],
       
-      similarTo: 'Ozone',
       comparedToFleet: 'A única OC2 da frota. Design otimizado para surf.',
     },
   },

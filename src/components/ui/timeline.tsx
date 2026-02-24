@@ -41,8 +41,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-4xl md:text-6xl lg:text-8xl mb-8 max-w-6xl font-display font-black leading-[0.95] tracking-tight"
-          style={{ color: 'hsl(var(--orange))' }}
+          className="text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-black leading-[0.9] tracking-tight"
+          style={{ 
+            color: 'hsl(var(--orange))',
+            fontFamily: "'Playfair Display', serif",
+            textShadow: '0 0 40px rgba(249, 115, 22, 0.35), 0 0 80px rgba(249, 115, 22, 0.15), 0 4px 20px rgba(0,0,0,0.5)',
+          }}
         >
           A Jornada de
           <br />
@@ -54,6 +58,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.25 }}
           className="text-lg md:text-2xl lg:text-3xl max-w-4xl leading-snug font-bold text-foreground/90"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+          }}
         >
           O visionário que introduziu a Canoa Havaiana no Brasil e o maior fomentador da canoagem oceânica brasileira.
         </motion.p>

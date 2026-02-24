@@ -35,13 +35,13 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       className="w-full bg-background font-sans md:px-10"
       ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-10 py-24 md:py-36 lg:py-44 flex flex-col justify-center min-h-[60vh] md:min-h-[70vh]">
         <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl md:text-5xl lg:text-6xl mb-6 max-w-5xl font-display font-bold leading-tight"
+          transition={{ duration: 0.7 }}
+          className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-8 max-w-6xl font-display font-bold leading-[1.1] tracking-tight"
           style={{ color: 'hsl(var(--orange))' }}
         >
           A Jornada de Fábio Paiva
@@ -50,8 +50,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-foreground/70 text-base md:text-xl max-w-3xl leading-relaxed font-medium"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-foreground/60 text-lg md:text-2xl lg:text-3xl max-w-4xl leading-relaxed font-medium"
         >
           O visionário que introduziu a Canoa Havaiana no Brasil e o maior fomentador da canoagem oceânica brasileira.
         </motion.p>

@@ -184,7 +184,7 @@ export const productsData: Record<string, Product> = {
       beam: '42cm',
       weight: '11kg',
       capacity: '120kg',
-      material: 'Fibra de Carbono + Kevlar',
+      material: 'Fibra de Carbono',
     },
     features: [
       'Cockpit ergonômico e confortável',
@@ -372,13 +372,12 @@ export const productsData: Record<string, Product> = {
     level: 'Intermediário a Avançado',
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
-    description: 'Surfski de alto desempenho para Downwind. Mesmo nível de estabilidade do V10. Transição perfeita do intermediário para a alta performance.',
+    description: 'Surfski de alto desempenho para Downwind. Transição perfeita do intermediário para a alta performance.',
     image: dwDetail1,
     specs: {
       length: '6.20m',
       beam: '42cm',
       weight: '11kg',
-      capacity: '95kg',
       material: 'Carbono Aeroespacial',
     },
     features: [
@@ -424,7 +423,6 @@ export const productsData: Record<string, Product> = {
         'Performance sem sofrimento',
         'Barco de entrada para competição',
       ],
-      similarTo: 'Mesmo nível de estabilidade do V10',
       comparedToFleet: 'Categoria de alto desempenho. Requer habilidade. Posição #4 em estabilidade.',
     },
   },
@@ -442,7 +440,6 @@ export const productsData: Record<string, Product> = {
       length: '6.45m',
       beam: '40cm',
       weight: '10.5kg',
-      capacity: '95kg',
       material: 'Carbono Pré-Preg Aeroespacial',
     },
     features: [
@@ -592,7 +589,6 @@ export const productsData: Record<string, Product> = {
         'Incomparável em velocidade',
       ],
       
-      similarTo: 'EPIC duplo',
       comparedToFleet: 'Duplo de competição. O mais rápido, requer habilidade.',
     },
   },
@@ -613,7 +609,7 @@ export const productsData: Record<string, Product> = {
       beam: '40cm',
       weight: '14kg',
       capacity: '105kg',
-      material: 'Carbono + Kevlar',
+      material: 'Carbono',
     },
     features: [
       'Design baseado no Pueo (Hawaii)',

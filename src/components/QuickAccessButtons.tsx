@@ -7,7 +7,7 @@ interface QuickAccessCategory {
 }
 
 const CATEGORIES: QuickAccessCategory[] = [
-  { label: 'Canoa OC1', eventDetail: 'canoa-oc1' },
+  { label: 'Canoa\nOC1', eventDetail: 'canoa-oc1' },
   { label: 'Canoa OC2', eventDetail: 'canoa-oc2' },
   { label: 'Surfski Individual', eventDetail: 'surfski-individual' },
   { label: 'Surfski Duplo', eventDetail: 'surfski-duplo' },
@@ -73,7 +73,7 @@ const QuickAccessButtons = () => {
               />
               
               {/* Label */}
-              <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300">
+              <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300 whitespace-pre-line">
                 {cat.label}
               </span>
             </motion.a>

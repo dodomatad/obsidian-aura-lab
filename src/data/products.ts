@@ -282,7 +282,7 @@ export const productsData: Record<string, Product> = {
       maneuverability: 'very-high',
       comfort: 'high',
       cargoCapacity: 'high',
-      boardingEase: 'hard',
+      boardingEase: 'medium',
       bestFor: ['Todos os tipos de mares', 'Travessias com carga', 'Mar de vento', 'Exploração'],
       conditions: ['Mar calmo', 'Mar agitado', 'Downwind', 'Upwind'],
       highlights: [

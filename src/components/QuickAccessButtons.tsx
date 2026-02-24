@@ -6,11 +6,14 @@ interface QuickAccessCategory {
   eventDetail: string;
 }
 
-const CATEGORIES: QuickAccessCategory[] = [
-  { label: 'Canoa OC1', eventDetail: 'canoa-oc1' },
-  { label: 'Canoa OC2', eventDetail: 'canoa-oc2' },
+const SURFSKIS: QuickAccessCategory[] = [
   { label: 'Surfski Individual', eventDetail: 'surfski-individual' },
   { label: 'Surfski Duplo', eventDetail: 'surfski-duplo' },
+];
+
+const CANOAS: QuickAccessCategory[] = [
+  { label: 'Canoa OC1', eventDetail: 'canoa-oc1' },
+  { label: 'Canoa OC2', eventDetail: 'canoa-oc2' },
 ];
 
 const QuickAccessButtons = () => {
@@ -47,9 +50,9 @@ const QuickAccessButtons = () => {
           Acesso direto ao modelo
         </p>
 
-        {/* Button Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-          {CATEGORIES.map((cat, i) => (
+        {/* Button Grid - Row 1: Surfskis */}
+        <div className="grid grid-cols-2 gap-4 md:gap-5 max-w-lg mx-auto mb-4 md:mb-5">
+          {SURFSKIS.map((cat, i) => (
             <motion.a
               key={cat.eventDetail}
               href="#modelos"
@@ -61,18 +64,37 @@ const QuickAccessButtons = () => {
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.97 }}
               className="group relative overflow-hidden rounded-xl p-5 md:p-6 text-center cursor-pointer border border-foreground/[0.08] transition-all duration-300 hover:border-orange/30"
-              style={{
-                background: 'rgba(255, 255, 255, 0.03)',
-              }}
+              style={{ background: 'rgba(255, 255, 255, 0.03)' }}
             >
-              {/* Hover glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 70%)',
-                }}
+                style={{ background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 70%)' }}
               />
-              
-              {/* Label */}
+              <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300">
+                {cat.label}
+              </span>
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Button Grid - Row 2: Canoas */}
+        <div className="grid grid-cols-2 gap-4 md:gap-5 max-w-lg mx-auto">
+          {CANOAS.map((cat, i) => (
+            <motion.a
+              key={cat.eventDetail}
+              href="#modelos"
+              onClick={(e) => handleClick(e, cat)}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.16 + i * 0.08 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="group relative overflow-hidden rounded-xl p-5 md:p-6 text-center cursor-pointer border border-foreground/[0.08] transition-all duration-300 hover:border-orange/30"
+              style={{ background: 'rgba(255, 255, 255, 0.03)' }}
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 70%)' }}
+              />
               <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300">
                 {cat.label}
               </span>

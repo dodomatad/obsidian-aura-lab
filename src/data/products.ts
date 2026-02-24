@@ -143,7 +143,7 @@ export interface TechProfile {
   highlights: string[];
   
   // Comparison notes
-  similarTo?: string; // e.g., "Comparável ao V10 da EPIC"
+  
   comparedToFleet?: string; // Position in fleet hierarchy
   notRecommendedReason?: string; // Why not recommended for certain uses
 }

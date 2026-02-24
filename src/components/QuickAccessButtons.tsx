@@ -8,7 +8,7 @@ interface QuickAccessCategory {
 
 const CATEGORIES: QuickAccessCategory[] = [
   { label: 'Canoa\nOC1', eventDetail: 'canoa-oc1' },
-  { label: 'Canoa OC2', eventDetail: 'canoa-oc2' },
+  { label: 'Canoa\nOC2', eventDetail: 'canoa-oc2' },
   { label: 'Surfski Individual', eventDetail: 'surfski-individual' },
   { label: 'Surfski Duplo', eventDetail: 'surfski-duplo' },
 ];

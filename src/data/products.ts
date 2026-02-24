@@ -177,7 +177,7 @@ export const productsData: Record<string, Product> = {
     level: 'Fácil (Iniciante)',
     levelColor: 'text-emerald-400',
     difficultyLevel: 15, // Mais Estável
-    description: 'O surfski mais estável do Brasil. Porta de entrada para muitos remadores no surfski, atendendo a todos os públicos e níveis. Navega perfeitamente até nas piores condições de mar.',
+    description: 'O surfski mais estável do Brasil. Porta de entrada para muitos remadores no mundo do surfski, utilizado por todos os níveis — do iniciante ao avançado que busca conforto e diversão sem pensar em competição. Rema em qualquer mar, do calmo ao agitado.',
     image: boatPono,
     specs: {
       length: '6.20m',
@@ -227,9 +227,10 @@ export const productsData: Record<string, Product> = {
       bestFor: ['Aprendizado', 'Treinos diários', 'Travessias', 'Mar agitado'],
       conditions: ['Mar calmo', 'Mar agitado', 'Represa', 'Qualquer condição'],
       highlights: [
-        'O mais estável da frota',
-        'Divisor de águas: combina estabilidade com velocidade',
-        'Ângulo de ataque otimizado (assento mais alto)',
+        'O surfski mais estável do Brasil',
+        'Porta de entrada para muitos remadores no surfski',
+        'Utilizado por todos os níveis de remadores',
+        'Rema em qualquer mar — do calmo ao agitado',
         'Velocidade próxima do SIOU e MOANA, porém muito mais estável',
       ],
       comparedToFleet: 'O barco mais estável da linha. Posição #1 em estabilidade.',
@@ -485,7 +486,7 @@ export const productsData: Record<string, Product> = {
       conditions: ['Competições', 'Atletas experientes', 'Alta performance'],
       highlights: [
         'O surfski mais rápido do Brasil',
-        'Comprovadamente mais rápido internacionalmente',
+        'Comprovadamente está entre os surfskis mais rápidos do mundo',
         'Fred Longhin (50+ anos) ganhou campeonato brasileiro com ele',
         'Para quem busca alto desempenho sem igual',
         'O mais instável = o mais rápido',
@@ -700,6 +701,7 @@ export const productsData: Record<string, Product> = {
       hunaBow,
       hunaDetailHardware,
     ],
+    // NOTE: hunaDeckRigging removido da galeria (elástico com visual ruim)
     techProfile: {
       idealFor: ['Duplas', 'Famílias', 'Amigos', 'Todos os níveis'],
       heightRecommendation: 'Todos os tamanhos',

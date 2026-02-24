@@ -9,6 +9,7 @@ import OpiumLoader from "./components/ui/opium-loader";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import Historia from "./pages/Historia";
+import Tecnologia from "./pages/Tecnologia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/modelo/:id" element={<ProductDetail />} />
         <Route path="/historia" element={<Historia />} />
+        <Route path="/tecnologia" element={<Tecnologia />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

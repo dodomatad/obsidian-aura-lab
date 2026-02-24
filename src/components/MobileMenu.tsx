@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, Ship, Cpu, Users, MessageCircle } from 'lucide-react';
 import {
@@ -72,25 +73,28 @@ const PaddleMenuButton = ({ isOpen }: { isOpen: boolean }) => {
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
-  
+  const navigate = useNavigate();
 
   const menuItems = [
-    { icon: Home, label: 'Início', href: '#hero', id: 'hero' },
-    { icon: Ship, label: 'Produtos', href: '#modelos', id: 'modelos' },
-    { icon: Cpu, label: 'Tecnologia', href: '#atelier', id: 'atelier' },
-    { icon: Users, label: 'História', href: '#champion', id: 'champion' },
+    { icon: Home, label: 'Início', href: '#hero', id: 'hero', isRoute: false },
+    { icon: Ship, label: 'Produtos', href: '#modelos', id: 'modelos', isRoute: false },
+    { icon: Cpu, label: 'Tecnologia', href: '/tecnologia', id: 'tecnologia', isRoute: true },
+    { icon: Users, label: 'História', href: '#champion', id: 'champion', isRoute: false },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, item: typeof menuItems[0]) => {
     e.preventDefault();
     setOpen(false);
-    // Small delay to allow sheet to close before scrolling
-    setTimeout(() => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 300);
+    if (item.isRoute) {
+      setTimeout(() => navigate(item.href), 300);
+    } else {
+      setTimeout(() => {
+        const element = document.getElementById(item.id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    }
   };
 
   return (
@@ -142,7 +146,7 @@ const MobileMenu = () => {
               >
                 <a
                   href={item.href}
-                  onClick={(e) => handleClick(e, item.id)}
+                  onClick={(e) => handleClick(e, item)}
                   className="flex items-center gap-4 px-4 py-4 rounded-xl text-foreground/70 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 group"
                 >
                   <item.icon className="w-5 h-5 text-foreground/40 group-hover:text-foreground transition-colors" />

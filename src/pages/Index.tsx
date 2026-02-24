@@ -107,6 +107,13 @@ const Index = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-8 md:gap-10">
             <a 
+              href="#hero" 
+              onClick={(e) => handleNavClick(e, 'hero')}
+              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+            >
+              Início
+            </a>
+            <a 
               href="#modelos" 
               onClick={(e) => handleNavClick(e, 'modelos')}
               className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
@@ -118,7 +125,14 @@ const Index = () => {
               onClick={(e) => handleNavClick(e, 'atelier')}
               className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
-              Ateliê
+              Tecnologia
+            </a>
+            <a 
+              href="#champion" 
+              onClick={(e) => handleNavClick(e, 'champion')}
+              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+            >
+              História
             </a>
           </div>
 

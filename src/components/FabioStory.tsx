@@ -206,34 +206,6 @@ export function FabioStory() {
       ),
     },
     {
-      title: "As Origens — DNA do Mar",
-      content: (
-        <div>
-          <RevealText
-            delay={0}
-            className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
-          >
-            Nascido em 10 de novembro de 1962, filho de dois atletas santistas: os nadadores{" "}
-            <span className="font-bold text-orange">Gilson Nunes Marques Pereira (o Kalu)</span> e{" "}
-            <span className="font-bold text-orange">Dona Regina Stella</span>.
-          </RevealText>
-
-          <div className="bg-orange/10 border border-orange/30 rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2">
-              <Anchor className="w-6 h-6 text-orange" />
-              <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
-            </div>
-            <RevealText
-              delay={0.05}
-              className="text-foreground/70 text-sm md:text-base"
-            >
-              O espírito esportivo dos pais proporcionou uma infância livre. Divertia-se participando de travessias marítimas feitas, literalmente, nas costas dos pais. Aos 10 anos, ganhou o primeiro barco a remo na Ilha das Palmas, onde criou sua intimidade com as águas.
-            </RevealText>
-          </div>
-        </div>
-      ),
-    },
-    {
       title: "2000 - A Revolução Havaiana",
       content: (
         <div>
@@ -284,6 +256,34 @@ export function FabioStory() {
           <div className="flex items-center gap-3 text-foreground/70">
             <Award className="w-6 h-6 text-orange flex-shrink-0" />
             <span className="text-base md:text-lg">Organizador dos primeiros campeonatos</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "As Origens — DNA do Mar",
+      content: (
+        <div>
+          <RevealText
+            delay={0}
+            className="text-foreground/80 text-lg md:text-2xl font-normal mb-8 leading-relaxed"
+          >
+            Nascido em 10 de novembro de 1962, filho de dois atletas santistas: os nadadores{" "}
+            <span className="font-bold text-orange">Gilson Nunes Marques Pereira (o Kalu)</span> e{" "}
+            <span className="font-bold text-orange">Dona Regina Stella</span>.
+          </RevealText>
+
+          <div className="bg-orange/10 border border-orange/30 rounded-lg p-5">
+            <div className="flex items-center gap-2 mb-2">
+              <Anchor className="w-6 h-6 text-orange" />
+              <span className="text-orange font-bold text-base md:text-lg">DNA do Mar</span>
+            </div>
+            <RevealText
+              delay={0.05}
+              className="text-foreground/70 text-sm md:text-base"
+            >
+              O espírito esportivo dos pais proporcionou uma infância livre. Divertia-se participando de travessias marítimas feitas, literalmente, nas costas dos pais. Aos 10 anos, ganhou o primeiro barco a remo na Ilha das Palmas, onde criou sua intimidade com as águas.
+            </RevealText>
           </div>
         </div>
       ),

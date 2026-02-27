@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Layers, Flame, Droplets } from 'lucide-react';
+import atelierPaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
 
 const materials = [
   {
@@ -101,6 +102,22 @@ const TechnologySection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Lifestyle photo break */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20 md:mb-28 rounded-2xl overflow-hidden border border-foreground/10"
+        >
+          <img
+            src={atelierPaddle}
+            alt="Barco Opium em ação"
+            className="w-full h-64 md:h-96 object-cover"
+            loading="lazy"
+          />
+        </motion.div>
 
         {/* Callout */}
         <motion.div

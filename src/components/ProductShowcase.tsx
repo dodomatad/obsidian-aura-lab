@@ -665,7 +665,7 @@ const ProductShowcase = () => {
             </span>
             
             {/* Name */}
-            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '0.1em' }}>
+            <h3 className="display-hero text-foreground" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '0.12em' }}>
               {currentProduct.name}
             </h3>
           </motion.div>

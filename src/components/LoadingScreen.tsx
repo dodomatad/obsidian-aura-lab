@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useTransition } from '@/context/TransitionContext';
+import opiumLogo from '@/assets/opium-logo-official.png';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -73,9 +74,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
 
           {/* Logo container */}
           <div className="relative flex flex-col items-center">
-            {/* Logo text - no overflow hidden to prevent clipping */}
+            {/* Logo image */}
             <div className="px-8 w-full flex justify-center">
-              <motion.h1
+              <motion.img
+                src={opiumLogo}
+                alt="OPIUM"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ 
@@ -83,15 +86,8 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
                   delay: 0.3,
                   ease: [0.16, 1, 0.3, 1] 
                 }}
-                className="font-display font-bold text-foreground text-center whitespace-nowrap"
-                style={{
-                  fontSize: 'clamp(2.5rem, 12vw, 8rem)',
-                  lineHeight: 1.1,
-                  letterSpacing: '0.02em',
-                }}
-              >
-                OPIUM
-              </motion.h1>
+                className="h-12 md:h-20 w-auto mx-auto"
+              />
             </div>
 
 

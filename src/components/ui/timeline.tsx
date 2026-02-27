@@ -80,7 +80,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 viewport={{ once: true }}
                 className="h-10 absolute left-0 md:left-3 w-10 rounded-full bg-background flex items-center justify-center"
               >
-                <div className="h-4 w-4 rounded-full bg-foreground/30 border-2 border-foreground p-2" />
+                <div className="h-3 w-3 rounded-full bg-orange border border-orange" />
               </motion.div>
               <motion.h3 
                 initial={{ opacity: 0, x: -20 }}

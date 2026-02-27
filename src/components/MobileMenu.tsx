@@ -136,7 +136,7 @@ const MobileMenu = () => {
 
         {/* Navigation Links */}
         <nav className="p-4">
-          <ul className="space-y-1">
+          <ul className="space-y-1 divide-y divide-foreground/10">
             {menuItems.map((item, index) => (
               <motion.li
                 key={item.id}
@@ -147,9 +147,9 @@ const MobileMenu = () => {
                 <a
                   href={item.href}
                   onClick={(e) => handleClick(e, item)}
-                  className="flex items-center gap-4 px-4 py-4 rounded-xl text-foreground/70 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 group"
+                  className="flex items-center gap-4 px-4 py-5 rounded-xl text-foreground/70 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 group"
                 >
-                  <item.icon className="w-5 h-5 text-foreground/40 group-hover:text-foreground transition-colors" />
+                  <item.icon className="w-5 h-5 text-foreground/40 group-hover:text-orange transition-colors" />
                   <span className="text-lg tracking-[0.15em] font-sporty font-semibold uppercase">{item.label}</span>
                 </a>
               </motion.li>

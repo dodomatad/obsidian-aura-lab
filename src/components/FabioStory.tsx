@@ -82,13 +82,13 @@ export function FabioStory() {
               <p className="text-foreground/60 text-sm mt-1">Troféus conquistados</p>
             </div>
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
-              <Medal className="w-7 h-7 text-yellow-400 mx-auto mb-2" />
-              <h4 className="text-yellow-400 font-bold text-2xl md:text-3xl">15 anos</h4>
+              <Medal className="w-7 h-7 text-orange mx-auto mb-2" />
+              <h4 className="text-orange font-bold text-2xl md:text-3xl">15 anos</h4>
               <p className="text-foreground/60 text-sm mt-1">Invicto no Brasil</p>
             </div>
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5 text-center">
-              <Award className="w-7 h-7 text-blue-400 mx-auto mb-2" />
-              <h4 className="text-blue-400 font-bold text-2xl md:text-3xl">164km</h4>
+              <Award className="w-7 h-7 text-orange mx-auto mb-2" />
+              <h4 className="text-orange font-bold text-2xl md:text-3xl">164km</h4>
               <p className="text-foreground/60 text-sm mt-1">Recorde 24h no mar</p>
             </div>
           </div>
@@ -139,15 +139,15 @@ export function FabioStory() {
           >
             Uma trajetória de{" "}
             <span className="font-bold text-foreground">700 troféus</span>. Fábio permaneceu{" "}
-            <span className="font-bold text-yellow-400">
+            <span className="font-bold text-orange">
               invicto no país por 15 anos
             </span>, mas seu remo foi além das fronteiras.
           </RevealText>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <Trophy className="w-7 h-7 text-yellow-400 mb-2" />
-              <h4 className="text-yellow-400 font-bold text-base md:text-lg">Vice-Campeão Mundial</h4>
+              <Trophy className="w-7 h-7 text-orange mb-2" />
+              <h4 className="text-orange font-bold text-base md:text-lg">Vice-Campeão Mundial</h4>
               <RevealText
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base mt-2"
@@ -156,8 +156,8 @@ export function FabioStory() {
               </RevealText>
             </div>
             <div className="bg-foreground/5 border border-foreground/10 rounded-lg p-5">
-              <Medal className="w-7 h-7 text-blue-400 mb-2" />
-              <h4 className="text-blue-400 font-bold text-base md:text-lg">Recordista & Rafting</h4>
+              <Medal className="w-7 h-7 text-orange mb-2" />
+              <h4 className="text-orange font-bold text-base md:text-lg">Recordista & Rafting</h4>
               <RevealText
                 delay={0.05}
                 className="text-foreground/60 text-sm md:text-base mt-2"

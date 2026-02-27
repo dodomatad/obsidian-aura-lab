@@ -40,7 +40,7 @@ const Historia = () => {
       <footer className="py-8 px-6 border-t border-foreground/10" style={{ backgroundColor: '#050505' }}>
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-xs text-foreground/40">
-            © 2025 Opium Hightec Line. Todos os direitos reservados.
+            © 2026 Opium Hightec Line. Todos os direitos reservados.
           </p>
         </div>
       </footer>

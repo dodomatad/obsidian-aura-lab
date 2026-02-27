@@ -62,7 +62,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         </motion.p>
       </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20 px-4 md:px-8 lg:px-10">
+      <div ref={ref} className="relative max-w-7xl mx-auto pb-20 pl-8 pr-4 md:px-8 lg:px-10">
         {data.map((item, index) => (
           <motion.div
             key={index}

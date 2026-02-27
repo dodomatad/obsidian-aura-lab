@@ -150,7 +150,7 @@ const MobileMenu = () => {
                   className="flex items-center gap-4 px-4 py-4 rounded-xl text-foreground/70 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 group"
                 >
                   <item.icon className="w-5 h-5 text-foreground/40 group-hover:text-foreground transition-colors" />
-                  <span className="text-sm tracking-wide font-medium">{item.label}</span>
+                  <span className="text-lg tracking-[0.15em] font-sporty font-semibold uppercase">{item.label}</span>
                 </a>
               </motion.li>
             ))}
@@ -166,7 +166,7 @@ const MobileMenu = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center justify-center gap-3 w-full py-4 rounded-xl text-white font-medium text-sm tracking-wide transition-all duration-300"
+            className="flex items-center justify-center gap-3 w-full py-4 rounded-xl text-white font-sporty font-semibold text-lg tracking-[0.15em] uppercase transition-all duration-300"
             style={{
               background: 'linear-gradient(135deg, hsl(var(--orange)) 0%, hsl(25 100% 45%) 100%)',
               boxShadow: '0 4px 20px rgba(249, 115, 22, 0.35)',

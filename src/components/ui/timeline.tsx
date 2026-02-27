@@ -41,10 +41,9 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-black leading-[0.9] tracking-tight"
+          className="font-brush text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-black leading-[0.9] tracking-tight"
           style={{ 
             color: 'hsl(var(--orange))',
-            fontFamily: "'Playfair Display', serif",
             textShadow: '0 0 40px rgba(249, 115, 22, 0.35), 0 0 80px rgba(249, 115, 22, 0.15), 0 4px 20px rgba(0,0,0,0.5)',
           }}
         >
@@ -57,10 +56,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-lg md:text-2xl lg:text-3xl max-w-4xl leading-snug font-bold text-foreground/90"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-          }}
+          className="text-lg md:text-2xl lg:text-3xl max-w-4xl leading-snug font-bold text-foreground/90 font-sans"
         >
           O visionário que introduziu a Canoa Havaiana no Brasil e o maior fomentador da canoagem oceânica brasileira.
         </motion.p>
@@ -91,7 +87,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
-                className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-foreground/50"
+                className="hidden md:block text-xl md:pl-20 md:text-5xl font-brush text-orange/70"
               >
                 {item.title}
               </motion.h3>
@@ -104,7 +100,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               viewport={{ once: true }}
               className="relative pl-14 pr-0 md:pl-4 w-full"
             >
-              <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-foreground/50">
+              <h3 className="md:hidden block text-2xl mb-4 text-left font-brush text-orange/70">
                 {item.title}
               </h3>
               {item.content}

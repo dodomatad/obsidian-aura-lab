@@ -114,7 +114,7 @@ const ChampionSection = () => {
               </span>
 
               {/* Title - NOSSOS DIFERENCIAIS - Laranja Vibrante Bold */}
-              <h2 className="display-hero text-3xl md:text-4xl lg:text-5xl mt-4 mb-6 text-orange font-bold">
+              <h2 className="font-brush text-3xl md:text-4xl lg:text-5xl mt-4 mb-6 text-orange">
                 NOSSOS DIFERENCIAIS
               </h2>
             </motion.div>
@@ -249,7 +249,7 @@ const ChampionSection = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="mb-6 md:mb-8"
               >
-                <span className="text-xl md:text-2xl tracking-[0.1em] md:tracking-[0.2em] uppercase text-orange-500 font-sans font-bold whitespace-nowrap">
+                <span className="text-2xl md:text-4xl tracking-[0.05em] uppercase text-orange font-brush whitespace-nowrap">
                   A Origem
                 </span>
               </motion.div>

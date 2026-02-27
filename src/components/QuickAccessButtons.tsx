@@ -37,13 +37,13 @@ const QuickAccessButtons = () => {
       >
         {/* Section label */}
         <div className="text-center mb-3">
-          <span className="text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-foreground/40 font-sans">
-            Encontre seu barco
+          <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-foreground/50 font-sporty font-semibold">
+            Encontre seu Surfski ou Canoa Havaiana
           </span>
         </div>
         
         {/* Section subtitle */}
-        <p className="text-center text-foreground/25 text-[10px] md:text-[11px] tracking-widest uppercase mb-10 md:mb-14">
+        <p className="text-center text-foreground/25 text-[10px] md:text-[11px] tracking-widest uppercase mb-10 md:mb-14 font-sans">
           Acesso direto ao modelo
         </p>
 
@@ -73,7 +73,7 @@ const QuickAccessButtons = () => {
               />
               
               {/* Label */}
-              <span className="text-[11px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300 whitespace-pre-line">
+              <span className="text-base md:text-lg font-sporty font-semibold tracking-[0.15em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300 whitespace-pre-line">
                 {cat.label}
               </span>
             </motion.a>

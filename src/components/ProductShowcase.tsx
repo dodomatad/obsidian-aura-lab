@@ -433,7 +433,7 @@ const ProductShowcase = () => {
               <motion.button
                 key={cat}
                 onClick={() => jumpToCategory(cat)}
-                className={`px-3 py-2.5 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border text-center ${
+                className={`px-3 py-2.5 rounded-full text-[11px] font-sporty font-semibold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border text-center ${
                   isActive 
                     ? 'bg-foreground text-background border-foreground shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
                     : 'bg-white/5 text-foreground/60 border-white/10 hover:bg-white/10 hover:text-foreground/80'

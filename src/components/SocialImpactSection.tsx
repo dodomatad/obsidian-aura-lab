@@ -143,7 +143,7 @@ const SocialImpactSection = () => {
           <span className="inline-block text-orange/80 text-sm font-semibold tracking-widest uppercase mb-4">
             Projetos e Parcerias
           </span>
-          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 tracking-tight">
+          <h2 className="font-brush text-3xl md:text-5xl lg:text-6xl text-foreground mb-4 tracking-tight">
             ALÉM DO ESPORTE
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">

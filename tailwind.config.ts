@@ -67,7 +67,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
+        display: ['Teko', 'sans-serif'],
+        brush: ['Permanent Marker', 'cursive'],
+        sporty: ['Teko', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {

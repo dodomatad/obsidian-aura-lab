@@ -60,15 +60,15 @@ const QuickAccessButtons = () => {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="group relative overflow-hidden rounded-xl p-5 md:p-6 text-center cursor-pointer border border-foreground/[0.08] transition-all duration-300 hover:border-orange/30"
+              className="group relative overflow-hidden rounded-xl p-5 md:p-6 text-center cursor-pointer border border-orange/20 transition-all duration-300 hover:border-orange/50"
               style={{
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'rgba(249, 115, 22, 0.06)',
               }}
             >
               {/* Hover glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.12) 0%, transparent 70%)',
                 }}
               />
               

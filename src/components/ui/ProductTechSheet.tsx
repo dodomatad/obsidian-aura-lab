@@ -265,7 +265,7 @@ const ProductTechSheet = ({ techProfile, productName, contentRevealed }: Product
         className="p-5 rounded-lg bg-white/5 border border-white/10"
       >
         <div className="flex items-center gap-2 mb-4">
-          <Target className="w-4 h-4 text-blue-400" />
+          <Target className="w-4 h-4 text-orange" />
           <h3 className="text-sm font-medium text-foreground uppercase tracking-wider">
             Melhor Para
           </h3>

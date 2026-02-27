@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ZoomIn } from 'lucide-react';
 import ImageLightbox from './ImageLightbox';
 
 interface ProductMiniGalleryProps {
@@ -51,9 +52,10 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
         
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
         
-        {/* Expand hint */}
+        {/* Expand hint with zoom icon */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <div className="bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 text-white/80 text-xs tracking-wider uppercase">
+          <div className="bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-white/80 text-xs tracking-wider uppercase">
+            <ZoomIn className="w-4 h-4" />
             Ampliar
           </div>
         </div>
@@ -66,7 +68,7 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
             key={idx} 
             onClick={() => setMainImage(img)}
             onDoubleClick={() => openLightbox(idx)}
-            className={`aspect-square rounded-lg overflow-hidden transition-all duration-300 ${
+            className={`group/thumb relative aspect-square rounded-lg overflow-hidden transition-all duration-300 ${
               mainImage === img 
                 ? 'ring-2 ring-foreground opacity-100' 
                 : 'opacity-40 grayscale hover:opacity-70 hover:grayscale-0'
@@ -85,9 +87,18 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
               className="w-full h-full object-cover"
               style={{ imageOrientation: 'from-image' }}
             />
+            {/* Zoom overlay on hover */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-200 pointer-events-none">
+              <ZoomIn className="w-3.5 h-3.5 text-white/80" />
+            </div>
           </motion.button>
         ))}
       </div>
+
+      {/* Hint text */}
+      <p className="text-[10px] text-foreground/30 text-center tracking-wider">
+        Clique nas fotos para ampliar
+      </p>
 
       {/* Lightbox */}
       <ImageLightbox

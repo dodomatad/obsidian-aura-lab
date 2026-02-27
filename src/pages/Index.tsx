@@ -110,28 +110,28 @@ const Index = () => {
             <a 
               href="#hero" 
               onClick={(e) => handleNavClick(e, 'hero')}
-              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+              className="text-sm font-sporty font-semibold tracking-[0.15em] uppercase text-orange hover:text-orange/80 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               Início
             </a>
             <a 
               href="#modelos" 
               onClick={(e) => handleNavClick(e, 'modelos')}
-              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+              className="text-sm font-sporty font-semibold tracking-[0.15em] uppercase text-orange hover:text-orange/80 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               Produtos
             </a>
             <a 
               href="/tecnologia" 
               onClick={(e) => { e.preventDefault(); navigate('/tecnologia'); }}
-              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+              className="text-sm font-sporty font-semibold tracking-[0.15em] uppercase text-orange hover:text-orange/80 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               Tecnologia
             </a>
             <a 
               href="#champion" 
               onClick={(e) => handleNavClick(e, 'champion')}
-              className="text-xs text-orange font-bold hover:text-orange/80 transition-all duration-300 tracking-wide hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+              className="text-sm font-sporty font-semibold tracking-[0.15em] uppercase text-orange hover:text-orange/80 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
             >
               História
             </a>

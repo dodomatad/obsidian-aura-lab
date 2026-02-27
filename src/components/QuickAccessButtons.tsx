@@ -58,22 +58,25 @@ const QuickAccessButtons = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              whileHover={{ scale: 1.03, y: -2 }}
+              whileHover={{ scale: 1.04, y: -3 }}
               whileTap={{ scale: 0.97 }}
-              className="group relative overflow-hidden rounded-xl p-5 md:p-6 text-center cursor-pointer border border-orange/20 transition-all duration-300 hover:border-orange/50"
+              className="group relative overflow-hidden rounded-xl p-6 md:p-7 text-center cursor-pointer border border-orange/30 transition-all duration-300 hover:border-orange/60 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)]"
               style={{
-                background: 'rgba(249, 115, 22, 0.06)',
+                background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(249, 115, 22, 0.03) 100%)',
               }}
             >
               {/* Hover glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                  background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.12) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.18) 0%, transparent 70%)',
                 }}
               />
               
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-[20%] right-[20%] h-[2px] bg-orange/0 group-hover:bg-orange/50 transition-all duration-500 rounded-full" />
+              
               {/* Label */}
-              <span className="text-base md:text-lg font-sporty font-semibold tracking-[0.15em] uppercase text-foreground/70 group-hover:text-orange transition-colors duration-300 whitespace-pre-line">
+              <span className="text-base md:text-lg font-sporty font-bold tracking-[0.15em] uppercase text-foreground/80 group-hover:text-orange transition-colors duration-300 whitespace-pre-line drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
                 {cat.label}
               </span>
             </motion.a>

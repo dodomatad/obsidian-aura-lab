@@ -324,7 +324,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 6 — NASCIMENTO DA OPIUM ──────────────── */}
-      <section className="min-h-[35vh] md:min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="md:min-h-[50vh] flex flex-col items-center justify-center px-6 py-6 md:py-0 text-center">
         <QuoteReveal>
           <p className="text-white/90 text-[clamp(1.5rem,4vw,3rem)] font-light leading-snug max-w-3xl italic">
             "Abandonou a engenharia para viver o mar."
@@ -345,8 +345,8 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 7 — LEGADO & RECONHECIMENTO ─────────── */}
-      <section className="py-10 md:py-24">
-        <ClipReveal direction="right" className="w-full mb-8 md:mb-12">
+      <section className="py-4 md:py-24">
+        <ClipReveal direction="right" className="w-full mb-4 md:mb-12">
           <div className="relative w-full">
             <img
               src={tochaOlimpica}

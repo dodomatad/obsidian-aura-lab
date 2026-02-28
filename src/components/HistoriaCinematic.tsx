@@ -135,7 +135,7 @@ function FullscreenStat({
   label: string;
 }) {
   return (
-    <section className="min-h-[50vh] md:min-h-[60vh] flex items-center justify-center px-6">
+    <section className="min-h-[35vh] md:min-h-[60vh] flex items-center justify-center px-6">
       <div className="text-center">
         <BlurReveal>
           <span className="block font-sporty text-[clamp(5rem,18vw,14rem)] font-bold text-white leading-none tracking-tight">
@@ -143,7 +143,7 @@ function FullscreenStat({
           </span>
         </BlurReveal>
         <BlurReveal delay={0.2}>
-          <span className="block text-white/40 text-sm md:text-lg tracking-[0.25em] uppercase mt-4">
+          <span className="block text-white/40 text-base md:text-xl tracking-[0.25em] uppercase mt-3">
             {label}
           </span>
         </BlurReveal>
@@ -227,7 +227,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 4 — ORIGENS ──────────────────────────── */}
-      <section className="min-h-[60vh] flex items-center py-16 md:py-24 px-6">
+      <section className="min-h-[40vh] md:min-h-[60vh] flex items-center py-10 md:py-24 px-6">
         <div className="max-w-3xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-6">
@@ -266,15 +266,15 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 5 — O DESPERTAR + DÉCADA DE OURO ─────── */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-10 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
-            <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-6">
+            <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4 md:mb-6">
               1984 — 2000
             </p>
           </BlurReveal>
           <ClipReveal direction="right">
-            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-10 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-6 md:mb-10 tracking-tight uppercase">
               O Despertar do Campeão
             </h2>
           </ClipReveal>
@@ -290,7 +290,7 @@ export function HistoriaCinematic() {
             </p>
           </BlurReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 mt-6 md:mt-12">
             <ScaleReveal>
               <div>
                 <span className="font-sporty text-5xl md:text-7xl font-bold text-orange block mb-3">
@@ -324,7 +324,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 6 — NASCIMENTO DA OPIUM ──────────────── */}
-      <section className="min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="min-h-[35vh] md:min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
         <QuoteReveal>
           <p className="text-white/90 text-[clamp(1.5rem,4vw,3rem)] font-light leading-snug max-w-3xl italic">
             "Abandonou a engenharia para viver o mar."
@@ -345,8 +345,8 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 7 — LEGADO & RECONHECIMENTO ─────────── */}
-      <section className="py-16 md:py-24">
-        <ClipReveal direction="right" className="w-full mb-12">
+      <section className="py-10 md:py-24">
+        <ClipReveal direction="right" className="w-full mb-8 md:mb-12">
           <div className="relative w-full">
             <img
               src={tochaOlimpica}
@@ -368,7 +368,7 @@ export function HistoriaCinematic() {
             </h2>
           </ClipReveal>
 
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start mt-10">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start mt-6 md:mt-10">
             <BlurReveal className="flex-1">
               <div className="flex items-center gap-4 mb-4">
                 <div className="bg-white rounded-lg p-3 flex-shrink-0">
@@ -415,15 +415,15 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 8 — IMPACTO SOCIAL ───────────────────── */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-10 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
-            <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-6">
+            <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4 md:mb-6">
               Impacto Social
             </p>
           </BlurReveal>
           <ClipReveal direction="up">
-            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-12 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-8 md:mb-12 tracking-tight uppercase">
               Transformando Vidas
             </h2>
           </ClipReveal>
@@ -471,7 +471,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO FINAL — ACERVO HISTÓRICO ─────────────── */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-10 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <h2 className="font-sporty text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight uppercase">

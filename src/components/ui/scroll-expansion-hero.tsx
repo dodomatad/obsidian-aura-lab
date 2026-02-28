@@ -26,35 +26,38 @@ const ScrollExpansionHero = ({
     offset: ["start start", "end start"],
   });
 
-  // Photo expands from portrait to fullscreen
+  // Eased progress for smoother feel (faster start, softer end)
+  const easedProgress = useTransform(scrollYProgress, (v) => Math.pow(v, 0.85));
+
+  // Photo expands from portrait to fullscreen — completes at 65% scroll
   const mediaWidth = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    easedProgress,
+    [0, 0.65],
     isMobile ? ["60vw", "100vw"] : ["28vw", "100vw"]
   );
   const mediaHeight = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    easedProgress,
+    [0, 0.65],
     isMobile ? ["45vh", "100vh"] : ["55vh", "100vh"]
   );
   const mediaBorderRadius = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    easedProgress,
+    [0, 0.65],
     ["16px", "0px"]
   );
 
-  // Text slides out
-  const titleX = useTransform(scrollYProgress, [0.1, 0.4], ["0%", "-120%"]);
-  const titleOpacity = useTransform(scrollYProgress, [0.1, 0.35], [1, 0]);
-  const subtitleX = useTransform(scrollYProgress, [0.15, 0.45], ["0%", "120%"]);
-  const subtitleOpacity = useTransform(scrollYProgress, [0.15, 0.4], [1, 0]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  // Text slides out faster
+  const titleX = useTransform(easedProgress, [0.05, 0.3], ["0%", "-120%"]);
+  const titleOpacity = useTransform(easedProgress, [0.05, 0.25], [1, 0]);
+  const subtitleX = useTransform(easedProgress, [0.1, 0.35], ["0%", "120%"]);
+  const subtitleOpacity = useTransform(easedProgress, [0.1, 0.3], [1, 0]);
+  const hintOpacity = useTransform(easedProgress, [0, 0.1], [1, 0]);
 
   // Overlay dims as photo expands
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.3], [0.55, 0.75]);
+  const overlayOpacity = useTransform(easedProgress, [0, 0.3], [0.55, 0.75]);
 
   return (
-    <div ref={containerRef} className="relative h-[250vh]">
+    <div ref={containerRef} className="relative h-[170vh]">
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         {/* Vimeo video background */}

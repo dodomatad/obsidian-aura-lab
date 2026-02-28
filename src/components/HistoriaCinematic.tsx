@@ -135,7 +135,7 @@ function FullscreenStat({
   label: string;
 }) {
   return (
-    <section className="min-h-[20vh] md:min-h-[60vh] flex items-center justify-center px-6 py-8 md:py-0">
+    <section className="md:min-h-[60vh] flex items-center justify-center px-6 py-6 md:py-0">
       <div className="text-center">
         <BlurReveal>
           <span className="block font-sporty text-[clamp(5rem,18vw,14rem)] font-bold text-white leading-none tracking-tight">
@@ -185,7 +185,7 @@ export function HistoriaCinematic() {
       <FullscreenStat number="164km" label="Recorde de 24h no mar" />
 
       {/* ─── BLOCO 3 — REVOLUÇÃO HAVAIANA ────────────────── */}
-      <section className="relative py-6 md:py-24">
+      <section className="relative py-2 md:py-24">
         <ClipReveal direction="left" className="w-full">
           <div className="relative w-full">
             <img

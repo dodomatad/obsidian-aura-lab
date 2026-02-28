@@ -337,6 +337,14 @@ export function HistoriaCinematic() {
 
       {/* ─── BLOCO 6 — NASCIMENTO DA OPIUM ──────────────── */}
       <section className="flex flex-col items-center justify-center px-6 py-14 md:py-0 md:min-h-[60vh] text-center">
+        <BlurReveal>
+          <div className="h-px w-16 bg-orange mb-6 mx-auto" />
+        </BlurReveal>
+        <ClipReveal direction="up">
+          <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight uppercase">
+            O Nascimento da Opium
+          </h2>
+        </ClipReveal>
         <QuoteReveal>
           <p className="text-white/90 text-[clamp(1.5rem,4vw,3rem)] font-light leading-snug max-w-3xl italic">
             "Abandonou a engenharia para viver o mar."
@@ -372,12 +380,15 @@ export function HistoriaCinematic() {
         </div>
         <div className="max-w-4xl mx-auto px-6">
           <BlurReveal>
+            <div className="h-px w-16 bg-orange mb-6" />
+          </BlurReveal>
+          <BlurReveal>
             <p className="text-white/40 text-xs tracking-[0.2em] uppercase mb-4">
               Reconhecimento
             </p>
           </BlurReveal>
           <ClipReveal direction="up">
-            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-4 md:mb-8 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight uppercase">
               Legado que Inspira
             </h2>
           </ClipReveal>
@@ -432,12 +443,15 @@ export function HistoriaCinematic() {
       <section className="py-14 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
+            <div className="h-px w-16 bg-orange mb-6" />
+          </BlurReveal>
+          <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-2 md:mb-6">
               Impacto Social
             </p>
           </BlurReveal>
           <ClipReveal direction="up">
-            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-4 md:mb-12 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-6 md:mb-12 tracking-tight uppercase">
               Transformando Vidas
             </h2>
           </ClipReveal>

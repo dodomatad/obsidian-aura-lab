@@ -57,7 +57,7 @@ const ScrollExpansionHero = ({
   const overlayOpacity = useTransform(easedProgress, [0, 0.3], [0.55, 0.75]);
 
   return (
-    <div ref={containerRef} className="relative h-[170vh]">
+    <div ref={containerRef} className="relative h-[150vh]">
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         {/* Vimeo video background */}

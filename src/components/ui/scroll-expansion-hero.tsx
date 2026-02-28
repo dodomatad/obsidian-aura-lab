@@ -124,9 +124,6 @@ const ScrollExpansionHero = ({
           className="absolute z-[3] bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           style={{ opacity: hintOpacity }}
         >
-          <span className="text-white/40 text-xs tracking-[0.3em] uppercase">
-            {scrollHint}
-          </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import jornalSantos from "@/assets/jornal-santos-2001.jpg";
 import tochaOlimpica from "@/assets/fabio-tocha-olimpica.jpg";
 import logoKaora from "@/assets/logo-kaora.jpg";
@@ -25,11 +26,11 @@ function ClipReveal({
       : { clipPath: "inset(100% 0 0 0)" };
 
   return (
-    <motion.div
-      initial={{ ...initial, opacity: 0 }}
-      whileInView={{ clipPath: "inset(0 0 0 0)", opacity: 1 }}
-      viewport={{ once: true, margin: "-15%" }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+     <motion.div
+       initial={{ ...initial, opacity: 0 }}
+       whileInView={{ clipPath: "inset(0 0 0 0)", opacity: 1 }}
+       viewport={{ once: true, amount: 0.3 }}
+       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -46,12 +47,13 @@ function BlurReveal({
   className?: string;
   delay?: number;
 }) {
+  const isMobile = useIsMobile();
   return (
     <motion.div
-      initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
+      initial={{ opacity: 0, filter: isMobile ? "blur(8px)" : "blur(10px)", y: isMobile ? 40 : 60 }}
       whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.4, ease: "easeOut", delay: delay * 0.4 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: delay * (isMobile ? 0.1 : 0.15) }}
       className={className}
     >
       {children}
@@ -68,10 +70,32 @@ function ScaleReveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.85 }}
+      initial={{ opacity: 0, scale: 0.88 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ── Quote reveal — opacity + subtle scale ───────────────── */
+
+function QuoteReveal({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.96 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -300,11 +324,11 @@ export function HistoriaCinematic() {
 
       {/* ─── BLOCO 6 — NASCIMENTO DA OPIUM ──────────────── */}
       <section className="min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
-        <BlurReveal>
+        <QuoteReveal>
           <p className="text-white/90 text-[clamp(1.5rem,4vw,3rem)] font-light leading-snug max-w-3xl italic">
             "Abandonou a engenharia para viver o mar."
           </p>
-        </BlurReveal>
+        </QuoteReveal>
         <BlurReveal delay={0.6}>
           <div className="w-12 h-px bg-orange/50 mx-auto my-10" />
         </BlurReveal>

@@ -10,6 +10,46 @@ interface TimelineEntry {
   content: React.ReactNode;
 }
 
+const TimelineCard = ({ item, index }: { item: TimelineEntry; index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 85%", "start 35%"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
+  // Alternate slide direction on desktop for odd/even cards
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [index % 2 === 0 ? -40 : 40, 0]
+  );
+  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ opacity, y, scale }}
+      className="pt-12 md:pt-20 pl-6 md:pl-0"
+    >
+      <motion.h3
+        style={{ opacity, x }}
+        className="text-2xl md:text-5xl font-brush text-orange/70 mb-6"
+      >
+        {item.title}
+      </motion.h3>
+
+      <motion.div
+        style={{ opacity, x }}
+        className="w-full"
+      >
+        {item.content}
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -64,34 +104,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20 pl-8 pr-4 md:px-8 lg:px-10">
         {data.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="pt-12 md:pt-20 pl-6 md:pl-0"
-          >
-            <motion.h3 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="text-2xl md:text-5xl font-brush text-orange/70 mb-6"
-            >
-              {item.title}
-            </motion.h3>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="w-full"
-            >
-              {item.content}
-            </motion.div>
-          </motion.div>
+          <TimelineCard key={index} item={item} index={index} />
         ))}
 
         {/* Linha vertical animada — sem dots */}

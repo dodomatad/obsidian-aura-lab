@@ -135,7 +135,7 @@ function FullscreenStat({
   label: string;
 }) {
   return (
-    <section className="md:min-h-[60vh] flex items-center justify-center px-6 py-6 md:py-0">
+    <section className="md:min-h-[60vh] flex items-center justify-center px-6 py-3 md:py-0">
       <div className="text-center">
         <BlurReveal>
           <span className="block font-sporty text-[clamp(5rem,18vw,14rem)] font-bold text-white leading-none tracking-tight">
@@ -158,7 +158,7 @@ export function HistoriaCinematic() {
   return (
     <div className="w-full" style={{ backgroundColor: "#050505" }}>
       {/* ─── BLOCO 1 — SILÊNCIO ─────────────────────────── */}
-      <section className="min-h-[25vh] md:min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="min-h-[18vh] md:min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
         <BlurReveal>
           <p className="text-white/90 text-[clamp(1.25rem,3.5vw,2.5rem)] font-light leading-relaxed max-w-3xl">
             O visionário que introduziu a{" "}
@@ -227,7 +227,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 4 — ORIGENS ──────────────────────────── */}
-      <section className="md:min-h-[60vh] flex items-center py-5 md:py-24 px-6">
+      <section className="md:min-h-[60vh] flex items-center py-3 md:py-24 px-6">
         <div className="max-w-3xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-6">
@@ -266,7 +266,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 5 — O DESPERTAR + DÉCADA DE OURO ─────── */}
-      <section className="py-5 md:py-24 px-6">
+      <section className="py-3 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4 md:mb-6">
@@ -324,7 +324,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 6 — NASCIMENTO DA OPIUM ──────────────── */}
-      <section className="md:min-h-[50vh] flex flex-col items-center justify-center px-6 py-4 md:py-0 text-center">
+      <section className="md:min-h-[50vh] flex flex-col items-center justify-center px-6 py-2 md:py-0 text-center">
         <QuoteReveal>
           <p className="text-white/90 text-[clamp(1.5rem,4vw,3rem)] font-light leading-snug max-w-3xl italic">
             "Abandonou a engenharia para viver o mar."
@@ -345,8 +345,8 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 7 — LEGADO & RECONHECIMENTO ─────────── */}
-      <section className="py-2 md:py-24">
-        <ClipReveal direction="right" className="w-full mb-4 md:mb-12">
+      <section className="py-0 md:py-24">
+        <ClipReveal direction="right" className="w-full mb-2 md:mb-12">
           <div className="relative w-full">
             <img
               src={tochaOlimpica}
@@ -415,7 +415,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 8 — IMPACTO SOCIAL ───────────────────── */}
-      <section className="py-5 md:py-24 px-6">
+      <section className="py-3 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4 md:mb-6">
@@ -471,7 +471,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO FINAL — ACERVO HISTÓRICO ─────────────── */}
-      <section className="py-5 md:py-24 px-6">
+      <section className="py-3 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <h2 className="font-sporty text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight uppercase">

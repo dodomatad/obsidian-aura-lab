@@ -185,7 +185,7 @@ export function HistoriaCinematic() {
       <FullscreenStat number="164km" label="Recorde de 24h no mar" />
 
       {/* ─── BLOCO 3 — REVOLUÇÃO HAVAIANA ────────────────── */}
-      <section className="relative py-12 md:py-24">
+      <section className="relative py-6 md:py-24">
         <ClipReveal direction="left" className="w-full">
           <div className="relative w-full">
             <img

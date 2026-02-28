@@ -158,7 +158,7 @@ export function HistoriaCinematic() {
   return (
     <div className="w-full" style={{ backgroundColor: "#050505" }}>
       {/* ─── BLOCO 1 — SILÊNCIO ─────────────────────────── */}
-      <section className="min-h-[40vh] md:min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="min-h-[25vh] md:min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
         <BlurReveal>
           <p className="text-white/90 text-[clamp(1.25rem,3.5vw,2.5rem)] font-light leading-relaxed max-w-3xl">
             O visionário que introduziu a{" "}
@@ -167,7 +167,7 @@ export function HistoriaCinematic() {
           </p>
         </BlurReveal>
         <BlurReveal delay={0.6}>
-          <p className="text-white/50 text-base md:text-xl mt-8 font-light tracking-wide">
+          <p className="text-white/50 text-base md:text-xl mt-4 md:mt-8 font-light tracking-wide">
             Invicto por 15 anos. Mais de 700 troféus.
           </p>
         </BlurReveal>
@@ -227,7 +227,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 4 — ORIGENS ──────────────────────────── */}
-      <section className="min-h-[40vh] md:min-h-[60vh] flex items-center py-10 md:py-24 px-6">
+      <section className="md:min-h-[60vh] flex items-center py-5 md:py-24 px-6">
         <div className="max-w-3xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-6">
@@ -235,12 +235,12 @@ export function HistoriaCinematic() {
             </p>
           </BlurReveal>
           <ClipReveal direction="up">
-            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-10 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-5 md:mb-10 tracking-tight uppercase">
               DNA do Mar
             </h2>
           </ClipReveal>
           <BlurReveal delay={0.15}>
-            <p className="text-white/70 text-lg md:text-2xl font-light leading-relaxed mb-8">
+            <p className="text-white/70 text-lg md:text-2xl font-light leading-relaxed mb-4 md:mb-8">
               Nascido em 10 de novembro de 1962, filho de dois atletas santistas:
               os nadadores{" "}
               <span className="text-orange font-medium">
@@ -266,7 +266,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 5 — O DESPERTAR + DÉCADA DE OURO ─────── */}
-      <section className="py-10 md:py-24 px-6">
+      <section className="py-5 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4 md:mb-6">
@@ -280,7 +280,7 @@ export function HistoriaCinematic() {
           </ClipReveal>
 
           <BlurReveal delay={0.1}>
-            <p className="text-white/70 text-lg md:text-2xl font-light leading-relaxed mb-10 max-w-3xl">
+            <p className="text-white/70 text-lg md:text-2xl font-light leading-relaxed mb-5 md:mb-10 max-w-3xl">
               Amor à primeira remada. Com dinheiro de estágio, comprou um caiaque
               e venceu sua primeira prova em 84. No ano seguinte, tornou-se o{" "}
               <span className="text-orange font-medium">
@@ -331,7 +331,7 @@ export function HistoriaCinematic() {
           </p>
         </QuoteReveal>
         <BlurReveal delay={0.6}>
-          <div className="w-12 h-px bg-orange/50 mx-auto my-10" />
+          <div className="w-12 h-px bg-orange/50 mx-auto my-5 md:my-10" />
         </BlurReveal>
         <BlurReveal delay={0.8}>
           <p className="text-white/50 text-base md:text-lg leading-relaxed max-w-2xl">
@@ -363,12 +363,12 @@ export function HistoriaCinematic() {
             </p>
           </BlurReveal>
           <ClipReveal direction="up">
-            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-8 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-6xl font-bold text-white mb-4 md:mb-8 tracking-tight uppercase">
               Legado que Inspira
             </h2>
           </ClipReveal>
 
-          <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start mt-6 md:mt-10">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-12 items-start mt-4 md:mt-10">
             <BlurReveal className="flex-1">
               <div className="flex items-center gap-4 mb-4">
                 <div className="bg-white rounded-lg p-3 flex-shrink-0">
@@ -401,7 +401,7 @@ export function HistoriaCinematic() {
                   Introduziu a modalidade no Brasil em 2007
                 </p>
               </div>
-              <div className="mt-8">
+              <div className="mt-4 md:mt-8">
                 <h3 className="text-orange font-medium text-lg mb-1">
                   Cidadão Santista
                 </h3>
@@ -415,7 +415,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO 8 — IMPACTO SOCIAL ───────────────────── */}
-      <section className="py-10 md:py-24 px-6">
+      <section className="py-5 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-4 md:mb-6">
@@ -423,12 +423,12 @@ export function HistoriaCinematic() {
             </p>
           </BlurReveal>
           <ClipReveal direction="up">
-            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-8 md:mb-12 tracking-tight uppercase">
+            <h2 className="font-sporty text-3xl md:text-5xl font-bold text-white mb-4 md:mb-12 tracking-tight uppercase">
               Transformando Vidas
             </h2>
           </ClipReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
             <ClipReveal direction="left">
               <div className="bg-white/[0.03] p-8 md:p-10">
                 <div className="bg-white rounded-lg p-3 mb-6 inline-block">
@@ -471,7 +471,7 @@ export function HistoriaCinematic() {
       </section>
 
       {/* ─── BLOCO FINAL — ACERVO HISTÓRICO ─────────────── */}
-      <section className="py-10 md:py-24 px-6">
+      <section className="py-5 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
             <h2 className="font-sporty text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight uppercase">
@@ -479,7 +479,7 @@ export function HistoriaCinematic() {
             </h2>
           </BlurReveal>
           <BlurReveal delay={0.15}>
-            <p className="text-white/30 text-sm mb-12">
+            <p className="text-white/30 text-sm mb-6 md:mb-12">
               Décadas de conquistas registradas em jornais, televisão e pódios ao
               redor do mundo.
               <span className="text-white/20 italic block mt-1">

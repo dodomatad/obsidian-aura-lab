@@ -29,7 +29,7 @@ function ClipReveal({
       initial={{ ...initial, opacity: 0 }}
       whileInView={{ clipPath: "inset(0 0 0 0)", opacity: 1 }}
       viewport={{ once: true, margin: "-15%" }}
-      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -51,7 +51,7 @@ function BlurReveal({
       initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
       whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 1, ease: "easeOut", delay }}
+      transition={{ duration: 0.55, ease: "easeOut", delay: delay * 0.6 }}
       className={className}
     >
       {children}
@@ -71,7 +71,7 @@ function ScaleReveal({
       initial={{ opacity: 0, scale: 0.85 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}

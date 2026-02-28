@@ -135,7 +135,7 @@ function FullscreenStat({
   label: string;
 }) {
   return (
-    <section className="min-h-[35vh] md:min-h-[60vh] flex items-center justify-center px-6">
+    <section className="min-h-[20vh] md:min-h-[60vh] flex items-center justify-center px-6 py-8 md:py-0">
       <div className="text-center">
         <BlurReveal>
           <span className="block font-sporty text-[clamp(5rem,18vw,14rem)] font-bold text-white leading-none tracking-tight">
@@ -158,7 +158,7 @@ export function HistoriaCinematic() {
   return (
     <div className="w-full" style={{ backgroundColor: "#050505" }}>
       {/* ─── BLOCO 1 — SILÊNCIO ─────────────────────────── */}
-      <section className="min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="min-h-[40vh] md:min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
         <BlurReveal>
           <p className="text-white/90 text-[clamp(1.25rem,3.5vw,2.5rem)] font-light leading-relaxed max-w-3xl">
             O visionário que introduziu a{" "}

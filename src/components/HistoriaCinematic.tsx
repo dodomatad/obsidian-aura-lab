@@ -50,11 +50,23 @@ function BlurReveal({
   const isMobile = useIsMobile();
   return (
     <motion.div
-      style={{ willChange: "opacity, filter, transform" }}
-      initial={{ opacity: 0, filter: isMobile ? "blur(8px)" : "blur(12px)", y: isMobile ? 35 : 50 }}
-      whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: isMobile ? 0.6 : 0.65, ease: [0.22, 1, 0.36, 1], delay: delay * (isMobile ? 0.1 : 0.15) }}
+      style={{ willChange: "opacity, transform, filter" }}
+      initial={{
+        opacity: 0,
+        y: isMobile ? 50 : 60,
+        filter: isMobile ? "blur(8px)" : "blur(12px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+      }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{
+        duration: isMobile ? 0.6 : 0.65,
+        ease: [0.22, 1, 0.36, 1],
+        delay: delay * 0.15,
+      }}
       className={className}
     >
       {children}

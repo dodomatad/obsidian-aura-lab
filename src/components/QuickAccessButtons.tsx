@@ -37,7 +37,7 @@ const QuickAccessButtons = () => {
       >
         {/* Section label */}
         <div className="text-center mb-3">
-          <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-foreground/50 font-sporty font-semibold">
+          <span className="text-xs md:text-sm tracking-[0.3em] uppercase text-foreground/50 font-sporty font-semibold">
             Encontre seu Surfski ou Canoa Havaiana
           </span>
         </div>

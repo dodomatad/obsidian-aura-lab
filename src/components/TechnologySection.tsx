@@ -60,7 +60,7 @@ const TechnologySection = () => {
           transition={{ duration: 0.8 }}
           className="mb-16 md:mb-24"
         >
-          <span className="text-xs tracking-widest text-muted-foreground uppercase block mb-3">
+          <span className="text-sm tracking-widest text-muted-foreground uppercase block mb-3">
             Engenharia &amp; Performance
           </span>
           <h2 className="font-brush text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground leading-none">
@@ -166,7 +166,7 @@ const TechnologySection = () => {
               style={{ background: 'rgba(255,255,255,0.02)' }}
             >
               <span
-                className="inline-block text-xs font-bold tracking-widest uppercase mb-4"
+                className="inline-block text-sm font-bold tracking-widest uppercase mb-4"
                 style={{ color: 'hsl(var(--orange))' }}
               >
                 0{i + 1}

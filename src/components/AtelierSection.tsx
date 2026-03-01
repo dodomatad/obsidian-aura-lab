@@ -110,7 +110,7 @@ const AtelierSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-xs tracking-widest text-muted-foreground uppercase block mb-3 md:mb-4">
+          <span className="text-sm tracking-widest text-muted-foreground uppercase block mb-3 md:mb-4">
             O Ateliê
           </span>
           <h2 className="display-hero text-foreground">
@@ -197,7 +197,7 @@ const AtelierSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mt-4 text-sm text-foreground text-center"
+          className="mt-4 text-base text-foreground text-center"
         >
           Personalize seu barco com cores e acabamentos exclusivos
         </motion.p>
@@ -212,10 +212,10 @@ const AtelierSection = () => {
         className="px-8 md:px-16 mt-4 text-center"
       >
         {/* Texto informativo */}
-        <p className="text-foreground/60 text-sm md:text-base mb-3 max-w-lg mx-auto leading-relaxed">
+        <p className="text-foreground/60 text-base md:text-lg mb-3 max-w-lg mx-auto leading-relaxed">
           Todos os barcos são fabricados sob encomenda com as <span className="text-foreground font-medium">cores padrão Opium</span>.
         </p>
-        <p className="text-foreground/60 text-sm md:text-base mb-6 max-w-lg mx-auto leading-relaxed">
+        <p className="text-foreground/60 text-base md:text-lg mb-6 max-w-lg mx-auto leading-relaxed">
           Customizações possuem valores e viabilidades técnicas específicas. Consulte nosso especialista.
         </p>
 

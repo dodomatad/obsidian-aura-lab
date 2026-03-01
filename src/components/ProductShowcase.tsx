@@ -391,7 +391,7 @@ const ProductShowcase = () => {
         className="relative z-20 px-6 md:px-16 pt-12 md:pt-20"
       >
         <div className="mb-2">
-          <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/80 font-sans font-medium">
+          <span className="text-xs md:text-sm tracking-[0.35em] uppercase text-foreground/80 font-sans font-medium">
             Performance
           </span>
         </div>
@@ -413,7 +413,7 @@ const ProductShowcase = () => {
           </AnimatePresence>
         </div>
         {/* Aviso de personalização sob consulta */}
-        <p className="text-[10px] md:text-xs text-foreground/40 mt-3 tracking-wide">
+        <p className="text-sm md:text-base text-foreground/40 mt-3 tracking-wide">
           Cores e acabamentos personalizados sob consulta com nosso especialista.
         </p>
       </motion.div>
@@ -433,7 +433,7 @@ const ProductShowcase = () => {
               <motion.button
                 key={cat}
                 onClick={() => jumpToCategory(cat)}
-                className={`px-3 py-2.5 rounded-full text-[11px] font-sporty font-semibold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border text-center ${
+                className={`px-3 py-2.5 rounded-full text-sm font-sporty font-semibold uppercase tracking-wider transition-all duration-300 backdrop-blur-md border text-center ${
                   isActive 
                     ? 'bg-foreground text-background border-foreground shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
                     : 'bg-white/5 text-foreground/60 border-white/10 hover:bg-white/10 hover:text-foreground/80'
@@ -589,7 +589,7 @@ const ProductShowcase = () => {
                     >
                       ←
                     </motion.span>
-                    <span className="text-[10px] tracking-[0.25em] uppercase text-foreground/45 font-sans">Deslize</span>
+                    <span className="text-sm tracking-[0.25em] uppercase text-foreground/45 font-sans">Deslize</span>
                     <motion.span 
                       animate={{ x: [4, -4, 4] }} 
                       transition={{ duration: 1.2, repeat: Infinity }} 
@@ -609,7 +609,7 @@ const ProductShowcase = () => {
                 animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 8 }}
                 transition={{ duration: 0.25 }}
               >
-                <span className="text-[10px] tracking-[0.35em] uppercase text-foreground/45 font-sans">Clique para explorar</span>
+                <span className="text-sm tracking-[0.35em] uppercase text-foreground/45 font-sans">Clique para explorar</span>
               </motion.div>
             )}
           </motion.div>
@@ -660,7 +660,7 @@ const ProductShowcase = () => {
             className="flex flex-col items-center"
           >
             {/* Category Badge */}
-            <span className="text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1">
+            <span className="text-xs md:text-sm tracking-[0.35em] uppercase text-foreground/35 font-sans block mb-1">
               {currentProduct.category}
             </span>
             
@@ -745,7 +745,7 @@ const ProductShowcase = () => {
           </motion.div>
         )}
         
-        <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-foreground/30 font-mono">
+        <span className="text-sm md:text-base tracking-[0.2em] uppercase text-foreground/30 font-mono">
           {String(currentIndex + 1).padStart(2, '0')} / {String(filteredProducts.length).padStart(2, '0')}
         </span>
       </div>

@@ -43,7 +43,7 @@ const QuickAccessButtons = () => {
         </div>
         
         {/* Section subtitle */}
-        <p className="text-center text-foreground/25 text-[10px] md:text-[11px] tracking-widest uppercase mb-10 md:mb-14 font-sans">
+        <p className="text-center text-foreground/25 text-xs md:text-sm tracking-widest uppercase mb-10 md:mb-14 font-sans">
           Acesso direto ao modelo
         </p>
 

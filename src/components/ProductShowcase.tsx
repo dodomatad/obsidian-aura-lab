@@ -396,7 +396,7 @@ const ProductShowcase = () => {
           </span>
         </div>
         {/* Dynamic Category Title with smooth transition */}
-        <div className="overflow-hidden h-[3.5rem] md:h-[4.5rem]">
+        <div className="overflow-hidden h-[4rem] md:h-[5.5rem]">
           <AnimatePresence mode="wait">
             <motion.h2 
               key={currentCategory}
@@ -406,7 +406,7 @@ const ProductShowcase = () => {
               exit="exit"
               transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
               className="display-hero text-foreground"
-              style={{ fontSize: 'clamp(1.6rem, 4.5vw, 3rem)', letterSpacing: '-0.015em' }}
+              style={{ fontSize: 'clamp(2rem, 5.5vw, 4rem)', letterSpacing: '-0.015em' }}
             >
               {currentCategory}<span className="text-foreground">.</span>
             </motion.h2>

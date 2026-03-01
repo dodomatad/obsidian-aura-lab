@@ -53,7 +53,13 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
         
         {/* Expand hint with zoom icon */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        {/* Mobile: small persistent icon in corner. Desktop: full overlay on hover */}
+        <div className="absolute bottom-3 right-3 md:hidden pointer-events-none">
+          <div className="bg-black/60 backdrop-blur-sm rounded-full p-2">
+            <ZoomIn className="w-4 h-4 text-white/80" />
+          </div>
+        </div>
+        <div className="absolute inset-0 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <div className="bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-white/80 text-xs tracking-wider uppercase">
             <ZoomIn className="w-4 h-4" />
             Ampliar

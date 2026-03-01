@@ -498,44 +498,6 @@ export function HistoriaCinematic() {
         </div>
       </section>
 
-      {/* ─── BLOCO FINAL — ACERVO HISTÓRICO ─────────────── */}
-      <section className="py-14 md:py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <BlurReveal>
-            <h2 className="font-sporty text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight uppercase">
-              Acervo Histórico
-            </h2>
-          </BlurReveal>
-          <BlurReveal delay={0.15}>
-            <p className="text-white/30 text-sm mb-6 md:mb-12">
-              Décadas de conquistas registradas em jornais, televisão e pódios ao
-              redor do mundo.
-              <span className="text-white/20 italic block mt-1">
-                Galeria em construção — novas imagens serão adicionadas em breve.
-              </span>
-            </p>
-          </BlurReveal>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            {[
-              "Recortes de Jornal",
-              "Aparições na TV",
-              "Pódios & Premiações",
-              "Competições Internacionais",
-              "Bastidores & Treinos",
-              "Com a Comunidade",
-            ].map((label, i) => (
-              <ScaleReveal key={label}>
-                <div className="aspect-[4/3] bg-white/[0.02] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.04] transition-colors duration-500 cursor-default">
-                  <span className="text-white/20 text-xs md:text-sm tracking-wide text-center px-4">
-                    {label}
-                  </span>
-                </div>
-              </ScaleReveal>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

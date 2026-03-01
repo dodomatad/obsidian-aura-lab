@@ -104,7 +104,7 @@ const ChampionSection = () => {
               className="text-center mb-12 md:mb-16"
             >
               {/* Section label */}
-              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-orange font-sans font-semibold">
+              <span className="text-xs md:text-sm tracking-[0.35em] uppercase text-orange font-sans font-semibold">
                 O que nos torna únicos
               </span>
 
@@ -318,7 +318,7 @@ const ChampionSection = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-8 md:mb-10"
             >
-              <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase font-sans font-semibold text-orange">
+              <span className="text-xs md:text-sm tracking-[0.35em] uppercase font-sans font-semibold text-orange">
                 Projetos e Parcerias
               </span>
             </motion.div>

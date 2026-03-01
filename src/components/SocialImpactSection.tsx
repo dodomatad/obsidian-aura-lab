@@ -140,7 +140,7 @@ const SocialImpactSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="inline-block text-orange/80 text-sm font-semibold tracking-widest uppercase mb-4">
+          <span className="inline-block text-orange/80 text-base font-semibold tracking-widest uppercase mb-4">
             Projetos e Parcerias
           </span>
           <h2 className="font-brush text-3xl md:text-5xl lg:text-6xl text-foreground mb-4 tracking-tight">

@@ -71,7 +71,7 @@ const FounderBioModal = ({ isOpen, onClose }: FounderBioModalProps) => {
                   
                   {/* Name overlay */}
                   <div className="absolute bottom-8 left-8 z-10">
-                    <span className="text-[10px] tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
+                    <span className="text-xs tracking-[0.35em] uppercase text-foreground/50 font-sans font-medium">
                       Fundador
                     </span>
                     <h2 className="display-hero text-foreground text-3xl md:text-4xl lg:text-5xl mt-2">
@@ -84,7 +84,7 @@ const FounderBioModal = ({ isOpen, onClose }: FounderBioModalProps) => {
                 <div className="px-6 md:px-12 lg:px-16 py-12 md:py-16">
                   <div className="max-w-lg">
                     {/* Section label */}
-                    <span className="text-[10px] tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
+                    <span className="text-xs tracking-[0.35em] uppercase text-orange/80 font-sans font-medium">
                       A Jornada do Campeão
                     </span>
 

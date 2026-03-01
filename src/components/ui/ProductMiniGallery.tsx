@@ -23,7 +23,7 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
 
   return (
     <div className="space-y-4">
-      <h4 className="text-[10px] tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium">
+      <h4 className="text-xs tracking-[0.3em] uppercase text-foreground/50 font-sans font-medium">
         Galeria
       </h4>
       
@@ -102,7 +102,7 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
       </div>
 
       {/* Hint text */}
-      <p className="text-[10px] text-foreground/30 text-center tracking-wider">
+      <p className="text-xs text-foreground/30 text-center tracking-wider">
         Clique nas fotos para ampliar
       </p>
 

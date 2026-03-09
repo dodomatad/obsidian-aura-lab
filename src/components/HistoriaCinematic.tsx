@@ -242,7 +242,7 @@ export function HistoriaCinematic() {
       <section className="flex items-center py-14 md:py-24 md:min-h-[60vh] px-6">
         <div className="max-w-3xl mx-auto">
           <BlurReveal>
-            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.3em] uppercase mb-3 md:mb-6 font-bold font-sporty">
+            <p className="text-white/70 text-xs tracking-[0.3em] uppercase mb-3 md:mb-6">
               As Origens
             </p>
           </BlurReveal>

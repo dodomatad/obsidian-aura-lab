@@ -411,39 +411,6 @@ export function FabioStory() {
         </div>
       ),
     },
-    // 9. Acervo Histórico (último)
-    {
-      title: "Acervo Histórico",
-      content: (
-        <div>
-          <RevealText
-            delay={0}
-            className="text-foreground/80 text-lg md:text-xl font-normal mb-8 leading-relaxed"
-          >
-            Décadas de conquistas registradas em jornais, televisão e pódios ao redor do mundo.
-            <span className="text-foreground/50 italic block mt-2 text-base">
-              Galeria em construção — novas imagens serão adicionadas em breve.
-            </span>
-          </RevealText>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {["Recortes de Jornal", "Aparições na TV", "Pódios & Premiações", "Competições Internacionais", "Bastidores & Treinos", "Com a Comunidade"].map((label) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="aspect-[4/3] rounded-xl border-2 border-dashed border-foreground/15 bg-foreground/5 flex flex-col items-center justify-center gap-3 hover:border-orange/30 hover:bg-orange/5 transition-all duration-300 cursor-default"
-              >
-                <ImageIcon className="w-8 h-8 text-foreground/20" />
-                <span className="text-foreground/40 text-xs md:text-sm font-medium text-center px-2">{label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
   ];
 
   return (

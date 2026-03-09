@@ -210,7 +210,7 @@ export function HistoriaCinematic() {
         </BlurReveal>
         <div className="max-w-4xl mx-auto px-6 mt-3 md:mt-10">
           <BlurReveal>
-            <p className="text-white/70 text-xs md:text-sm tracking-[0.2em] uppercase mb-4">
+            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.2em] uppercase mb-4 font-bold font-sporty">
               Agosto/2001
             </p>
           </BlurReveal>
@@ -242,7 +242,7 @@ export function HistoriaCinematic() {
       <section className="flex items-center py-14 md:py-24 md:min-h-[60vh] px-6">
         <div className="max-w-3xl mx-auto">
           <BlurReveal>
-            <p className="text-white/70 text-xs tracking-[0.3em] uppercase mb-3 md:mb-6">
+            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.3em] uppercase mb-3 md:mb-6 font-bold font-sporty">
               As Origens
             </p>
           </BlurReveal>
@@ -281,7 +281,7 @@ export function HistoriaCinematic() {
       <section className="py-14 md:py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <BlurReveal>
-            <p className="text-white/70 text-xs tracking-[0.3em] uppercase mb-2 md:mb-6">
+            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.3em] uppercase mb-2 md:mb-6 font-bold font-sporty">
               1984 — 2000
             </p>
           </BlurReveal>
@@ -383,7 +383,7 @@ export function HistoriaCinematic() {
             <div className="h-px w-16 bg-orange mb-6" />
           </BlurReveal>
           <BlurReveal>
-            <p className="text-white/70 text-xs tracking-[0.2em] uppercase mb-4">
+            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.2em] uppercase mb-4 font-bold font-sporty">
               Reconhecimento
             </p>
           </BlurReveal>
@@ -446,7 +446,7 @@ export function HistoriaCinematic() {
             <div className="h-px w-16 bg-orange mb-6" />
           </BlurReveal>
           <BlurReveal>
-            <p className="text-white/70 text-xs tracking-[0.3em] uppercase mb-2 md:mb-6">
+            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.3em] uppercase mb-2 md:mb-6 font-bold font-sporty">
               Impacto Social
             </p>
           </BlurReveal>

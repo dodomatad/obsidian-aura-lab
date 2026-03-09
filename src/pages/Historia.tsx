@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import opiumLogo from "@/assets/opium-logo-official.png";
-import fabioPortrait from "@/assets/fabio-opium-shirt.jpg";
-import ScrollExpansionHero from "@/components/ui/scroll-expansion-hero";
-import { HistoriaCinematic } from "@/components/HistoriaCinematic";
+import { FabioStory } from "@/components/FabioStory";
 
 const Historia = () => {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#050505" }}>
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 bg-black/60 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -33,24 +31,13 @@ const Historia = () => {
         </div>
       </header>
 
-      {/* Scroll Expansion Hero */}
-      <ScrollExpansionHero
-        imageSrc={fabioPortrait}
-        videoId="1162233180"
-        title="Fábio Paiva"
-        subtitle="35 anos moldando o mar brasileiro"
-      />
-
-      {/* Documentary Cinematic Blocks */}
-      <main>
-        <HistoriaCinematic />
+      {/* FabioStory Timeline */}
+      <main className="pt-24">
+        <FabioStory />
       </main>
 
       {/* Minimal Footer */}
-      <footer
-        className="py-8 px-6"
-        style={{ backgroundColor: "#050505" }}
-      >
+      <footer className="py-8 px-6 bg-background">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-xs text-white/20">
             © 2026 Opium Hightec Line. Todos os direitos reservados.

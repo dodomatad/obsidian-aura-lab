@@ -63,7 +63,7 @@ const TechnologySection = () => {
           <span className="text-sm tracking-widest text-muted-foreground uppercase block mb-3">
             Engenharia &amp; Performance
           </span>
-          <h2 className="font-brush text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground leading-none">
+          <h2 className="font-sporty text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground leading-none font-bold uppercase">
             TECNOLOGIA
             <br />
             <span style={{ color: 'hsl(var(--orange))' }}>DE PONTA</span>

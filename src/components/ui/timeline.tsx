@@ -35,7 +35,7 @@ const TimelineCard = ({ item, index }: { item: TimelineEntry; index: number }) =
     >
       <motion.h3
         style={{ opacity, x }}
-        className="text-2xl md:text-5xl font-brush text-orange/70 mb-6"
+        className="text-2xl md:text-5xl font-sporty font-bold text-orange/70 mb-6 uppercase"
       >
         {item.title}
       </motion.h3>

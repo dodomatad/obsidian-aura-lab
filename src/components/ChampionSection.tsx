@@ -109,7 +109,7 @@ const ChampionSection = () => {
               </span>
 
               {/* Title - NOSSOS DIFERENCIAIS - Laranja Vibrante Bold */}
-              <h2 className="font-brush text-4xl md:text-5xl lg:text-6xl mt-4 mb-6 text-orange">
+              <h2 className="font-sporty text-4xl md:text-5xl lg:text-6xl mt-4 mb-6 text-orange font-bold uppercase">
                 NOSSOS DIFERENCIAIS
               </h2>
             </motion.div>

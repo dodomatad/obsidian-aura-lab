@@ -446,7 +446,7 @@ export function HistoriaCinematic() {
             <div className="h-px w-16 bg-orange mb-6" />
           </BlurReveal>
           <BlurReveal>
-            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.3em] uppercase mb-2 md:mb-6 font-bold font-sporty">
+            <p className="text-white/70 text-xs tracking-[0.3em] uppercase mb-2 md:mb-6">
               Impacto Social
             </p>
           </BlurReveal>

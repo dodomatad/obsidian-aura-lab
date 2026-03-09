@@ -210,7 +210,7 @@ export function HistoriaCinematic() {
         </BlurReveal>
         <div className="max-w-4xl mx-auto px-6 mt-3 md:mt-10">
           <BlurReveal>
-            <p className="text-white/70 text-2xl md:text-3xl tracking-[0.2em] uppercase mb-4 font-bold font-sporty">
+            <p className="text-white/70 text-xs md:text-sm tracking-[0.2em] uppercase mb-4">
               Agosto/2001
             </p>
           </BlurReveal>

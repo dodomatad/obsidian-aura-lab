@@ -63,7 +63,7 @@ const TechnologySection = () => {
           <span className="text-sm tracking-widest text-muted-foreground uppercase block mb-3">
             Engenharia &amp; Performance
           </span>
-          <h2 className="font-sporty text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground leading-none font-bold uppercase">
+          <h2 className="font-sporty text-4xl md:text-6xl lg:text-7xl tracking-tight text-foreground leading-none font-bold uppercasne font-bold uppercase">
             TECNOLOGIA
             <br />
             <span style={{ color: 'hsl(var(--orange))' }}>DE PONTA</span>
@@ -149,7 +149,7 @@ const TechnologySection = () => {
           transition={{ duration: 0.7 }}
           className="mb-6"
         >
-          <h3 className="text-2xl md:text-3xl font-brush text-foreground mb-10 tracking-tight">
+          <h3 className="text-sporty font-bold text-foreground mb-10 tracking-tight uppercase mb-10 tracking-tight">
             Processos &amp; Acabamento
           </h3>
         </motion.div>

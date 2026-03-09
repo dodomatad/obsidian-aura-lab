@@ -35,7 +35,7 @@ const TimelineCard = ({ item, index }: { item: TimelineEntry; index: number }) =
     >
       <motion.h3
         style={{ opacity, x }}
-        className="text-2xl md:text-5xl font-sporty font-bold text-orange/70 mb-6 uppercase"
+        className="text-2xl md:text-5xl font-sporty font-bold text-orange/70 mb-6 uppercasenge/70 mb-6 uppercase"
       >
         {item.title}
       </motion.h3>
@@ -81,7 +81,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="font-brush text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-black leading-[0.9] tracking-tight"
+     sporty text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-bold leading-[0.9] tracking-tight uppercase-[0.9] tracking-tight"
           style={{ 
             color: 'hsl(var(--orange))',
             textShadow: '0 0 40px rgba(249, 115, 22, 0.35), 0 0 80px rgba(249, 115, 22, 0.15), 0 4px 20px rgba(0,0,0,0.5)',

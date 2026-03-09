@@ -81,7 +81,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-     sporty text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-bold leading-[0.9] tracking-tight uppercase-[0.9] tracking-tight"
+     className="font-sporty text-5xl md:text-7xl lg:text-9xl mb-8 max-w-6xl font-bold leading-[0.9] tracking-tight uppercase"
           style={{ 
             color: 'hsl(var(--orange))',
             textShadow: '0 0 40px rgba(249, 115, 22, 0.35), 0 0 80px rgba(249, 115, 22, 0.15), 0 4px 20px rgba(0,0,0,0.5)',

@@ -541,10 +541,10 @@ const ProductShowcase = () => {
               />
             )}
 
-            {/* Boat image - GPU optimized */}
+            {/* Boat image - GPU optimized, fixed aspect ratio */}
             <motion.div
-              className="w-full h-auto relative z-10"
-              style={{ willChange: 'transform' }}
+              className="w-full relative z-10"
+              style={{ willChange: 'transform', aspectRatio: '16 / 7' }}
               animate={{
                 y: isHovered && !isMobile ? -15 : 0,
                 scale: isHovered && !isMobile ? 1.04 : 1,
@@ -558,14 +558,13 @@ const ProductShowcase = () => {
                 imageRef={(el) => { imageRefs.current[currentIndex] = el; }}
                 src={currentProduct.image}
                 alt={currentProduct.name}
-                className="w-full h-auto object-contain pointer-events-none"
+                className="absolute inset-0 w-full h-full object-contain pointer-events-none"
                 style={{
-                  // Optimized shadow: smaller blur radius on mobile (less GPU calc)
                   filter: isMobile 
                     ? 'drop-shadow(0 8px 12px rgba(0,0,0,0.6))'
                     : 'drop-shadow(0 50px 100px rgba(0,0,0,0.75)) drop-shadow(0 25px 50px rgba(0,0,0,0.55))',
                   willChange: 'transform',
-                  transform: 'translateZ(0)', // Force GPU layer
+                  transform: 'translateZ(0)',
                   opacity: isThisProductTransitioning ? 0 : 1,
                 }}
               />

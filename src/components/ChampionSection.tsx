@@ -286,10 +286,10 @@ const ChampionSection = () => {
 
               {/* Botão: Conheça a História de Fábio Paiva */}
               <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.7 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
                 <Link
                   to="/historia"

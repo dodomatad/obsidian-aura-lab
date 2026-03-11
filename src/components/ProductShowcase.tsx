@@ -492,7 +492,7 @@ const ProductShowcase = () => {
             animate="center"
             exit="exit"
             transition={smoothTransition}
-            className="absolute w-[92%] md:w-[55%] max-w-3xl cursor-pointer"
+            className="absolute w-[95%] md:w-[75%] max-w-5xl cursor-pointer"
             onClick={() => {
               const currentImageRef = imageRefs.current[currentIndex];
               if (currentImageRef) handleProductClick(currentProduct, currentImageRef);

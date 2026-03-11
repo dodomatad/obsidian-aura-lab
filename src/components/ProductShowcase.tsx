@@ -544,7 +544,7 @@ const ProductShowcase = () => {
             {/* Boat image - GPU optimized, fixed aspect ratio */}
             <motion.div
               className="w-full relative z-10"
-              style={{ willChange: 'transform', aspectRatio: '16 / 7' }}
+              style={{ willChange: 'transform', aspectRatio: isMobile ? '16 / 10' : '16 / 7' }}
               animate={{
                 y: isHovered && !isMobile ? -15 : 0,
                 scale: isHovered && !isMobile ? 1.04 : 1,

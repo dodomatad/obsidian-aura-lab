@@ -373,7 +373,7 @@ export const productsData: Record<string, Product> = {
     levelColor: 'text-orange-400',
     difficultyLevel: 70,
     description: 'Surfski de alto desempenho para Downwind. Transição perfeita do intermediário para o alto desempenho.',
-    image: dwDetail1,
+    image: dwCover,
     specs: {
       length: '6.20m',
       beam: '42cm',

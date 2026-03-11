@@ -570,36 +570,7 @@ const ProductShowcase = () => {
               />
             </motion.div>
 
-            {/* Mobile swipe hint - fades out after first interaction */}
-            {isMobile && (
-              <AnimatePresence>
-                {!hasInteracted && (
-                  <motion.div
-                    className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full pt-6 pointer-events-none flex items-center gap-3"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ delay: 0.6, duration: 0.4 }}
-                  >
-                    <motion.span 
-                      animate={{ x: [-4, 4, -4] }} 
-                      transition={{ duration: 1.2, repeat: Infinity }} 
-                      className="text-foreground/45 text-lg"
-                    >
-                      ←
-                    </motion.span>
-                    <span className="text-sm tracking-[0.25em] uppercase text-foreground/45 font-sans">Deslize</span>
-                    <motion.span 
-                      animate={{ x: [4, -4, 4] }} 
-                      transition={{ duration: 1.2, repeat: Infinity }} 
-                      className="text-foreground/45 text-lg"
-                    >
-                      →
-                    </motion.span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
+            {/* Mobile swipe hint removed - was overlapping boat names */}
 
             {/* Desktop hover hint */}
             {!isMobile && (

@@ -121,6 +121,7 @@ import azimutDeckClose from '@/assets/boats/azimut/azimut-deck-close.jpg';
 import azimutProfileSide from '@/assets/boats/azimut/azimut-profile-side.jpg';
 import azimutProfileRear from '@/assets/boats/azimut/azimut-profile-rear.jpg';
 
+export interface ColorOption {
   id: string;
   name: string;
   color: string;

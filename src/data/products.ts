@@ -672,6 +672,10 @@ export const productsData: Record<string, Product> = {
       azimutRudder,
       azimutSeatDetail,
       azimutBowAngle,
+      azimutBeachLogo,
+      azimutDeckClose,
+      azimutProfileSide,
+      azimutProfileRear,
     ],
     techProfile: {
       idealFor: ['Duplas intermediárias a avançadas', 'Competidores', 'Travessias em dupla'],

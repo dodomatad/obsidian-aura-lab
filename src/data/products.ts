@@ -105,6 +105,18 @@ import hakaPaddlingRear from '@/assets/boats/haka/haka-paddling-rear.jpg';
 import hakaPaddlingFront from '@/assets/boats/haka/haka-paddling-front.jpg';
 import hakaCockpitDetail from '@/assets/boats/haka/haka-cockpit-detail.jpg';
 
+// AZIMUT Gallery Images
+import azimutProfile from '@/assets/boats/azimut/azimut-profile.jpg';
+import azimutBowLogo from '@/assets/boats/azimut/azimut-bow-logo.jpg';
+import azimutBowBeach from '@/assets/boats/azimut/azimut-bow-beach.jpg';
+import azimutCockpitBeach from '@/assets/boats/azimut/azimut-cockpit-beach.jpg';
+import azimutBeachFull from '@/assets/boats/azimut/azimut-beach-full.jpg';
+import azimutSternLogo from '@/assets/boats/azimut/azimut-stern-logo.jpg';
+import azimutTopView from '@/assets/boats/azimut/azimut-top-view.jpg';
+import azimutRudder from '@/assets/boats/azimut/azimut-rudder.jpg';
+import azimutSeatDetail from '@/assets/boats/azimut/azimut-seat-detail.jpg';
+import azimutBowAngle from '@/assets/boats/azimut/azimut-bow-angle.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;

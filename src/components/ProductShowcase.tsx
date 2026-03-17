@@ -8,7 +8,7 @@ import StabilityMeter from '@/components/ui/StabilityMeter';
 
 // Custom order for the fleet carousel
 // Canoas first (carro-chefe), then Surfski Individual, then Surfski Duplo
-const CUSTOM_ORDER = ['haka-oc1', 'huna-oc2', 'pono', 'siou', 'moana', 'dw', 'infinity'] as const;
+const CUSTOM_ORDER = ['haka-oc1', 'huna-oc2', 'pono', 'siou', 'moana', 'dw', 'infinity', 'azimut'] as const;
 
 // Get ALL products in the custom order
 const allProducts: Product[] = CUSTOM_ORDER

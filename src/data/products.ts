@@ -105,6 +105,18 @@ import hakaPaddlingRear from '@/assets/boats/haka/haka-paddling-rear.jpg';
 import hakaPaddlingFront from '@/assets/boats/haka/haka-paddling-front.jpg';
 import hakaCockpitDetail from '@/assets/boats/haka/haka-cockpit-detail.jpg';
 
+// AZIMUT Gallery Images
+import azimutProfile from '@/assets/boats/azimut/azimut-profile.jpg';
+import azimutBowLogo from '@/assets/boats/azimut/azimut-bow-logo.jpg';
+import azimutBowBeach from '@/assets/boats/azimut/azimut-bow-beach.jpg';
+import azimutCockpitBeach from '@/assets/boats/azimut/azimut-cockpit-beach.jpg';
+import azimutBeachFull from '@/assets/boats/azimut/azimut-beach-full.jpg';
+import azimutSternLogo from '@/assets/boats/azimut/azimut-stern-logo.jpg';
+import azimutTopView from '@/assets/boats/azimut/azimut-top-view.jpg';
+import azimutRudder from '@/assets/boats/azimut/azimut-rudder.jpg';
+import azimutSeatDetail from '@/assets/boats/azimut/azimut-seat-detail.jpg';
+import azimutBowAngle from '@/assets/boats/azimut/azimut-bow-angle.jpg';
+
 export interface ColorOption {
   id: string;
   name: string;
@@ -613,6 +625,69 @@ export const productsData: Record<string, Product> = {
       ],
       
       comparedToFleet: 'A única OC2 da frota. Design otimizado para surf.',
+    },
+  },
+
+  // --- SURFSKI DUPLO ---
+  azimut: {
+    id: 'azimut',
+    name: 'AZIMUT',
+    tagline: 'Surfski Duplo de Alta Performance',
+    category: 'Surfski Duplo',
+    level: 'Intermediário a Avançado',
+    levelColor: 'text-orange-400',
+    difficultyLevel: 70,
+    description: 'Surfski duplo de alto desempenho da Opium. Projetado para duplas que buscam velocidade e performance em travessias e competições.',
+    image: azimutProfile,
+    specs: {
+      length: '6.80m',
+      beam: '48cm',
+      weight: '18kg',
+      capacity: '200kg',
+      material: 'Fibra de Carbono',
+    },
+    features: [
+      'Design para duplas de alta performance',
+      'Dois cockpits ergonômicos independentes',
+      'Sistema de leme por pedal',
+      'Construção em fibra de carbono',
+      'Acabamento Elite Series',
+    ],
+    colors: [
+      { id: 'default', name: 'Verde & Laranja', color: '#2ECC40', image: azimutProfile },
+    ],
+    defaultImage: azimutProfile,
+    galleryImages: [
+      azimutProfile,
+      azimutBowLogo,
+      azimutBowBeach,
+      azimutCockpitBeach,
+      azimutBeachFull,
+      azimutSternLogo,
+      azimutTopView,
+      azimutRudder,
+      azimutSeatDetail,
+      azimutBowAngle,
+    ],
+    techProfile: {
+      idealFor: ['Duplas intermediárias a avançadas', 'Competidores', 'Travessias em dupla'],
+      notRecommendedFor: ['Iniciantes', 'Remadores solo'],
+      heightRecommendation: 'Todos os tamanhos',
+      stability: 'medium',
+      speed: 'very-high',
+      maneuverability: 'medium',
+      comfort: 'high',
+      boardingEase: 'medium',
+      bestFor: ['Competições em dupla', 'Travessias longas', 'Downwind', 'Treino de velocidade'],
+      conditions: ['Mar calmo', 'Mar agitado', 'Downwind', 'Competições'],
+      highlights: [
+        'Surfski duplo de alto desempenho',
+        'Elite Series da Opium',
+        'Projetado para máxima velocidade em dupla',
+        'Cockpits independentes e ergonômicos',
+        'Construção leve e resistente',
+      ],
+      comparedToFleet: 'O único surfski duplo da frota. Alto desempenho para duplas.',
     },
   },
 };

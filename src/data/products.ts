@@ -116,8 +116,11 @@ import azimutTopView from '@/assets/boats/azimut/azimut-top-view.jpg';
 import azimutRudder from '@/assets/boats/azimut/azimut-rudder.jpg';
 import azimutSeatDetail from '@/assets/boats/azimut/azimut-seat-detail.jpg';
 import azimutBowAngle from '@/assets/boats/azimut/azimut-bow-angle.jpg';
+import azimutBeachLogo from '@/assets/boats/azimut/azimut-beach-logo.jpg';
+import azimutDeckClose from '@/assets/boats/azimut/azimut-deck-close.jpg';
+import azimutProfileSide from '@/assets/boats/azimut/azimut-profile-side.jpg';
+import azimutProfileRear from '@/assets/boats/azimut/azimut-profile-rear.jpg';
 
-export interface ColorOption {
   id: string;
   name: string;
   color: string;

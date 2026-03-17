@@ -635,7 +635,7 @@ export const productsData: Record<string, Product> = {
   // --- SURFSKI DUPLO ---
   azimut: {
     id: 'azimut',
-    name: 'AZIMUT',
+    name: 'AZIMUTH',
     tagline: 'Surfski Duplo de Alta Performance',
     category: 'Surfski Duplo',
     level: 'Intermediário a Avançado',

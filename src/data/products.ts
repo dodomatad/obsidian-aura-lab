@@ -104,6 +104,7 @@ import hakaProfileWater from '@/assets/boats/haka/haka-profile-water.jpg';
 import hakaPaddlingRear from '@/assets/boats/haka/haka-paddling-rear.jpg';
 import hakaPaddlingFront from '@/assets/boats/haka/haka-paddling-front.jpg';
 import hakaCockpitDetail from '@/assets/boats/haka/haka-cockpit-detail.jpg';
+import hakaPaddlingAction from '@/assets/boats/haka/haka-paddling-action.jpg';
 
 // AZIMUT Gallery Images
 import azimutProfile from '@/assets/boats/azimut/azimut-profile.jpg';
@@ -541,6 +542,7 @@ export const productsData: Record<string, Product> = {
     galleryImages: [
       hakaCover,
       hakaAction,
+      hakaPaddlingAction,
       hakaPov,
       hakaCockpit,
       hakaBow,

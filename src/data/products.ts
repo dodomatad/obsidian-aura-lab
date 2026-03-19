@@ -217,6 +217,7 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: boatPono,
     galleryImages: [
+      boatPono,
       ponoProfileLandscape,
       ponoDetail1,
       ponoDetail2,

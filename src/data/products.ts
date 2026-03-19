@@ -542,6 +542,7 @@ export const productsData: Record<string, Product> = {
     galleryImages: [
       hakaCover,
       hakaAction,
+      hakaPaddlingAction,
       hakaPov,
       hakaCockpit,
       hakaBow,

@@ -217,6 +217,7 @@ export const productsData: Record<string, Product> = {
     ],
     defaultImage: boatPono,
     galleryImages: [
+      ponoProfileLandscape,
       ponoDetail1,
       ponoDetail2,
       ponoDetail3,
@@ -224,11 +225,10 @@ export const productsData: Record<string, Product> = {
       ponoDetail5,
       ponoDetail6,
       ponoBowOrange,
-      ponoProfileLandscape,
       ponoCockpitDetail,
-      ponoSternRudder,
       ponoDeckLogo,
       ponoNoseLogo,
+      ponoSternRudder,
     ],
     techProfile: {
       idealFor: ['Iniciantes', 'Intermediários', 'Avançados que buscam conforto'],

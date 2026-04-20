@@ -100,6 +100,7 @@ const AtelierCarousel = () => {
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ imageOrientation: 'from-image' }}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}

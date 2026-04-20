@@ -92,6 +92,8 @@ const ProductMiniGallery = ({ images }: ProductMiniGalleryProps) => {
               alt={`Miniatura ${idx + 1}`} 
               className="w-full h-full object-cover"
               style={{ imageOrientation: 'from-image' }}
+              loading="lazy"
+              decoding="async"
             />
             {/* Zoom overlay on hover */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-200 pointer-events-none">

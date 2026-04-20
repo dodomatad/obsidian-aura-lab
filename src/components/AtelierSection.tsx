@@ -143,6 +143,8 @@ const AtelierSection = () => {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
               className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
               style={{
                 imageOrientation: 'from-image',
                 willChange: 'transform, opacity',

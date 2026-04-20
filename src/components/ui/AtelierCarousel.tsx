@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Palette } from 'lucide-react';
 
 // Import atelier lifestyle images
-import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
-import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.jpg';
-import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.jpg';
+import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.webp';
+import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.webp';
+import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.webp';
 
 const atelierImages = [
   { src: atelierCustomExotic, alt: 'Customização: acabamento e cores exóticas' },

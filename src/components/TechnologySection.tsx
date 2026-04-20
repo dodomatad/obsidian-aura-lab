@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Layers, Flame, Droplets } from 'lucide-react';
-import atelierPaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
+import atelierPaddle from '@/assets/atelier/atelier-lifestyle-paddle.webp';
 
 const materials = [
   {

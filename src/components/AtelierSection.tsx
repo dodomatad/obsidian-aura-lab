@@ -3,9 +3,9 @@ import { useMemo, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import atelier REAL lifestyle images
-import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.jpg';
-import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.jpg';
-import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.jpg';
+import atelierLifestylePaddle from '@/assets/atelier/atelier-lifestyle-paddle.webp';
+import atelierLifestyleCarry from '@/assets/atelier/atelier-lifestyle-carry.webp';
+import atelierCustomExotic from '@/assets/atelier/atelier-custom-exotic.webp';
 
 interface AtelierImage {
   id: string;

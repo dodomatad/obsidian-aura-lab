@@ -1,6 +1,6 @@
 // Central product data for the complete Opium fleet
 // NOTE: use a cache-busting filename for the real PONO cover photo.
-// Some browsers can keep an older cached version of boat-pono.png.
+// Some browsers can keep an older cached version of boat-pono.webp.
 import boatPono from '@/assets/boat-pono-photo.png';
 import boatSurfski from '@/assets/boat-surfski.png';
 import boatPink from '@/assets/boat-pink.png';
@@ -13,21 +13,21 @@ import ponoDetail1 from '@/assets/boats/pono/pono-detail-1.jpg';
 import ponoDetail2 from '@/assets/boats/pono/pono-detail-2.webp';
 import ponoDetail3 from '@/assets/boats/pono/pono-detail-3.webp';
 import ponoDetail4 from '@/assets/boats/pono/pono-detail-4.jpg';
-import ponoDetail5 from '@/assets/boats/pono/pono-detail-5.jpg';
-import ponoDetail6 from '@/assets/boats/pono/pono-detail-6.jpg';
+import ponoDetail5 from '@/assets/boats/pono/pono-detail-5.webp';
+import ponoDetail6 from '@/assets/boats/pono/pono-detail-6.webp';
 import ponoBowOrange from '@/assets/boats/pono/pono-bow-orange.webp';
-import ponoProfileLandscape from '@/assets/boats/pono/pono-profile-landscape.jpg';
+import ponoProfileLandscape from '@/assets/boats/pono/pono-profile-landscape.webp';
 import ponoCockpitDetail from '@/assets/boats/pono/pono-cockpit-detail.webp';
-import ponoSternRudder from '@/assets/boats/pono/pono-stern-rudder.jpg';
+import ponoSternRudder from '@/assets/boats/pono/pono-stern-rudder.webp';
 import ponoDeckLogo from '@/assets/boats/pono/pono-deck-logo.webp';
-import ponoNoseLogo from '@/assets/boats/pono/pono-nose-logo.jpg';
+import ponoNoseLogo from '@/assets/boats/pono/pono-nose-logo.webp';
 
 // INFINITY Gallery Images
 import infinityDetail1 from '@/assets/boats/infinity/infinity-detail-1.webp';
-import infinityDetail2 from '@/assets/boats/infinity/infinity-detail-2.jpg';
+import infinityDetail2 from '@/assets/boats/infinity/infinity-detail-2.webp';
 import infinityDetail3 from '@/assets/boats/infinity/infinity-detail-3.webp';
 import infinityDetail4 from '@/assets/boats/infinity/infinity-detail-4.webp';
-import infinityDetail5 from '@/assets/boats/infinity/infinity-detail-5.jpg';
+import infinityDetail5 from '@/assets/boats/infinity/infinity-detail-5.webp';
 import infinityDetail6 from '@/assets/boats/infinity/infinity-detail-6.webp';
 import infinityDetail7 from '@/assets/boats/infinity/infinity-detail-7.webp';
 import infinityDetail8 from '@/assets/boats/infinity/infinity-detail-8.webp';
@@ -41,12 +41,12 @@ import infinitySternRudder from '@/assets/boats/infinity/infinity-stern-rudder.w
 import dwCover from '@/assets/boats/dw/dw-cover.webp';
 import dwDetail1 from '@/assets/boats/dw/dw-detail-1.webp';
 import dwDetail2 from '@/assets/boats/dw/dw-detail-2.webp';
-import dwDetail3 from '@/assets/boats/dw/dw-detail-3.jpg';
-import dwDetail4 from '@/assets/boats/dw/dw-detail-4.jpg';
+import dwDetail3 from '@/assets/boats/dw/dw-detail-3.webp';
+import dwDetail4 from '@/assets/boats/dw/dw-detail-4.webp';
 import dwDetail5 from '@/assets/boats/dw/dw-detail-5.jpg';
 import dwProfileRack from '@/assets/boats/dw/dw-profile-rack.webp';
-import dwBowHatch from '@/assets/boats/dw/dw-bow-hatch.jpg';
-import dwCockpitDetail from '@/assets/boats/dw/dw-cockpit-detail.jpg';
+import dwBowHatch from '@/assets/boats/dw/dw-bow-hatch.webp';
+import dwCockpitDetail from '@/assets/boats/dw/dw-cockpit-detail.webp';
 import dwDeckPov from '@/assets/boats/dw/dw-deck-pov.webp';
 import dwSternLogo from '@/assets/boats/dw/dw-stern-logo.webp';
 import dwFullProfile from '@/assets/boats/dw/dw-full-profile.webp';
@@ -55,7 +55,7 @@ import dwDeckAngle from '@/assets/boats/dw/dw-deck-angle.webp';
 
 // SIOU Gallery Images
 import siouCover from '@/assets/boats/siou/siou-cover.jpg';
-import siouAction1 from '@/assets/boats/siou/siou-action-1.jpg';
+import siouAction1 from '@/assets/boats/siou/siou-action-1.webp';
 import siouAction2 from '@/assets/boats/siou/siou-action-2.webp';
 import siouCarrying from '@/assets/boats/siou/siou-carrying.jpg';
 import siouYellowRack from '@/assets/boats/siou/siou-yellow-rack.webp';
@@ -68,17 +68,17 @@ import moanaCover from '@/assets/boats/moana/moana-cover.webp';
 import moanaProfile from '@/assets/boats/moana/moana-profile.jpg';
 import moanaAngle from '@/assets/boats/moana/moana-angle.jpg';
 import moanaCockpit from '@/assets/boats/moana/moana-cockpit.webp';
-import moanaLogo from '@/assets/boats/moana/moana-logo.jpg';
-import moanaSeat from '@/assets/boats/moana/moana-seat.jpg';
-import moanaDuo from '@/assets/boats/moana/moana-duo.jpg';
-import moanaBowLogo from '@/assets/boats/moana/moana-bow-logo.jpg';
+import moanaLogo from '@/assets/boats/moana/moana-logo.webp';
+import moanaSeat from '@/assets/boats/moana/moana-seat.webp';
+import moanaDuo from '@/assets/boats/moana/moana-duo.webp';
+import moanaBowLogo from '@/assets/boats/moana/moana-bow-logo.webp';
 import moanaCockpitBeach from '@/assets/boats/moana/moana-cockpit-beach.jpg';
-import moanaSternDetail from '@/assets/boats/moana/moana-stern-detail.jpg';
+import moanaSternDetail from '@/assets/boats/moana/moana-stern-detail.webp';
 import moanaDeckTop from '@/assets/boats/moana/moana-deck-top.webp';
 import moanaBowInterior from '@/assets/boats/moana/moana-bow-interior.jpg';
 import moanaSideBeach from '@/assets/boats/moana/moana-side-beach.jpg';
 import moanaAerial from '@/assets/boats/moana/moana-aerial.jpg';
-import moanaSeatTop from '@/assets/boats/moana/moana-seat-top.jpg';
+import moanaSeatTop from '@/assets/boats/moana/moana-seat-top.webp';
 
 // HUNA OC2 Gallery Images
 import hunaCover from '@/assets/boats/huna/huna-cover.jpg';
@@ -96,11 +96,11 @@ import hakaAction from '@/assets/boats/haka/haka-action.jpg';
 import hakaPov from '@/assets/boats/haka/haka-pov.jpg';
 import hakaCockpit from '@/assets/boats/haka/haka-cockpit.jpg';
 import hakaBow from '@/assets/boats/haka/haka-bow.jpg';
-import hakaWater from '@/assets/boats/haka/haka-water.jpg';
-import hakaWaterCity from '@/assets/boats/haka/haka-water-city.jpg';
+import hakaWater from '@/assets/boats/haka/haka-water.webp';
+import hakaWaterCity from '@/assets/boats/haka/haka-water-city.webp';
 import hakaBowLogo from '@/assets/boats/haka/haka-bow-logo.jpg';
 import hakaAmaClose from '@/assets/boats/haka/haka-ama-close.jpg';
-import hakaProfileWater from '@/assets/boats/haka/haka-profile-water.jpg';
+import hakaProfileWater from '@/assets/boats/haka/haka-profile-water.webp';
 import hakaPaddlingRear from '@/assets/boats/haka/haka-paddling-rear.jpg';
 import hakaPaddlingFront from '@/assets/boats/haka/haka-paddling-front.jpg';
 import hakaCockpitDetail from '@/assets/boats/haka/haka-cockpit-detail.jpg';
@@ -110,13 +110,13 @@ import hakaPaddlingAction from '@/assets/boats/haka/haka-paddling-action.jpg';
 import azimutProfile from '@/assets/boats/azimut/azimut-profile.webp';
 import azimutBowLogo from '@/assets/boats/azimut/azimut-bow-logo.webp';
 import azimutBowBeach from '@/assets/boats/azimut/azimut-bow-beach.webp';
-import azimutCockpitBeach from '@/assets/boats/azimut/azimut-cockpit-beach.jpg';
+import azimutCockpitBeach from '@/assets/boats/azimut/azimut-cockpit-beach.webp';
 import azimutBeachFull from '@/assets/boats/azimut/azimut-beach-full.webp';
-import azimutSternLogo from '@/assets/boats/azimut/azimut-stern-logo.jpg';
+import azimutSternLogo from '@/assets/boats/azimut/azimut-stern-logo.webp';
 import azimutTopView from '@/assets/boats/azimut/azimut-top-view.webp';
-import azimutRudder from '@/assets/boats/azimut/azimut-rudder.jpg';
-import azimutSeatDetail from '@/assets/boats/azimut/azimut-seat-detail.jpg';
-import azimutBowAngle from '@/assets/boats/azimut/azimut-bow-angle.jpg';
+import azimutRudder from '@/assets/boats/azimut/azimut-rudder.webp';
+import azimutSeatDetail from '@/assets/boats/azimut/azimut-seat-detail.webp';
+import azimutBowAngle from '@/assets/boats/azimut/azimut-bow-angle.webp';
 import azimutBeachLogo from '@/assets/boats/azimut/azimut-beach-logo.webp';
 import azimutDeckClose from '@/assets/boats/azimut/azimut-deck-close.webp';
 import azimutProfileSide from '@/assets/boats/azimut/azimut-profile-side.webp';
